@@ -1,0 +1,371 @@
+id,subject,sender,body,expected_cues
+1,"URGENT: Your Account Will Be Closed","security@paypa1-verification.com","Dear Valued Customer,
+
+Your account has been temporarily suspended due to unusual activity detected. You must verify your identity within 24 hours or your account will be permanently closed.
+
+Click here to verify now: http://paypal-secure-login.com/verify
+
+Failure to comply will result in loss of access to your funds.
+
+Best Regards,
+PayPal Security Team",5
+2,"Confirm Your Email Address Immediately","no-reply@amazn-services.net","Hello,
+
+We noticed you haven't confirmed your email address yet. Your account is at risk of being deleted if you don't confirm within 12 hours.
+
+CLICK HERE TO CONFIRM: http://amazon-account-verify.com
+
+Thank you for using Amazon Services.
+
+Amazon Support",4
+3,"You've Won $5,000 Gift Card!","winners@walmart-rewards.org","Congratulations!!!
+
+You have been selected as our lucky winner for a $5,000 Walmart Gift Card! This is a limited time offer and you must claim it within 48 hours.
+
+CLAIM YOUR PRIZE HERE: http://walmart-giftcard-claim.com
+
+Act fast before it expires!
+
+Walmart Rewards Department",5
+4,"Security Alert: Password Expired","alerts@microsoft-security.net","Dear User,
+
+Your Microsoft password has expired and needs to be updated immediately. Failure to update may result in account lockout.
+
+Update your password here: http://microsoft-password-reset.com
+
+This is an automated message. Do not reply to this email.
+
+Microsoft Account Team",4
+5,"Your Package Delivery Failed","delivery@ups-tracking.org","Attention Customer,
+
+We attempted to deliver your package but no one was home. Please reschedule your delivery within 24 hours or the package will be returned to sender.
+
+Track and reschedule: http://ups-redelivery.com/track
+
+Package ID: UPS894726341
+
+UPS Delivery Services",4
+6,"Bank Account Security Update Required","security@chase-bankaccount.com","Dear Customer,
+
+Due to recent security updates, you need to verify your account information immediately. This is mandatory for all customers.
+
+Verify now: http://chase-security-update.com
+
+Failure to complete verification will result in account suspension.
+
+Chase Bank Security",5
+7,"Tax Refund Pending - Action Required","refunds@irs-taxrefund.gov","Dear Taxpayer,
+
+You have a pending tax refund of $1,847.00 waiting to be processed. You must claim this refund within 7 days.
+
+Claim your refund: http://irs-refund-portal.com
+
+IRS Tax Refund Department
+Case #: TX-9847263",4
+8,"Your iCloud Storage Is Full","notifications@apple-icloud.net","Dear iCloud User,
+
+Your iCloud storage is 99% full. Upgrade now to avoid losing your photos and data permanently.
+
+UPGRADE NOW: http://icloud-storage-upgrade.com
+
+Don't risk losing your precious memories!
+
+Apple iCloud Team",3
+9,"LinkedIn: Someone Viewed Your Profile","connect@linkedin-notifications.org","Hi there,
+
+5 recruiters from top companies viewed your profile today! See who they are and connect with them now.
+
+View your profile visitors: http://linkedin-profile-views.com
+
+This link expires in 24 hours.
+
+LinkedIn Networking Team",4
+10,"Facebook: You Have 10 New Messages","alerts@facebook-messages.net","Hello,
+
+You have 10 unread messages waiting for you on Facebook. Login now to see who messaged you.
+
+View messages: http://facebook-message-center.com
+
+Facebook Notifications",3
+11,"Your Netflix Subscription Failed","billing@netflix-payment.org","Hi there,
+
+We couldn't process your payment for Netflix. Your account will be suspended in 24 hours if you don't update your payment method.
+
+Update payment: http://netflix-billing-update.com
+
+Netflix Billing Department",4
+12,"Verify Your Identity - Bank of America","security@bankofamerica-verify.com","Dear Valued Customer,
+
+We detected suspicious login attempts on your account. Please verify your identity immediately to prevent account closure.
+
+Verify here: http://boa-identity-check.com
+
+Bank of America Security Team",5
+13,"Your Amazon Order Has Been Cancelled","orders@amazon-cancellation.net","Hello,
+
+Your recent order #AMZ-9847263 has been cancelled due to payment issues. If this was not you, please verify your account immediately.
+
+Check order status: http://amazon-order-verify.com
+
+Amazon Customer Service",4
+14,"Wells Fargo: Unusual Activity Detected","fraud@wellsfargo-alerts.com","ALERT: We detected unusual activity on your Wells Fargo account ending in 4526.
+
+Please confirm these transactions immediately: http://wellsfargo-fraud-check.com
+
+If you don't recognize this activity, your account may be compromised.
+
+Wells Fargo Fraud Prevention",5
+15,"Your Google Account Sign-In Was Blocked","security@google-account-alerts.org","Hi,
+
+Someone tried to sign in to your Google Account from an unknown device. We blocked this attempt to protect your account.
+
+Review this activity: http://google-security-check.com
+
+Google Security Team",3
+16,"PayPal: You Sent a Payment of $499.99","receipts@paypal-transactions.net","Dear Customer,
+
+You sent a payment of $499.99 to unknown.seller@email.com. If you didn't authorize this transaction, please cancel it immediately.
+
+Cancel payment: http://paypal-payment-cancel.com
+
+PayPal Transaction Team",4
+17,"Your Microsoft Office License Expired","licensing@microsoft-office.org","Dear User,
+
+Your Microsoft Office license has expired. Renew now to continue using Word, Excel, and PowerPoint.
+
+RENEW LICENSE: http://microsoft-office-renew.com
+
+Microsoft Licensing Department",3
+18,"Venmo: Confirm Your Account Information","verify@venmo-security.net","Hi,
+
+We need you to confirm your account information to continue using Venmo. This is required by law.
+
+Confirm now: http://venmo-account-confirm.com
+
+Venmo Compliance Team",4
+19,"Your eBay Account Has Been Suspended","suspended@ebay-accounts.org","Dear eBay Member,
+
+Your account has been suspended due to suspicious activity. You must verify your identity within 48 hours to restore access.
+
+Restore account: http://ebay-account-restore.com
+
+eBay Trust & Safety",5
+20,"Instagram: Unusual Login Activity","security@instagram-alerts.net","Hi,
+
+We noticed a login to your Instagram account from Russia. If this wasn't you, please secure your account immediately.
+
+Secure account: http://instagram-security-check.com
+
+Instagram Security Team",3
+21,"Your Credit Card Statement Is Ready","statements@citi-creditcard.com","Dear Cardholder,
+
+Your monthly credit card statement is ready to view. Login to see your charges and due date.
+
+View statement: http://citi-statement-view.com
+
+Citi Credit Card Services",3
+22,"Apple: Your Apple ID Has Been Locked","security@apple-id-support.com","Dear Apple User,
+
+Your Apple ID has been locked for security reasons. Unlock it now to continue using your devices.
+
+Unlock Apple ID: http://apple-id-unlock.com
+
+Apple Support Team",4
+23,"Costco: Claim Your Free Membership","offers@costco-memberships.org","Congratulations!
+
+You've been selected for a FREE Costco membership worth $60! Claim it now before this offer expires.
+
+CLAIM FREE MEMBERSHIP: http://costco-free-member.com
+
+Costco Membership Services",4
+24,"Your Student Loan Forgiveness Approved","forgiveness@studentloan-dept.gov","Dear Borrower,
+
+Your application for student loan forgiveness has been APPROVED! Claim your forgiveness now.
+
+Complete final step: http://studentloan-forgiveness-claim.com
+
+US Department of Education",4
+25,"Zoom: Your Free Account Will Be Deleted","notices@zoom-accounts.net","Hi,
+
+Your free Zoom account will be deleted due to inactivity. Login within 48 hours to keep your account active.
+
+Keep account: http://zoom-account-keep.com
+
+Zoom Communications",3
+26,"Your Social Security Number Suspended","alerts@ssa-security.gov","URGENT: Your Social Security Number has been suspended due to suspicious activity linked to fraud.
+
+Verify your identity immediately: http://ssa-verify-identity.com
+
+Social Security Administration",5
+27,"Target: Your Order Is Ready for Pickup","pickup@target-orders.org","Hi,
+
+Your Target order is ready for pickup at store #4526. Please bring this email and your ID.
+
+View pickup details: http://target-order-pickup.com
+
+Target Guest Services",3
+28,"Your AT&T Bill Payment Failed","billing@att-wireless.net","Dear Customer,
+
+Your recent payment for AT&T wireless service failed. Please update your payment method to avoid service interruption.
+
+Update payment: http://att-payment-update.com
+
+AT&T Billing Department",4
+29,"Congratulations on Your Loan Approval!","approvals@quickloans-online.com","Dear Applicant,
+
+Your loan application for $15,000 has been APPROVED! Complete the final step to receive your funds.
+
+Get your money: http://quickloans-approve.com
+
+Quick Loans Online",4
+30,"Your YouTube Channel Copyright Strike","copyright@youtube-strikes.org","Dear Creator,
+
+Your YouTube channel received a copyright strike. If you don't appeal within 7 days, your channel will be permanently deleted.
+
+Appeal strike: http://youtube-copyright-appeal.com
+
+YouTube Copyright Team",4
+31,"Spotify: Update Your Payment Information","billing@spotify-premium.net","Hi,
+
+We couldn't charge your payment method for Spotify Premium. Update your payment info to keep listening.
+
+Update payment: http://spotify-payment-fix.com
+
+Spotify Billing Team",3
+32,"Your McAfee Antivirus Expired","renewals@mcafee-security.org","ALERT: Your McAfee antivirus protection has expired. Your computer is now at risk!
+
+RENEW NOW: http://mcafee-renew-protection.com
+
+McAfee Security Services",4
+33,"IRS: You Owe Back Taxes","collections@irs-backtaxes.gov","Dear Taxpayer,
+
+Our records show you owe $4,263.00 in back taxes. Pay immediately to avoid penalties and legal action.
+
+Pay now: http://irs-tax-payment.com
+
+IRS Collections Division",5
+34,"Your Best Buy Order Confirmation","orders@bestbuy-confirmation.org","Thank you for your order!
+
+Order #: BB-8472639
+Total: $1,299.99
+Item: MacBook Pro 16-inch
+
+View order: http://bestbuy-order-track.com
+
+If you didn't place this order, cancel immediately.
+
+Best Buy Online",4
+35,"Your Email Account Will Be Closed","admin@email-account-services.com","Dear Email User,
+
+Your email account will be closed due to storage quota exceeded. Upgrade now to keep your account active.
+
+UPGRADE STORAGE: http://email-storage-upgrade.com
+
+Email Administration",4
+36,"Congratulations! You're Pre-Approved","preapproval@creditcards-apply.com","Dear Customer,
+
+You're pre-approved for a credit card with $10,000 limit and 0% APR! Apply now before this offer expires.
+
+APPLY NOW: http://creditcard-preapproved.com
+
+Credit Card Services",3
+37,"Your Dropbox Account Suspended","security@dropbox-accounts.net","Hi,
+
+Your Dropbox account has been suspended due to suspicious file sharing activity. Verify your account to restore access.
+
+Verify account: http://dropbox-account-verify.com
+
+Dropbox Security Team",4
+38,"FedEx: Package Delivery Exception","tracking@fedex-delivery.org","Delivery Alert,
+
+Your FedEx package could not be delivered due to incomplete address. Update your shipping information now.
+
+Update address: http://fedex-address-update.com
+
+Tracking #: FX9847263847
+
+FedEx Delivery Services",4
+39,"Your Adobe Subscription Renewal Failed","billing@adobe-subscriptions.com","Dear Subscriber,
+
+We couldn't renew your Adobe Creative Cloud subscription. Update your payment to continue using Photoshop, Illustrator, and more.
+
+Update payment: http://adobe-billing-update.com
+
+Adobe Subscription Services",3
+40,"Walmart: You Have a Package Waiting","notifications@walmart-packages.org","Hi,
+
+You have a package waiting at Walmart store #5283. Pick it up within 7 days or it will be returned.
+
+View package details: http://walmart-package-pickup.com
+
+Walmart Pickup Services",3
+41,"Your Bank Account Temporarily Frozen","alerts@chase-bank-security.com","URGENT: Your Chase bank account has been temporarily frozen due to suspected fraud.
+
+Unfreeze account: http://chase-unfreeze-account.com
+
+You must act within 24 hours.
+
+Chase Fraud Prevention",5
+42,"Steam: Your Account Security Alert","security@steam-accounts.net","Dear Gamer,
+
+Someone attempted to access your Steam account from China. Secure your account immediately to prevent unauthorized purchases.
+
+Secure account: http://steam-security-verify.com
+
+Steam Support Team",3
+43,"Your Norton Security Subscription Expired","renewals@norton-antivirus.org","WARNING: Your Norton antivirus subscription has expired. Your device is now vulnerable to viruses and malware.
+
+RENEW PROTECTION: http://norton-renew-now.com
+
+Norton Security Services",4
+44,"LinkedIn: You Appeared in 15 Searches","insights@linkedin-talent.org","Hi there,
+
+Your LinkedIn profile appeared in 15 recruiter searches this week! Upgrade to Premium to see who's interested.
+
+Upgrade now: http://linkedin-premium-upgrade.com
+
+LinkedIn Premium Team",3
+45,"Your DHL Package Delivery Failed","delivery@dhl-tracking.org","Attention,
+
+We attempted to deliver your DHL package but encountered an issue. Reschedule delivery within 48 hours.
+
+Reschedule: http://dhl-redelivery-schedule.com
+
+Package tracking: DHL4826394726
+
+DHL Express",4
+46,"Your Comcast Bill Is Overdue","billing@comcast-payments.net","Dear Customer,
+
+Your Comcast bill payment is 15 days overdue. Pay now to avoid service disconnection.
+
+PAY BILL: http://comcast-bill-payment.com
+
+Comcast Billing Services",4
+47,"AOL: Verify Your Email Account","verification@aol-email-verify.com","Dear AOL User,
+
+We need to verify your email account to comply with new security regulations. Verify now or your account will be deleted.
+
+Verify account: http://aol-account-verification.com
+
+AOL Email Services",4
+48,"Your Square Payment Processing Hold","alerts@square-payments.net","Dear Merchant,
+
+We've placed a hold on your Square payments due to unusual activity. Verify your account to release funds.
+
+Verify account: http://square-verify-merchant.com
+
+Square Payment Support",4
+49,"Your Twitch Account Suspended","moderation@twitch-accounts.org","Dear Streamer,
+
+Your Twitch account has been suspended for violating community guidelines. Appeal within 7 days or lose your channel permanently.
+
+File appeal: http://twitch-appeal-suspension.com
+
+Twitch Moderation Team",4
+50,"Your Grammarly Premium Trial Ending","trials@grammarly-premium.net","Hi,
+
+Your Grammarly Premium free trial ends in 24 hours. Subscribe now to keep advanced writing features.
+
+SUBSCRIBE NOW: http://grammarly-subscribe-premium.com
+
+Grammarly Team",3

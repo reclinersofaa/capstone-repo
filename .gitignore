@@ -1,5 +1,5 @@
 # Environment variables and secrets
-.env
+# .env tracked for v2 branch
 .env.local
 .env.*.local
 
@@ -51,7 +51,8 @@ venv/
 Thumbs.db
 
 # Large data files
-*.csv
+# CSV files tracked, but exclude backups
+*.csv.bak
 *.xlsx
 *.xls
 
@@ -61,7 +62,7 @@ Thumbs.db
 *.log
 
 # Compiled files
-*.zip
+# _docx_extract.zip tracked, but exclude other archives
 *.rar
 *.7z
 

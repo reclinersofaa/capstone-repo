@@ -1,0 +1,499 @@
+id,subject,sender,body,expected_cues,vtriad_tactic
+1,"Your account verification required","security@paypal.com","Hello,
+
+We've updated our security policies to better protect your account. As part of this update, we need you to verify your account information.
+
+Please visit: https://accounts-paypal.secure-verify.net/confirm
+
+Thank you for helping us keep your account secure.
+
+PayPal Security Team",2,Verification
+2,"Confirm recent transaction","alerts@chase.com","Dear Customer,
+
+We noticed a transaction on your account that requires your confirmation for security purposes.
+
+Transaction: $487.50 at Electronics Store
+Date: January 30, 2026
+
+Please review this transaction: https://www.chase-banking.net/verify-transaction
+
+Chase Fraud Monitoring",2,Verification
+3,"Complete your profile verification","verify@linkedin.com","Hi,
+
+To improve your visibility to recruiters and maintain profile integrity, we're asking all members to complete profile verification.
+
+Verified profiles receive 3x more profile views from hiring managers.
+
+Complete verification: https://linkedin-verify-account.com/profiles
+
+LinkedIn Trust & Safety",2,Verification
+4,"Action required: Review security settings","security@microsoft.com","Hello,
+
+We noticed your account security settings haven't been reviewed in over 6 months. To maintain optimal security, please review your current settings.
+
+Visit Security Settings: https://accounts-microsoft.com/security-center
+
+Microsoft Account Security",1,Verification
+5,"Confirm shipping address for your order","shipping@amazon.com","Hello,
+
+Your order is ready to ship, but we need to confirm your shipping address to ensure accurate delivery.
+
+Order: Premium Wireless Headphones
+Expected delivery: February 3-5, 2026
+
+Please verify: https://amazon-orders.com/shipping-confirm
+
+Amazon Logistics",2,Verification
+6,"Your account access will be limited","compliance@wellsfargo.com","Dear Customer,
+
+Due to federal banking regulations, we need updated information from all customers by February 15, 2026.
+
+Accounts without updated information will have limited access to certain features.
+
+Update information: https://www.wellsfargo-compliance.net/update
+
+Wells Fargo Compliance",2,Threat
+7,"Important: Review suspicious activity","security@apple.com","Dear Apple ID user,
+
+Our security systems detected an unusual sign-in attempt to your Apple ID from a new device in a different location.
+
+Device: Windows PC
+Location: Seattle, WA
+Time: January 30, 2026, 10:45 PM
+
+If this wasn't you, please secure your account: https://appleid-security-verify.net/signin-check
+
+Apple Security",2,Threat
+8,"Your payment method needs attention","billing@netflix.com","Hi,
+
+We're having trouble with your current payment method. Your next billing cycle starts in 3 days.
+
+Please update your payment information to avoid any interruption: https://netflix-account-billing.com/payment
+
+Netflix Membership Team",2,Threat
+9,"Unusual activity detected on your account","fraud@bankofamerica.com","Dear Valued Customer,
+
+Our fraud detection system flagged several transactions on your account that don't match your usual spending patterns.
+
+For your protection, we've temporarily limited certain account features until you review these transactions.
+
+Review activity: https://bankofamerica-fraud-alert.net/check
+
+Bank of America Fraud Prevention",2,Threat
+10,"Security notice: Password strength update","security@google.com","Hello,
+
+Our systems indicate your current password doesn't meet our updated security standards. Accounts with weak passwords are more vulnerable to unauthorized access.
+
+Please update to a stronger password: https://accounts-google.com/password-update
+
+Google Account Protection",2,Threat
+11,"Claim your exclusive cashback reward","rewards@discover.com","Dear Cardholder,
+
+Congratulations! You've earned $127.50 in cashback rewards this quarter.
+
+Your rewards are ready to redeem. Choose from:
+- Statement credit
+- Direct deposit
+- Gift cards
+
+Redeem your rewards: https://discover-cashback-rewards.net/redeem
+
+Discover Rewards",2,Reward
+12,"You're eligible for account upgrade","upgrades@chase.com","Dear Customer,
+
+Based on your account history and relationship with us, you now qualify for a premium account upgrade with exclusive benefits:
+
+- Higher interest rates
+- No monthly fees
+- Priority customer service
+- Travel rewards
+
+Review your upgrade: https://chase-premium-accounts.com/upgrade-now
+
+Chase Premium Banking",2,Reward
+13,"Your refund has been processed","refunds@irs.gov","Dear Taxpayer,
+
+Your tax refund has been approved and processed.
+
+Refund amount: $1,847.00
+Expected deposit: 5-7 business days
+
+Track your refund: https://irs-tax-refund.gov/track-status
+
+Internal Revenue Service",1,Reward
+14,"Exclusive offer for valued customers","offers@americanexpress.com","Dear Cardmember,
+
+Thank you for being a loyal American Express customer. We're offering you an exclusive opportunity to earn 50,000 bonus points.
+
+This limited-time offer is available only to select customers with excellent account history.
+
+View offer: https://americanexpress-rewards-offer.net/bonus
+
+American Express Rewards",2,Reward
+15,"Your loyalty points are expiring soon","points@hilton.com","Dear Hilton Honors Member,
+
+You have 45,000 points that will expire on March 31, 2026 if not used.
+
+Redeem your points for:
+- Free hotel stays
+- Flight upgrades
+- Gift cards
+
+Use points now: https://hilton-honors-redemption.com/redeem
+
+Hilton Honors Program",2,Threat
+16,"Verify identity for account security","identity@paypal.com","Hello,
+
+We're implementing enhanced security measures for all accounts. To continue using your account without restrictions, please complete identity verification.
+
+This is a one-time process that takes less than 2 minutes.
+
+Complete verification: https://paypal-identity-verify.net/confirm
+
+PayPal Account Security",2,Verification
+17,"Update required for continued service","updates@spotify.com","Hi,
+
+We've made important updates to our Terms of Service. To continue enjoying Spotify Premium, please review and accept the updated terms.
+
+Your service will continue uninterrupted once you accept in your account: https://spotify-tos-update.com/accept
+
+Spotify Legal Team",2,Threat
+18,"Your insurance policy renewal notice","renewals@geico.com","Dear Policyholder,
+
+Your auto insurance policy is up for renewal next month. We've reviewed your account and you may qualify for reduced rates.
+
+Current premium: $127/month
+Potential new rate: $98/month
+
+Review renewal options: https://geico-policy-renewal.net/rates
+
+GEICO Policy Services",2,Reward
+19,"Confirm your recent account changes","changes@microsoft.com","Hello,
+
+We detected that your account recovery email was recently changed. If you made this change, no action is needed.
+
+If you didn't make this change, please secure your account: https://microsoft-account-changes.com/verify
+
+Microsoft Account Team",1,Verification
+20,"Your subscription benefits have increased","membership@amazon.com","Hello Prime Member,
+
+Great news! Your Amazon Prime membership now includes additional benefits:
+
+- Free grocery delivery from Whole Foods
+- Exclusive early access to deals
+- Enhanced streaming content
+
+View benefits: https://amazon-prime-benefits.net/new
+
+Amazon Prime Team",1,Reward
+21,"Complete your security checkup","checkup@google.com","Hello,
+
+It's been 90 days since your last security checkup. Google recommends reviewing your account security quarterly.
+
+Complete a quick security checkup: https://google-security-checkup.com/start
+
+Google Security",2,Verification
+22,"Your credit score has improved","alerts@creditkarma.com","Great news!
+
+Your credit score increased by 28 points this month to 742.
+
+This improvement may qualify you for better interest rates on loans and credit cards.
+
+View your report: https://creditkarma-report.net/view
+
+Credit Karma Monitoring",1,Reward
+23,"Action needed: Verify recent login","security@dropbox.com","Hi,
+
+We noticed a login to your Dropbox account from a new location:
+
+Device: Mobile (iOS)
+Location: Portland, OR
+Time: January 30, 2026
+
+If this was you, no action needed. If not: https://dropbox-security-verify.com/review
+
+Dropbox Security Team",2,Verification
+24,"Your warranty is about to expire","warranty@apple.com","Dear Apple Customer,
+
+Your AppleCare+ warranty for iPhone 14 Pro expires on February 28, 2026.
+
+Extend your coverage: https://apple-warranty-extend.net/renew
+
+Apple Support",2,Threat
+25,"Congratulations on your approval","approvals@chase.com","Dear Applicant,
+
+We're pleased to inform you that your credit card application has been approved.
+
+Card: Chase Sapphire Preferred
+Credit limit: $8,500
+Welcome bonus: 60,000 points
+
+Activate your card: https://chase-card-activate.com/new
+
+Chase Credit Cards",1,Reward
+26,"Security alert: New device detected","alerts@facebook.com","Hi,
+
+A new device just logged into your Facebook account:
+
+Device: Chrome on Windows
+Location: Austin, TX
+Time: January 30, 2026, 11:20 PM
+
+If this was you: https://facebook-device-confirm.net/confirm
+
+Facebook Security",2,Threat
+27,"Your order is ready for pickup","pickup@walmart.com","Hi,
+
+Your Walmart order #WM-4729384 is ready for pickup at store 5847.
+
+Items: 4
+Total: $67.89
+
+View pickup details: https://walmart-pickup-orders.com/track
+
+Walmart Online Orders",1,Verification
+28,"Your prescription is ready","pharmacy@cvs.com","Dear Customer,
+
+Your prescription for Lisinopril 10mg is ready for pickup at CVS Pharmacy #8472.
+
+Prescription: Lisinopril 10mg (30-day supply)
+Cost: $12.50 (with insurance)
+
+Pick up within 14 days: https://cvs-pharmacy-ready.net/pickup
+
+CVS Pharmacy",1,Verification
+29,"Update your payment information","billing@adobe.com","Hello,
+
+Your Adobe Creative Cloud subscription payment is due in 5 days. We currently have an expired payment method on file.
+
+Please update your payment: https://adobe-billing-update.com/payment
+
+Adobe Subscriptions",2,Threat
+30,"Your package delivery scheduled","delivery@ups.com","Dear Customer,
+
+Your UPS package is scheduled for delivery tomorrow, January 31, 2026, between 2-6 PM.
+
+Tracking: 1Z9472938472938472
+From: Seattle Distribution Center
+
+Confirm delivery: https://ups-package-confirm.net/schedule
+
+UPS Delivery Services",1,Verification
+31,"Important notice about your account","notices@wellsfargo.com","Dear Customer,
+
+We're updating our mobile banking app with new features and enhanced security. Please update to the latest version by February 7, 2026.
+
+Accounts using older app versions will have limited functionality after this date.
+
+Download update: https://wellsfargo-app-update.com/latest
+
+Wells Fargo Digital Banking",2,Threat
+32,"Your reward points statement","rewards@southwest.com","Dear Rapid Rewards Member,
+
+Your monthly points summary is ready:
+
+Points earned: 3,847
+Current balance: 52,394 points
+
+You're only 7,606 points away from a free round-trip flight!
+
+View points: https://southwest-rewards-balance.net/account
+
+Southwest Rapid Rewards",1,Reward
+33,"Confirm your appointment","appointments@healthcare.com","Dear Patient,
+
+This is a reminder of your upcoming appointment:
+
+Date: February 5, 2026
+Time: 10:30 AM
+Provider: Dr. Sarah Johnson
+Location: Main Clinic, Building A
+
+Confirm attendance: https://healthcare-appointments.com/confirm
+
+Healthcare Center",1,Verification
+34,"Your document is ready to sign","documents@docusign.com","Hello,
+
+You have a document waiting for your electronic signature.
+
+Document: Service Agreement
+From: TechServices LLC
+Due: February 3, 2026
+
+Sign now: https://docusign-documents.net/sign
+
+DocuSign Services",1,Verification
+35,"Your monthly statement is available","statements@citibank.com","Dear Cardholder,
+
+Your Citi credit card statement for January 2026 is now available.
+
+Balance: $1,247.83
+Minimum payment: $35.00
+Due date: February 20, 2026
+
+View statement: https://citi-statements-online.com/view
+
+Citi Credit Cards",1,Verification
+36,"Special financing offer available","financing@bestbuy.com","Dear Best Buy Customer,
+
+You're pre-approved for special financing on purchases over $299.
+
+Offer: 12 months, 0% APR
+Valid until: March 31, 2026
+
+View eligible products: https://bestbuy-financing-offers.net/approved
+
+Best Buy Financing",2,Reward
+37,"Your form submission received","submissions@uscis.gov","Dear Applicant,
+
+We've received your Form I-130 submission.
+
+Receipt number: MSC9382847293
+Date received: January 28, 2026
+
+Track your case: https://uscis-case-status.gov/track
+
+U.S. Citizenship and Immigration Services",1,Verification
+38,"Review your account activity summary","summary@venmo.com","Hi,
+
+Your monthly Venmo activity summary is ready:
+
+Sent: $487.50
+Received: $623.00
+Transactions: 18
+
+View history: https://venmo-activity-summary.com/review
+
+Venmo Services",1,Verification
+39,"Your cloud storage upgrade completed","storage@google.com","Hello,
+
+Your Google One storage upgrade to 200GB has been completed.
+
+New storage: 200GB
+Monthly cost: $2.99
+Next billing: February 28, 2026
+
+View storage: https://google-one-storage.net/manage
+
+Google One Team",1,Reward
+40,"Confirm your subscription preferences","preferences@nytimes.com","Dear Subscriber,
+
+We're updating our email preferences system. Please confirm your current subscription settings to continue receiving your selected content.
+
+Current preferences:
+- Daily briefing: Enabled
+- Breaking news: Enabled
+- Weekend edition: Disabled
+
+Update preferences: https://nytimes-preferences.com/manage
+
+The New York Times",2,Verification
+41,"Your investment account quarterly report","reports@vanguard.com","Dear Investor,
+
+Your Q4 2025 investment performance report is now available.
+
+Portfolio value: $47,382.00
+Quarterly return: +4.2%
+Year-to-date return: +11.8%
+
+View report: https://vanguard-statements.net/reports
+
+Vanguard Investor Services",1,Verification
+42,"Your reservation confirmation","reservations@marriott.com","Dear Guest,
+
+Your hotel reservation is confirmed.
+
+Hotel: Marriott Downtown
+Check-in: February 10, 2026
+Check-out: February 13, 2026
+Confirmation: MB-9847263
+
+Manage reservation: https://marriott-reservations.com/manage
+
+Marriott Hotels",1,Verification
+43,"Update available for your device","updates@samsung.com","Dear Galaxy User,
+
+A software update is available for your Samsung Galaxy S23.
+
+Version: Android 14.5
+Size: 1.2 GB
+Features: Security patches, performance improvements
+
+Install update: https://samsung-updates.net/install
+
+Samsung Mobile",1,Verification
+44,"Your application status update","applications@indeed.com","Hello,
+
+You have an update on your job application:
+
+Position: Senior Software Engineer
+Company: TechCorp Solutions
+Status: Interview scheduled
+
+Check details: https://indeed-applications.com/status
+
+Indeed Job Alerts",1,Reward
+45,"Your energy usage report","energy@pge.com","Dear Customer,
+
+Your monthly energy usage report is available:
+
+Usage: 847 kWh
+Cost: $127.50
+Comparison: 12% lower than last month
+
+View report: https://pge-usage-report.net/view
+
+Pacific Gas & Electric",1,Verification
+46,"Your membership renewal notice","renewals@costco.com","Dear Member,
+
+Your Costco Gold Star membership expires on March 15, 2026.
+
+Renew now to continue enjoying:
+- Low prices on quality merchandise
+- Exclusive member savings
+- Fuel discounts
+
+Renew membership: https://costco-membership-renew.com/join
+
+Costco Wholesale",2,Threat
+47,"Your test results are available","results@labcorp.com","Dear Patient,
+
+Your recent lab test results are now available.
+
+Test date: January 27, 2026
+Ordered by: Dr. Michael Chen
+
+View results: https://labcorp-results-portal.net/view
+
+LabCorp Patient Services",1,Verification
+48,"Your cashback is ready to redeem","cashback@rakuten.com","Hi,
+
+You've earned $42.75 in cashback from your recent shopping!
+
+Cashback balance: $87.50
+Stores shopped: 8
+
+Redeem cashback: https://rakuten-cashback-redeem.net/claim
+
+Rakuten Rewards",2,Reward
+49,"Your flight check-in is available","checkin@delta.com","Dear Traveler,
+
+Check-in is now open for your upcoming Delta flight:
+
+Flight: DL 2847
+Route: LAX to JFK
+Date: February 2, 2026
+Departure: 8:45 AM
+
+Check in now: https://delta-check-in.com/flights
+
+Delta Air Lines",1,Verification
+50,"Your subscription trial ending soon","trials@hulu.com","Hi,
+
+Your 30-day free trial of Hulu ends on February 5, 2026.
+
+Continue enjoying unlimited streaming for only $7.99/month: https://hulu-subscribe-now.com/plans
+
+Your subscription will automatically begin after trial unless you cancel.
+
+Hulu Subscriptions",2,Threat
