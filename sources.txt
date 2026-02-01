@@ -1,3 +1,0 @@
-SpamAssassin (meant to be benign mails, check for benign mails) = https://www.kaggle.com/datasets/beatoa/spamassassin-public-corpus 
-Enron = https://www.kaggle.com/datasets/wcukierski/enron-email-dataset
-Phishbowl (for normal non-LLM phishing mails) = https://github.com/MitanshuGada/DispEmailWebScraper/blob/master/cornell_phishbowl_data.csv

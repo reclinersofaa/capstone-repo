@@ -214,8 +214,6 @@ Before starting ANY coding session:
 ### Objective
 Gather all datasets and create a complete inventory with metadata. **CRITICAL: Inspect actual data format BEFORE any processing.**
 
-**Target division (demo phase):** 100 benign (SpamAssassin ham) + 50 Phishbowl phishing + 50 plain AI-generated phishing + 50 hybrid AI-generated phishing (VTriad-guided).
-
 ### Why SpamAssassin Instead of Enron?
 **Decision:** Use **Apache SpamAssassin** public corpus for benign emails instead of Enron.
 
@@ -228,10 +226,10 @@ Gather all datasets and create a complete inventory with metadata. **CRITICAL: I
 ### Tasks
 | Task | Validation Check |
 |------|------------------|
-| Download SpamAssassin Ham corpus | File exists; sample 100 benign emails |
-| Download Phishbowl dataset | File exists; sample 50 phishing emails |
-| Generate Plain AI dataset | 50 phishing emails, consistent schema |
-| Generate Hybrid AI dataset (VTriad) | 50 phishing emails, consistent schema |
+| Download SpamAssassin Ham corpus | File exists, >200 emails, clean text format |
+| Download Phishbowl dataset | File exists, ~100 emails |
+| Download Kaggle Human vs LLM dataset | File exists, has `body` column |
+| Generate/collect Hybrid dataset | 48 emails with known structure |
 | **INSPECT DATA FORMATS** | See "Format Inspection Protocol" below |
 | Create `data_inventory.md` | All sources documented |
 
@@ -301,14 +299,14 @@ inspect_dataset('data/raw/hybrid_48.json', 'Hybrid')
 
 ### Deliverable: `data_inventory.md`
 ```markdown
-## Dataset Inventory (demo phase division)
+## Dataset Inventory
 
 | Source | File | Count | Class | Key Columns | Format Notes |
 |--------|------|-------|-------|-------------|--------------|
-| SpamAssassin Ham | spamassassin_ham_100.csv | 100 | Benign (0) | subject, sender, body | RFC822 headers present; strip after blank line |
-| Phishbowl | phishbowl_50.csv | 50 | Phishing (1) | title, date_time, email_message | HTML content; strip tags |
-| Plain AI gen mails | plain_ai_50.csv | 50 | Phishing (1) | subject, sender, body | Generated (CSV) |
-| Hybrid AI gen mails (VTriad) | hybrid_ai_50.csv | 50 | Phishing (1) | subject, sender, body | Generated (CSV) |
+| SpamAssassin Ham | spamassassin_ham.csv | 250 | Benign (0) | message, subject | Clean text, no headers |
+| Phishbowl | phishbowl_100.csv | 100 | Phishing (1) | body, subject, from | Verify column names |
+| Kaggle LLM | kaggle_llm.csv | 100 | Mixed (0/1) | body, label | NOT 'text' or 'content' |
+| Hybrid | hybrid_48.json | 48 | Phishing (1) | content, subject | JSON format |
 
 **CRITICAL:** Column names are VERIFIED by inspection, not assumed!
 ```

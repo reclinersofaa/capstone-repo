@@ -32,7 +32,6 @@ venv/
 ENV/
 env/
 .venv
-venv/
 .venv/
 
 # Jupyter Notebook
@@ -50,24 +49,14 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Large data files
-*.csv
-*.xlsx
-*.xls
+# PDF files
+*.pdf
 
 # Temporary files
 *.tmp
 *.bak
 *.log
 
-# Compiled files
-*.zip
-*.rar
-*.7z
-
-# macOS
-__MACOSX/
-
-# Large dataset directories
-data/raw/spamassassin/
-data/raw/enron/
+# Large data files (keep CSVs tracked if needed, but exclude backups)
+*.csv.bak
+data/
