@@ -71,3 +71,6 @@ __MACOSX/
 # Large dataset directories
 data/raw/spamassassin/
 data/raw/enron/
+
+# Preprocessing folder (v1 branch only)
+Preprocessing/
