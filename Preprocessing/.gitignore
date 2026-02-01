@@ -60,3 +60,4 @@ Thumbs.db
 # Large data files (keep CSVs tracked if needed, but exclude backups)
 *.csv.bak
 data/
+
