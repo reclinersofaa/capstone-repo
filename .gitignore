@@ -1,0 +1,29 @@
+# v1 branch: Ignore everything except Preprocessing folder
+
+# Data files (v2 only)
+data/
+_docx_extract.zip
+_docx_extract/
+
+# Environment files (v2 only)
+.env
+
+# Documents (v2 only)
+*.docx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
