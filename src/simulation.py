@@ -82,7 +82,10 @@ def run_simulation(
     total_runs = n_agents * len(workday_hours) * len(emails)
     print(f"Step 3 — Simulating {n_agents} agents × {len(workday_hours)} hours × {len(emails)} emails = {total_runs} runs...")
 
+    hour_labels = {8.0: "8am", 10.0: "10am", 12.0: "12pm", 14.0: "2pm", 16.0: "4pm"}
+
     records = []
+    step_id = 0
     for agent in agents:
         for hour in workday_hours:
             agent.advance_workday(hour)
@@ -94,11 +97,13 @@ def run_simulation(
                 result = simulate_email(agent, cues, rng=loop_rng)
 
                 records.append({
+                    "step_id":              step_id,
                     "agent_id":             agent.agent_id,
                     "email_id":             eid,
                     "source":               row["source"],
                     "actual_class":         row["actual_class"],
                     "workday_hour":         hour,
+                    "time_of_day":          hour_labels.get(hour, f"{int(hour)}:00"),
                     "suspicion_threshold":  agent.suspicion_threshold,
                     "max_cues_processed":   agent.max_cues_processed,
                     "age":                  round(agent.age, 1),
@@ -107,6 +112,7 @@ def run_simulation(
                     "cues_extracted":       len(cues),
                     **result,
                 })
+                step_id += 1
 
     df = pd.DataFrame(records)
     print(f"  Done. {len(df):,} rows generated.\n")
