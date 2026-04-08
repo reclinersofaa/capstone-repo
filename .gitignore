@@ -1,5 +1,6 @@
 # Environment variables and secrets
 # .env tracked for v2 branch
+.env
 .env.local
 .env.*.local
 
@@ -75,3 +76,6 @@ data/raw/enron/
 
 # Preprocessing folder (v1 branch only)
 Preprocessing/
+
+#temporary word file used to extract docx report
+_docx_extract/
