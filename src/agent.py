@@ -42,6 +42,7 @@ class Agent:
     time_pressure: float = 1.0       # 1–5, increases as workday advances
     workload: float = 1.5            # 1–5, increases as workday advances
     current_hour: float = 8.0        # current simulation hour (set by advance_workday)
+    f_dynamic: float = 0.0           # accumulated cognitive depletion [0, 1] (Bakker & Demerouti 2007)
 
     # -------------------------------------------------------------------------
     # Three Process Model (Åkerstedt) — KSS-based fatigue
@@ -104,17 +105,17 @@ class Agent:
 
     def compute_total_fatigue(self) -> float:
         """
-        Combines KSS-derived sleepiness (time-of-day) and energy depletion,
-        normalised to [1, 5].
+        Combines three fatigue components normalised to [1, 5]:
+          1. KSS — biological time-of-day fatigue (Åkerstedt TPM)
+          2. ED  — static resource depletion from job characteristics (Tian et al. 2022)
+          3. f_dynamic — accumulated situational cognitive load (Bakker & Demerouti 2007)
 
-        KSS is mapped from 1–9 → 1–5 before averaging with ED.
-        Because KSS uses current_hour (set by advance_workday), total_fatigue
-        is now genuinely time-varying across the workday.
+        f_dynamic adds up to +1.0 fatigue unit as it saturates at 1.0.
         """
         kss = self.compute_kss()                    # 1–9
         kss_norm = (kss - 1.0) / 2.0 + 1.0         # maps 1-9 → 1-5
         ed = self.compute_energy_depletion()         # 1–5
-        raw = (kss_norm + ed) / 2.0
+        raw = (kss_norm + ed) / 2.0 + self.f_dynamic * 1.0
         return max(1.0, min(5.0, raw))
 
     # -------------------------------------------------------------------------
@@ -172,25 +173,51 @@ class Agent:
         fpl = 0.5 * fatigue_norm * (1.0 - jp_norm)
         return max(0.0, min(0.5, fpl))
 
+    # Perceptibility of each cue type: 0.0 = nearly invisible, 1.0 = unmissable.
+    # High-strength cues (concrete, verifiable) reduce FPL — agents are harder to fool.
+    # Low-strength cues (subtle, contextual) leave FPL near baseline — easy to miss.
+    # This is the mechanism by which V-Triad (few, low-strength cues) achieves higher click rates
+    # than plain LLM (many, high-strength cues like urgency/threats).
+    _CUE_STRENGTH: dict = {
+        "suspicious_link":   0.8,  # concrete URL check — high digital-literacy signal
+        "suspicious_sender": 0.8,  # verifiable domain mismatch
+        "personal_info":     0.7,  # explicit credential request — clear policy violation
+        "threats":           0.7,  # overt negative consequence language
+        "urgency":           0.6,  # deadline pressure — common but salient
+        "too_good_true":     0.6,  # prize/reward language — widely known red flag
+        "emotional_appeal":  0.5,  # psychological manipulation — moderate subtlety
+        "generic_greeting":  0.4,  # impersonal opener — subtle, normal in bulk email
+        "spelling_grammar":  0.4,  # linguistic errors — only salient to attentive readers
+    }
+
     def get_cue_fpl(self, cue: str) -> float:
         """
-        Trait-differentiated FPL per cue.
+        Trait- and cue-strength-differentiated FPL.
 
-        Older and less-educated agents are worse at URL/sender cues (digital literacy).
-        Desk workers in complex jobs are better at account-threat cues (exposure effect).
+        FPL_cue = base_fpl * (1 - CueStrength[cue])
+
+        High-strength cues (suspicious_link = 0.8) are nearly unmissable — FPL collapses to
+        20% of base. Low-strength cues (generic_greeting = 0.4) leave FPL at 60% of base.
+        This is why V-Triad emails (few cues, mostly subtle) produce more clicks than
+        plain LLM (many cues, mostly overt).
+
+        Trait modifiers applied after CueStrength scaling:
+          - Older/less-educated agents: higher FPL on URL cues (digital literacy gap)
+          - Desk workers in complex jobs: lower FPL on account-threat cues (exposure effect)
         """
         base = self.compute_flawed_perception_level()
+        cue_strength = self._CUE_STRENGTH.get(cue, 0.5)
+        adjusted = base * (1.0 - cue_strength)
 
         if cue in ("suspicious_link", "suspicious_sender"):
             age_pen = max(0.0, (self.age - 30) / 200)
             edu_pen = max(0.0, (3.0 - self.education_level) / 20.0)
-            return min(0.5, base + age_pen + edu_pen)
-
-        if cue in ("threats", "personal_info", "too_good_true"):
+            adjusted = min(0.5, adjusted + age_pen + edu_pen)
+        elif cue in ("threats", "personal_info", "too_good_true"):
             if self.job_type == 1 and self.job_complexity > 3:
-                return max(0.0, base - 0.08)
+                adjusted = max(0.0, adjusted - 0.04)
 
-        return base
+        return max(0.0, min(0.5, adjusted))
 
     # -------------------------------------------------------------------------
     # Workday progression
@@ -199,14 +226,26 @@ class Agent:
     def advance_workday(self, hour: float):
         """
         Simulate agent state at a given hour (8am–5pm).
-        Stores current_hour so compute_kss() and compute_total_fatigue()
-        produce the correct time-of-day values.
-        time_pressure and workload ramp linearly across the day.
+
+        1. Updates time_pressure and workload (linear ramp).
+        2. Accumulates f_dynamic — situational cognitive depletion (Bakker & Demerouti 2007).
+           Depletion rate is driven by workload, time_pressure, and static ED (JD-R model).
+           Recovery attenuates when workload is high and f_dynamic is already elevated.
+        3. Stores current_hour for compute_kss() / compute_total_fatigue().
         """
         self.current_hour = hour
         progress = max(0.0, min(1.0, (hour - 8.0) / 9.0))  # 0 at 8am, 1 at 5pm
         self.time_pressure = 1.0 + 4.0 * progress            # 1 → 5
         self.workload = 1.5 + 3.5 * progress                  # 1.5 → 5
+
+        # F_dynamic accumulation — Bakker & Demerouti JD-R (2007)
+        w_norm  = (self.workload - 1.0) / 4.0        # [0, 1]
+        tp_norm = (self.time_pressure - 1.0) / 4.0   # [0, 1]
+        ed_norm = (self.compute_energy_depletion() - 1.0) / 4.0  # [0, 1]
+        depletion = 0.30 * w_norm + 0.25 * tp_norm + 0.20 * ed_norm + 0.10 * w_norm * tp_norm
+        recovery  = 0.15 * (1.0 - w_norm) * (1.0 - self.f_dynamic)
+        dt = 2.0 / 9.0   # ~2-hour ticks over a 9-hour day
+        self.f_dynamic = max(0.0, min(1.0, self.f_dynamic + dt * (depletion - recovery)))
 
     # -------------------------------------------------------------------------
     # Factory
