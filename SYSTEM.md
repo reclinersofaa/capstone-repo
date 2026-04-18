@@ -115,26 +115,56 @@ Empty array `[]` = either no cues found OR API quota was exceeded (regex fallbac
 
 **Class:** `Agent` (dataclass)
 
-All fields are set at construction. Workday-dynamic fields (`time_pressure`, `workload`) are mutated by `advance_workday()`.
+All fields set at construction. Workday-dynamic fields (`current_hour`, `time_pressure`, `workload`) are mutated by `advance_workday()`.
 
 **Key methods:**
 
 | Method | Returns | Notes |
 |---|---|---|
-| `compute_energy_depletion()` | float | Stable across workday |
-| `compute_fatigue()` | float | Uses `time_of_awakening`, `total_sleep_time` |
-| `compute_total_fatigue()` | float [1,5] | Average of above two, clamped |
-| `compute_job_performance()` | float | Uses `time_pressure`, `workload` (dynamic) |
-| `compute_flawed_perception_level()` | float [0,0.5] | Derived from fatigue + JP |
+| `compute_kss()` | float [1,9] | Three Process Model KSS — uses `current_hour`, time-varying |
+| `compute_energy_depletion()` | float [1,5] | `f(job_complexity, intrinsic_motivation)` — gender removed |
+| `compute_total_fatigue()` | float [1,5] | `(KSS_norm + ED) / 2`, changes with `current_hour` |
+| `compute_job_performance()` | float | Uses `time_pressure`, `workload` (dynamic) + fatigue crossover |
+| `compute_flawed_perception_level()` | float [0,0.5] | Derived from total_fatigue + JP |
 | `get_cue_fpl(cue: str)` | float [0,0.5] | Trait-adjusted FPL for a specific cue |
-| `advance_workday(hour: float)` | None | Mutates `time_pressure` and `workload` |
+| `advance_workday(hour: float)` | None | Sets `current_hour`; mutates `time_pressure` and `workload` |
 | `Agent.random_agent(agent_id, seed)` | Agent | Classmethod factory |
+
+**Key design note:** `gender` is stored as a field for demographic records but is NOT used in any formula. The previous ED formula included `+0.09*gender` which was removed after review — the Tian et al. paper specifies `ED = f(JobComplexity, PsychologicalEmpowerment)` without gender.
+
+**Fatigue is time-varying:** calling `advance_workday(hour)` updates `current_hour`, so subsequent calls to `compute_kss()`, `compute_total_fatigue()`, and `compute_flawed_perception_level()` return hour-appropriate values. At 8am, KSS ≈ 8–9 (groggy start); by 4pm it falls to ≈ 5–6 as circadian alertness rises.
 
 **Trait adjustments in `get_cue_fpl`:**
 - `suspicious_link`, `suspicious_sender`: penalised for age > 30 and education < 3
 - `threats`, `personal_info`, `too_good_true`: reduced by 0.08 for desk workers with job_complexity > 3
 
-**To extend:** add new cue-specific adjustments in `get_cue_fpl()`. Add new demographic fields to the dataclass and the `random_agent()` factory.
+---
+
+### `src/ollama_extractor.py`
+
+**Class:** `OllamaExtractor`
+
+Drop-in replacement for `CueExtractor` using a locally-running Ollama model. Same cache-first interface.
+
+**Constructor params:**
+- `model` (default: `"qwen2.5:7b"`) — any Ollama model; `gemma2:9b` also works well
+- `cache_dir` (default: `"data/cue_cache"`)
+- `endpoint` (default: `"http://localhost:11434/api/generate"`)
+- `min_interval` (default: `0.3` seconds)
+
+**Key methods:**
+
+| Method | Description |
+|---|---|
+| `extract(email_id, subject, sender, body, urls)` | Cache-first extraction. Returns `list[str]` |
+| `extract_batch(emails_df)` | Same as `CueExtractor.extract_batch()` |
+| `is_available()` | Checks Ollama is running and model is pulled. Returns `bool` |
+
+**Setup:** `ollama pull qwen2.5:7b` (fits in 16GB VRAM, ~3–5s per call)
+
+**Why prefer over regex:** Ollama understands tone, implication, and subtle manipulation that regex cannot catch. Phishbowl emails in particular score low with regex (0.78 avg cues) because real phishing avoids obvious patterns — Ollama catches what regex misses.
+
+**To use in simulation:** In notebook 04, set `USE_OLLAMA=True` and delete `data/cue_cache/` to force re-extraction.
 
 ---
 

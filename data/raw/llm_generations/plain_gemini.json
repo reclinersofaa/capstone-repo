@@ -1,0 +1,77 @@
+[
+    {
+        "subject": "Required: Verify Your Apple ID Today",
+        "sender": "support@apple-verify-service.net",
+        "body": "Dear Customer, Your Apple ID account has been flagged for unusual sign-in activity originating from Russia. For your security, we have placed a temporary block on all App Store purchases and iCloud syncing. You must verify your account ownership promptly, or your Apple ID will be restricted, resulting in the loss of all your photos, contacts, and purchased media. Please click the secure link below to confirm your identity. You will need to enter your Apple ID email, password, and account details to restore full access. Do not ignore this alert. \n\nClick here: https://apple-account-recovery.online/login"
+    },
+    {
+        "subject": "Overdue Payment Notice - Invoice 39281",
+        "sender": "billing@xero-invoicing-portal.xyz",
+        "body": "Hello Client, We are contacting you to inform you that your latest invoice #39281 remains unpaid. The total amount of $1,250.00 was due three days ago. If we do not recieved the payment by the end of today, we will be forced to suspend your account and forward your details to a debt collection agency. This will negatively impact your credit score. Please find the attached invoice details and pay immediately using the secure payment gateway link below. Please insure your credit card details are entered correctly to avoid additional penalty fees of 10%. \n\nPay Now: https://xero-secure-pay.site/invoice/39281"
+    },
+    {
+        "subject": "IT ALERT: Mailbox Storage Full",
+        "sender": "admin@webmail-server-admin.com",
+        "body": "Attention User, Your corporate mailbox has reached its maximum capacity of 20GB. As a result, 4 incoming messages are currently blocked and pending delivery. You must validate your mailbox immediately to receive these pending emails and prevent your account from being archived. If you fail to upgrade your storage quota within 2 hours, your account will be suspended and all incoming emails will bounce back to the senders. Click the link below to upgrade your storage for free. You will be required to input your email address and password to authenticate the request. \n\nUpgrade Quota: https://webmail-quota-increase.net/upgrade"
+    },
+    {
+        "subject": "URGENT: W-2 Tax Form Available for Download",
+        "sender": "hr-dept@adp-payroll-services.site",
+        "body": "Dear Employee, Your annual W-2 tax document is now available for download and review. Due to new federal regulations, you must review and digitally sign this document before the end of the current pay period. Failure to complete this required action by Friday will result in a delay in your tax filing and a potential hold on your next paycheck. Please access the secure portal using the link below to retrieve your document. You will need to verify your identity by entering your Social Security Number and employee login password. \n\nAccess W-2: https://adp-tax-portal.online/login"
+    },
+    {
+        "subject": "Unsuccessful Delivery Attempt: Action Required",
+        "sender": "tracking@fedex-delivery-updates.net",
+        "body": "Dear Customer, We attempted to deliver your package (Tracking #FX84759291) today at 10:45 AM, but no one was available to sign for it. The package is currently being held at our regional sorting facility. You must reschedule your delivery within 24 hours, or the package will be returned to the sender. To arrange a new delivery time, please follow the tracking link provided below. You will need to confirm your full shipping address and provide your credit card information to cover a minor $1.99 redelivery processing fee. Please act fast to ensure you receive your items. \n\nReschedule Delivery: https://fedex-redelivery-track.xyz/reschedule"
+    },
+    {
+        "subject": "Verify Your Amazon Account",
+        "sender": "security@amazon-account-check.net",
+        "body": "Hello User, We have detected unusual activity on your Amazon account regarding a recent purchase of an expensive electronics item. To protect your financial security, we have flagged the transaction. You must verify your account configuration soon to cancel this unauthorized order and restore your account access. If you fail to verify your details by tomorrow, the order will be processed, and your account will remain pending review. Please click the link below and verify your account details. Do not delay, as this is a important notice.\n\nVerify here: https://amazon-security-verify.site/auth"
+    },
+    {
+        "subject": "Action Required: Your PayPal Account is Limited",
+        "sender": "service@paypal-resolutions.xyz",
+        "body": "Dear Customer, Your PayPal account has been temporarily restricted due to a recent dispute filed against a transaction. We noticed a charge of $450.00 that requires your immediate attention. Until this issue is resolved, you will not be able to send or receive money, or withdraw funds to your bank account. To remove these limitations and resolve the dispute, you must log in to the resolution center. Please click the link below and confirm your identity by entering your identity. If you do not complete this step soon, the funds will be permanently deducted from your account. Please act to secure your money.\n\nResolve issue: https://paypal-dispute-resolve.online/login"
+    },
+    {
+        "subject": "SECURITY WARNING: Unauthorized Device Detected",
+        "sender": "helpdesk@corporate-it-support.net",
+        "body": "Attention Employee, The IT Department has detected an unauthorized login attempt from an unknown mobile device trying to access the company VPN. This is a severe security violation. To ensure the safety of our corporate network, your remote access privileges have been temporarily suspended. You must authenticate your identity immediately to regain access to your work emails and internal systems. Failure to verify your device by 3:00 PM today will result in a permanent network ban and an immediate report to Human Resources. Click the secure link below to verify your login credentials. You will need to enter your username and current network password.\n\nAuthenticate device: https://vpn-auth-portal.xyz/verify"
+    },
+    {
+        "subject": "Important Update: Changes to Employee Benefits",
+        "sender": "humanresources@company-benefits-update.com",
+        "body": "Dear Staff Member, We are writing to inform you of mandatory changes to your employee health insurance benefits for the upcoming year. Your current coverage will expire at the end of this month, and you must select a new plan to ensure continuous medical coverage. If you do not update your benefits profile within the next 48 hours, you will automatically be un-enrolled from the health plan, leaving you without insurance. Please click the link below to review the new plan options and confirm your selection. You will be required to log in using your employee ID and password. Do not wait until the last minute.\n\nReview benefits: https://hr-benefits-enrollment.site/login"
+    },
+    {
+        "subject": "Congratulations! You've won a $500 Walmart Gift Card!",
+        "sender": "rewards@walmart-prize-claim.online",
+        "body": "Hello Customer,  You have been randomly selected as the grand prize winner of our monthly shopper appreciation sweepstakes. You have won a $500 Walmart digital gift card to spend on anything you want! This incredible offer is only available to a select few, and you must act quickly. Your prize will end after exactly 3 hours if left unclaimed. To receive your free gift card, click the link below to confirm your contact details. You just need to provide your full name, home address, and pay a tiny $2.99 processing fee using your credit card. Claim your free money now before someone else takes it!\n\nClaim reward: https://walmart-winner-claim.xyz/reward"
+    },
+    {
+        "subject": "Urgent: Action Required for Pending DHL Delivery",
+        "sender": "support@dhl-tracking-notice.xyz",
+        "body": "Dear Customer, Your package is currently stuck at our local sorting facility due to unpaid customs fees. We attempted to contact you yesterday, but recieved no response. The outstanding fee is $4.50. You must settle this payment immediately to release your package for final delivery. If payment is not recieved within 24 hours, the package will be returned to the sender, and you will not be refunded for the shipping cost. Please click the secure link below to review your shipment details and pay the customs fee using your credit card. Do not ignore this message, as your package contains valuable items.\n\nTrack and Pay: https://dhl-customs-pay.online/tracking"
+    },
+    {
+        "subject": "Microsoft 365: Verify Your Account Soon",
+        "sender": "no-reply@microsoft-auth-verify.net",
+        "body": "Hello User, We are implementing a mandatory security upgrade for all Microsoft 365 accounts. Our system indicates that your account has not yet been verified under the new security protocol. To avoid service interruption, you must verify your account soon. If you fail to complete this verification process by the end of the day, your access may be delayed, and you will be unable to access Microsoft Teams, OneDrive, or Outlook. This is your reminder. Click the link below to authenticate your identity. You will be prompted to enter your current password and answer your security questions to complete the upgrade.\n\nVerify Account: https://m365-security-upgrade.site/login"
+    },
+    {
+        "subject": "URGENT: Discrepancy in Your Recent Pay Stub",
+        "sender": "payroll@hr-salary-portal.xyz",
+        "body": "Dear Employee, During our monthly payroll reconciliation, we noticed a significant discrepancy regarding your recent salary deposit. It appears that a portion of your wages was routed to an incorrect external account. We need to verify your direct deposit information immediately to correct this error and issue your missing funds. Please review the attached summary to see the affected amount. If you do not verify your banking details within 12 hours, the missing funds will be permanently forfeited, and future paychecks may also be delayed. Please click the link below to log into the employee portal. You will need your employee ID and password to proceed.\n\nVerify Details: https://hr-payroll-correction.online/verify"
+    },
+    {
+        "subject": "Security Alert: Your Password Expires in 2 Hours",
+        "sender": "it-support@company-directory-admin.net",
+        "body": "Hello, This is an automated warning from the IT Helpdesk. Your corporate network password is set to expire in exactly 2 hours. According to company policy, you must update your password regularly to maintain network security. If you do not update your password before the deadline, you will be locked out of your workstation and all internal company systems. To prevent this lockout, please navigate to the password reset portal using the link below. You must enter your current password before creating a new one. Act now to ensure you don't lose access during your workday.\n\nReset Password: https://password-reset-portal.site/update"
+    },
+    {
+        "subject": "Your Norton Antivirus Subscription Expired",
+        "sender": "billing@norton-renew-service.xyz",
+        "body": "Dear Customer, Your Norton Antivirus protection has officially expired as of today. Your computer is currently vulnerable to viruses, malware, and cyber threats. We attempted to process your automatic renewal, but your payment method was declined. To restore your computer's protection and avoid losing your personal data to hackers, you must renew your subscription soon. We are offering a 50% discount if you renew today. Click the link below to update your billing information and process the payment. You will need to enter your payment method and billing address. Do not leave your PC unprotected for another minute!\n\nRenew Now: https://norton-billing-renew.online/pay"
+    }
+]

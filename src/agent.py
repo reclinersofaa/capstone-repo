@@ -1,5 +1,6 @@
+import math
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -9,7 +10,7 @@ class Agent:
 
     # --- Stable demographic traits ---
     age: float             # years (22–60)
-    gender: float          # 0 = female, 1 = male (as encoded in the regression)
+    gender: float          # 0 = female, 1 = male  NOTE: stored for demographics only, NOT used in any formula
     education_level: float # 1–5 scale (1=no degree, 5=postgrad)
     tenure: float          # years at current job
     job_type: float        # 0 = non-desk, 1 = desk job
@@ -24,7 +25,7 @@ class Agent:
 
     # --- Job performance inputs (stable) ---
     burnout: float              # 1–5
-    intrinsic_motivation: float # 1–5
+    intrinsic_motivation: float # 1–5  (also used as psychological empowerment proxy in ED)
     job_satisfaction: float     # 1–5
     role_conflict: float        # 1–5
     leave_intention: float      # 1–5
@@ -40,42 +41,95 @@ class Agent:
     total_sleep_time: float = 7.5    # hours slept
     time_pressure: float = 1.0       # 1–5, increases as workday advances
     workload: float = 1.5            # 1–5, increases as workday advances
+    current_hour: float = 8.0        # current simulation hour (set by advance_workday)
 
     # -------------------------------------------------------------------------
-    # Internal state calculations
+    # Three Process Model (Åkerstedt) — KSS-based fatigue
+    # -------------------------------------------------------------------------
+
+    def compute_kss(self) -> float:
+        """
+        Karolinska Sleepiness Scale via Åkerstedt's Three Process Model.
+
+        KSS = 10.6 - 0.6 * (S + C + U)   [range 1–9; 1=very alert, 9=very sleepy]
+
+        S  — homeostatic alertness: S_t = ha - (ha - S_w) * e^(d * taw)
+               ha=14.3, d=-0.0353, S_w derived from sleep quality/duration
+        C  — circadian: Ca * cos(2π(tod - p) / 24)
+               Ca=2.5, p=16.8 (peak ~4:48 PM; circadian alertness highest in late afternoon)
+        U  — ultradian component (simplified to 0)
+
+        Both S and C represent internal alertness — higher value → lower KSS (more alert).
+        The circadian trough at ~4:48 AM means agents are least circadian-alert at 8 AM
+        and most alert in the late afternoon, consistent with Åkerstedt empirical data.
+        """
+        taw = max(0.0, self.current_hour - self.time_of_awakening)
+
+        # Homeostatic process — alertness builds from S_w toward ha as waking hours increase
+        ha = 14.3
+        d = -0.0353
+        # S_w: initial alertness at waking. Better sleep → higher starting alertness.
+        S_w = max(1.0, min(8.0,
+            2.0 + (self.total_sleep_time - 5.0) * 0.30 + (self.sleep_quality - 1.0) * 0.50
+        ))
+        S = ha - (ha - S_w) * math.exp(d * taw)
+
+        # Circadian process — peaks at 16.8h (4:48 PM), trough at 4.8 AM
+        Ca = 2.5
+        p = 16.8
+        C = Ca * math.cos(2 * math.pi * (self.current_hour - p) / 24)
+
+        kss = 10.6 - 0.6 * (S + C)   # U = 0 (ultradian simplified)
+        return max(1.0, min(9.0, kss))
+
+    # -------------------------------------------------------------------------
+    # Energy Depletion (Tian et al., 2022)
     # -------------------------------------------------------------------------
 
     def compute_energy_depletion(self) -> float:
-        return (
-            2.45
-            - 0.05 * self.age
-            + 0.09 * self.gender
-            - 0.08 * self.education_level
-            - 0.01 * self.tenure
-            - 0.25 * self.job_type
-            + 0.65 * self.job_complexity
-        )
+        """
+        ED = f(JobComplexity, PsychologicalEmpowerment)
 
-    def compute_fatigue(self) -> float:
-        return (
-            6.22
-            - 0.22 * self.time_of_awakening
-            - 0.15 * self.total_sleep_time
-            + 0.14 * self.sleep_quality
-            + 0.44 * self.stress_avg
-            + 0.44 * self.illness
-            + 0.29 * self.subjective_health
-            + 0.02 * self.age
-            + 0.17 * self.depression
-        )
+        High job complexity depletes resources; psychological empowerment buffers it.
+        Intrinsic motivation is used as the empowerment proxy (Tian et al.).
+        Gender is NOT included — it is not a valid physiological predictor in this model.
+        """
+        psy_emp = self.intrinsic_motivation  # 1–5 scale
+        ed = 0.65 * self.job_complexity - 0.20 * psy_emp + 1.80
+        return max(1.0, min(5.0, ed))
+
+    # -------------------------------------------------------------------------
+    # Composite fatigue
+    # -------------------------------------------------------------------------
 
     def compute_total_fatigue(self) -> float:
-        """Average of energy depletion and fatigue, clamped to [1, 5]."""
-        raw = (self.compute_energy_depletion() + self.compute_fatigue()) / 2
+        """
+        Combines KSS-derived sleepiness (time-of-day) and energy depletion,
+        normalised to [1, 5].
+
+        KSS is mapped from 1–9 → 1–5 before averaging with ED.
+        Because KSS uses current_hour (set by advance_workday), total_fatigue
+        is now genuinely time-varying across the workday.
+        """
+        kss = self.compute_kss()                    # 1–9
+        kss_norm = (kss - 1.0) / 2.0 + 1.0         # maps 1-9 → 1-5
+        ed = self.compute_energy_depletion()         # 1–5
+        raw = (kss_norm + ed) / 2.0
         return max(1.0, min(5.0, raw))
 
+    # -------------------------------------------------------------------------
+    # Job performance (Rehman 2015 + Basit/Hassan 2017)
+    # -------------------------------------------------------------------------
+
     def compute_job_performance(self) -> float:
-        """Final JP = average of JP1 and JP2 minus fatigue crossover penalty."""
+        """
+        JP_final = (JP1 + JP2) / 2  −  crossover_penalty
+
+        JP1 (Rehman et al.): macro psychological state
+        JP2 (Basit & Hassan): micro situational stressors (time_pressure, workload are dynamic)
+        Crossover penalty (Hassan & Morsy): −2.442 per point on 0–10 fatigue scale,
+            scaled to our 1–5 fatigue range → coefficient ≈ 0.34 per unit.
+        """
         jp1 = (
             2.766
             - 0.106 * self.burnout
@@ -91,41 +145,48 @@ class Agent:
             - 0.141 * self.lack_motivation
             - 0.155 * self.role_ambiguity
         )
-        overall = (jp1 + jp2) / 2
+        overall = (jp1 + jp2) / 2.0
+        # Crossover penalty: fatigue degrades job performance
+        # Original: −2.442/point on 0–10 scale, 0–72 JP. Scaled to our 1–5 fatigue, ~1–4 JP range.
         return overall - (0.34 * self.compute_total_fatigue())
+
+    # -------------------------------------------------------------------------
+    # Flawed Perception Level (Shonman / ACT-R / IBLT)
+    # -------------------------------------------------------------------------
 
     def compute_flawed_perception_level(self) -> float:
         """
-        Probability [0.0, 0.5] that agent misidentifies a malicious cue as benign.
-        Higher fatigue + lower JP → higher FPL (more errors).
+        P(Misclassification) = FPL  [0.0, 0.5]
+
+        0.0 = perfect observer; 0.5 = guessing at random (Signal Detection Theory).
+        FPL rises with fatigue (KSS-based) and falls with job performance.
+        The time-varying nature of compute_total_fatigue() means FPL genuinely
+        changes across the workday.
         """
         fatigue = self.compute_total_fatigue()   # 1–5
         jp = self.compute_job_performance()
 
-        fatigue_norm = (fatigue - 1) / 4          # → [0, 1]
-        jp_norm = max(0.0, min(1.0, jp / 4.0))    # → [0, 1], higher is better
+        fatigue_norm = (fatigue - 1.0) / 4.0          # → [0, 1]
+        jp_norm = max(0.0, min(1.0, jp / 4.0))        # → [0, 1], higher = better
 
-        fpl = 0.5 * fatigue_norm * (1 - jp_norm)
+        fpl = 0.5 * fatigue_norm * (1.0 - jp_norm)
         return max(0.0, min(0.5, fpl))
 
     def get_cue_fpl(self, cue: str) -> float:
         """
         Trait-differentiated FPL per cue.
 
-        Older and less-educated agents are worse at URL/sender cues.
-        Desk workers in complex jobs are better at account-threat cues.
+        Older and less-educated agents are worse at URL/sender cues (digital literacy).
+        Desk workers in complex jobs are better at account-threat cues (exposure effect).
         """
         base = self.compute_flawed_perception_level()
 
         if cue in ("suspicious_link", "suspicious_sender"):
-            # age penalty: +0–0.15 for 30–60 years old
             age_pen = max(0.0, (self.age - 30) / 200)
-            # education penalty: +0–0.1 for low education (1–2)
-            edu_pen = max(0.0, (3 - self.education_level) / 20)
+            edu_pen = max(0.0, (3.0 - self.education_level) / 20.0)
             return min(0.5, base + age_pen + edu_pen)
 
         if cue in ("threats", "personal_info", "too_good_true"):
-            # desk + complex job → more aware of account-based lures
             if self.job_type == 1 and self.job_complexity > 3:
                 return max(0.0, base - 0.08)
 
@@ -137,12 +198,15 @@ class Agent:
 
     def advance_workday(self, hour: float):
         """
-        Simulate state at a given hour of the workday (8am–5pm).
-        time_pressure and workload ramp up linearly across the day.
+        Simulate agent state at a given hour (8am–5pm).
+        Stores current_hour so compute_kss() and compute_total_fatigue()
+        produce the correct time-of-day values.
+        time_pressure and workload ramp linearly across the day.
         """
-        progress = max(0.0, min(1.0, (hour - 8) / 9))  # 0 at 8am, 1 at 5pm
-        self.time_pressure = 1.0 + 4.0 * progress       # 1 → 5
-        self.workload = 1.5 + 3.5 * progress             # 1.5 → 5
+        self.current_hour = hour
+        progress = max(0.0, min(1.0, (hour - 8.0) / 9.0))  # 0 at 8am, 1 at 5pm
+        self.time_pressure = 1.0 + 4.0 * progress            # 1 → 5
+        self.workload = 1.5 + 3.5 * progress                  # 1.5 → 5
 
     # -------------------------------------------------------------------------
     # Factory
@@ -155,7 +219,7 @@ class Agent:
         return cls(
             agent_id=agent_id,
             age=rng.uniform(22, 60),
-            gender=rng.choice([0, 1]),
+            gender=rng.choice([0, 1]),           # stored for demographics, not used in formulas
             education_level=rng.uniform(1, 5),
             tenure=rng.uniform(0.5, 20),
             job_type=rng.choice([0, 1]),

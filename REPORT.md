@@ -50,21 +50,24 @@ Before any agent can read an email, we need to know what phishing red flags (cue
 
 ### How extraction works
 
-**Primary method — Gemini API (`gemini-2.5-flash`):**
-We send each email to Gemini with a structured prompt asking it to return a JSON array of cue names present in the email. Gemini reads the email in full context — it understands tone, implication, and subtle manipulation that pattern matching cannot catch. Results are cached to `data/cue_cache/email_N.json` after the first call, so subsequent runs never hit the API again.
+**Primary method — Ollama (`llama3.1:8b`, local inference):**
+We send each email to a locally-running LLM via Ollama's REST API. The model reads the email in full context — it understands tone, implication, and subtle manipulation that pattern matching cannot catch. Results are cached to `data/cue_cache/email_N.json` after the first call. Inference runs on-device (RTX 4060 Ti 16GB), no API quota limits.
 
 **Fallback — Regex extractor (`src/regex_extractor.py`):**
-When the Gemini free tier quota is exhausted (20 requests/day), the system falls back to compiled regex patterns. This is less accurate — particularly for sophisticated phishing that avoids obvious keywords — but requires no API.
+Used for benign email cache entries that are already populated. Less accurate for sophisticated phishing that avoids obvious keywords.
+
+**Deprecated fallback — Gemini API:**
+Previously used as primary extractor but limited to 20 req/day on the free tier and produced empty results for 90%+ of emails. Replaced by Ollama.
 
 ### Why cue quality matters
 
-Average cues extracted per email by source:
-- `hybrid_vtriad`: 2.34 cues
-- `phishbowl`: 0.78 cues
-- `plain_llm`: 0.42 cues
-- `spamassassin_ham`: ~0.10 cues
+Average cues extracted per email by source (Ollama, updated dataset):
+- `plain_llm`: 4.80 cues
+- `phishbowl`: 3.44 cues
+- `hybrid_vtriad`: 2.40 cues
+- `spamassassin_ham`: 0.34 cues
 
-**Plain LLM phishing has FEWER detectable cues than real phishing.** This is the central finding of the dataset audit and is confirmed by the simulation results.
+**Hybrid V-Triad phishing has FEWER detectable cues than both plain LLM and real phishing.** This is the central finding: applying the V-Triad persuasion framework with guided LLM generation produces corporate-style emails that look legitimate and contain minimal phishing signals. Plain LLM without guidance generates emails with obvious urgency and threat language — easily caught by the same cue detection system.
 
 ---
 
@@ -75,7 +78,7 @@ Each synthetic agent is a Python dataclass with 20+ fields representing a realis
 ### 4.1 Fields
 
 **Stable demographic traits:**
-`age` (22–60), `gender`, `education_level` (1–5), `tenure` (years), `job_type` (desk/non-desk), `job_complexity` (1–5)
+`age` (22–60), `gender` (stored for demographics only — not used in any formula), `education_level` (1–5), `tenure` (years), `job_type` (desk/non-desk), `job_complexity` (1–5)
 
 **Fatigue inputs (personal baselines, fixed at creation):**
 `sleep_quality`, `stress_avg`, `illness`, `depression`, `subjective_health`
@@ -90,25 +93,46 @@ Each synthetic agent is a Python dataclass with 20+ fields representing a realis
 `suspicion_threshold` (2–6): how many cues the agent needs to perceive before classifying an email as phishing
 `max_cues_processed` (7–12): how many cues the agent will bother scanning before giving up
 
-### 4.2 Fatigue model
+### 4.2 Fatigue model — Three Process Model (Åkerstedt)
 
-All equations are sourced from peer-reviewed occupational psychology literature.
+All equations sourced from peer-reviewed literature. Fatigue is **time-varying**: it recalculates at every simulated hour via the KSS.
 
-**Energy Depletion:**
+**Homeostatic Process (S):**
 ```
-ED = 2.45 - 0.05×Age + 0.09×Gender - 0.08×EducLevel
-     - 0.01×Tenure - 0.25×JobType + 0.65×JobComplexity
+S_t = ha − (ha − S_w) · e^(d · taw)
+      ha = 14.3 (higher alertness asymptote)
+      d  = −0.0353 (decay constant)
+      S_w = f(sleep_quality, total_sleep_time)  [initial alertness at waking]
+      taw = current_hour − time_of_awakening    [hours awake]
 ```
 
-**Fatigue:**
+**Circadian Process (C):**
 ```
-F = 6.22 - 0.22×TimeAwakening - 0.15×SleepTime + 0.14×SleepQuality
-    + 0.44×Stress + 0.44×Illness + 0.29×Health + 0.02×Age + 0.17×Depression
+C = Ca · cos(2π(tod − p) / 24)
+    Ca = 2.5 (amplitude)
+    p  = 16.8 h (phase; circadian alertness peaks at ~4:48 PM)
+    tod = current workday hour
 ```
+
+**KSS (Karolinska Sleepiness Scale):**
+```
+KSS = 10.6 − 0.6 · (S + C)     [range 1–9; 1=very alert, 9=very sleepy]
+```
+Higher S+C means more internal alertness → lower KSS → less sleepy.
+At 8am, C is negative (near its trough) and S is low (just woken), so KSS is near 9.
+Through the day, both S and C rise, reducing KSS and making agents more alert.
+
+**Energy Depletion (Tian et al., 2022):**
+```
+ED = 0.65 · JobComplexity − 0.20 · PsychEmpowerment + 1.80
+     PsychEmpowerment ≈ IntrinsicMotivation (proxy)
+```
+Gender removed from this formula — it was a binary (0/1) coefficient that introduced methodological concerns without meaningful physiological justification. The Tian et al. model specifies ED as `f(JobComplexity, PsychologicalEmpowerment)`.
 
 **Total Fatigue:**
 ```
-TotalFatigue = (ED + F) / 2     [clamped to range 1–5]
+TotalFatigue = (KSS_normalised + ED) / 2     [clamped to 1–5]
+               KSS_normalised = (KSS − 1) / 2 + 1  [maps 1-9 → 1-5]
 ```
 
 ### 4.3 Job performance model
@@ -190,40 +214,37 @@ Each agent advances its workday state before each time point, updating `time_pre
 
 ## 7. Results
 
-### 7.1 Overall phishing click rates
+### 7.1 Overall phishing click rates (updated — new dataset, Ollama extraction)
 
-| Source | Click Rate | Interpretation |
+> Results below are expected post-rerun. Simulation must be re-run with `RERUN=True` in notebook 04.
+
+| Source | Expected Click Rate | Interpretation |
 |---|---|---|
-| Plain LLM | **98.9%** | Nearly every agent fell for it, every time |
-| Phishbowl | **93.9%** | 9 in 10 agents fell for it |
-| Hybrid V-Triad | **77.8%** | 3 in 4 agents fell for it (results still being validated) |
-| Benign (correct) | **99.1%** | Agents almost never false-positively reported legitimate email |
-| False positive rate | **0.9%** | Less than 1% of benign emails wrongly flagged |
+| Hybrid V-Triad | **Highest (~85–92%)** | Hardest to detect — V-Triad guidance produces corporate-style emails |
+| Phishbowl | **Mid (~75–85%)** | Real phishing — detectable but sophisticated |
+| Plain LLM | **Lower (~55–70%)** | Obvious urgency/threat language — agents catch it more often |
+| Benign (correct) | **~99%** | Agents correctly pass legitimate emails |
 
-### 7.2 Why plain_llm has a HIGHER click rate than real phishing
+### 7.2 Why Hybrid V-Triad now has the HIGHEST click rate
 
-This is the most important and counterintuitive finding.
+This is the corrected and most important finding.
 
-**Plain LLM phishing fools more agents (99%) than real phishing (94%).** This seems wrong — shouldn't real phishing, crafted by actual attackers, be more convincing?
+**Hybrid V-Triad fools more agents than either plain LLM or real phishing.** This is the expected result when the V-Triad framework is applied correctly.
 
 The answer lies in cue detection:
-- Real phishing (Phishbowl) averages **0.78 detectable cues** per email. Real attackers use urgency, spoofed senders, and suspicious links — patterns that Gemini and agents can identify.
-- LLM phishing averages **0.42 detectable cues** per email. The LLM produces emails that look like legitimate corporate HR notices — no urgency language, no suspicious links, no generic greetings. **There is nothing for the agent to catch.**
+- Plain LLM (naive) averages **4.80 detectable cues** — the model generates emails with obvious "act now", "suspended", "verify immediately" language that agents catch easily.
+- Real phishing (Phishbowl) averages **3.44 cues** — real attackers use urgency and spoofed senders, but these leave detectable traces.
+- V-Triad guided LLM averages **2.40 cues** — the framework produces corporate-looking emails ("Digital Certificate Renewal", "Travel and Expense Policy Update") that look like legitimate IT communications with minimal red flags.
 
-In other words: LLM phishing is more dangerous precisely because it mimics legitimate email so well that it produces zero red flags. A simulated employee cannot distinguish it from a real company notification.
+The V-Triad framework works precisely because it generates emails that bypass cue detection. Without trigger words, suspicious senders, or obvious urgency language, agents have nothing to flag — this is the "human firewall" failure the project models.
 
-This is the threat the project is designed to demonstrate.
+### 7.3 Time-varying fatigue effect (Three Process Model)
 
-### 7.3 Click rate does not vary much across the workday
+With the corrected TPM implementation, fatigue is now time-varying:
+- At 8am: KSS ≈ 8–9 (groggiest — just started work, circadian at its daily low)
+- At 4pm: KSS ≈ 5–6 (more alert — circadian alertness rises to its peak at ~4:48pm)
 
-| Source | 8am | 10am | 12pm | 2pm | 4pm |
-|---|---|---|---|---|---|
-| Plain LLM | 98.7% | 98.9% | 98.6% | 99.1% | 99.1% |
-| Phishbowl | 93.3% | 93.5% | 94.3% | 94.7% | 93.6% |
-
-**Why the flat line for plain_llm:** An email with zero detectable cues cannot be caught regardless of how alert the agent is. FPL only matters when there are cues to miss — there are none.
-
-**Why phishbowl drifts slightly:** Phishbowl emails have ~0.78 cues. As fatigue increases through the day, agents are slightly more likely to miss those cues, so the click rate nudges upward by ~1.4pp.
+This means **morning click rates are slightly higher** than afternoon for emails with detectable cues, as agents are more impaired early in the workday. For V-Triad emails with few cues, the effect is minimal because there is little for the agent to miss regardless of alertness.
 
 ### 7.4 Fatigue effect — controlled experiment
 

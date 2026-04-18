@@ -4,8 +4,16 @@ import pandas as pd
 from pathlib import Path
 
 from .agent import Agent
-from .cue_extractor import CueExtractor
 from .decision_loop import simulate_email
+
+# CueExtractor is imported lazily inside run_simulation() so that
+# OllamaExtractor (or any other extractor) can be injected by setting
+# src.simulation.CueExtractor = MyExtractor before calling run_simulation().
+def _default_extractor():
+    from .cue_extractor import CueExtractor
+    return CueExtractor
+
+CueExtractor = None  # overwrite with OllamaExtractor if desired
 
 # Default workday sample points (hours, 8am–5pm)
 DEFAULT_HOURS = [8.0, 10.0, 12.0, 14.0, 16.0]
@@ -62,8 +70,12 @@ def run_simulation(
 
     # ------------------------------------------------------------------
     # Step 1: Extract cues for all emails
+    # Use module-level CueExtractor if overridden (e.g. OllamaExtractor),
+    # otherwise fall back to the real Gemini-based CueExtractor.
     # ------------------------------------------------------------------
-    extractor = CueExtractor(cache_dir=cache_dir)
+    import src.simulation as _self
+    ExtractorClass = _self.CueExtractor if _self.CueExtractor is not None else _default_extractor()
+    extractor = ExtractorClass(cache_dir=cache_dir)
     print(f"Step 1 — Extracting cues for {len(emails)} emails...")
     email_cues = extractor.extract_batch(emails)
     cached = sum(1 for eid in email_cues if (Path(cache_dir) / f"email_{eid}.json").exists())
