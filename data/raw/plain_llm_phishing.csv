@@ -1,371 +1,453 @@
 id,subject,sender,body,expected_cues
-1,"URGENT: Your Account Will Be Closed","security@paypa1-verification.com","Dear Valued Customer,
+1,Critical Security Alert: Your Account Password Expires Tonight,security-noreply@dropbox-account-services.net,"Dear Customer,
 
-Your account has been temporarily suspended due to unusual activity detected. You must verify your identity within 24 hours or your account will be permanently closed.
+We are reaching out regarding your Dropbox account, which is scheduled for mandatory password rotation as part of our Q2 security compliance rollout. Our records show your current credentials were last updated over 90 days ago and will expire at 11:59 PM tonight.
 
-Click here to verify now: http://paypal-secure-login.com/verify
+Accounts with expired passwords are automatically set to read-only mode, which means you will lose the ability to upload, share, or sync files until credentials are renewed. Many users in your organization have already completed this step.
 
-Failure to comply will result in loss of access to your funds.
+Please update your password immediately to avoid any service disruption:
+https://dropbox-credential-renewal.online/update
 
-Best Regards,
-PayPal Security Team",5
-2,"Confirm Your Email Address Immediately","no-reply@amazn-services.net","Hello,
+You will be asked to confirm your current password before setting a new one. The process takes under two minutes.
 
-We noticed you haven't confirmed your email address yet. Your account is at risk of being deleted if you don't confirm within 12 hours.
+Dropbox Account Security Team",5
+2,Unusual Login Detected – Verify Your Identity Now,alerts@paypal-security-monitor.site,"Hello,
 
-CLICK HERE TO CONFIRM: http://amazon-account-verify.com
+Our fraud detection systems flagged a sign-in attempt to your PayPal account from a location in Eastern Europe that does not match your typical usage pattern. As a precautionary measure, outgoing transactions from your account have been placed on temporary hold.
 
-Thank you for using Amazon Services.
+To reinstate full account functionality and confirm that you authorized this activity, please complete identity verification through our secure portal within the next 6 hours. Failure to verify may result in your account being suspended pending a full security review.
 
-Amazon Support",4
-3,"You've Won $5,000 Gift Card!","winners@walmart-rewards.org","Congratulations!!!
+Confirm your identity here: https://paypal-fraud-check.online/verify
 
-You have been selected as our lucky winner for a $5,000 Walmart Gift Card! This is a limited time offer and you must claim it within 48 hours.
+You will need to provide your registered email address and confirm your last four billing digits.
 
-CLAIM YOUR PRIZE HERE: http://walmart-giftcard-claim.com
+PayPal Trust & Safety",4
+3,Payroll Update Required – Banking Details Could Not Be Verified,payroll-admin@corp-hrportal.online,"Dear Employee,
 
-Act fast before it expires!
+During our routine payroll validation cycle, the banking information currently on file for your account could not be verified against our third-party payment processor. As a result, your upcoming salary disbursement has been placed in a pending queue.
 
-Walmart Rewards Department",5
-4,"Security Alert: Password Expired","alerts@microsoft-security.net","Dear User,
+To ensure you receive your full payment on the scheduled date, you must log into the employee self-service portal and re-confirm your direct deposit details before the payroll cutoff on Friday at 5:00 PM.
 
-Your Microsoft password has expired and needs to be updated immediately. Failure to update may result in account lockout.
+Access the portal here: https://employee-payroll-portal.site/banking
 
-Update your password here: http://microsoft-password-reset.com
+Please have your bank account number and routing number ready. Employees who do not complete verification by the deadline may experience a delay of up to two pay cycles.
 
-This is an automated message. Do not reply to this email.
+Corporate Payroll Services",4
+4,"Invoice #INV-44821 – Payment Declined, Immediate Action Required",billing@stripe-payment-resolution.net,"Hello Customer,
 
-Microsoft Account Team",4
-5,"Your Package Delivery Failed","delivery@ups-tracking.org","Attention Customer,
+We were unable to process the recent payment associated with your account. The transaction for Invoice #INV-44821 was declined by your card issuer, and the outstanding balance of $189.00 remains unpaid.
 
-We attempted to deliver your package but no one was home. Please reschedule your delivery within 24 hours or the package will be returned to sender.
+If this balance is not resolved within 24 hours, your subscription will be automatically downgraded to a limited free tier and access to premium features will be suspended. To avoid service interruption, please update your payment method at your earliest convenience.
 
-Track and reschedule: http://ups-redelivery.com/track
+Resolve billing issue: https://stripe-billing-rescue.online/payment
 
-Package ID: UPS894726341
+You may be asked to re-enter your card number and billing address during this process.
 
-UPS Delivery Services",4
-6,"Bank Account Security Update Required","security@chase-bankaccount.com","Dear Customer,
+Billing Resolution Team",5
+5,Your Mailbox Is Full – Storage Limit Exceeded,it-helpdesk@microsoft-mailservices.net,"Dear User,
 
-Due to recent security updates, you need to verify your account information immediately. This is mandatory for all customers.
+Your corporate email mailbox has reached 100% of its allocated storage quota, causing all incoming messages to be bounced back to senders. This issue typically arises when automatic archiving rules have not run as scheduled.
 
-Verify now: http://chase-security-update.com
+To restore normal email functionality, you must authenticate and run a remote cleanup scan on your account. Until this is completed, you will be unable to send or receive emails through this account.
 
-Failure to complete verification will result in account suspension.
+Please log in and run the cleanup scan here:
+https://microsoft-mailbox-recovery.site/login
 
-Chase Bank Security",5
-7,"Tax Refund Pending - Action Required","refunds@irs-taxrefund.gov","Dear Taxpayer,
+This will require your corporate email address and your network password. The process is fully automated and should complete within five minutes.
 
-You have a pending tax refund of $1,847.00 waiting to be processed. You must claim this refund within 7 days.
+IT Helpdesk Operations",3
+6,Your FedEx Package Is Being Held – Customs Fee Unpaid,tracking@fedex-clearance-center.online,"Dear Customer,
 
-Claim your refund: http://irs-refund-portal.com
+Your FedEx shipment (Tracking #394-221-8837) arrived at our regional customs facility but has been placed on hold due to an unpaid import clearance fee of $3.50. This fee is required by customs regulations before the package can continue to its final destination.
 
-IRS Tax Refund Department
-Case #: TX-9847263",4
-8,"Your iCloud Storage Is Full","notifications@apple-icloud.net","Dear iCloud User,
+Due to limited storage capacity at our facility, packages held for more than 72 hours are returned to the originating sender. Please settle the fee at your earliest convenience to avoid return shipping.
 
-Your iCloud storage is 99% full. Upgrade now to avoid losing your photos and data permanently.
+Pay clearance fee: https://fedex-customs-clearance.site/pay
 
-UPGRADE NOW: http://icloud-storage-upgrade.com
+You will need to enter your shipment tracking number, delivery address, and credit card information to complete the payment.
 
-Don't risk losing your precious memories!
+FedEx Customs Services",2
+7,Action Required: Benefits Open Enrollment Closing Soon,benefits@hr-enrollment-system.net,"Hello,
 
-Apple iCloud Team",3
-9,"LinkedIn: Someone Viewed Your Profile","connect@linkedin-notifications.org","Hi there,
+This is a reminder that the annual benefits open enrollment window closes this Friday. If you have not yet made your selections for health, dental, and vision coverage for the upcoming plan year, you must do so before the deadline.
 
-5 recruiters from top companies viewed your profile today! See who they are and connect with them now.
+Employees who do not complete enrollment by Friday will automatically be assigned the lowest-tier health plan available, which may not provide adequate coverage for your family's medical needs. Most of your colleagues have already submitted their selections.
 
-View your profile visitors: http://linkedin-profile-views.com
+Log in to review and submit your benefits choices:
+https://hr-open-enrollment.online/login
 
-This link expires in 24 hours.
+You will need your employee ID and date of birth to access the portal.
 
-LinkedIn Networking Team",4
-10,"Facebook: You Have 10 New Messages","alerts@facebook-messages.net","Hello,
+Human Resources Benefits Team",3
+8,Congratulations! You Have Been Selected for an Exclusive Reward,promotions@customer-loyalty-rewards.online,"Dear Valued Customer,
 
-You have 10 unread messages waiting for you on Facebook. Login now to see who messaged you.
+Congratulations! You have been selected from our database of loyal customers to receive a complimentary $750 gift card as part of our annual customer appreciation program. This reward is being offered to a very limited group of qualifying participants.
 
-View messages: http://facebook-message-center.com
+To claim your gift card, you must verify your identity and confirm your shipping address within the next 48 hours. Once the window closes, unclaimed rewards are redistributed to other participants.
 
-Facebook Notifications",3
-11,"Your Netflix Subscription Failed","billing@netflix-payment.org","Hi there,
+Claim your reward: https://customer-reward-claim.site/bonus
 
-We couldn't process your payment for Netflix. Your account will be suspended in 24 hours if you don't update your payment method.
+You will need to provide your full name, mailing address, and credit or debit card information for a minimal $1.99 processing and handling fee.
 
-Update payment: http://netflix-billing-update.com
+Customer Loyalty Program",4
+9,SECURITY NOTICE: Unauthorized API Access Detected on Your Account,security@github-account-alerts.net,"Hello,
 
-Netflix Billing Department",4
-12,"Verify Your Identity - Bank of America","security@bankofamerica-verify.com","Dear Valued Customer,
+Our systems have detected unauthorized API activity associated with your developer account. A third-party application appears to have accessed private repositories without proper authorization tokens. All API access has been temporarily revoked as a precaution.
 
-We detected suspicious login attempts on your account. Please verify your identity immediately to prevent account closure.
+To reactivate your developer access and review which applications have permissions on your account, please verify your identity through our secure portal immediately. Until this is resolved, commits, pull requests, and deployments may fail for any projects tied to this account.
 
-Verify here: http://boa-identity-check.com
+Verify and restore access: https://github-security-review.online/verify
 
-Bank of America Security Team",5
-13,"Your Amazon Order Has Been Cancelled","orders@amazon-cancellation.net","Hello,
+During verification, you will be asked to confirm your username and current password.
 
-Your recent order #AMZ-9847263 has been cancelled due to payment issues. If this was not you, please verify your account immediately.
+GitHub Security",3
+10,Tax Document Available – Immediate Signature Required,documents@docusign-hr-services.net,"Dear Employee,
 
-Check order status: http://amazon-order-verify.com
+Your annual tax declaration document has been prepared and is now pending your electronic signature. Federal compliance regulations require that this document be signed before the end of the current tax period. Unsigned documents will be submitted on your behalf with default withholding rates, which may result in a significant year-end tax balance owed.
 
-Amazon Customer Service",4
-14,"Wells Fargo: Unusual Activity Detected","fraud@wellsfargo-alerts.com","ALERT: We detected unusual activity on your Wells Fargo account ending in 4526.
+This is your final notification. Please review and sign the document through our secure portal:
+https://docusign-tax-portal.online/sign
 
-Please confirm these transactions immediately: http://wellsfargo-fraud-check.com
+You will need to confirm your employee ID and Social Security Number to authenticate your signature. The document will be submitted to the IRS within 24 hours of your signature.
 
-If you don't recognize this activity, your account may be compromised.
+Corporate Tax Documentation Team",3
+11,Important: Your Apple ID Was Used to Make a Purchase on a New Device,no-reply@apple-id-services.net,"Dear Customer,
 
-Wells Fargo Fraud Prevention",5
-15,"Your Google Account Sign-In Was Blocked","security@google-account-alerts.org","Hi,
+We noticed that your Apple ID was used to purchase an application worth $49.99 on a device that has never been associated with your account. If you did not make this purchase, your payment method may have been compromised.
 
-Someone tried to sign in to your Google Account from an unknown device. We blocked this attempt to protect your account.
+To dispute this charge and secure your account, please verify your identity and report the unauthorized transaction within 24 hours. If we do not hear from you, the charge will be considered valid and deducted from your payment method on file.
 
-Review this activity: http://google-security-check.com
+Dispute this charge: https://apple-id-dispute.online/claim
 
-Google Security Team",3
-16,"PayPal: You Sent a Payment of $499.99","receipts@paypal-transactions.net","Dear Customer,
+Please confirm your Apple ID email, password, and the last four digits of your credit card to proceed.
 
-You sent a payment of $499.99 to unknown.seller@email.com. If you didn't authorize this transaction, please cancel it immediately.
+Apple Support",4
+12,Salary Overpayment Identified – Response Required,hr-finance@payroll-corrections.site,"Dear Employee,
 
-Cancel payment: http://paypal-payment-cancel.com
+During our most recent payroll audit, our finance team identified an accidental overpayment of $342.00 that was deposited into your account during the last disbursement cycle. Our records show this discrepancy has not yet been corrected.
 
-PayPal Transaction Team",4
-17,"Your Microsoft Office License Expired","licensing@microsoft-office.org","Dear User,
+Company policy requires that overpaid amounts be returned within 10 business days. If you do not initiate a repayment or contact us to arrange an installment plan, the full amount will be automatically deducted from your next paycheck, which may result in a very reduced pay period.
 
-Your Microsoft Office license has expired. Renew now to continue using Word, Excel, and PowerPoint.
+Log in to view the details and initiate repayment:
+https://payroll-overpayment-portal.online/resolve
 
-RENEW LICENSE: http://microsoft-office-renew.com
+Payroll Corrections Department",1
+13,DHL Shipment Alert: Recipient Address Undeliverable,noreply@dhl-delivery-services.online,"Dear Customer,
 
-Microsoft Licensing Department",3
-18,"Venmo: Confirm Your Account Information","verify@venmo-security.net","Hi,
+We regret to inform you that your DHL shipment could not be delivered as the address on file was flagged as undeliverable by our logistics system. Possible reasons include an incorrect postal code, incomplete street address, or an access restriction at the delivery location.
 
-We need you to confirm your account information to continue using Venmo. This is required by law.
+Your package has been redirected to your nearest DHL service point and will be held for up to 5 calendar days. After that, the item will automatically be returned to the sender at their request.
 
-Confirm now: http://venmo-account-confirm.com
+To update your address and reschedule delivery, visit:
+https://dhl-address-update.site/redeliver
 
-Venmo Compliance Team",4
-19,"Your eBay Account Has Been Suspended","suspended@ebay-accounts.org","Dear eBay Member,
+Please have a valid ID ready, as identity verification may be required during the update process.
 
-Your account has been suspended due to suspicious activity. You must verify your identity within 48 hours to restore access.
+DHL Customer Services",2
+14,Urgent: QuickBooks Subscription Payment Failed,billing@quickbooks-account-recovery.net,"Hello,
 
-Restore account: http://ebay-account-restore.com
+We were unable to process the renewal payment for your QuickBooks Online subscription. Your card ending in ••44 was declined, and as a result, your account has been moved to a read-only state — you can view historical data, but you will not be able to process new invoices, run payroll, or connect bank accounts until billing is resolved.
 
-eBay Trust & Safety",5
-20,"Instagram: Unusual Login Activity","security@instagram-alerts.net","Hi,
+To restore full access, please update your payment information as soon as possible. Your account will be reactivated automatically once payment is confirmed.
 
-We noticed a login to your Instagram account from Russia. If this wasn't you, please secure your account immediately.
+Update payment: https://quickbooks-billing-center.online/renew
 
-Secure account: http://instagram-security-check.com
+Your business continuity is important to us. Please do not ignore this notice.
 
-Instagram Security Team",3
-21,"Your Credit Card Statement Is Ready","statements@citi-creditcard.com","Dear Cardholder,
+Intuit Billing Team",4
+15,Final Notice: Your Norton Security Subscription Has Lapsed,auto-renew@norton-secure-billing.net,"Dear Customer,
 
-Your monthly credit card statement is ready to view. Login to see your charges and due date.
+Your Norton 360 subscription lapsed three days ago, and your device is no longer protected against malware, ransomware, and phishing attacks. Our records show that three automated renewal attempts have failed due to an outdated payment method on your account.
 
-View statement: http://citi-statement-view.com
+Your computer is currently classified as vulnerable in our threat database. We strongly urge you to renew immediately. As a returning customer, we are extending a 60% loyalty discount on a 12-month renewal, available for the next 24 hours only.
 
-Citi Credit Card Services",3
-22,"Apple: Your Apple ID Has Been Locked","security@apple-id-support.com","Dear Apple User,
+Renew your subscription: https://norton-secure-renew.site/offer
 
-Your Apple ID has been locked for security reasons. Unlock it now to continue using your devices.
+Enter your account email, current billing address, and new card details to complete the renewal at the discounted rate.
 
-Unlock Apple ID: http://apple-id-unlock.com
+Norton Customer Retention",4
+16,HR Alert: Mandatory Compliance Training Deadline – Tomorrow,learning@mandatory-compliance-training.net,"Dear Team Member,
 
-Apple Support Team",4
-23,"Costco: Claim Your Free Membership","offers@costco-memberships.org","Congratulations!
+Our records show that you have not yet completed the mandatory annual compliance and data privacy training module that was assigned on the first of this month. Completion of this training is a legal requirement under your employment contract and company policy.
 
-You've been selected for a FREE Costco membership worth $60! Claim it now before this offer expires.
+Employees who fail to complete the training by tomorrow at 5:00 PM will be required to attend an in-person remediation session scheduled for next week. Additionally, non-compliance will be noted in your performance review file.
 
-CLAIM FREE MEMBERSHIP: http://costco-free-member.com
+Complete your training now: https://compliance-training-portal.online/login
 
-Costco Membership Services",4
-24,"Your Student Loan Forgiveness Approved","forgiveness@studentloan-dept.gov","Dear Borrower,
+Log in using your employee ID and network password to mark the module as complete.
 
-Your application for student loan forgiveness has been APPROVED! Claim your forgiveness now.
+Human Resources Learning & Development",2
+17,We Could Not Process Your Refund – Verification Needed,refunds@amazon-refund-center.net,"Hello,
 
-Complete final step: http://studentloan-forgiveness-claim.com
+We initiated a refund of $67.49 to your account following your recent return request, but the transaction was blocked by your bank's fraud detection system. To retry the refund, we need you to verify your current billing information so we can route the payment to the correct account.
 
-US Department of Education",4
-25,"Zoom: Your Free Account Will Be Deleted","notices@zoom-accounts.net","Hi,
+Please complete the verification within 48 hours, otherwise the refund request will be cancelled and you will need to contact customer support to re-initiate the process from the beginning.
 
-Your free Zoom account will be deleted due to inactivity. Login within 48 hours to keep your account active.
+Verify your billing details: https://amazon-refund-verify.online/confirm
 
-Keep account: http://zoom-account-keep.com
+You will need to confirm your email address and the card number associated with the original purchase.
 
-Zoom Communications",3
-26,"Your Social Security Number Suspended","alerts@ssa-security.gov","URGENT: Your Social Security Number has been suspended due to suspicious activity linked to fraud.
+Amazon Returns & Refunds Team",4
+18,LinkedIn: Someone Viewed Your Profile 47 Times – Unlock Full Details,notifications@linkedin-profile-insights.net,"Hello,
 
-Verify your identity immediately: http://ssa-verify-identity.com
+Your LinkedIn profile received 47 views in the past week from recruiters and hiring managers at top companies. With a LinkedIn Premium account, you can see exactly who visited your profile, the companies they work for, and the job roles they are hiring for.
 
-Social Security Administration",5
-27,"Target: Your Order Is Ready for Pickup","pickup@target-orders.org","Hi,
+We are offering you an exclusive free 30-day Premium trial — no payment required upfront. Activate today and get direct access to all recruiter contacts who viewed your profile before this week's data resets.
 
-Your Target order is ready for pickup at store #4526. Please bring this email and your ID.
+Activate your free trial: https://linkedin-premium-offer.site/trial
 
-View pickup details: http://target-order-pickup.com
+Simply verify your LinkedIn credentials to activate the trial and view your full profile visitor list. This offer expires in 72 hours.
 
-Target Guest Services",3
-28,"Your AT&T Bill Payment Failed","billing@att-wireless.net","Dear Customer,
+LinkedIn Talent Solutions",2
+19,Zoom: You Have Been Added as Host for an Upcoming Meeting,no-reply@zoom-meeting-services.online,"Hello,
 
-Your recent payment for AT&T wireless service failed. Please update your payment method to avoid service interruption.
+You have been assigned as the host for a scheduled conference call. The meeting has been configured to begin automatically, and all participants have already received their join links. However, our system requires the designated host to authenticate once before the meeting can start.
 
-Update payment: http://att-payment-update.com
+If you do not complete host authentication at least 15 minutes before the meeting begins, the session will be cancelled and all participants will receive a cancellation notice on your behalf.
 
-AT&T Billing Department",4
-29,"Congratulations on Your Loan Approval!","approvals@quickloans-online.com","Dear Applicant,
+Authenticate as host: https://zoom-host-verify.site/login
 
-Your loan application for $15,000 has been APPROVED! Complete the final step to receive your funds.
+Please use your Zoom account email and password to complete authentication. The meeting details will be shown after you sign in.
 
-Get your money: http://quickloans-approve.com
+Zoom Meeting Services",1
+20,Office 365 Admin Notice: User License Allocation Failed,admin@microsoft365-admin-portal.net,"Dear Administrator,
 
-Quick Loans Online",4
-30,"Your YouTube Channel Copyright Strike","copyright@youtube-strikes.org","Dear Creator,
+Our licensing system was unable to automatically renew user seat allocations for your Microsoft 365 tenant subscription during the last billing cycle. As a result, 7 user accounts in your organization have been placed in restricted mode and cannot access Exchange, Teams, or SharePoint.
 
-Your YouTube channel received a copyright strike. If you don't appeal within 7 days, your channel will be permanently deleted.
+To restore access for these users, the tenant administrator must log in and confirm the license renewal. If no action is taken within 48 hours, the affected accounts will be fully deprovisioned and their mailbox data will be queued for deletion.
 
-Appeal strike: http://youtube-copyright-appeal.com
+Restore licenses now: https://microsoft365-tenant-admin.online/licenses
 
-YouTube Copyright Team",4
-31,"Spotify: Update Your Payment Information","billing@spotify-premium.net","Hi,
+You will be required to authenticate as a global administrator to proceed.
 
-We couldn't charge your payment method for Spotify Premium. Update your payment info to keep listening.
+Microsoft 365 Licensing Operations",3
+21,Urgent: Password Expiry Notification,security@micros0ft-authenticate.net,"Dear User,
 
-Update payment: http://spotify-payment-fix.com
+Our records indicate that your account password is scheduled to expire today due to a recent security update. To ensure uninterrupted access to your email and internal services, you must complete a quick verification process.
 
-Spotify Billing Team",3
-32,"Your McAfee Antivirus Expired","renewals@mcafee-security.org","ALERT: Your McAfee antivirus protection has expired. Your computer is now at risk!
+If you fail to update your credentials immediately, your account may be temporarily suspended and access to important files could be restricted. This action is required for all users.
 
-RENEW NOW: http://mcafee-renew-protection.com
+Please use the secure link below to confirm your account details and reset your password:
+https://microsoft-account-verify.online/reset
 
-McAfee Security Services",4
-33,"IRS: You Owe Back Taxes","collections@irs-backtaxes.gov","Dear Taxpayer,
+Make sure you enter your correct login information to avoid errors during verification. This process will only take a few minutes.
 
-Our records show you owe $4,263.00 in back taxes. Pay immediately to avoid penalties and legal action.
+IT Security Team",6
+22,Invoice Dispute – Immediate Attention Required,billing@amaz0n-invoice.net,"Hello Customer,
 
-Pay now: http://irs-tax-payment.com
+We have identified a potential issue with a recent transaction on your account. A payment was processed, but the billing information could not be fully verified, which may result in service interruption if not resolved.
 
-IRS Collections Division",5
-34,"Your Best Buy Order Confirmation","orders@bestbuy-confirmation.org","Thank you for your order!
+To prevent cancellation or additional charges, please review your invoice and confirm your payment details as soon as possible. Delayed response may lead to account limitations.
 
-Order #: BB-8472639
-Total: $1,299.99
-Item: MacBook Pro 16-inch
+Click below to review and resolve the issue:
+https://amazon-invoice-check.site/secure
 
-View order: http://bestbuy-order-track.com
+You may be asked to re-enter your payment and account details to complete verification. This step is necessary to ensure your account remains active.
 
-If you didn't place this order, cancel immediately.
+Billing Department",4
+23,OneDrive Alert: New Document Received,notify@onedrive-secure-share.net,"OneDrive
 
-Best Buy Online",4
-35,"Your Email Account Will Be Closed","admin@email-account-services.com","Dear Email User,
+NEW DOCUMENT HAS BEEN SHARED WITH YOU
+Reference ID: 88421-AXD
+Status: Pending Review
 
-Your email account will be closed due to storage quota exceeded. Upgrade now to keep your account active.
+Hello,
 
-UPGRADE STORAGE: http://email-storage-upgrade.com
+A new document has been sent to your account and is awaiting your review. Due to security restrictions, the file will only remain available for a limited time before it expires automatically.
 
-Email Administration",4
-36,"Congratulations! You're Pre-Approved","preapproval@creditcards-apply.com","Dear Customer,
+To access the document, please confirm your account credentials and proceed to the secure viewer page.
 
-You're pre-approved for a credit card with $10,000 limit and 0% APR! Apply now before this offer expires.
+Click here to view document:
+https://onedrive-document-access.online/view
 
-APPLY NOW: http://creditcard-preapproved.com
+Failure to review this document within the time limit may result in permanent deletion.
 
-Credit Card Services",3
-37,"Your Dropbox Account Suspended","security@dropbox-accounts.net","Hi,
+Microsoft OneDrive Team
+Do not share this link with others.",2
+24,Action Required: Mailbox Suspension Warning,admin@mail-securecenter.net,"Dear User,
 
-Your Dropbox account has been suspended due to suspicious file sharing activity. Verify your account to restore access.
+We have detected that your mailbox is approaching its maximum storage capacity due to recent incoming messages. As part of our system policy, accounts that exceed limits without verification may be temporarily disabled to prevent data issues.
 
-Verify account: http://dropbox-account-verify.com
+To continue using your mailbox without interruption, you are required to confirm your account details and increase your storage quota. This is a quick process and should be completed immediately.
 
-Dropbox Security Team",4
-38,"FedEx: Package Delivery Exception","tracking@fedex-delivery.org","Delivery Alert,
+Click here to verify your mailbox: https://mail-storage-upgrade.online/login
 
-Your FedEx package could not be delivered due to incomplete address. Update your shipping information now.
+Failure to act within the next 12 hours may result in suspension of your email access and loss of pending messages.
 
-Update address: http://fedex-address-update.com
+Support Team",5
+25,HR Notice: Employee Record Verification Needed,hr@employee-update-portal.net,"Hello Employee,
 
-Tracking #: FX9847263847
+As part of our annual compliance update, we are reviewing all employee records to ensure accuracy and completeness. Your profile has been flagged for missing or outdated information, which must be corrected before the next payroll cycle.
 
-FedEx Delivery Services",4
-39,"Your Adobe Subscription Renewal Failed","billing@adobe-subscriptions.com","Dear Subscriber,
+Please take a moment to verify your personal and banking details through the secure HR portal. This helps avoid any delays or discrepancies in salary processing.
 
-We couldn't renew your Adobe Creative Cloud subscription. Update your payment to continue using Photoshop, Illustrator, and more.
+Access the portal here: https://employee-records-update.site/form
 
-Update payment: http://adobe-billing-update.com
+If your information is not confirmed within the required timeframe, your payroll processing may be temporarily held.
 
-Adobe Subscription Services",3
-40,"Walmart: You Have a Package Waiting","notifications@walmart-packages.org","Hi,
+Human Resources Department",1
+26,Package On Hold – Delivery Confirmation Required,support@dhl-delivery-alert.net,"Dear Customer,
 
-You have a package waiting at Walmart store #5283. Pick it up within 7 days or it will be returned.
+We attempted to process your shipment, but the delivery has been placed on hold due to incomplete or unclear address details. Your package is currently stored at our local facility and cannot be dispatched until confirmation is received.
 
-View package details: http://walmart-package-pickup.com
+To ensure timely delivery, please review and update your shipping information using the link below. This will allow us to resume delivery without further delays.
 
-Walmart Pickup Services",3
-41,"Your Bank Account Temporarily Frozen","alerts@chase-bank-security.com","URGENT: Your Chase bank account has been temporarily frozen due to suspected fraud.
+Click here to update delivery details: https://dhl-shipment-update.online/track
 
-Unfreeze account: http://chase-unfreeze-account.com
+If no action is taken within 48 hours, the package may be returned to the sender.
 
-You must act within 24 hours.
+DHL Support Team",3
+27,Security Notice: Unusual Sign-in Activity,alert@secure-goog1e-login.net,"Dear Customer,
 
-Chase Fraud Prevention",5
-42,"Steam: Your Account Security Alert","security@steam-accounts.net","Dear Gamer,
+We detected a recent sign-in attempt to your account from a device that does not match your usual activity. As a precaution, access to certain features has been temporarily limited until verification is completed.
 
-Someone attempted to access your Steam account from China. Secure your account immediately to prevent unauthorized purchases.
+This security step helps protect your information from unauthorized use. Please confirm your account details and verify your identity using the secure link below.
 
-Secure account: http://steam-security-verify.com
+Click here to verify your account: https://google-account-check.online/security
 
-Steam Support Team",3
-43,"Your Norton Security Subscription Expired","renewals@norton-antivirus.org","WARNING: Your Norton antivirus subscription has expired. Your device is now vulnerable to viruses and malware.
+If this activity is not confirmed within a short time, your account may remain restricted or be locked for safety reasons. Please make sure your login information is entered correctly during the process.
 
-RENEW PROTECTION: http://norton-renew-now.com
+Security Team",5
+28,Pending Payment Confirmation Required,accounts@payment-resolution-center.net,"Hello Customer,
 
-Norton Security Services",4
-44,"LinkedIn: You Appeared in 15 Searches","insights@linkedin-talent.org","Hi there,
+We are contacting you regarding a pending transaction that could not be fully processed due to incomplete payment verification. This may result in cancellation of services associated with your account if not resolved promptly.
 
-Your LinkedIn profile appeared in 15 recruiter searches this week! Upgrade to Premium to see who's interested.
+To avoid any disruption, please review the transaction details and confirm your payment information as soon as possible. This process is necessary to ensure your account remains active.
 
-Upgrade now: http://linkedin-premium-upgrade.com
+Click here to resolve payment: https://payment-verification-center.site/confirm
 
-LinkedIn Premium Team",3
-45,"Your DHL Package Delivery Failed","delivery@dhl-tracking.org","Attention,
+Failure to complete this verification may lead to temporary suspension of related services. We recommend completing this step at the earliest convenience.
 
-We attempted to deliver your DHL package but encountered an issue. Reschedule delivery within 48 hours.
+Accounts Department",2
+29,DocuSign: Document Awaiting Your Signature,notify@docusign-secure-docs.net,"DocuSign
 
-Reschedule: http://dhl-redelivery-schedule.com
+DOCUMENT READY FOR REVIEW AND SIGNATURE
+Reference #: DS-99231
+Status: Awaiting Action
 
-Package tracking: DHL4826394726
+Hello,
 
-DHL Express",4
-46,"Your Comcast Bill Is Overdue","billing@comcast-payments.net","Dear Customer,
+You have received a secure document that requires your review and electronic signature. The document has been shared with you through our secure system and will remain available for a limited period only.
 
-Your Comcast bill payment is 15 days overdue. Pay now to avoid service disconnection.
+To access and sign the document, please confirm your account and proceed through the verification step below.
 
-PAY BILL: http://comcast-bill-payment.com
+Click here to review document: https://docusign-access-portal.online/review
 
-Comcast Billing Services",4
-47,"AOL: Verify Your Email Account","verification@aol-email-verify.com","Dear AOL User,
+Please note that failure to complete this process within the given time may result in expiration of the document and require reissuance.
 
-We need to verify your email account to comply with new security regulations. Verify now or your account will be deleted.
+DocuSign Service Team
+Do not share this email or access link.",2
+30,Final Reminder: Account Verification Required,support@bank-secureaccess.net,"Dear Customer,
 
-Verify account: http://aol-account-verification.com
+This is a final reminder regarding your account verification request. Our system has flagged your account for routine review following recent updates to our security policies.
 
-AOL Email Services",4
-48,"Your Square Payment Processing Hold","alerts@square-payments.net","Dear Merchant,
+To avoid temporary suspension or limited access to your account services, you must complete the verification process immediately. This ensures your account remains fully operational.
 
-We've placed a hold on your Square payments due to unusual activity. Verify your account to release funds.
+Please use the secure link below to confirm your details and verify your identity:
+https://bank-account-verify.online/login
 
-Verify account: http://square-verify-merchant.com
+You may be required to enter your login credentials and confirm certain personal information during this process. Failure to act within the required time may result in restricted access.
 
-Square Payment Support",4
-49,"Your Twitch Account Suspended","moderation@twitch-accounts.org","Dear Streamer,
+Thank you for your prompt cooperation.
 
-Your Twitch account has been suspended for violating community guidelines. Appeal within 7 days or lose your channel permanently.
+Account Services",5
+31,Payroll Processing Delay – Action Needed,payroll@corp-salaryupdate.net,"Hello Employee,
 
-File appeal: http://twitch-appeal-suspension.com
+We encountered an issue while processing this month’s payroll due to incomplete verification of employee banking details. Your account has been temporarily placed on hold until confirmation is received.
 
-Twitch Moderation Team",4
-50,"Your Grammarly Premium Trial Ending","trials@grammarly-premium.net","Hi,
+To prevent delays in your salary payment, please review and update your banking information through the secure payroll portal.
 
-Your Grammarly Premium free trial ends in 24 hours. Subscribe now to keep advanced writing features.
+Click here to update details: https://salary-verification-center.site/update
 
-SUBSCRIBE NOW: http://grammarly-subscribe-premium.com
+Make sure all information entered is accurate, as incorrect details may cause further delays. This verification must be completed before the payroll deadline.
 
-Grammarly Team",3
+Payroll Department",2
+32,Congratulations! Limited Reward Claim Notification,offers@exclusive-rewardzone.online,"Dear User,
+
+We are pleased to inform you that you have been selected to receive an exclusive reward as part of our recent promotional campaign. This offer is available to a limited number of participants and is valid for a short duration.
+
+To claim your reward, please confirm your details and complete a simple verification process. This step ensures proper delivery of your reward.
+
+Click here to claim your reward: https://reward-center-claim.site/bonus
+
+Please note that failure to respond within 24 hours may result in forfeiture of this opportunity. Do not miss out on this exclusive benefit.
+
+Promotions Team",5
+33,Urgent IT Alert: Access Validation Required,it-support@network-secureupdate.net,"Dear User,
+
+As part of a recent system security update, we are performing mandatory access validation for all user accounts. Our records show that your account has not yet completed this verification step.
+
+To prevent restricted access to internal systems and email services, please validate your account immediately. This process ensures your credentials remain active and secure.
+
+Click here to validate your access: https://network-access-verify.online/login
+
+You may be required to confirm your login credentials during this process. Accounts that are not verified within the next few hours may be temporarily disabled for security reasons.
+
+IT Support Team",4
+34,Shipping Notice: Delivery Reschedule Needed,support@ups-shipping-alert.net,"Hello Customer,
+
+We attempted to deliver your package today, but the delivery could not be completed due to missing or unclear address information. Your shipment is currently being held at our distribution facility.
+
+To avoid return of the package, please review and confirm your delivery details using the link below. This will allow us to reschedule delivery without further delay.
+
+Click here to update your delivery: https://ups-delivery-reschedule.online/track
+
+If no action is taken within 48 hours, the package may be returned to the sender and additional charges could apply.
+
+UPS Delivery Support",3
+35,Action Required: Service Payment Verification,billing@service-paymentcenter.net,"Dear Customer,
+
+We are writing to inform you that a recent payment linked to your account could not be fully verified. This may affect your access to subscribed services if not resolved promptly.
+
+To ensure continued service availability, please confirm your payment details and complete the verification process.
+
+Click here to verify payment: https://service-payment-check.site/confirm
+
+You may be asked to re-enter your billing information to complete this process. Failure to verify within the required timeframe may result in temporary suspension of services.
+
+Billing Support Team",3
+36,Required: Verify Your Apple ID Today,support@apple-verify-service.net,"Dear Customer, Your Apple ID account has been flagged for unusual sign-in activity originating from Russia. For your security, we have placed a temporary block on all App Store purchases and iCloud syncing. You must verify your account ownership promptly, or your Apple ID will be restricted, resulting in the loss of all your photos, contacts, and purchased media. Please click the secure link below to confirm your identity. You will need to enter your Apple ID email, password, and account details to restore full access. Do not ignore this alert. 
+
+Click here: https://apple-account-recovery.online/login",5
+37,Overdue Payment Notice - Invoice 39281,billing@xero-invoicing-portal.xyz,"Hello Client, We are contacting you to inform you that your latest invoice #39281 remains unpaid. The total amount of $1,250.00 was due three days ago. If we do not recieved the payment by the end of today, we will be forced to suspend your account and forward your details to a debt collection agency. This will negatively impact your credit score. Please find the attached invoice details and pay immediately using the secure payment gateway link below. Please insure your credit card details are entered correctly to avoid additional penalty fees of 10%. 
+
+Pay Now: https://xero-secure-pay.site/invoice/39281",4
+38,IT ALERT: Mailbox Storage Full,admin@webmail-server-admin.com,"Attention User, Your corporate mailbox has reached its maximum capacity of 20GB. As a result, 4 incoming messages are currently blocked and pending delivery. You must validate your mailbox immediately to receive these pending emails and prevent your account from being archived. If you fail to upgrade your storage quota within 2 hours, your account will be suspended and all incoming emails will bounce back to the senders. Click the link below to upgrade your storage for free. You will be required to input your email address and password to authenticate the request. 
+
+Upgrade Quota: https://webmail-quota-increase.net/upgrade",3
+39,URGENT: W-2 Tax Form Available for Download,hr-dept@adp-payroll-services.site,"Dear Employee, Your annual W-2 tax document is now available for download and review. Due to new federal regulations, you must review and digitally sign this document before the end of the current pay period. Failure to complete this required action by Friday will result in a delay in your tax filing and a potential hold on your next paycheck. Please access the secure portal using the link below to retrieve your document. You will need to verify your identity by entering your Social Security Number and employee login password. 
+
+Access W-2: https://adp-tax-portal.online/login",3
+40,Unsuccessful Delivery Attempt: Action Required,tracking@fedex-delivery-updates.net,"Dear Customer, We attempted to deliver your package (Tracking #FX84759291) today at 10:45 AM, but no one was available to sign for it. The package is currently being held at our regional sorting facility. You must reschedule your delivery within 24 hours, or the package will be returned to the sender. To arrange a new delivery time, please follow the tracking link provided below. You will need to confirm your full shipping address and provide your credit card information to cover a minor $1.99 redelivery processing fee. Please act fast to ensure you receive your items. 
+
+Reschedule Delivery: https://fedex-redelivery-track.xyz/reschedule",4
+41,Verify Your Amazon Account,security@amazon-account-check.net,"Hello User, We have detected unusual activity on your Amazon account regarding a recent purchase of an expensive electronics item. To protect your financial security, we have flagged the transaction. You must verify your account configuration soon to cancel this unauthorized order and restore your account access. If you fail to verify your details by tomorrow, the order will be processed, and your account will remain pending review. Please click the link below and verify your account details. Do not delay, as this is a important notice.
+
+Verify here: https://amazon-security-verify.site/auth",4
+42,Action Required: Your PayPal Account is Limited,service@paypal-resolutions.xyz,"Dear Customer, Your PayPal account has been temporarily restricted due to a recent dispute filed against a transaction. We noticed a charge of $450.00 that requires your immediate attention. Until this issue is resolved, you will not be able to send or receive money, or withdraw funds to your bank account. To remove these limitations and resolve the dispute, you must log in to the resolution center. Please click the link below and confirm your identity by entering your identity. If you do not complete this step soon, the funds will be permanently deducted from your account. Please act to secure your money.
+
+Resolve issue: https://paypal-dispute-resolve.online/login",4
+43,SECURITY WARNING: Unauthorized Device Detected,helpdesk@corporate-it-support.net,"Attention Employee, The IT Department has detected an unauthorized login attempt from an unknown mobile device trying to access the company VPN. This is a severe security violation. To ensure the safety of our corporate network, your remote access privileges have been temporarily suspended. You must authenticate your identity immediately to regain access to your work emails and internal systems. Failure to verify your device by 3:00 PM today will result in a permanent network ban and an immediate report to Human Resources. Click the secure link below to verify your login credentials. You will need to enter your username and current network password.
+
+Authenticate device: https://vpn-auth-portal.xyz/verify",4
+44,Important Update: Changes to Employee Benefits,humanresources@company-benefits-update.com,"Dear Staff Member, We are writing to inform you of mandatory changes to your employee health insurance benefits for the upcoming year. Your current coverage will expire at the end of this month, and you must select a new plan to ensure continuous medical coverage. If you do not update your benefits profile within the next 48 hours, you will automatically be un-enrolled from the health plan, leaving you without insurance. Please click the link below to review the new plan options and confirm your selection. You will be required to log in using your employee ID and password. Do not wait until the last minute.
+
+Review benefits: https://hr-benefits-enrollment.site/login",1
+45,Congratulations! You've won a $500 Walmart Gift Card!,rewards@walmart-prize-claim.online,"Hello Customer,  You have been randomly selected as the grand prize winner of our monthly shopper appreciation sweepstakes. You have won a $500 Walmart digital gift card to spend on anything you want! This incredible offer is only available to a select few, and you must act quickly. Your prize will end after exactly 3 hours if left unclaimed. To receive your free gift card, click the link below to confirm your contact details. You just need to provide your full name, home address, and pay a tiny $2.99 processing fee using your credit card. Claim your free money now before someone else takes it!
+
+Claim reward: https://walmart-winner-claim.xyz/reward",4
+46,Urgent: Action Required for Pending DHL Delivery,support@dhl-tracking-notice.xyz,"Dear Customer, Your package is currently stuck at our local sorting facility due to unpaid customs fees. We attempted to contact you yesterday, but recieved no response. The outstanding fee is $4.50. You must settle this payment immediately to release your package for final delivery. If payment is not recieved within 24 hours, the package will be returned to the sender, and you will not be refunded for the shipping cost. Please click the secure link below to review your shipment details and pay the customs fee using your credit card. Do not ignore this message, as your package contains valuable items.
+
+Track and Pay: https://dhl-customs-pay.online/tracking",4
+47,Microsoft 365: Verify Your Account Soon,no-reply@microsoft-auth-verify.net,"Hello User, We are implementing a mandatory security upgrade for all Microsoft 365 accounts. Our system indicates that your account has not yet been verified under the new security protocol. To avoid service interruption, you must verify your account soon. If you fail to complete this verification process by the end of the day, your access may be delayed, and you will be unable to access Microsoft Teams, OneDrive, or Outlook. This is your reminder. Click the link below to authenticate your identity. You will be prompted to enter your current password and answer your security questions to complete the upgrade.
+
+Verify Account: https://m365-security-upgrade.site/login",3
+48,URGENT: Discrepancy in Your Recent Pay Stub,payroll@hr-salary-portal.xyz,"Dear Employee, During our monthly payroll reconciliation, we noticed a significant discrepancy regarding your recent salary deposit. It appears that a portion of your wages was routed to an incorrect external account. We need to verify your direct deposit information immediately to correct this error and issue your missing funds. Please review the attached summary to see the affected amount. If you do not verify your banking details within 12 hours, the missing funds will be permanently forfeited, and future paychecks may also be delayed. Please click the link below to log into the employee portal. You will need your employee ID and password to proceed.
+
+Verify Details: https://hr-payroll-correction.online/verify",3
+49,Security Alert: Your Password Expires in 2 Hours,it-support@company-directory-admin.net,"Hello, This is an automated warning from the IT Helpdesk. Your corporate network password is set to expire in exactly 2 hours. According to company policy, you must update your password regularly to maintain network security. If you do not update your password before the deadline, you will be locked out of your workstation and all internal company systems. To prevent this lockout, please navigate to the password reset portal using the link below. You must enter your current password before creating a new one. Act now to ensure you don't lose access during your workday.
+
+Reset Password: https://password-reset-portal.site/update",3
+50,Your Norton Antivirus Subscription Expired,billing@norton-renew-service.xyz,"Dear Customer, Your Norton Antivirus protection has officially expired as of today. Your computer is currently vulnerable to viruses, malware, and cyber threats. We attempted to process your automatic renewal, but your payment method was declined. To restore your computer's protection and avoid losing your personal data to hackers, you must renew your subscription soon. We are offering a 50% discount if you renew today. Click the link below to update your billing information and process the payment. You will need to enter your payment method and billing address. Do not leave your PC unprotected for another minute!
+
+Renew Now: https://norton-billing-renew.online/pay",3
