@@ -2,6 +2,18 @@ import math
 import random
 from dataclasses import dataclass
 
+_CUE_STRENGTH: dict = {
+    "suspicious_link":   0.8,
+    "suspicious_sender": 0.8,
+    "personal_info":     0.7,
+    "threats":           0.7,
+    "urgency":           0.6,
+    "too_good_true":     0.6,
+    "emotional_appeal":  0.5,
+    "generic_greeting":  0.4,
+    "spelling_grammar":  0.4,
+}
+
 
 @dataclass
 class Agent:
@@ -173,23 +185,6 @@ class Agent:
         fpl = 0.5 * fatigue_norm * (1.0 - jp_norm)
         return max(0.0, min(0.5, fpl))
 
-    # Perceptibility of each cue type: 0.0 = nearly invisible, 1.0 = unmissable.
-    # High-strength cues (concrete, verifiable) reduce FPL — agents are harder to fool.
-    # Low-strength cues (subtle, contextual) leave FPL near baseline — easy to miss.
-    # This is the mechanism by which V-Triad (few, low-strength cues) achieves higher click rates
-    # than plain LLM (many, high-strength cues like urgency/threats).
-    _CUE_STRENGTH: dict = {
-        "suspicious_link":   0.8,  # concrete URL check — high digital-literacy signal
-        "suspicious_sender": 0.8,  # verifiable domain mismatch
-        "personal_info":     0.7,  # explicit credential request — clear policy violation
-        "threats":           0.7,  # overt negative consequence language
-        "urgency":           0.6,  # deadline pressure — common but salient
-        "too_good_true":     0.6,  # prize/reward language — widely known red flag
-        "emotional_appeal":  0.5,  # psychological manipulation — moderate subtlety
-        "generic_greeting":  0.4,  # impersonal opener — subtle, normal in bulk email
-        "spelling_grammar":  0.4,  # linguistic errors — only salient to attentive readers
-    }
-
     def get_cue_fpl(self, cue: str) -> float:
         """
         Trait- and cue-strength-differentiated FPL.
@@ -206,7 +201,7 @@ class Agent:
           - Desk workers in complex jobs: lower FPL on account-threat cues (exposure effect)
         """
         base = self.compute_flawed_perception_level()
-        cue_strength = self._CUE_STRENGTH.get(cue, 0.5)
+        cue_strength = _CUE_STRENGTH.get(cue, 0.5)
         adjusted = base * (1.0 - cue_strength)
 
         if cue in ("suspicious_link", "suspicious_sender"):
