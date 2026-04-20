@@ -87,6 +87,3 @@ PC_CLAUDE.md
 # Notebook checkpoints and auto-saves
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
-
-# Generated result PNGs (reproducible from notebook)
-results/*.png
