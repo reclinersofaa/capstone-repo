@@ -1,0 +1,382 @@
+========================================================
+SLIDE: Technologies Used
+========================================================
+
+Language & Runtime
+- Python 3.10+ — simulation engine, data processing, agent modelling
+
+LLM / AI
+- Google Gemini 2.5 Flash (via google-genai) — phishing cue extraction from raw email text
+  Used because it understands implicit cues (tone, implication, context) that regex cannot catch
+
+Data & Analysis
+- pandas, numpy — data wrangling, simulation output aggregation
+- matplotlib, seaborn — result visualisation (click rate plots, heatmaps, correlation matrices)
+- textblob — sentiment scoring for emotional appeal cue detection
+
+Storage
+- CSV (master_emails.csv, simulation_results.csv) — flat structured storage, no DB needed at this scale
+- JSON (data/cue_cache/) — per-email disk cache to avoid re-calling the Gemini API on re-runs
+
+Notebook Environment
+- Jupyter Notebook + ipykernel — interactive development, analysis and visualisation
+
+Why these?
+Lightweight, no infrastructure required, fully reproducible, and directly interoperable.
+Gemini API is the only external service dependency.
+
+
+========================================================
+SLIDE: Data Exploration
+========================================================
+
+Dataset: master_emails.csv — 250 rows, 7 columns
+
+Source              | Count | Class      | Origin
+--------------------|-------|------------|------------------------------------------
+SpamAssassin Ham    |  100  | Benign (0) | Real ham emails, Apache SpamAssassin public corpus
+Phishbowl           |   50  | Phishing(1)| Real phishing emails, Cornell Phishbowl archive
+Plain LLM           |   50  | Phishing(1)| Naive AI-generated phishing (no constraints)
+Hybrid V-Triad      |   50  | Phishing(1)| AI phishing guided by V-Triad persuasion framework
+
+Schema: email_id, subject, sender, body, extracted_urls, source, actual_class
+
+Cue Distribution — average cues detected per email by source:
+- phishbowl:         0.78 cues  (real phishing avoids obvious patterns)
+- hybrid_vtriad:     2.34 cues  (guided generation produces detectable structure)
+- plain_llm:         0.42 cues  (generic AI output mimics legitimate email too closely)
+- spamassassin_ham:  ~0.1 cues  (mostly clean)
+
+Key observation:
+Plain LLM phishing has FEWER detectable cues than real phishing.
+LLM-generated emails are structurally closer to benign emails than real phishing is.
+
+
+========================================================
+SLIDE: Tool Exploration
+========================================================
+
+Google Gemini API (gemini-2.5-flash)
+- Used for intelligent phishing cue extraction
+- Given the full email (subject, sender, body, URLs), it identifies which of 9 predefined
+  phishing indicators are present
+- Outperforms regex on subtle cues: tone, implied urgency, indirect threats
+- Returns a JSON array of cue names — validated against our approved cue list
+- Free tier: ~20 requests/day, managed via disk cache (each email called once ever)
+
+Jupyter Notebook
+- All development, testing, and analysis done in notebooks
+- 02_pattern_testing: cue pattern development and validation
+- 03_audit_synthetic_vs_real: dataset quality scoring (1-5 scale per dimension)
+- 04_agent_simulation: main simulation run + 8 analysis cells
+
+Python Regex Engine (re module)
+- Fallback cue extractor when API quota is exhausted
+- 9 compiled patterns covering: urgency keywords, threat language, sender spoofing,
+  URL anomalies, generic greetings, emotional language, personal info requests
+- Less accurate on sophisticated phishing (real phishing avoids obvious patterns)
+  but zero API dependency and instant execution
+
+
+========================================================
+SLIDE: Architecture
+========================================================
+
+[RAW EMAIL SOURCES]
+SpamAssassin Ham / Phishbowl / Plain LLM / Hybrid V-Triad
+        |
+        v
+[DATA NORMALISATION] — phase2_normalization.ipynb
+Standardise schema, strip headers, extract URLs, assign labels
+        |
+        v
+[master_emails.csv] — 250 emails, unified format
+        |
+        v
+[CUE EXTRACTION LAYER]
+  Primary:  CueExtractor — calls Gemini API, returns list of cue names
+  Fallback: RegexExtractor — pattern matching, no API dependency
+  Cache:    data/cue_cache/email_N.json — one file per email, never re-called
+        |
+        v
+[AGENT GENERATION] — Agent.random_agent() x 30 agents
+  20+ demographic + psychological fields per agent
+  Fatigue, Job Performance, FPL computed dynamically per workday hour
+        |
+        v
+[SIMULATION LOOP] — simulation.py
+  Triple loop: agent x workday hour x email
+  advance_workday(hour) -> simulate_email(agent, cues) -> stochastic decision
+        |
+        v
+[simulation_results.csv] — 37,500 rows
+  30 agents x 5 hours x 250 emails
+        |
+        v
+[ANALYSIS] — 04_agent_simulation.ipynb
+  Click rates / Fatigue effects / Trait correlations / Cue heatmap / Summary tables
+
+
+========================================================
+SLIDE: Design Description — Agent Model
+========================================================
+
+Class: Agent (Python dataclass)
+
+Fields — 20+ parameters across 4 categories:
+
+  Demographic (stable):
+    age (22-60), gender, education_level (1-5), tenure (years),
+    job_type (desk/non-desk), job_complexity (1-5)
+
+  Fatigue Inputs (stable):
+    sleep_quality, stress_avg, illness, depression, subjective_health
+
+  Job Performance Inputs (stable):
+    burnout, intrinsic_motivation, job_satisfaction,
+    role_conflict, leave_intention, role_ambiguity, lack_motivation
+
+  Workday-Dynamic (mutated per hour):
+    time_pressure, workload  (ramp linearly 8am -> 4pm)
+
+  Behaviour (fixed at creation):
+    suspicion_threshold: 2-6 (cues needed to classify as phishing)
+    max_cues_processed: 7-12 (agent stops scanning after this many)
+
+
+========================================================
+SLIDE: Design Description — Equations
+========================================================
+
+All equations sourced from peer-reviewed occupational psychology literature.
+
+--- ENERGY DEPLETION ---
+ED = 2.45 - 0.05*Age + 0.09*Gender - 0.08*EducLevel
+     - 0.01*Tenure - 0.25*JobType + 0.65*JobComplexity
+
+--- FATIGUE ---
+F = 6.22 - 0.22*TimeAwakening - 0.15*SleepTime + 0.14*SleepQuality
+    + 0.44*Stress + 0.44*Illness + 0.29*Health + 0.02*Age + 0.17*Depression
+
+--- TOTAL FATIGUE ---
+TotalFatigue = (ED + F) / 2      [clamped to range 1-5]
+
+--- JOB PERFORMANCE ---
+JP1 = 2.766 - 0.106*Burnout + 0.301*IntMotivation + 0.298*JobSat
+      - 0.153*RoleConflict - 0.076*LeaveIntention
+
+JP2 = 3.238 - 0.022*TimePressure - 0.086*Workload
+      - 0.141*LackMotivation - 0.155*RoleAmbiguity
+
+FinalJP = (JP1 + JP2) / 2  -  (0.34 x TotalFatigue)
+
+--- FLAWED PERCEPTION LEVEL (FPL) ---
+FPL = 0.5 x fatigue_norm x (1 - jp_norm)      [range 0.0 - 0.5]
+
+where:
+  fatigue_norm = (TotalFatigue - 1) / 4
+  jp_norm      = FinalJP / 4   (clamped 0-1)
+
+FPL = probability that the agent fails to notice a phishing cue
+Higher fatigue + lower job performance = higher FPL = more errors
+
+
+========================================================
+SLIDE: Design Description — Decision Loop
+========================================================
+
+The stochastic cue-processing loop (src/decision_loop.py):
+
+INPUT:
+  agent          — with current workday state set via advance_workday(hour)
+  cues           — list of cue names extracted from the email (e.g. ["urgency", "threats"])
+
+PROCESS:
+  1. Shuffle the cue list (agents don't read emails linearly)
+  2. For each cue (up to max_cues_processed):
+       cue_fpl = agent.get_cue_fpl(cue)        <- trait-adjusted FPL
+       if random() > cue_fpl:
+           cue perceived -> suspicion_counter += 1
+       if suspicion_counter >= suspicion_threshold:
+           STOP -> decision = "reported"
+  3. If max cues processed without hitting threshold:
+       decision = "clicked"
+
+Trait differentiation in FPL:
+  - suspicious_link, suspicious_sender: +penalty for age >30 and low education
+  - threats, personal_info, too_good_true: -0.08 for desk workers in complex jobs
+
+OUTPUT per run:
+  decision, suspicion_counter, cues_scanned, cues_perceived, fatigue, jp, fpl
+
+
+========================================================
+SLIDE: Data Preprocessing
+========================================================
+
+Steps completed (phase2_normalization.ipynb):
+
+1. Loaded 4 raw source CSVs independently
+   (SpamAssassin, Phishbowl, Plain LLM, Hybrid V-Triad)
+
+2. Standardised schema across all sources
+   Unified columns: email_id, subject, sender, body, extracted_urls, source, actual_class
+
+3. Cleaned body text
+   Stripped email headers, quoted reply chains, HTML artifacts
+
+4. Extracted URLs from body
+   Regex pattern matching http://, https://, and bare domain references
+
+5. Assigned binary labels
+   0 = benign (SpamAssassin Ham)
+   1 = phishing (all other sources)
+
+6. Merged into master_emails.csv
+   250 rows, verified no duplicates, no nulls in critical columns
+
+7. Quality audit (notebook 03_audit_synthetic_vs_real.ipynb)
+   Scored synthetic vs real phishing across 6 dimensions (1-5 scale each):
+   - Phishbowl:      4.83 / 5  (real phishing, high authenticity)
+   - Hybrid V-Triad: 2.50 / 5  (guided AI, moderate authenticity)
+   - Plain LLM:      1.50 / 5  (naive AI, low authenticity)
+
+   This quality ranking is directly confirmed by simulation click rates:
+   plain_llm 99% click rate > phishbowl 94% > hybrid 77%
+   More authentic phishing = harder to detect = higher agent click rate
+
+
+========================================================
+RESULTS SLIDES
+========================================================
+
+
+========================================================
+SLIDE: Results — The Setup
+(no image needed, just numbers — set the stage)
+========================================================
+
+What we ran:
+  30 simulated employees
+  250 emails  (100 benign + 150 phishing across 3 types)
+  5 time points per day  (8am, 10am, 12pm, 2pm, 4pm)
+  = 37,500 individual decisions
+
+Each agent has unique:
+  - Age, education, job type, sleep quality, stress levels
+  - Suspicion threshold: how many red flags before they report
+  - Flawed Perception Level: how likely they miss a red flag
+
+The question we asked:
+  How often does a simulated employee click a phishing email?
+  Does it change based on who they are or what time of day it is?
+
+
+========================================================
+SLIDE: Result 1 — The Hierarchy
+IMAGE: 03_overall_click_rate.png
+========================================================
+
+The more sophisticated the phishing, the harder it is to catch.
+
+  Plain LLM phishing:    98.9% click rate  — almost never caught
+  Real phishing:         93.9% click rate  — rarely caught
+  Guided AI phishing:    77.8% click rate  — occasionally caught
+
+This matches exactly what the quality audit predicted before running the simulation.
+The ranking held across all 30 agents and all 5 time points.
+
+Benign emails:  99.1% correct (agents almost never falsely reported a normal email)
+False positive rate: less than 1%
+
+Key point for the panel:
+Even the "easiest" phishing (Hybrid V-Triad) still fools 3 in 4 simulated employees.
+Real phishing fools 9 in 10. Every time.
+
+
+========================================================
+SLIDE: Result 2 — The Scare
+IMAGE: 06_email_showcase.png
+========================================================
+
+Three emails side by side:
+
+LEFT — A real benign email. Normal conversation. 0 red flags.
+        100% of agents correctly did not report it.
+
+MIDDLE — Real phishing (Phishbowl). 5 red flags detected:
+          urgency, fake sender, suspicious link, emotional appeal, generic greeting.
+          Still clicked 94% of the time.
+
+RIGHT — AI-generated phishing (Plain LLM). 0 red flags detected.
+         Looks identical to a legitimate HR email.
+         100% of agents clicked it. Every single agent. Every single time.
+
+The point:
+AI-generated phishing doesn't look like phishing.
+It has no detectable red flags — not even the ones real phishing emails have.
+A simulated employee cannot tell it apart from a real company email.
+This is the threat.
+
+
+========================================================
+SLIDE: Result 3 — Time of Day Matters
+IMAGE: 01_click_rate_by_source.png
+========================================================
+
+As the workday progresses, click rates drift upward.
+
+  Hybrid V-Triad: 76.9% at 8am → 78.8% at 4pm  (+2pp)
+  Phishbowl:      93.3% at 8am → 94.7% at 2pm   (+1.4pp)
+  Plain LLM:      stays flat near 99% all day
+
+Effect is small but consistent on detectable phishing.
+Plain LLM stays flat because there is nothing to miss — 0 cues regardless of fatigue.
+
+The time-of-day effect only matters when an email has red flags to miss.
+Most phishing today is sophisticated enough that fatigue becomes irrelevant —
+there is simply nothing for the agent to catch.
+
+
+========================================================
+SLIDE: Result 4 — Fatigue Effect
+IMAGE: 02_fatigue_effect.png
+========================================================
+
+When we hold suspicion threshold constant and only vary fatigue:
+
+  Low fatigue agents:    ~69% click rate
+  Medium fatigue agents: ~74% click rate
+  High fatigue agents:   ~78% click rate
+
+A 9 percentage point gap between fresh and fatigued employees.
+
+This confirms the psychology literature:
+Higher fatigue → lower job performance → higher flawed perception level
+→ agent misses more red flags → more phishing gets through.
+
+The fatigue effect is real but secondary.
+The dominant factor is whether the email has detectable red flags at all.
+Against AI-generated phishing with 0 cues, even the sharpest well-rested agent fails.
+
+
+========================================================
+SLIDE: Results — Key Takeaways
+(no image — summary bullets, large text)
+========================================================
+
+1. AI-generated phishing is more dangerous than real phishing
+   It produces 0 detectable cues — no agent, trained or fatigued, can catch it.
+
+2. Fatigue increases vulnerability by up to 9 percentage points
+   The effect is measurable and follows occupational psychology predictions.
+
+3. Email sophistication matters more than employee state
+   Against sufficiently crafted phishing, human cognitive state becomes secondary.
+
+4. False positive rate is under 1%
+   Agents almost never mistake a legitimate email for phishing.
+
+5. The suspicion threshold is the single biggest individual factor
+   Naturally skeptical employees (high threshold) need more evidence before reporting —
+   which makes them more vulnerable when emails have few cues.

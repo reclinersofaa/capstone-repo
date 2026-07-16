@@ -1,0 +1,77 @@
+[
+    {
+        "subject": "Urgent: Password Expiry Notification",
+        "sender": "security@micros0ft-authenticate.net",
+        "body": "Dear User,\n\nOur records indicate that your account password is scheduled to expire today due to a recent security update. To ensure uninterrupted access to your email and internal services, you must complete a quick verification process.\n\nIf you fail to update your credentials immediately, your account may be temporarily suspended and access to important files could be restricted. This action is required for all users.\n\nPlease use the secure link below to confirm your account details and reset your password:\nhttps://microsoft-account-verify.online/reset\n\nMake sure you enter your correct login information to avoid errors during verification. This process will only take a few minutes.\n\nIT Security Team"
+    },
+    {
+        "subject": "Invoice Dispute – Immediate Attention Required",
+        "sender": "billing@amaz0n-invoice.net",
+        "body": "Hello Customer,\n\nWe have identified a potential issue with a recent transaction on your account. A payment was processed, but the billing information could not be fully verified, which may result in service interruption if not resolved.\n\nTo prevent cancellation or additional charges, please review your invoice and confirm your payment details as soon as possible. Delayed response may lead to account limitations.\n\nClick below to review and resolve the issue:\nhttps://amazon-invoice-check.site/secure\n\nYou may be asked to re-enter your payment and account details to complete verification. This step is necessary to ensure your account remains active.\n\nBilling Department"
+    },
+    {
+        "subject": "OneDrive Alert: New Document Received",
+        "sender": "notify@onedrive-secure-share.net",
+        "body": "OneDrive\n\nNEW DOCUMENT HAS BEEN SHARED WITH YOU\nReference ID: 88421-AXD\nStatus: Pending Review\n\nHello,\n\nA new document has been sent to your account and is awaiting your review. Due to security restrictions, the file will only remain available for a limited time before it expires automatically.\n\nTo access the document, please confirm your account credentials and proceed to the secure viewer page.\n\nClick here to view document:\nhttps://onedrive-document-access.online/view\n\nFailure to review this document within the time limit may result in permanent deletion.\n\nMicrosoft OneDrive Team\nDo not share this link with others."
+    },
+    {
+        "subject": "Action Required: Mailbox Suspension Warning",
+        "sender": "admin@mail-securecenter.net",
+        "body": "Dear User,\n\nWe have detected that your mailbox is approaching its maximum storage capacity due to recent incoming messages. As part of our system policy, accounts that exceed limits without verification may be temporarily disabled to prevent data issues.\n\nTo continue using your mailbox without interruption, you are required to confirm your account details and increase your storage quota. This is a quick process and should be completed immediately.\n\nClick here to verify your mailbox: https://mail-storage-upgrade.online/login\n\nFailure to act within the next 12 hours may result in suspension of your email access and loss of pending messages.\n\nSupport Team"
+    },
+    {
+        "subject": "HR Notice: Employee Record Verification Needed",
+        "sender": "hr@employee-update-portal.net",
+        "body": "Hello Employee,\n\nAs part of our annual compliance update, we are reviewing all employee records to ensure accuracy and completeness. Your profile has been flagged for missing or outdated information, which must be corrected before the next payroll cycle.\n\nPlease take a moment to verify your personal and banking details through the secure HR portal. This helps avoid any delays or discrepancies in salary processing.\n\nAccess the portal here: https://employee-records-update.site/form\n\nIf your information is not confirmed within the required timeframe, your payroll processing may be temporarily held.\n\nHuman Resources Department"
+    },
+    {
+        "subject": "Package On Hold – Delivery Confirmation Required",
+        "sender": "support@dhl-delivery-alert.net",
+        "body": "Dear Customer,\n\nWe attempted to process your shipment, but the delivery has been placed on hold due to incomplete or unclear address details. Your package is currently stored at our local facility and cannot be dispatched until confirmation is received.\n\nTo ensure timely delivery, please review and update your shipping information using the link below. This will allow us to resume delivery without further delays.\n\nClick here to update delivery details: https://dhl-shipment-update.online/track\n\nIf no action is taken within 48 hours, the package may be returned to the sender.\n\nDHL Support Team"
+    },
+    {
+        "subject": "Security Notice: Unusual Sign-in Activity",
+        "sender": "alert@secure-goog1e-login.net",
+        "body": "Dear Customer,\n\nWe detected a recent sign-in attempt to your account from a device that does not match your usual activity. As a precaution, access to certain features has been temporarily limited until verification is completed.\n\nThis security step helps protect your information from unauthorized use. Please confirm your account details and verify your identity using the secure link below.\n\nClick here to verify your account: https://google-account-check.online/security\n\nIf this activity is not confirmed within a short time, your account may remain restricted or be locked for safety reasons. Please make sure your login information is entered correctly during the process.\n\nSecurity Team"
+    },
+    {
+        "subject": "Pending Payment Confirmation Required",
+        "sender": "accounts@payment-resolution-center.net",
+        "body": "Hello Customer,\n\nWe are contacting you regarding a pending transaction that could not be fully processed due to incomplete payment verification. This may result in cancellation of services associated with your account if not resolved promptly.\n\nTo avoid any disruption, please review the transaction details and confirm your payment information as soon as possible. This process is necessary to ensure your account remains active.\n\nClick here to resolve payment: https://payment-verification-center.site/confirm\n\nFailure to complete this verification may lead to temporary suspension of related services. We recommend completing this step at the earliest convenience.\n\nAccounts Department"
+    },
+    {
+        "subject": "DocuSign: Document Awaiting Your Signature",
+        "sender": "notify@docusign-secure-docs.net",
+        "body": "DocuSign\n\nDOCUMENT READY FOR REVIEW AND SIGNATURE\nReference #: DS-99231\nStatus: Awaiting Action\n\nHello,\n\nYou have received a secure document that requires your review and electronic signature. The document has been shared with you through our secure system and will remain available for a limited period only.\n\nTo access and sign the document, please confirm your account and proceed through the verification step below.\n\nClick here to review document: https://docusign-access-portal.online/review\n\nPlease note that failure to complete this process within the given time may result in expiration of the document and require reissuance.\n\nDocuSign Service Team\nDo not share this email or access link."
+    },
+    {
+        "subject": "Final Reminder: Account Verification Required",
+        "sender": "support@bank-secureaccess.net",
+        "body": "Dear Customer,\n\nThis is a final reminder regarding your account verification request. Our system has flagged your account for routine review following recent updates to our security policies.\n\nTo avoid temporary suspension or limited access to your account services, you must complete the verification process immediately. This ensures your account remains fully operational.\n\nPlease use the secure link below to confirm your details and verify your identity:\nhttps://bank-account-verify.online/login\n\nYou may be required to enter your login credentials and confirm certain personal information during this process. Failure to act within the required time may result in restricted access.\n\nThank you for your prompt cooperation.\n\nAccount Services"
+    },
+    {
+        "subject": "Payroll Processing Delay – Action Needed",
+        "sender": "payroll@corp-salaryupdate.net",
+        "body": "Hello Employee,\n\nWe encountered an issue while processing this month’s payroll due to incomplete verification of employee banking details. Your account has been temporarily placed on hold until confirmation is received.\n\nTo prevent delays in your salary payment, please review and update your banking information through the secure payroll portal.\n\nClick here to update details: https://salary-verification-center.site/update\n\nMake sure all information entered is accurate, as incorrect details may cause further delays. This verification must be completed before the payroll deadline.\n\nPayroll Department"
+    },
+    {
+        "subject": "Congratulations! Limited Reward Claim Notification",
+        "sender": "offers@exclusive-rewardzone.online",
+        "body": "Dear User,\n\nWe are pleased to inform you that you have been selected to receive an exclusive reward as part of our recent promotional campaign. This offer is available to a limited number of participants and is valid for a short duration.\n\nTo claim your reward, please confirm your details and complete a simple verification process. This step ensures proper delivery of your reward.\n\nClick here to claim your reward: https://reward-center-claim.site/bonus\n\nPlease note that failure to respond within 24 hours may result in forfeiture of this opportunity. Do not miss out on this exclusive benefit.\n\nPromotions Team"
+    },
+    {
+        "subject": "Urgent IT Alert: Access Validation Required",
+        "sender": "it-support@network-secureupdate.net",
+        "body": "Dear User,\n\nAs part of a recent system security update, we are performing mandatory access validation for all user accounts. Our records show that your account has not yet completed this verification step.\n\nTo prevent restricted access to internal systems and email services, please validate your account immediately. This process ensures your credentials remain active and secure.\n\nClick here to validate your access: https://network-access-verify.online/login\n\nYou may be required to confirm your login credentials during this process. Accounts that are not verified within the next few hours may be temporarily disabled for security reasons.\n\nIT Support Team"
+    },
+    {
+        "subject": "Shipping Notice: Delivery Reschedule Needed",
+        "sender": "support@ups-shipping-alert.net",
+        "body": "Hello Customer,\n\nWe attempted to deliver your package today, but the delivery could not be completed due to missing or unclear address information. Your shipment is currently being held at our distribution facility.\n\nTo avoid return of the package, please review and confirm your delivery details using the link below. This will allow us to reschedule delivery without further delay.\n\nClick here to update your delivery: https://ups-delivery-reschedule.online/track\n\nIf no action is taken within 48 hours, the package may be returned to the sender and additional charges could apply.\n\nUPS Delivery Support"
+    },
+    {
+        "subject": "Action Required: Service Payment Verification",
+        "sender": "billing@service-paymentcenter.net",
+        "body": "Dear Customer,\n\nWe are writing to inform you that a recent payment linked to your account could not be fully verified. This may affect your access to subscribed services if not resolved promptly.\n\nTo ensure continued service availability, please confirm your payment details and complete the verification process.\n\nClick here to verify payment: https://service-payment-check.site/confirm\n\nYou may be asked to re-enter your billing information to complete this process. Failure to verify within the required timeframe may result in temporary suspension of services.\n\nBilling Support Team"
+    }
+]

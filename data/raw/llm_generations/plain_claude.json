@@ -1,0 +1,102 @@
+[
+    {
+        "subject": "Critical Security Alert: Your Account Password Expires Tonight",
+        "sender": "security-noreply@dropbox-account-services.net",
+        "body": "Dear Customer,\n\nWe are reaching out regarding your Dropbox account, which is scheduled for mandatory password rotation as part of our Q2 security compliance rollout. Our records show your current credentials were last updated over 90 days ago and will expire at 11:59 PM tonight.\n\nAccounts with expired passwords are automatically set to read-only mode, which means you will lose the ability to upload, share, or sync files until credentials are renewed. Many users in your organization have already completed this step.\n\nPlease update your password immediately to avoid any service disruption:\nhttps://dropbox-credential-renewal.online/update\n\nYou will be asked to confirm your current password before setting a new one. The process takes under two minutes.\n\nDropbox Account Security Team"
+    },
+    {
+        "subject": "Unusual Login Detected – Verify Your Identity Now",
+        "sender": "alerts@paypal-security-monitor.site",
+        "body": "Hello,\n\nOur fraud detection systems flagged a sign-in attempt to your PayPal account from a location in Eastern Europe that does not match your typical usage pattern. As a precautionary measure, outgoing transactions from your account have been placed on temporary hold.\n\nTo reinstate full account functionality and confirm that you authorized this activity, please complete identity verification through our secure portal within the next 6 hours. Failure to verify may result in your account being suspended pending a full security review.\n\nConfirm your identity here: https://paypal-fraud-check.online/verify\n\nYou will need to provide your registered email address and confirm your last four billing digits.\n\nPayPal Trust & Safety"
+    },
+    {
+        "subject": "Payroll Update Required – Banking Details Could Not Be Verified",
+        "sender": "payroll-admin@corp-hrportal.online",
+        "body": "Dear Employee,\n\nDuring our routine payroll validation cycle, the banking information currently on file for your account could not be verified against our third-party payment processor. As a result, your upcoming salary disbursement has been placed in a pending queue.\n\nTo ensure you receive your full payment on the scheduled date, you must log into the employee self-service portal and re-confirm your direct deposit details before the payroll cutoff on Friday at 5:00 PM.\n\nAccess the portal here: https://employee-payroll-portal.site/banking\n\nPlease have your bank account number and routing number ready. Employees who do not complete verification by the deadline may experience a delay of up to two pay cycles.\n\nCorporate Payroll Services"
+    },
+    {
+        "subject": "Invoice #INV-44821 – Payment Declined, Immediate Action Required",
+        "sender": "billing@stripe-payment-resolution.net",
+        "body": "Hello Customer,\n\nWe were unable to process the recent payment associated with your account. The transaction for Invoice #INV-44821 was declined by your card issuer, and the outstanding balance of $189.00 remains unpaid.\n\nIf this balance is not resolved within 24 hours, your subscription will be automatically downgraded to a limited free tier and access to premium features will be suspended. To avoid service interruption, please update your payment method at your earliest convenience.\n\nResolve billing issue: https://stripe-billing-rescue.online/payment\n\nYou may be asked to re-enter your card number and billing address during this process.\n\nBilling Resolution Team"
+    },
+    {
+        "subject": "Your Mailbox Is Full – Storage Limit Exceeded",
+        "sender": "it-helpdesk@microsoft-mailservices.net",
+        "body": "Dear User,\n\nYour corporate email mailbox has reached 100% of its allocated storage quota, causing all incoming messages to be bounced back to senders. This issue typically arises when automatic archiving rules have not run as scheduled.\n\nTo restore normal email functionality, you must authenticate and run a remote cleanup scan on your account. Until this is completed, you will be unable to send or receive emails through this account.\n\nPlease log in and run the cleanup scan here:\nhttps://microsoft-mailbox-recovery.site/login\n\nThis will require your corporate email address and your network password. The process is fully automated and should complete within five minutes.\n\nIT Helpdesk Operations"
+    },
+    {
+        "subject": "Your FedEx Package Is Being Held – Customs Fee Unpaid",
+        "sender": "tracking@fedex-clearance-center.online",
+        "body": "Dear Customer,\n\nYour FedEx shipment (Tracking #394-221-8837) arrived at our regional customs facility but has been placed on hold due to an unpaid import clearance fee of $3.50. This fee is required by customs regulations before the package can continue to its final destination.\n\nDue to limited storage capacity at our facility, packages held for more than 72 hours are returned to the originating sender. Please settle the fee at your earliest convenience to avoid return shipping.\n\nPay clearance fee: https://fedex-customs-clearance.site/pay\n\nYou will need to enter your shipment tracking number, delivery address, and credit card information to complete the payment.\n\nFedEx Customs Services"
+    },
+    {
+        "subject": "Action Required: Benefits Open Enrollment Closing Soon",
+        "sender": "benefits@hr-enrollment-system.net",
+        "body": "Hello,\n\nThis is a reminder that the annual benefits open enrollment window closes this Friday. If you have not yet made your selections for health, dental, and vision coverage for the upcoming plan year, you must do so before the deadline.\n\nEmployees who do not complete enrollment by Friday will automatically be assigned the lowest-tier health plan available, which may not provide adequate coverage for your family's medical needs. Most of your colleagues have already submitted their selections.\n\nLog in to review and submit your benefits choices:\nhttps://hr-open-enrollment.online/login\n\nYou will need your employee ID and date of birth to access the portal.\n\nHuman Resources Benefits Team"
+    },
+    {
+        "subject": "Congratulations! You Have Been Selected for an Exclusive Reward",
+        "sender": "promotions@customer-loyalty-rewards.online",
+        "body": "Dear Valued Customer,\n\nCongratulations! You have been selected from our database of loyal customers to receive a complimentary $750 gift card as part of our annual customer appreciation program. This reward is being offered to a very limited group of qualifying participants.\n\nTo claim your gift card, you must verify your identity and confirm your shipping address within the next 48 hours. Once the window closes, unclaimed rewards are redistributed to other participants.\n\nClaim your reward: https://customer-reward-claim.site/bonus\n\nYou will need to provide your full name, mailing address, and credit or debit card information for a minimal $1.99 processing and handling fee.\n\nCustomer Loyalty Program"
+    },
+    {
+        "subject": "SECURITY NOTICE: Unauthorized API Access Detected on Your Account",
+        "sender": "security@github-account-alerts.net",
+        "body": "Hello,\n\nOur systems have detected unauthorized API activity associated with your developer account. A third-party application appears to have accessed private repositories without proper authorization tokens. All API access has been temporarily revoked as a precaution.\n\nTo reactivate your developer access and review which applications have permissions on your account, please verify your identity through our secure portal immediately. Until this is resolved, commits, pull requests, and deployments may fail for any projects tied to this account.\n\nVerify and restore access: https://github-security-review.online/verify\n\nDuring verification, you will be asked to confirm your username and current password.\n\nGitHub Security"
+    },
+    {
+        "subject": "Tax Document Available – Immediate Signature Required",
+        "sender": "documents@docusign-hr-services.net",
+        "body": "Dear Employee,\n\nYour annual tax declaration document has been prepared and is now pending your electronic signature. Federal compliance regulations require that this document be signed before the end of the current tax period. Unsigned documents will be submitted on your behalf with default withholding rates, which may result in a significant year-end tax balance owed.\n\nThis is your final notification. Please review and sign the document through our secure portal:\nhttps://docusign-tax-portal.online/sign\n\nYou will need to confirm your employee ID and Social Security Number to authenticate your signature. The document will be submitted to the IRS within 24 hours of your signature.\n\nCorporate Tax Documentation Team"
+    },
+    {
+        "subject": "Important: Your Apple ID Was Used to Make a Purchase on a New Device",
+        "sender": "no-reply@apple-id-services.net",
+        "body": "Dear Customer,\n\nWe noticed that your Apple ID was used to purchase an application worth $49.99 on a device that has never been associated with your account. If you did not make this purchase, your payment method may have been compromised.\n\nTo dispute this charge and secure your account, please verify your identity and report the unauthorized transaction within 24 hours. If we do not hear from you, the charge will be considered valid and deducted from your payment method on file.\n\nDispute this charge: https://apple-id-dispute.online/claim\n\nPlease confirm your Apple ID email, password, and the last four digits of your credit card to proceed.\n\nApple Support"
+    },
+    {
+        "subject": "Salary Overpayment Identified – Response Required",
+        "sender": "hr-finance@payroll-corrections.site",
+        "body": "Dear Employee,\n\nDuring our most recent payroll audit, our finance team identified an accidental overpayment of $342.00 that was deposited into your account during the last disbursement cycle. Our records show this discrepancy has not yet been corrected.\n\nCompany policy requires that overpaid amounts be returned within 10 business days. If you do not initiate a repayment or contact us to arrange an installment plan, the full amount will be automatically deducted from your next paycheck, which may result in a very reduced pay period.\n\nLog in to view the details and initiate repayment:\nhttps://payroll-overpayment-portal.online/resolve\n\nPayroll Corrections Department"
+    },
+    {
+        "subject": "DHL Shipment Alert: Recipient Address Undeliverable",
+        "sender": "noreply@dhl-delivery-services.online",
+        "body": "Dear Customer,\n\nWe regret to inform you that your DHL shipment could not be delivered as the address on file was flagged as undeliverable by our logistics system. Possible reasons include an incorrect postal code, incomplete street address, or an access restriction at the delivery location.\n\nYour package has been redirected to your nearest DHL service point and will be held for up to 5 calendar days. After that, the item will automatically be returned to the sender at their request.\n\nTo update your address and reschedule delivery, visit:\nhttps://dhl-address-update.site/redeliver\n\nPlease have a valid ID ready, as identity verification may be required during the update process.\n\nDHL Customer Services"
+    },
+    {
+        "subject": "Urgent: QuickBooks Subscription Payment Failed",
+        "sender": "billing@quickbooks-account-recovery.net",
+        "body": "Hello,\n\nWe were unable to process the renewal payment for your QuickBooks Online subscription. Your card ending in ••44 was declined, and as a result, your account has been moved to a read-only state — you can view historical data, but you will not be able to process new invoices, run payroll, or connect bank accounts until billing is resolved.\n\nTo restore full access, please update your payment information as soon as possible. Your account will be reactivated automatically once payment is confirmed.\n\nUpdate payment: https://quickbooks-billing-center.online/renew\n\nYour business continuity is important to us. Please do not ignore this notice.\n\nIntuit Billing Team"
+    },
+    {
+        "subject": "Final Notice: Your Norton Security Subscription Has Lapsed",
+        "sender": "auto-renew@norton-secure-billing.net",
+        "body": "Dear Customer,\n\nYour Norton 360 subscription lapsed three days ago, and your device is no longer protected against malware, ransomware, and phishing attacks. Our records show that three automated renewal attempts have failed due to an outdated payment method on your account.\n\nYour computer is currently classified as vulnerable in our threat database. We strongly urge you to renew immediately. As a returning customer, we are extending a 60% loyalty discount on a 12-month renewal, available for the next 24 hours only.\n\nRenew your subscription: https://norton-secure-renew.site/offer\n\nEnter your account email, current billing address, and new card details to complete the renewal at the discounted rate.\n\nNorton Customer Retention"
+    },
+    {
+        "subject": "HR Alert: Mandatory Compliance Training Deadline – Tomorrow",
+        "sender": "learning@mandatory-compliance-training.net",
+        "body": "Dear Team Member,\n\nOur records show that you have not yet completed the mandatory annual compliance and data privacy training module that was assigned on the first of this month. Completion of this training is a legal requirement under your employment contract and company policy.\n\nEmployees who fail to complete the training by tomorrow at 5:00 PM will be required to attend an in-person remediation session scheduled for next week. Additionally, non-compliance will be noted in your performance review file.\n\nComplete your training now: https://compliance-training-portal.online/login\n\nLog in using your employee ID and network password to mark the module as complete.\n\nHuman Resources Learning & Development"
+    },
+    {
+        "subject": "We Could Not Process Your Refund – Verification Needed",
+        "sender": "refunds@amazon-refund-center.net",
+        "body": "Hello,\n\nWe initiated a refund of $67.49 to your account following your recent return request, but the transaction was blocked by your bank's fraud detection system. To retry the refund, we need you to verify your current billing information so we can route the payment to the correct account.\n\nPlease complete the verification within 48 hours, otherwise the refund request will be cancelled and you will need to contact customer support to re-initiate the process from the beginning.\n\nVerify your billing details: https://amazon-refund-verify.online/confirm\n\nYou will need to confirm your email address and the card number associated with the original purchase.\n\nAmazon Returns & Refunds Team"
+    },
+    {
+        "subject": "LinkedIn: Someone Viewed Your Profile 47 Times – Unlock Full Details",
+        "sender": "notifications@linkedin-profile-insights.net",
+        "body": "Hello,\n\nYour LinkedIn profile received 47 views in the past week from recruiters and hiring managers at top companies. With a LinkedIn Premium account, you can see exactly who visited your profile, the companies they work for, and the job roles they are hiring for.\n\nWe are offering you an exclusive free 30-day Premium trial — no payment required upfront. Activate today and get direct access to all recruiter contacts who viewed your profile before this week's data resets.\n\nActivate your free trial: https://linkedin-premium-offer.site/trial\n\nSimply verify your LinkedIn credentials to activate the trial and view your full profile visitor list. This offer expires in 72 hours.\n\nLinkedIn Talent Solutions"
+    },
+    {
+        "subject": "Zoom: You Have Been Added as Host for an Upcoming Meeting",
+        "sender": "no-reply@zoom-meeting-services.online",
+        "body": "Hello,\n\nYou have been assigned as the host for a scheduled conference call. The meeting has been configured to begin automatically, and all participants have already received their join links. However, our system requires the designated host to authenticate once before the meeting can start.\n\nIf you do not complete host authentication at least 15 minutes before the meeting begins, the session will be cancelled and all participants will receive a cancellation notice on your behalf.\n\nAuthenticate as host: https://zoom-host-verify.site/login\n\nPlease use your Zoom account email and password to complete authentication. The meeting details will be shown after you sign in.\n\nZoom Meeting Services"
+    },
+    {
+        "subject": "Office 365 Admin Notice: User License Allocation Failed",
+        "sender": "admin@microsoft365-admin-portal.net",
+        "body": "Dear Administrator,\n\nOur licensing system was unable to automatically renew user seat allocations for your Microsoft 365 tenant subscription during the last billing cycle. As a result, 7 user accounts in your organization have been placed in restricted mode and cannot access Exchange, Teams, or SharePoint.\n\nTo restore access for these users, the tenant administrator must log in and confirm the license renewal. If no action is taken within 48 hours, the affected accounts will be fully deprovisioned and their mailbox data will be queued for deletion.\n\nRestore licenses now: https://microsoft365-tenant-admin.online/licenses\n\nYou will be required to authenticate as a global administrator to proceed.\n\nMicrosoft 365 Licensing Operations"
+    }
+]
