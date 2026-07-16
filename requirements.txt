@@ -1,0 +1,41 @@
+# Pinned dependencies for the AI Phishing Simulation capstone (PW26_SVM_01).
+#
+# WHY PINNED: dataset_v2.load_enron_clean() fetches the Enron corpus at runtime and
+# returns an EMPTY frame if its imports fail. Missing huggingface_hub or pyarrow
+# therefore does not error — it silently drops 200 benign emails and the corpus
+# builds as 1,395 instead of 1,595. Two machines then report different results from
+# identical code. Install from this file so every environment builds the same corpus.
+#
+#   python -m pip install -r requirements.txt
+#
+# Verify the environment is complete before trusting any numbers:
+#   python -c "import pandas, numpy, matplotlib, seaborn, dotenv, huggingface_hub, pyarrow"
+#
+# Cue extraction needs ONE of:
+#   - Ollama running locally (recommended: reproducible, no rate limits, no keys)
+#         ollama pull gemma4:12b
+#         python run_demo.py --extractor ollama --ollama-model gemma4:12b
+#   - a hosted provider key in .env (see src/llm_providers.py)
+
+# --- core analysis ---
+pandas==2.3.3
+numpy==2.2.6
+
+# --- charts ---
+matplotlib==3.10.8
+seaborn==0.13.2
+
+# --- dataset access ---
+# huggingface_hub + pyarrow are REQUIRED for the enron_clean benign source.
+# Without BOTH, that source is skipped silently and the corpus is 200 emails smaller.
+huggingface_hub==1.23.0
+pyarrow==25.0.0
+
+# --- hosted LLM extraction (optional; local Ollama needs neither) ---
+python-dotenv==1.2.2
+groq==1.5.0
+
+# --- notebooks (06_agent_simulation_v2.ipynb) ---
+ipykernel==7.2.0
+nbformat==5.10.4
+nbconvert==7.17.1

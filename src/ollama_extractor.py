@@ -20,7 +20,9 @@ To force re-extraction from scratch (recommended after switching extractors):
 """
 
 import ast
+import hashlib
 import json
+import re
 import time
 import urllib.request
 import urllib.error
@@ -101,7 +103,7 @@ class OllamaExtractor:
         Return list of cue names present in the email.
         Checks disk cache first; calls Ollama only on a cache miss.
         """
-        cache_path = self._cache_path(email_id)
+        cache_path = self._cache_path(subject, body)
         if cache_path.exists():
             return json.loads(cache_path.read_text())
 
@@ -109,39 +111,73 @@ class OllamaExtractor:
         cache_path.write_text(json.dumps(cues))
         return cues
 
-    def extract_batch(self, emails_df) -> dict:
+    def extract_batch(self, emails_df, batch_size: int = 8) -> dict:
         """
-        Extract cues for every row in a DataFrame.
-        Returns {email_id: [cues]} dict. Prints progress every 25 emails.
+        Cache-first, BATCHED extraction (many emails per local model call) — fewer,
+        larger calls keep the local GPU busy and cut wall-clock ~2x vs one-at-a-time.
+        No external rate limits. Any batch that fails to parse falls back to per-email.
         """
-        results = {}
-        total = len(emails_df)
-
-        for i, (_, row) in enumerate(emails_df.iterrows()):
+        results, todo = {}, []
+        for _, row in emails_df.iterrows():
             eid = row["email_id"]
-
-            urls = row.get("extracted_urls", "")
-            if isinstance(urls, str) and urls.startswith("["):
-                try:
-                    urls = ast.literal_eval(urls)
-                except Exception:
-                    urls = []
-
-            results[eid] = self.extract(
-                email_id=eid,
-                subject=str(row.get("subject", "")),
-                sender=str(row.get("sender", "")),
-                body=str(row.get("body", "")),
-                urls=urls,
-            )
-
-            if (i + 1) % 25 == 0 or (i + 1) == total:
-                newly = sum(1 for k, v in results.items()
-                            if not (self._cache_path(k).stat().st_size > 0
-                                    and json.loads(self._cache_path(k).read_text()) == v))
-                print(f"  [{i+1}/{total}] processed (model={self.model})")
-
+            cp = self._cache_path(row.get("subject", ""), row.get("body", ""))
+            if cp.exists():
+                results[eid] = json.loads(cp.read_text())
+            else:
+                todo.append(row)
+        total = len(todo)
+        print(f"  [ollama extract] {len(results)} cached, {total} to extract "
+              f"(batched x{batch_size}, model={self.model})", flush=True)
+        for i in range(0, total, batch_size):
+            batch = todo[i:i + batch_size]
+            for row, cues in zip(batch, self._call_batch(batch)):
+                self._cache_path(row.get("subject", ""), row.get("body", "")).write_text(json.dumps(cues))
+                results[row["email_id"]] = cues
+            if (i // batch_size) % 5 == 0 or i + batch_size >= total:
+                print(f"  [ollama extract] {min(i + batch_size, total)}/{total}", flush=True)
         return results
+
+    def _call_batch(self, batch) -> list:
+        """Return a list of cue-lists aligned to `batch`; per-email fallback on failure."""
+        from .groq_client import _BATCH_PROMPT
+        parts = []
+        for j, row in enumerate(batch):
+            body = str(row.get("body", "") or "")[:1200]
+            parts.append(f"### EMAIL {j}\nSubject: {row.get('subject','')}\nFrom: {row.get('sender','')}\nBody: {body}")
+        prompt = _BATCH_PROMPT.format(n=len(batch), emails="\n\n".join(parts))
+        payload = json.dumps({
+            "model": self.model, "prompt": prompt, "stream": False,
+            # think=False is REQUIRED for reasoning models (gemma4, qwen3, deepseek-r1).
+            # Without it Ollama spends the whole num_predict budget on hidden reasoning
+            # tokens, strips them from "response", and hands back an EMPTY STRING —
+            # eval_count=270, done_reason='length', response=''. That looks identical to
+            # "model can't do the task" and silently yields zero cues for every email.
+            "think": False,
+            "options": {"temperature": 0.1, "num_predict": 50 * len(batch) + 120},
+        }).encode()
+        self._rate_limit()
+        try:
+            req = urllib.request.Request(self.endpoint, data=payload,
+                                         headers={"Content-Type": "application/json"}, method="POST")
+            with urllib.request.urlopen(req, timeout=self.timeout * 3) as resp:
+                _data = json.loads(resp.read())
+            text = _data.get("response", "")
+            # Loud failure beats silent zeros: tokens generated but nothing returned means
+            # the reasoning channel swallowed the output. Never let that become "no cues".
+            if not text.strip() and _data.get("eval_count", 0) > 0:
+                raise RuntimeError(
+                    f"{self.model} generated {_data['eval_count']} tokens but returned an "
+                    f"empty response (done_reason={_data.get('done_reason')!r}). Reasoning "
+                    f"output was stripped — 'think': False must be sent for this model.")
+            s, e = text.find("["), text.rfind("]") + 1
+            parsed = json.loads(text[s:e])
+            if isinstance(parsed, list) and len(parsed) == len(batch):
+                return [[c for c in (item or []) if c in VALID_CUES] for item in parsed]
+            print(f"  [ollama batch: len {len(parsed) if isinstance(parsed,list) else '?'} != {len(batch)} -> fallback]", flush=True)
+        except Exception as ex:
+            print(f"  [ollama batch err -> fallback] {type(ex).__name__}: {str(ex)[:80]}", flush=True)
+        return [self._call_ollama(str(r.get("subject", "")), str(r.get("sender", "")),
+                                  str(r.get("body", ""))[:2000], "") for r in batch]
 
     def is_available(self) -> bool:
         """Returns True if Ollama is reachable and the chosen model is present."""
@@ -163,8 +199,20 @@ class OllamaExtractor:
     # Internal helpers
     # ------------------------------------------------------------------
 
-    def _cache_path(self, email_id) -> Path:
-        return self.cache_dir / f"email_{email_id}.json"
+    def _cache_path(self, subject, body) -> Path:
+        """Key by CONTENT hash, not email_id.
+
+        email_id is POSITIONAL: it is assigned by build_target_corpus() at assembly time,
+        so adding or dropping a single source renumbers the entire corpus and every cached
+        entry silently maps to a DIFFERENT email — wrong cues, no error. This is not
+        hypothetical here: load_enron_clean() drops 200 emails when huggingface_hub/pyarrow
+        are missing, which flips the corpus between 1,595 and 1,395 and shifts every id.
+
+        Identical scheme to groq_client._cache_key(), so the same email produces the same
+        filename under every extractor and the per-model cache dirs stay comparable.
+        """
+        blob = re.sub(r"\s+", " ", f"{subject}\n{body}".lower()).strip()
+        return self.cache_dir / f"cue_{hashlib.md5(blob.encode('utf-8', 'ignore')).hexdigest()}.json"
 
     def _rate_limit(self):
         elapsed = time.time() - self._last_call_at
@@ -185,6 +233,7 @@ class OllamaExtractor:
             "model": self.model,
             "prompt": prompt,
             "stream": False,
+            "think": False,           # see _call_batch — reasoning eats num_predict, returns ""
             "options": {
                 "temperature": 0.1,   # low temperature for deterministic JSON
                 "num_predict": 64,    # cue array is short, don't need more

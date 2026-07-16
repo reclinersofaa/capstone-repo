@@ -1,220 +1,183 @@
-# Phishing Detection — Agent-Based Simulation
+# AI Phishing Simulation via Hybrid Agent-Based Modeling
 
-A research pipeline that models how human cognitive state affects susceptibility to phishing emails. It combines a labelled email dataset, LLM-based cue extraction, and a stochastic agent simulation grounded in occupational psychology research.
+PES University Capstone · Project ID `PW26_SVM_01`
+Adithya Kallaje · B. Thanav Reddy · Dattatreya K A · Krishna Venkatesh — guide: Dr. Sapna V M
 
----
-
-## What This Project Does
-
-1. **Builds a dataset** of 250 emails across four categories (real phishing, AI-generated phishing variants, and benign)
-2. **Extracts phishing cues** from every email using Gemini (LLM) with a regex fallback
-3. **Simulates synthetic employees** — each with randomised demographic, psychological, and occupational traits — reading those emails at different points in their workday
-4. **Models cognitive vulnerability** through fatigue and job performance equations derived from peer-reviewed research, then measures how often agents click vs report each email type
+An agent-based simulation of **how an employee's cognitive state — fatigue, motivation, vigilance — changes whether they fall for a phishing email**, and whether AI-crafted phishing evades human detection better than real, human-authored phishing. Live phishing tests on staff are unethical and illegal, so we simulate synthetic employees reading a labelled corpus.
 
 ---
 
-## Dataset
+## The headline result
 
-| Source | Count | Class | Description |
-|---|---|---|---|
-| SpamAssassin Ham | 100 | 0 — Benign | Real benign emails, pre-cleaned |
-| Phishbowl | 50 | 1 — Phishing | Real-world phishing emails |
-| Plain LLM | 50 | 1 — Phishing | Naive AI-generated phishing |
-| Hybrid V-Triad | 50 | 1 — Phishing | Guided AI phishing using V-Triad persuasion framework |
+**1,595 emails · 10 segregated sources · 239,250 decisions**
+Cues extracted locally by `gemma4:12b` (Ollama) — one model across the whole corpus.
 
-**Master dataset:** `data/processed/master_emails.csv` — 250 rows, 7 columns
+| Source | avg detectable cues | click rate | |
+|---|---:|---:|---|
+| **hybrid_vtriad** (AI, V-Triad-guided) | **0.93** | **92.0%** | ← fewest cues, **most clicks** |
+| phishbowl (real phishing) | 1.85 | 81.7% | |
+| ceas08 (real phishing) | 1.90 | 82.7% | |
+| nazario (real phishing) | 2.79 | 62.1% | |
+| nigerian_fraud (real 419) | 2.90 | 62.0% | |
+| multi_llm (modern AI, 3 models) | 3.49 | 47.4% | |
+| plain_llm (naive AI) | 4.64 | 27.8% | most cues, fewest clicks |
 
-Schema: `email_id, subject, sender, body, extracted_urls, source, actual_class`
+- **Spearman(cues, click rate) = −0.96** — near-monotonic: every step up in detectability is a step down in clicks.
+- **Replicated across two independent extractors.** `llama-4-scout-17b` (hosted, 17B) and
+  `gemma4:12b` (local, 12B) rank V-Triad **lowest in cues and highest in clicks** in both
+  runs. The finding is not an artifact of one extraction model.
+- **Benign false-positive rate: 0.12%** (benign cue sparsity 0.03–0.12 across all 3 benign sources)
+- **Workday fatigue effect: +13.6%** (same agent, 4pm vs 8am)
 
----
+![Fewer detectable cues means more clicks. V-Triad sits alone in the top-left: fewest cues, highest click rate.](results/v2_demo_cues_vs_click.png)
 
-## Phishing Cue Taxonomy
+**Interpretation:** persuasion-guided AI phishing carries barely more detectable red flags than *legitimate* email (0.93 vs ~0.03–0.12 for benign) — and it beats real, human-authored phishing at getting clicked. Sophistication is inversely related to detectability.
 
-9 cues extracted per email:
+![Dataset composition: 1,595 emails across 10 sources, kept segregated.](results/v2_dataset_composition.png)
 
-| Cue | Detection Method |
-|---|---|
-| `urgency` | Regex — "act now", "expires today" |
-| `threats` | Regex — "account suspended", "legal action" |
-| `generic_greeting` | Regex — "Dear Customer", "Hello User" |
-| `spelling_grammar` | Regex — known misspellings + homoglyph patterns |
-| `emotional_appeal` | Regex — "congratulations", "you've been selected" |
-| `too_good_true` | Regex — "you won", "free gift", lottery language |
-| `personal_info` | Regex — requests for password, SSN, credit card |
-| `suspicious_sender` | Regex + logic — typosquatted brand domains |
-| `suspicious_link` | Logic — URL shorteners, suspicious TLDs, brand-domain mismatch |
+> **Reproducing:** cue counts are only comparable within one extractor, so the cache is scoped
+> per model (`data/cue_cache_v2/<model>/`). Numbers above are the `gemma4:12b` run; the scout
+> run is preserved under `groq-scout/`. Never mix the two in one corpus.
 
-Cues are first extracted by Gemini (`gemini-2.5-flash`) and cached to disk. Emails that exceed the API quota fall back to the regex extractor automatically.
-
----
-
-## Agent Architecture
-
-Each synthetic agent is a dataclass (`src/agent.py`) with 20+ fields covering demographics, sleep, psychological state, and job characteristics.
-
-### Fatigue Model
-
-```
-Energy Depletion = 2.45 - 0.05·Age + 0.09·Gender - 0.08·EducLevel
-                   - 0.01·Tenure - 0.25·JobType + 0.65·JobComplexity
-
-Fatigue = 6.22 - 0.22·TimeAwakening - 0.15·SleepTime + 0.14·SleepQuality
-          + 0.44·StressAvg + 0.44·Illness + 0.29·SubjectiveHealth
-          + 0.02·Age + 0.17·Depression
-
-Total Fatigue = (Energy Depletion + Fatigue) / 2   → clamped [1, 5]
-```
-
-### Job Performance Model
-
-```
-JP1 = 2.766 - 0.106·Burnout + 0.301·IntMotivation + 0.298·JobSat
-      - 0.153·RoleConflict - 0.076·LeaveIntention
-
-JP2 = 3.238 - 0.022·TimePressure - 0.086·Workload
-      - 0.141·LackMotivation - 0.155·RoleAmbiguity
-
-Final JP = (JP1 + JP2) / 2 - (0.34 × Total Fatigue)
-```
-
-### Flawed Perception Level (FPL)
-
-Probability [0.0, 0.5] that an agent misidentifies a malicious cue as benign:
-
-```
-FPL = 0.5 × fatigue_norm × (1 - jp_norm)
-```
-
-FPL is **trait-differentiated per cue**:
-- Older / lower-education agents have higher FPL for URL and sender cues
-- Desk workers in complex jobs have lower FPL for account-threat cues
-
-### Decision Loop
-
-1. Gemini returns a list of cues present in the email (e.g. `["urgency", "threats", "personal_info"]`)
-2. Python shuffles the list and iterates up to `max_cues_processed` (7–12, agent-specific)
-3. For each cue: `random() > cue_fpl` → agent perceives it → `suspicion_counter += 1`
-4. If `suspicion_counter >= suspicion_threshold` (2–6, agent-specific) → **reported**
-5. If max cues processed without reaching threshold → **clicked**
-
-Workday progression: `time_pressure` and `workload` ramp linearly from 1 at 8am to 5 at 5pm, degrading job performance and increasing FPL as the day advances.
+See **[`notebooks/06_agent_simulation_v2.ipynb`](notebooks/06_agent_simulation_v2.ipynb)** for the full analysis.
 
 ---
 
-## Simulation Results
-
-**30 agents × 5 time points × 250 emails = 37,500 simulation runs**
-
-### Phishing click rate (vulnerability — lower is better)
-
-| Source | 8am | 10am | 12pm | 2pm | 4pm |
-|---|---|---|---|---|---|
-| `hybrid_vtriad` | 76.9% | 77.6% | 78.6% | 77.2% | 78.8% |
-| `phishbowl` | 93.3% | 93.5% | 94.3% | 94.7% | 93.6% |
-| `plain_llm` | 98.7% | 98.9% | 98.6% | 99.1% | 99.1% |
-
-### Benign click rate (correct behaviour — higher is better)
-
-| Source | 8am | 10am | 12pm | 2pm | 4pm |
-|---|---|---|---|---|---|
-| `spamassassin_ham` | 99.2% | 99.0% | 99.1% | 99.2% | 99.0% |
-
-### False positive rate (benign emails incorrectly reported)
-
-~0.8–1.0% across all time points — very low.
-
-### Key findings
-
-- **Sophistication hierarchy holds:** agents click `plain_llm` 99% of the time vs 77% for `hybrid_vtriad` — exactly matching the Phase 3.5 quality audit ranking
-- **Workday fatigue signal is present:** `hybrid_vtriad` click rate drifts +2pp from 8am to 4pm
-- **Suspicion threshold dominates:** agents with threshold ≥ 6 rarely report any email regardless of FPL because most emails contain fewer than 6 cues
-- **FPR is minimal:** benign emails are almost never false-positively reported
-
----
-
-## Project Structure
-
-```
-capstone-preprocess-labels/
-├── data/
-│   ├── raw/                        # Original source CSVs
-│   ├── processed/
-│   │   └── master_emails.csv       # Unified 250-email dataset
-│   ├── cue_cache/                  # Gemini API responses (JSON, one per email)
-│   └── simulation_results.csv      # 37,500-row simulation output
-│
-├── src/
-│   ├── agent.py                    # Agent dataclass + fatigue/JP/FPL math
-│   ├── cue_extractor.py            # Gemini API cue extraction with disk cache
-│   ├── regex_extractor.py          # Regex fallback cue extractor
-│   ├── decision_loop.py            # Stochastic per-cue decision loop
-│   └── simulation.py               # Full pipeline orchestration
-│
-├── notebooks/
-│   ├── 02_pattern_testing.ipynb    # Cue pattern development and testing
-│   ├── 03_audit_synthetic_vs_real.ipynb  # Dataset quality audit
-│   └── 04_agent_simulation.ipynb   # Simulation analysis and visualisations
-│
-├── .env                            # GEMINI_KEY (required)
-├── ROADMAP.md                      # Pipeline decisions and lessons learned
-├── SYSTEM.md                       # Technical codebase reference
-└── README.md                       # This file
-```
-
----
-
-## Setup
-
-### Requirements
-
-- Python 3.10+
-- A Gemini API key from [aistudio.google.com](https://aistudio.google.com) (free tier, no billing needed)
-
-### Install
+## Quick start
 
 ```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
+python -m venv .venv && .venv\Scripts\activate        # Windows
+pip install -r requirements.txt
 
-pip install pandas numpy scikit-learn matplotlib seaborn jupyter ipykernel requests python-dotenv google-genai textblob
+jupyter notebook notebooks/06_agent_simulation_v2.ipynb
 ```
 
-### Register Jupyter kernel
+> **Install from `requirements.txt`, not an ad-hoc `pip install` list.** `huggingface_hub`
+> and `pyarrow` gate the `enron_clean` benign source, which fails *silently* — without both,
+> the corpus builds as 1,395 instead of 1,595 and every number shifts, with nothing looking
+> broken. Verify before trusting results:
+> ```bash
+> python -c "import pandas, numpy, matplotlib, seaborn, dotenv, huggingface_hub, pyarrow"
+> ```
+
+`06` runs top-to-bottom with **no API key and no local model** — cue extractions are cached in `data/cue_cache_v2/`. Safe to run live in front of an audience.
+
+To rebuild the corpus / re-simulate:
 
 ```bash
-python -m ipykernel install --user --name=capstone --display-name="Capstone (venv)"
+python run_demo.py                 # build corpus → extract locally (cache-first) → simulate → report
+python run_demo.py --extractor groq  # hosted extraction instead (needs GROQ_API_KEY; rate-limited)
+python run_demo.py --generate 120  # also generate 120 more of each synthetic class (needs GROQ_API_KEY)
+python run_demo.py --charts        # also write presentation charts
 ```
 
-### Configure API key
-
-Add to `.env`:
-```
-GEMINI_KEY=your_key_here
-```
-
-### Run
-
-```bash
-jupyter notebook notebooks/04_agent_simulation.ipynb
-```
-
-Select the **Capstone (venv)** kernel. Cell 2 loads existing results if `data/simulation_results.csv` exists. Set `RERUN = True` to re-simulate.
-
-To re-extract cues (e.g. after quota resets): delete `data/cue_cache/` and rerun cell 2.
+Extraction defaults to **local Ollama** (`gemma4:12b`) — no key needed, and it is the
+reproducible path used for the published numbers. `.env` keys are only for the optional
+hosted path: `GROQ_API_KEY` (generation, and `--extractor groq`), `KAGGLE_USERNAME` /
+`KAGGLE_KEY` (corpus download).
 
 ---
 
-## Dependencies
+## Two generations of the model
 
-| Package | Purpose |
-|---|---|
-| `pandas`, `numpy` | Data manipulation |
-| `google-genai` | Gemini API client |
-| `python-dotenv` | Load `.env` credentials |
-| `matplotlib`, `seaborn` | Visualisation |
-| `textblob` | Sentiment analysis (emotional appeal cue) |
-| `scikit-learn` | Available for future ML extensions |
-| `jupyter`, `ipykernel` | Notebook runtime |
+Both live in the repo side by side — **v1 is untouched and still runs.**
+
+| | **v1** (`05_agent_simulation.ipynb`) | **v2** (`06_agent_simulation_v2.ipynb`) |
+|---|---|---|
+| Model | `src/agent.py` | `src/agent_v2.py` |
+| Emails | 250, 4 sources | **1,595, 10 segregated sources** |
+| Fatigue | KSS circadian + static ED | **dynamic ED, circadian dropped, noisy-OR** |
+| Job performance | 2 stacked regressions | **weighted geometric mean** |
+| FPL | fatigue × (1−JP) | + **Perceived Vulnerability** |
+| Threshold | fixed 2–6 | **partly dynamic** (base + F_dynamic drift) |
+| Agents | independent traits | **copula-correlated** |
+| Workday curve | **flat / slightly falling** | **rises (+13.6%)** |
+| Decisions | 37,500 | **239,250** |
+
+**Why v2 exists:** in v1, click rate correlated **+0.98 with the fixed suspicion threshold** but only **−0.06 with fatigue** (and −0.05 with FPL — the wrong sign). The Åkerstedt circadian term peaks at 4:48pm, making agents *more* alert late in the day, cancelling fatigue accumulation and flattening the workday curve. v2 rebuilds the model on a single `[0,1]` scale so fatigue is monotone and actually moves outcomes.
+
+---
+
+## How it works
+
+```
+raw sources → normalise + clean + dedupe → master_emails_v2.csv (segregated by `source`)
+           → cue extraction (9 cues, cache-first) → data/cue_cache_v2/
+           → agents (copula-correlated traits) × 5 workday hours × emails
+           → per-cue stochastic decision loop → clicked | reported
+           → data/simulation_results_v2.csv → notebook 06
+```
+
+**The v2 cognitive chain** (all quantities in `[0,1]`):
+
+```
+ED(t)        = dynamic energy depletion (workload, time-pressure, task-switching, job complexity)
+F_dynamic   += dt · (ED − Recovery)              accumulates across the day
+TotalFatigue = noisy-OR(F_base(sleep), F_dynamic)
+JP           = (1−Fatigue)^0.5 · Motivation^0.3 · RoleClarity^0.2
+FPL          = TotalFatigue · (1−JP) · (1 − λ·PerceivedVulnerability)
+cue_fpl      = FPL · (1 − CueStrength[cue]) + trait modifiers
+decision     : perceive cues until suspicion ≥ threshold → reported, else clicked
+```
+
+The **decision** comes from the per-cue Bernoulli loop. `P_click` (a centred sigmoid) is a reporting index only.
+
+### The 9 phishing cues
+
+`urgency` · `threats` · `generic_greeting` · `spelling_grammar` · `emotional_appeal` · `too_good_true` · `personal_info` · `suspicious_sender` · `suspicious_link`
+
+Extracted once per email by an LLM and cached to disk. Each cue has a **CueStrength** (0.4–0.8) — blatant cues are hard to miss, subtle ones easy to skim past.
+
+---
+
+## The dataset
+
+**1,595 emails, 10 sources, kept strictly segregated** (never blended) so cue behaviour and click rate can always be sliced per origin.
+
+| Class | Count | Sources |
+|---|---:|---|
+| Benign | **797** | SpamAssassin ham (447) · Enron pre-cleaned (200) · TREC-07 (150) |
+| Real phishing | **418** | CEAS-08 (130) · Nazario (110) · Nigerian/419 (90) · Cornell Phishbowl (88) |
+| Synthetic phishing | **380** | multi_llm (150, 3 models) · hybrid_vtriad (120, V-Triad-guided) · plain_llm (110, naive) |
+
+Every source's **origin, licence, retrieval date, cleaning steps and the models that processed it** are auto-documented in **[`DATA_PROVENANCE.md`](DATA_PROVENANCE.md)** — regenerated from the actual data, so it cannot drift out of sync.
+
+Sources marked ⚠️ have inherited/unclear licences: **verify before publishing, and cite the original corpora, not the Kaggle mirrors.** We ship **loader code + DOIs, not re-hosted corpora** — `src/dataset_v2.py` reconstructs the dataset from the original sources.
+
+> **Data-quality note:** the Cornell Phishbowl records wrap each real phish in Cornell IT's *warning* boilerplate ("This phish typically originates from… Do not reply…"). v1 fed that anti-phishing language straight into cue extraction; `dataset_v2.clean_phishbowl()` strips it.
+
+---
+
+## Repo structure
+
+```
+notebooks/
+  02_pattern_testing.ipynb        cue regex development
+  03_audit_synthetic_vs_real.ipynb  dataset quality audit
+  04/05_agent_simulation.ipynb    v1 simulation (untouched)
+  06_agent_simulation_v2.ipynb    v2 — THE analysis: dataset, model, results, robustness
+src/
+  agent.py            v1 cognitive model
+  agent_v2.py         v2 model + copula agent generation + simulation runner
+  decision_loop.py    per-cue stochastic click/report loop (shared by v1 & v2)
+  simulation.py       v1 pipeline orchestration
+  dataset_v2.py       corpus assembly: clean, parse, dedupe, segregate
+  groq_client.py      Groq cue extraction (batched) + synthetic generation
+  provenance.py       auto-generates DATA_PROVENANCE.md + composition chart
+  ollama_extractor.py / cue_extractor.py / regex_extractor.py   extraction backends
+run_demo.py           single entry point: build → extract → simulate → report
+ARCHITECTURE.md       onboarding map of the v1 baseline
+DATA_PROVENANCE.md    auto-generated dataset datasheet
+SYSTEM.md             technical codebase reference
+```
+
+---
+
+## Honest limits
+
+- **Coefficients are modeling choices.** ED weights, JP exponents, `λ_PV`, threshold drift and the P_click centring were tuned for `[0,1]` bounds and monotonicity — **not** taken from any paper. The literature motivates *structure and signs* only.
+- **The extraction model matters.** Cue counts differ measurably by model (llama-3.1-8b over-flags benign at ~1.7 cues/email vs ~0.0 for the models we use), so a corpus must be extracted by **one** model — the cue cache is scoped per model for exactly this reason. Results here use **local `gemma4:12b`**, recorded in the datasheet. The V-Triad ranking **replicates** on `llama-4-scout-17b` (Groq), so the headline is not an artifact of one extractor, but cue *magnitudes* are not comparable across extractors.
+- **The Shin-Carley `−5.584` PV coefficient** comes from the Phase-1 report and must be verified against the primary paper. The organizational damage index is an *index*, not validation — it's built from its own inputs, and tracks actual clicks at only r ≈ +0.08.
+- **The suspicion threshold still dominates between agents** (r ≈ 0.98). It's a large individual difference; fatigue is a *within-person* effect. Both are reported honestly in `06 §12`.
+- **Synthetic phishing is self-generated** (fictional entities only) — no public V-Triad corpus exists.
+- The v1-vs-v2 workday chart changes **model *and* dataset**; the within-agent measure is the clean evidence.
