@@ -1,0 +1,848 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #0e1117;
+  color: #e6e8eb;
+}
+
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 2px solid #8ab4f8;
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app-shell {
+  min-height: 100vh;
+  background: #0e1117;
+  color: #e6e8eb;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  background: #17191f;
+  border-bottom: 1px solid #292d35;
+}
+
+.topbar-left {
+  width: 250px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-right {
+  margin-left: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #b8bdc7;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.icon-button:hover {
+  background: #282c34;
+  color: #f1f3f4;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #e8eaed;
+
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #30343d;
+  color: #a8c7fa;
+}
+
+.search-bar {
+  height: 46px;
+  flex: 1;
+  max-width: 720px;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 0 18px;
+
+  border-radius: 24px;
+
+  background: #252930;
+  color: #8e949f;
+
+  font-size: 15px;
+}
+
+.search-bar svg {
+  color: #9aa0aa;
+}
+
+.profile-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #7c4dff;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.main-layout {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+
+  padding: 18px 12px;
+
+  background: #17191f;
+  border-right: 1px solid #292d35;
+}
+
+.experiment-label {
+  height: 48px;
+
+  margin: 2px 8px 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #dce0e6;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.experiment-label svg {
+  color: #9ad7a0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebar-item {
+  height: 42px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  border-radius: 0 21px 21px 0;
+
+  color: #b8bdc7;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-item:hover {
+  background: #252930;
+  color: #f1f3f4;
+}
+
+.sidebar-item.active {
+  background: #2d333d;
+  color: #d9e7ff;
+  font-weight: 600;
+}
+
+.sidebar-item svg {
+  flex-shrink: 0;
+}
+
+.inbox-count {
+  margin-left: auto;
+
+  color: #9aa0aa;
+
+  font-size: 12px;
+}
+
+.sidebar-divider {
+  height: 1px;
+
+  margin: 22px 14px;
+
+  background: #292d35;
+}
+
+.experiment-note {
+  margin: 0 14px;
+  padding: 14px;
+
+  border-radius: 10px;
+
+  background: #1d2026;
+}
+
+.experiment-note p {
+  margin: 0 0 5px;
+
+  color: #dce0e6;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.experiment-note span {
+  color: #858b96;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #0e1117;
+}
+
+
+/* =========================================================
+   MAIL TOOLBAR
+========================================================= */
+
+.mail-toolbar {
+  height: 58px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid #292d35;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.toolbar-button {
+  width: 38px;
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #aeb4be;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.toolbar-button:hover {
+  background: #252930;
+  color: #e8eaed;
+}
+
+
+/* =========================================================
+   EMAIL CONTAINER
+========================================================= */
+
+.email-container {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  padding: 22px 24px 50px;
+}
+
+
+/* =========================================================
+   EMAIL CARD
+========================================================= */
+
+.email-card {
+  overflow: hidden;
+
+  border: 1px solid #292d35;
+  border-radius: 10px;
+
+  background: #17191f;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   EMAIL HEADER
+========================================================= */
+
+.email-header {
+  padding: 27px 30px 22px;
+
+  border-bottom: 1px solid #292d35;
+}
+
+.subject-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.subject-row h1 {
+  flex: 1;
+
+  margin: 0;
+
+  color: #f1f3f4;
+
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.35;
+
+  overflow-wrap: anywhere;
+}
+
+.star-email {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #8b919b;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.star-email:hover {
+  background: #252930;
+  color: #f5c84b;
+}
+
+.sender-row {
+  margin-top: 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.sender-avatar {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #3c4048;
+  color: #d8dce3;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sender-details {
+  min-width: 0;
+}
+
+.sender-line {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.sender-name {
+  color: #e8eaed;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sender-email {
+  color: #858b96;
+
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipient-line {
+  margin-top: 3px;
+
+  color: #858b96;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   EMAIL BODY
+========================================================= */
+
+.email-body {
+  width: 100%;
+
+  padding: 34px 34px 42px;
+
+  color: #d7dae0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+
+  /*
+   * Preserve the original email formatting.
+   */
+  white-space: pre-wrap;
+
+  /*
+   * Long URLs and unusual email text
+   * must never break the layout.
+   */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  max-width: 900px;
+}
+
+
+/* =========================================================
+   CLASSIFICATION PANEL
+========================================================= */
+
+.classification-panel {
+  margin-top: 18px;
+  padding: 22px;
+
+  border: 1px solid #292d35;
+  border-radius: 10px;
+
+  background: #17191f;
+}
+
+.classification-header {
+  margin-bottom: 18px;
+}
+
+.classification-header h2 {
+  margin: 0 0 5px;
+
+  color: #e8eaed;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.classification-header p {
+  margin: 0;
+
+  color: #858b96;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   BENIGN / PHISHING BUTTONS
+========================================================= */
+
+.decision-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+.decision-button {
+  min-height: 68px;
+
+  padding: 13px 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 13px;
+
+  border: 1px solid #383d47;
+  border-radius: 10px;
+
+  background: #1d2026;
+  color: #c8ccd3;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.decision-button:hover {
+  background: #252930;
+
+  transform: translateY(-1px);
+}
+
+.decision-button strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #e8eaed;
+
+  font-size: 14px;
+}
+
+.decision-button span {
+  display: block;
+
+  color: #858b96;
+
+  font-size: 12px;
+}
+
+.decision-button.benign svg {
+  color: #8ac791;
+}
+
+.decision-button.phishing svg {
+  color: #f28b82;
+}
+
+.decision-button.benign.selected {
+  border-color: #6eaa75;
+  background: #202b23;
+}
+
+.decision-button.phishing.selected {
+  border-color: #c06b65;
+  background: #2c2223;
+}
+
+
+/* =========================================================
+   RESPONSE RECORDED
+========================================================= */
+
+.response-recorded {
+  margin-top: 18px;
+
+  padding: 20px 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  border: 1px solid #3b5c40;
+  border-radius: 10px;
+
+  background: #1b261e;
+}
+
+.recorded-icon {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #293c2d;
+  color: #9ad7a0;
+}
+
+.response-recorded strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #dce0e6;
+
+  font-size: 14px;
+}
+
+.response-recorded span {
+  color: #858b96;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-screen {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-card {
+  width: 320px;
+
+  padding: 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: 1px solid #292d35;
+  border-radius: 12px;
+
+  background: #17191f;
+
+  color: #b8bdc7;
+
+  text-align: center;
+}
+
+.loading-card p {
+  margin: 15px 0 0;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+
+  border: 3px solid #30343d;
+  border-top-color: #a8c7fa;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+.error-card {
+  color: #f28b82;
+}
+
+.error-card h2 {
+  margin: 15px 0 5px;
+
+  color: #e8eaed;
+
+  font-size: 18px;
+}
+
+.error-card p {
+  margin: 0;
+
+  color: #858b96;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .topbar-left {
+    width: 200px;
+  }
+
+  .email-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+
+  .topbar-left {
+    width: auto;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .search-bar {
+    margin-left: 10px;
+  }
+
+  .email-header {
+    padding: 22px 20px 18px;
+  }
+
+  .subject-row h1 {
+    font-size: 20px;
+  }
+
+  .email-body {
+    padding: 25px 20px 30px;
+    font-size: 14px;
+  }
+
+  .decision-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .classification-panel {
+    padding: 17px;
+  }
+
+  .sender-email {
+    display: none;
+  }
+}
