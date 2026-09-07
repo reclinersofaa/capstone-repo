@@ -236,7 +236,7 @@ class OllamaExtractor:
             "think": False,           # see _call_batch — reasoning eats num_predict, returns ""
             "options": {
                 "temperature": 0.1,   # low temperature for deterministic JSON
-                "num_predict": 64,    # cue array is short, don't need more
+                "num_predict": 200,   # must fit the FULL JSON array: 64 truncated cue-rich emails to a silent []
             },
         }).encode()
 
@@ -255,11 +255,13 @@ class OllamaExtractor:
 
             # Parse JSON array from response — model may add preamble or skip commas
             start = text.find("[")
-            end = text.rfind("]") + 1
-            if start == -1 or end == 0:
+            if start == -1:
                 return []
-
-            raw_array = text[start:end]
+            end = text.rfind("]") + 1
+            # Salvage truncated output (done_reason='length', no closing ']'): keep from '['
+            # onward so the quoted-string fallback below can still recover cues, instead of
+            # returning [] — a silent empty reads as "no cues" and wrongly inflates the click rate.
+            raw_array = text[start:end] if end > 0 else text[start:]
 
             # First try standard parse
             try:

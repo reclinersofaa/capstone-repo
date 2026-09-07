@@ -46,9 +46,15 @@ PROVIDERS = [
     # them back-to-back exceeds 30K/min within seconds and every call 429s.
     {"name": "groq", "env": "GROQ_API_KEY",
      "base": "https://api.groq.com/openai/v1",
-     "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+     # llama-4-scout-17b was RETIRED from Groq (confirmed via /v1/models: 404, no longer
+     # listed) — verify with `python -m src.llm_providers` before relying on this in a
+     # demo; Groq's free-tier model lineup changes without notice. qwen3.6-27b is
+     # reasoning-only here (wraps output in <think>, eats the token budget, same failure
+     # mode as the old gpt-oss/zai-glm rejects below) — compound-mini is the one model on
+     # this key confirmed to return a plain JSON array with no wrapper.
+     "model": "groq/compound-mini",
      "tpm": 30000,
-     "limits": "30K TPM (binding), 1000 RPD; per-model TPD 3.6K–500K (scout 500K)"},
+     "limits": "30K TPM (binding), 1000 RPD"},
     {"name": "gemini", "env": "GEMINI_KEY",
      "base": "https://generativelanguage.googleapis.com/v1beta/openai",
      "model": "gemini-2.5-flash",

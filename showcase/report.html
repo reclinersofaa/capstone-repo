@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Report</title>
+<style>
+  :root{
+    --ground:#EEF0F4; --surface:#FBFCFD; --surface-2:#F3F5F9; --ink:#14181F;
+    --muted:#586173; --faint:#8A93A3; --hairline:#DCE0E8; --hairline-strong:#C7CDD8;
+    --accent:#B5314A; --accent-ink:#8E2138; --accent-wash:#F7E9EC;
+    --good:#2E7D5B; --good-wash:#E6F1EB; --code-bg:#F3F1EC;
+    --shadow:0 1px 2px rgba(20,24,31,.05), 0 8px 28px -14px rgba(20,24,31,.18);
+    --font-display:Georgia,"Iowan Old Style","Charter","Times New Roman",serif;
+    --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --toc-w:280px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0E1116; --surface:#161B22; --surface-2:#1B222C; --ink:#E7EAF0;
+      --muted:#9AA4B4; --faint:#6B7482; --hairline:#262D38; --hairline-strong:#333C49;
+      --accent:#E4637A; --accent-ink:#F08A9C; --accent-wash:#2A1A20;
+      --good:#5FBE8E; --good-wash:#16241D; --code-bg:#1B1F26;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#EEF0F4; --surface:#FBFCFD; --surface-2:#F3F5F9; --ink:#14181F;
+    --muted:#586173; --faint:#8A93A3; --hairline:#DCE0E8; --hairline-strong:#C7CDD8;
+    --accent:#B5314A; --accent-ink:#8E2138; --accent-wash:#F7E9EC;
+    --good:#2E7D5B; --good-wash:#E6F1EB; --code-bg:#F3F1EC;
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E1116; --surface:#161B22; --surface-2:#1B222C; --ink:#E7EAF0;
+    --muted:#9AA4B4; --faint:#6B7482; --hairline:#262D38; --hairline-strong:#333C49;
+    --accent:#E4637A; --accent-ink:#F08A9C; --accent-wash:#2A1A20;
+    --good:#5FBE8E; --good-wash:#16241D; --code-bg:#1B1F26;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light dark; scroll-behavior:smooth}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.6; -webkit-font-smoothing:antialiased}
+  a{color:var(--accent-ink)}
+
+  /* ---- layout shell: sticky TOC + content column ---- */
+  .shell{display:grid; grid-template-columns:var(--toc-w) minmax(0,1fr); max-width:1280px; margin:0 auto; align-items:start}
+  .toc{position:sticky; top:0; height:100vh; overflow-y:auto; padding:28px 18px 40px 24px; border-right:1px solid var(--hairline)}
+  .toc-title{font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 14px}
+  .toc a{display:flex; gap:10px; align-items:baseline; text-decoration:none; color:var(--muted); font-size:.86rem; padding:5px 8px; border-radius:7px; line-height:1.35}
+  .toc a:hover{background:var(--surface-2); color:var(--ink)}
+  .toc a.active{background:var(--accent-wash); color:var(--accent-ink); font-weight:600}
+  .toc-num{font-family:var(--font-mono); font-size:11px; color:var(--faint); min-width:1.4em; text-align:right; flex:none}
+  .toc a.active .toc-num{color:var(--accent-ink)}
+  .toc-back{display:block; margin-top:18px; padding-top:14px; border-top:1px solid var(--hairline); font-family:var(--font-mono); font-size:12px; color:var(--muted); text-decoration:none}
+  .toc-back:hover{color:var(--accent-ink)}
+
+  .content{min-width:0; padding:0 40px 100px}
+  .masthead{max-width:760px; padding:52px 0 30px}
+  .eyebrow{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  .eyebrow .dot{width:5px; height:5px; border-radius:50%; background:var(--accent)}
+  h1{font-family:var(--font-display); font-weight:600; letter-spacing:-.015em; font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.08; margin:.35em 0 .25em; text-wrap:balance}
+  .dek{font-size:1.05rem; color:var(--muted); max-width:66ch; margin:0}
+  .dek b{color:var(--ink)}
+  .quicklinks{display:flex; gap:10px; margin-top:20px; flex-wrap:wrap}
+  .quicklinks a{font-family:var(--font-mono); font-size:12.5px; text-decoration:none; color:var(--muted); border:1px solid var(--hairline-strong); border-radius:20px; padding:6px 13px}
+  .quicklinks a:hover{border-color:var(--accent); color:var(--accent-ink)}
+
+  section{max-width:760px; padding:38px 0; border-bottom:1px solid var(--hairline); scroll-margin-top:20px}
+  .sec-head{display:flex; align-items:baseline; gap:12px; margin:0 0 14px}
+  .sec-num{font-family:var(--font-mono); font-size:12px; color:var(--faint); letter-spacing:.06em; border:1px solid var(--hairline-strong); border-radius:6px; padding:1px 7px; flex:none}
+  h2{font-family:var(--font-display); font-weight:600; font-size:1.35rem; letter-spacing:-.01em; margin:0; text-wrap:balance}
+
+  .sec-md p{margin:0 0 12px; color:var(--ink)}
+  .sec-md ul{margin:0 0 12px; padding-left:1.3em}
+  .sec-md li{margin:4px 0}
+  .sec-md code, .sec-md :not(pre)>code{font-family:var(--font-mono); font-size:.88em; background:var(--code-bg); border-radius:4px; padding:1px 5px}
+  blockquote{margin:14px 0; padding:10px 16px; border-left:3px solid var(--accent); background:var(--surface); border-radius:0 8px 8px 0; color:var(--muted); font-size:.94rem}
+
+  figure{margin:16px 0 6px; background:var(--surface); border:1px solid var(--hairline); border-radius:12px; padding:14px; box-shadow:var(--shadow)}
+  figure img{display:block; width:100%; height:auto; border-radius:6px}
+
+  .table-wrap{overflow-x:auto; margin:14px 0; border:1px solid var(--hairline); border-radius:10px; background:var(--surface)}
+  table.dnb-table{border-collapse:collapse; width:100%; font-size:.86rem; font-family:var(--font-mono)}
+  table.dnb-table th, table.dnb-table td{padding:8px 14px; text-align:right; border-bottom:1px solid var(--hairline); white-space:nowrap; font-variant-numeric:tabular-nums}
+  table.dnb-table thead th{font-family:var(--font-sans); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; border-bottom:1px solid var(--hairline-strong); text-align:right}
+  table.dnb-table th:first-child, table.dnb-table td:first-child{text-align:left; font-family:var(--font-sans); font-weight:500}
+  table.dnb-table tbody tr:hover{background:var(--surface-2)}
+
+  pre.out{background:var(--surface-2); border:1px solid var(--hairline); border-radius:10px; padding:13px 16px; font-family:var(--font-mono); font-size:.82rem; line-height:1.55; overflow-x:auto; margin:14px 0; color:var(--ink); white-space:pre-wrap}
+
+  .caveats-list{max-width:760px}
+  #caveats-honest-limits .sec-md ul li{margin-bottom:10px}
+
+  .end-note{max-width:760px; padding:36px 0 60px; color:var(--muted); font-size:.88rem}
+  .end-note a{font-weight:600}
+
+  /* mobile: TOC collapses to a top bar you can open */
+  .toc-toggle{display:none}
+  @media (max-width:960px){
+    .shell{grid-template-columns:1fr}
+    .toc{position:static; height:auto; border-right:none; border-bottom:1px solid var(--hairline); padding:16px 20px}
+    .toc.collapsed .toc-list{display:none}
+    .toc-toggle{display:flex; align-items:center; justify-content:space-between; width:100%; background:none; border:none; color:var(--ink); font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:.1em; cursor:pointer; padding:0}
+    .content{padding:0 20px 80px}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="toc" id="toc">
+    <button class="toc-toggle" id="tocToggle">Contents <span id="tocChevron">&#9660;</span></button>
+    <div class="toc-list">
+      <p class="toc-title">On this page</p>
+      <a href="#1-the-dataset-expanded-segregated"><span class="toc-num">1</span>The dataset - expanded &amp; segregated</a>
+<a href="#2-the-v2-cognitive-model"><span class="toc-num">2</span>The v2 cognitive model</a>
+<a href="#3-single-agent-workday-trajectory"><span class="toc-num">3</span>Single-agent workday trajectory</a>
+<a href="#4-cuestrength-why-some-cues-get-missed"><span class="toc-num">4</span>CueStrength - why some cues get missed</a>
+<a href="#5-cue-extraction-the-detection-signal"><span class="toc-num">5</span>Cue extraction - the detection signal</a>
+<a href="#6-headline-fewer-cues-more-clicks"><span class="toc-num">6</span>HEADLINE - fewer cues → more clicks</a>
+<a href="#7-click-rate-by-source"><span class="toc-num">7</span>Click rate by source</a>
+<a href="#8-the-workday-fatigue-effect"><span class="toc-num">8</span>The workday fatigue effect</a>
+<a href="#9-controlled-fatigue-experiment"><span class="toc-num">9</span>Controlled fatigue experiment</a>
+<a href="#10-perceived-vulnerability"><span class="toc-num">10</span>Perceived Vulnerability</a>
+<a href="#11-agent-traits-vs-outcome"><span class="toc-num">11</span>Agent traits vs outcome</a>
+<a href="#12-what-still-dominates-an-honest-decomposition"><span class="toc-num">12</span>What still dominates - an honest decomposition</a>
+<a href="#13-which-cues-get-perceived-by-source"><span class="toc-num">13</span>Which cues get perceived, by source</a>
+<a href="#14-agent-coherence-the-copula"><span class="toc-num">14</span>Agent coherence - the copula</a>
+<a href="#15-robustness-sensitivity"><span class="toc-num">15</span>Robustness &amp; sensitivity</a>
+<a href="#16-organizational-damage-index-shin-carley"><span class="toc-num">16</span>Organizational Damage Index (Shin-Carley)</a>
+<a href="#17-summary"><span class="toc-num">17</span>Summary</a>
+<a href="#caveats-honest-limits"><span class="toc-num">!</span>Caveats &amp; honest limits</a>
+      <a class="toc-back" href="/showcase">&larr; back to results summary</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <header class="masthead">
+      <div class="eyebrow">
+        <span>PES University</span><span class="dot"></span>
+        <span>Capstone PW26_SVM_01</span><span class="dot"></span>
+        <span>notebook 06 &middot; full report</span>
+      </div>
+      <h1>The complete analysis, in one page.</h1>
+      <p class="dek">Every section of <b>06_agent_simulation_v2.ipynb</b> - dataset, cognitive model, headline result, robustness checks, and honest limits - rendered from its actual saved outputs. No code required to read it; nothing here was re-run or altered from the notebook's own results.</p>
+      <div class="quicklinks">
+        <a href="/" target="_blank" rel="noopener">&larr; Live scorer</a>
+        <a href="/showcase">Results summary</a>
+        <a href="#6-headline-fewer-cues-more-clicks">Jump to the headline</a>
+        <a href="#caveats-honest-limits">Jump to caveats</a>
+      </div>
+    </header>
+
+    <section id="1-the-dataset-expanded-segregated">
+<div class="sec-head"><span class="sec-num">1</span><h2>The dataset - expanded &amp; segregated</h2></div>
+<div class="sec-md"><p>1,595 emails from <strong>10 sources kept strictly separate</strong> (never blended), so cue behaviour and click rate can always be sliced per origin. Every source's origin, licence, retrieval date and cleaning steps are auto-documented in <strong><code>DATA_PROVENANCE.md</code></strong>.</p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source</th>
+      <th>actual_class</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ceas08</td>
+      <td>1</td>
+      <td>130</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>enron_clean</td>
+      <td>0</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>hybrid_vtriad</td>
+      <td>1</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>multi_llm</td>
+      <td>1</td>
+      <td>150</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>nazario</td>
+      <td>1</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>nigerian_fraud</td>
+      <td>1</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>phishbowl</td>
+      <td>1</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>plain_llm</td>
+      <td>1</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>spamassassin_ham</td>
+      <td>0</td>
+      <td>447</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>trec07_ham</td>
+      <td>0</td>
+      <td>150</td>
+    </tr>
+  </tbody>
+</table></div>
+<pre class="out">benign 797  |  phishing 798</pre>
+<figure><img src="report_assets/v2_dataset_composition.png" alt="The dataset - expanded &amp; segregated chart" loading="lazy"></figure>
+</section>
+<section id="2-the-v2-cognitive-model">
+<div class="sec-head"><span class="sec-num">2</span><h2>The v2 cognitive model</h2></div>
+<div class="sec-md"><p>All quantities on one <code>[0,1]</code> scale. The chain: <strong>dynamic ED -&gt; F_dynamic accumulates -&gt; TotalFatigue -&gt; JP falls -&gt; FPL rises -&gt; cues missed -&gt; click</strong>.</p>
+<p>The key fix: v1's Åkerstedt <strong>circadian term peaked at 4:48pm</strong>, making agents <em>more</em> alert late in the day - it cancelled fatigue accumulation and produced a flat workday curve. v2 drops it, so fatigue is monotone.</p></div>
+<pre class="out">ED weights (W/TP/TS/JC/interaction): 0.3 0.25 0.15 0.1 0.2
+F_dynamic dt: 0.22 | recovery: 0.15
+JP exponents (fatigue/motiv/roleclarity): 0.5 0.3 0.2
+FPL lambda_PV: 0.7 | threshold drift K: 2.0
+
+TotalFatigue  8am 0.311 -&gt; 4pm 0.507   (delta +0.196)
+FPL           8am 0.098 -&gt; 4pm 0.211
+threshold     8am 3.92 -&gt; 4pm 4.49  (partly dynamic)
+
+OK - fatigue is monotone increasing (v1 fell).</pre>
+</section>
+<section id="3-single-agent-workday-trajectory">
+<div class="sec-head"><span class="sec-num">3</span><h2>Single-agent workday trajectory</h2></div>
+<div class="sec-md"><p>One agent depleting across the day - the mechanism, before we look at outcomes.</p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ED</th>
+      <th>F_base</th>
+      <th>F_dynamic</th>
+      <th>TotalFatigue</th>
+      <th>JP</th>
+      <th>FPL</th>
+      <th>threshold</th>
+      <th>P_click</th>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>0.270</td>
+      <td>0.359</td>
+      <td>0.000</td>
+      <td>0.359</td>
+      <td>0.448</td>
+      <td>0.118</td>
+      <td>2.785</td>
+      <td>0.299</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.376</td>
+      <td>0.359</td>
+      <td>0.036</td>
+      <td>0.383</td>
+      <td>0.440</td>
+      <td>0.128</td>
+      <td>2.858</td>
+      <td>0.320</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.491</td>
+      <td>0.359</td>
+      <td>0.101</td>
+      <td>0.424</td>
+      <td>0.425</td>
+      <td>0.145</td>
+      <td>2.987</td>
+      <td>0.360</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.616</td>
+      <td>0.359</td>
+      <td>0.196</td>
+      <td>0.485</td>
+      <td>0.402</td>
+      <td>0.173</td>
+      <td>3.178</td>
+      <td>0.426</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.751</td>
+      <td>0.359</td>
+      <td>0.324</td>
+      <td>0.567</td>
+      <td>0.369</td>
+      <td>0.213</td>
+      <td>3.434</td>
+      <td>0.527</td>
+    </tr>
+  </tbody>
+</table></div>
+<figure><img src="report_assets/v2_single_agent_trace.png" alt="Single-agent workday trajectory chart" loading="lazy"></figure>
+</section>
+<section id="4-cuestrength-why-some-cues-get-missed">
+<div class="sec-head"><span class="sec-num">4</span><h2>CueStrength - why some cues get missed</h2></div>
+<div class="sec-md"><p>Not all red flags are equal. A blatant <code>suspicious_link</code> is hard to miss; a <code>generic_greeting</code> is easy to skim past. Per-cue miss probability is <code>FPL_base x (1 - CueStrength[cue])</code>, plus trait modifiers (age/education on URL cues, exposure bonus on account-threat cues).</p>
+<p><strong>This is the mechanism behind the headline:</strong> V-Triad emails carry few cues <em>and</em> the ones they carry are subtle.</p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cue</th>
+      <th>CueStrength</th>
+      <th>cue_fpl (miss prob)</th>
+      <th>% of base FPL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>suspicious_link</td>
+      <td>0.8</td>
+      <td>0.169</td>
+      <td>116.442</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>suspicious_sender</td>
+      <td>0.8</td>
+      <td>0.169</td>
+      <td>116.442</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>personal_info</td>
+      <td>0.7</td>
+      <td>0.044</td>
+      <td>30.000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>threats</td>
+      <td>0.7</td>
+      <td>0.044</td>
+      <td>30.000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>urgency</td>
+      <td>0.6</td>
+      <td>0.058</td>
+      <td>40.000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>too_good_true</td>
+      <td>0.6</td>
+      <td>0.058</td>
+      <td>40.000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>emotional_appeal</td>
+      <td>0.5</td>
+      <td>0.073</td>
+      <td>50.000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>generic_greeting</td>
+      <td>0.4</td>
+      <td>0.087</td>
+      <td>60.000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>spelling_grammar</td>
+      <td>0.4</td>
+      <td>0.087</td>
+      <td>60.000</td>
+    </tr>
+  </tbody>
+</table></div>
+<pre class="out">agent base FPL at 12pm: 0.145
+
+
+Strong cues collapse the miss probability; weak cues leave most of it intact.</pre>
+</section>
+<section id="5-cue-extraction-the-detection-signal">
+<div class="sec-head"><span class="sec-num">5</span><h2>Cue extraction - the detection signal</h2></div>
+<div class="sec-md"><p>Before agents read anything, we extract which of the 9 phishing cues each email contains. <strong>This is what makes an email catchable.</strong> Fewer cues = harder to detect.</p></div>
+<pre class="out">source
+trec07_ham          0.03
+enron_clean         0.08
+spamassassin_ham    0.12
+hybrid_vtriad       0.93
+phishbowl           1.85
+ceas08              1.90
+nazario             2.79
+nigerian_fraud      2.90
+multi_llm           3.49
+plain_llm           4.64
+Name: avg_cues, dtype: float64
+
+V-Triad carries barely more cues than legitimate email -&gt; that is why it slips through.</pre>
+<figure><img src="report_assets/chart_05.png" alt="Cue extraction - the detection signal chart" loading="lazy"></figure>
+</section>
+<section id="6-headline-fewer-cues-more-clicks">
+<div class="sec-head"><span class="sec-num">6</span><h2>HEADLINE - fewer cues → more clicks</h2></div>
+<div class="sec-md"><p>The core finding. Each point is a phishing source: <strong>x = how detectable it is, y = how often agents fell for it.</strong></p>
+<p><strong>hybrid_vtriad sits alone top-left: the fewest detectable cues of <em>any</em> source - real or synthetic - and the highest click rate.</strong></p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>avg_cues</th>
+      <th>click_rate</th>
+    </tr>
+    <tr>
+      <th>source</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>hybrid_vtriad</th>
+      <td>0.933</td>
+      <td>0.920</td>
+    </tr>
+    <tr>
+      <th>ceas08</th>
+      <td>1.900</td>
+      <td>0.827</td>
+    </tr>
+    <tr>
+      <th>phishbowl</th>
+      <td>1.852</td>
+      <td>0.817</td>
+    </tr>
+    <tr>
+      <th>nazario</th>
+      <td>2.791</td>
+      <td>0.621</td>
+    </tr>
+    <tr>
+      <th>nigerian_fraud</th>
+      <td>2.900</td>
+      <td>0.620</td>
+    </tr>
+    <tr>
+      <th>multi_llm</th>
+      <td>3.487</td>
+      <td>0.474</td>
+    </tr>
+    <tr>
+      <th>plain_llm</th>
+      <td>4.636</td>
+      <td>0.278</td>
+    </tr>
+  </tbody>
+</table></div>
+<pre class="out">Spearman corr(cues, click_rate) = -0.96   (-1.0 = perfectly monotonic)</pre>
+<figure><img src="report_assets/v2_demo_cues_vs_click.png" alt="HEADLINE - fewer cues → more clicks chart" loading="lazy"></figure>
+</section>
+<section id="7-click-rate-by-source">
+<div class="sec-head"><span class="sec-num">7</span><h2>Click rate by source</h2></div>
+<div class="sec-md"><p>Guided AI phishing beats <strong>real, human-authored</strong> phishing (CEAS, Phishbowl, Nazario, 419) - not just naive AI.</p></div>
+<pre class="out">benign pass rate: 99.9%   -&gt;  false-positive rate: 0.1%</pre>
+<figure><img src="report_assets/v2_demo_click_by_source.png" alt="Click rate by source chart" loading="lazy"></figure>
+</section>
+<section id="8-the-workday-fatigue-effect">
+<div class="sec-head"><span class="sec-num">8</span><h2>The workday fatigue effect</h2></div>
+<div class="sec-md"><p>v1's curve was <strong>flat/slightly decreasing</strong> - the circadian term cancelled fatigue. v2's rises as agents deplete.</p>
+<p><em>(Note: v1 ran on the old 250-email set with the old model, so this contrasts the whole pipeline, not the model alone. The within-agent measure in §9 is the clean, self-contained evidence.)</em></p></div>
+<figure><img src="report_assets/v2_demo_workday.png" alt="The workday fatigue effect chart" loading="lazy"></figure>
+</section>
+<section id="9-controlled-fatigue-experiment">
+<div class="sec-head"><span class="sec-num">9</span><h2>Controlled fatigue experiment</h2></div>
+<div class="sec-md"><p>Two ways to isolate fatigue from the (large) individual differences between agents.</p></div>
+<pre class="out">Within-agent workday effect (4pm - 8am): mean +0.1357 | positive for 29/30 agents
+
+Click rate by fatigue tertile:
+fatigue_level
+Low       0.6234
+Medium    0.6396
+High      0.6767</pre>
+<figure><img src="report_assets/v2_fatigue_effect.png" alt="Controlled fatigue experiment chart" loading="lazy"></figure>
+</section>
+<section id="10-perceived-vulnerability">
+<div class="sec-head"><span class="sec-num">10</span><h2>Perceived Vulnerability</h2></div>
+<div class="sec-md"><p>Absent from v1 entirely, yet Shin-Carley report it as the <strong>strongest</strong> predictor of organizational damage. It enters FPL protectively: higher PV -&gt; more caution.</p></div>
+<pre class="out">Click rate by PV tertile (higher PV -&gt; fewer clicks):
+pvbin
+low PV     0.7357
+mid PV     0.5449
+high PV    0.6575</pre>
+<figure><img src="report_assets/chart_10.png" alt="Perceived Vulnerability chart" loading="lazy"></figure>
+</section>
+<section id="11-agent-traits-vs-outcome">
+<div class="sec-head"><span class="sec-num">11</span><h2>Agent traits vs outcome</h2></div>
+<div class="sec-md"><p>Which agent properties actually track susceptibility. (05 had this; kept and extended with the v2 traits.)</p></div>
+<pre class="out">Read the top row: base_threshold dominates; PV is protective; fatigue/FPL are confounded by threshold (see next section).</pre>
+<figure><img src="report_assets/v2_trait_correlation.png" alt="Agent traits vs outcome chart" loading="lazy"></figure>
+</section>
+<section id="12-what-still-dominates-an-honest-decomposition">
+<div class="sec-head"><span class="sec-num">12</span><h2>What still dominates - an honest decomposition</h2></div>
+<div class="sec-md"><p>Between <em>individuals</em>, the base suspicion threshold still explains most variance (it's a big individual difference). Fatigue is a <strong>within-person, time-driven</strong> effect. The raw cross-agent fatigue correlation is confounded by the threshold, so we report the <strong>partial</strong> correlation.</p></div>
+<pre class="out">Raw cross-agent correlations with click rate:
+base    0.973
+fat    -0.112
+pv     -0.163
+
+Partial corr(click, fatigue | threshold, PV) = +0.008  (correct sign once threshold is controlled)
+Takeaway: individual caution sets the between-person baseline; fatigue moves each person within their own day.</pre>
+</section>
+<section id="13-which-cues-get-perceived-by-source">
+<div class="sec-head"><span class="sec-num">13</span><h2>Which cues get perceived, by source</h2></div>
+<figure><img src="report_assets/v2_cue_heatmap.png" alt="Which cues get perceived, by source chart" loading="lazy"></figure>
+</section>
+<section id="14-agent-coherence-the-copula">
+<div class="sec-head"><span class="sec-num">14</span><h2>Agent coherence - the copula</h2></div>
+<div class="sec-md"><p>v1 drew every trait independently, so an agent could be max-burnout <em>and</em> max-motivation <em>and</em> max-satisfaction. v2 imposes a realistic correlation structure while preserving each trait's exact range.</p></div>
+<pre class="out">correlation matrix (17, 17) | min eigenvalue 0.1355 (PSD -&gt; valid)</pre>
+<figure><img src="report_assets/v2_agent_coherence.png" alt="Agent coherence - the copula chart" loading="lazy"></figure>
+</section>
+<section id="15-robustness-sensitivity">
+<div class="sec-head"><span class="sec-num">15</span><h2>Robustness &amp; sensitivity</h2></div>
+<div class="sec-md"><p><strong>The answer to "did you just tune it until it looked good?"</strong> We vary the random seed and the key coefficients and check the headline claim survives: V-Triad stays the top click rate, the workday effect stays positive, FPR stays low.</p>
+<p><em>Run on a stratified subsample (40/source) so it re-executes in ~2 min - cues are already cached, so no API calls.</em></p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>test</th>
+      <th>vtriad_click</th>
+      <th>vtriad_is_top</th>
+      <th>within_delta</th>
+      <th>FPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>seed=42</td>
+      <td>0.939</td>
+      <td>True</td>
+      <td>0.125</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>seed=1</td>
+      <td>0.956</td>
+      <td>True</td>
+      <td>0.080</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>seed=7</td>
+      <td>0.943</td>
+      <td>True</td>
+      <td>0.101</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>drift K=1.0</td>
+      <td>0.931</td>
+      <td>True</td>
+      <td>0.087</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>drift K=3.0</td>
+      <td>0.948</td>
+      <td>True</td>
+      <td>0.188</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>lambda_PV=0.5</td>
+      <td>0.939</td>
+      <td>True</td>
+      <td>0.126</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>lambda_PV=0.9</td>
+      <td>0.938</td>
+      <td>True</td>
+      <td>0.124</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table></div>
+<pre class="out">C:\Users\krish\AppData\Local\Temp\ipykernel_20356\3514174871.py:1: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  sub = emails.groupby('source', group_keys=False).apply(lambda g: g.head(40)).reset_index(drop=True)
+
+V-Triad is the TOP click rate in every case:  True
+workday fatigue effect positive in every case: True
+benign FPR &lt; 3% in every case:               True</pre>
+</section>
+<section id="16-organizational-damage-index-shin-carley">
+<div class="sec-head"><span class="sec-num">16</span><h2>Organizational Damage Index (Shin-Carley)</h2></div>
+<div class="sec-md"><p>An aggregate output metric using the reported regression <code>Damage = -2.292<em>z(JP) + 0.608</em>z(Fatigue) - 5.584*z(PV)</code>.</p>
+<p>⚠️ <strong>Read this honestly:</strong> it is a reported <em>index</em>, <strong>not external validation</strong>. Damage is built from the same JP/Fatigue/PV the model computes, so regressing it back on them is circular. And the <code>-5.584</code> coefficient comes from the Phase-1 report - <strong>verify it against the primary Shin-Carley paper before citing</strong>.</p></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fatigue</th>
+      <th>jp</th>
+      <th>pv</th>
+      <th>clicks</th>
+      <th>damage_index</th>
+    </tr>
+    <tr>
+      <th>agent_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>agentv2_022</th>
+      <td>0.506</td>
+      <td>0.429</td>
+      <td>0.100</td>
+      <td>1516</td>
+      <td>11.749</td>
+    </tr>
+    <tr>
+      <th>agentv2_008</th>
+      <td>0.243</td>
+      <td>0.427</td>
+      <td>0.164</td>
+      <td>3480</td>
+      <td>8.890</td>
+    </tr>
+    <tr>
+      <th>agentv2_016</th>
+      <td>0.344</td>
+      <td>0.438</td>
+      <td>0.213</td>
+      <td>2555</td>
+      <td>8.292</td>
+    </tr>
+  </tbody>
+</table></div>
+<div class="table-wrap"><table border="1" class="dnb-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fatigue</th>
+      <th>jp</th>
+      <th>pv</th>
+      <th>clicks</th>
+      <th>damage_index</th>
+    </tr>
+    <tr>
+      <th>agent_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>agentv2_021</th>
+      <td>0.259</td>
+      <td>0.773</td>
+      <td>0.950</td>
+      <td>3106</td>
+      <td>-13.329</td>
+    </tr>
+    <tr>
+      <th>agentv2_018</th>
+      <td>0.242</td>
+      <td>0.611</td>
+      <td>0.971</td>
+      <td>1053</td>
+      <td>-11.004</td>
+    </tr>
+    <tr>
+      <th>agentv2_011</th>
+      <td>0.170</td>
+      <td>0.694</td>
+      <td>0.819</td>
+      <td>3855</td>
+      <td>-9.756</td>
+    </tr>
+  </tbody>
+</table></div>
+<pre class="out">Most vulnerable agents:
+
+Most protected agents:
+
+Damage Index vs ACTUAL phishing-click count: r = +0.092
+(A positive r means the literature-weighted index ranks agents consistently with what the sim actually did.)</pre>
+</section>
+<section id="17-summary">
+<div class="sec-head"><span class="sec-num">17</span><h2>Summary</h2></div>
+<pre class="out">==============================================================
+  v2 SIMULATION - SUMMARY
+==============================================================
+  corpus     1,595 emails across 10 segregated sources
+  scale      239,250 decisions (30 agents x 5 hours x 1,595 emails)
+
+  PER-SOURCE:  cues -&gt; click rate
+    hybrid_vtriad      cues=0.93   click=92.0%   &lt;-- fewest cues, most clicks
+    ceas08             cues=1.90   click=82.7%
+    phishbowl          cues=1.85   click=81.7%
+    nazario            cues=2.79   click=62.1%
+    nigerian_fraud     cues=2.90   click=62.0%
+    multi_llm          cues=3.49   click=47.4%
+    plain_llm          cues=4.64   click=27.8%
+
+  benign FPR        0.1%
+  workday effect    +13.6%  (within-agent, 4pm-8am)
+  cues&lt;-&gt;click      spearman -0.96
+  robustness        V-Triad top in 7/7 configs</pre>
+</section>
+<section id="caveats-honest-limits">
+<div class="sec-head"><span class="sec-num">!</span><h2>Caveats &amp; honest limits</h2></div>
+<div class="sec-md"><ul><li><strong>Coefficients are modeling choices.</strong> ED weights, JP exponents, <code>lambda_PV</code>, threshold drift and P_click centring were tuned for <code>[0,1]</code> bounds and monotonicity - <strong>not</strong> taken from any paper. Literature motivates the <strong>structure and signs</strong> only.</li><li><strong>The Shin-Carley <code>-5.584</code> PV coefficient</strong> is from the Phase-1 report and must be verified against the primary paper. The damage index (§16) is an index, not validation.</li><li><strong>Synthetic phishing is self-generated</strong> (Groq llama-3.3-70b, fictional entities only). No public V-Triad corpus exists, so this class cannot be sourced externally.</li><li><strong>The threshold still dominates between agents</strong> (r~0.98). Making it partly dynamic surfaced the within-agent fatigue effect; correlating it with traits is a further option.</li><li><strong>The v1-vs-v2 workday chart (§8) changes model <em>and</em> dataset</strong> - treat §9's within-agent measure as the clean evidence.</li><li><strong>Extraction model matters</strong>: cue counts differ measurably between models, so a corpus must be extracted by ONE model (the cache is scoped per model for this reason). These results use <strong>local gemma4:12b</strong>, and the V-Triad ranking <strong>replicates</strong> on Groq llama-4-scout - so the headline is not an artifact of one extractor. llama-3.1-8b is rejected: it over-flags benign email (~1.7 cues vs ~0.0). Recorded in <code>DATA_PROVENANCE.md</code>.</li><li><strong>Licences</strong>: sources marked ⚠️ in <code>DATA_PROVENANCE.md</code> have inherited/unclear licences - verify before publishing, cite the <em>original</em> corpora (not Kaggle mirrors), and ship loader code + DOIs rather than re-hosted data.</li><li><code>P_click</code> is a reporting index only - the click/report <strong>decisions</strong> come from the per-cue Bernoulli loop.</li></ul></div>
+</section>
+
+    <div class="end-note">
+      Generated from <code>notebooks/06_agent_simulation_v2.ipynb</code> - every table, chart and printed statistic on this page is copied from that notebook's saved output, not recomputed. See <a href="index.html">the results summary</a> for the condensed version, or open the notebook directly for the underlying code.
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  // active-section highlighting
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc-list a[href^="#"]'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var current = null;
+    targets.forEach(function(el){ if (el.offsetTop <= y) current = el; });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (current) {
+      var link = links.find(function(a){ return a.getAttribute('href') === '#' + current.id; });
+      if (link) link.classList.add('active');
+    }
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // mobile collapse
+  var toc = document.getElementById('toc'), btn = document.getElementById('tocToggle'), chev = document.getElementById('tocChevron');
+  if (window.matchMedia('(max-width:960px)').matches) toc.classList.add('collapsed');
+  btn.addEventListener('click', function(){
+    toc.classList.toggle('collapsed');
+    chev.textContent = toc.classList.contains('collapsed') ? '▼' : '▲';
+  });
+})();
+</script>
+</body>
+</html>

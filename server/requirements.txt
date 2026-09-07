@@ -1,0 +1,5 @@
+# Extra deps for the live scorer web layer (on top of the project's requirements.txt).
+# The scoring core (server/scorer.py) needs nothing beyond the project deps; only the
+# HTTP server below is added here.
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27

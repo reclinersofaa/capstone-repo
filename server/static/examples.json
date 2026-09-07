@@ -1,0 +1,856 @@
+{
+ "vtriad": {
+  "label": "V-Triad style",
+  "examples": [
+   {
+    "source": "hybrid_vtriad",
+    "sender": "finance@lyraent.com",
+    "subject": "Reminder: Expense Report Submission for Quarterly Review",
+    "body": "As we approach the end of the quarter, please remember to submit your expense reports for review. This will ensure that all expenses are properly accounted for and reimbursed in a timely manner. If you have any questions or concerns, please do not hesitate to reach out to the finance department.",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "it@novacorp.tech",
+    "subject": "Security Alert: Unusual Sign-in Activity",
+    "body": "Dear Team, we've detected unusual sign-in activity from an unknown location. As a precaution, please verify your account credentials and update your password. This will ensure the security of our network and protect sensitive data. If you have any questions or concerns, please don't hesitate to reach out to the IT department.",
+    "cues": [
+     "generic_greeting",
+     "personal_info"
+    ],
+    "n_cues": 2,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 80.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 70.0,
+      "clicked": 21,
+      "reported": 9,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 20.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "hr@corvusinc.com",
+    "subject": "Benefits Enrollment: Open Enrollment Period",
+    "body": "Hello Employees, this is a reminder that the open enrollment period for benefits is now open. Please review and update your benefits selections during this time to ensure you have the coverage you need. If you have any questions, please contact the HR department. We're here to help.",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "security.alerts@proteansec.com",
+    "subject": "Security Notification: Account Verification Required",
+    "body": "Dear Users, As a security measure, we are conducting a periodic account verification process. To ensure the integrity of our systems, please verify your account details by following the link provided below. Your prompt response is appreciated, and please contact our security team if you have any questions.",
+    "cues": [
+     "generic_greeting"
+    ],
+    "n_cues": 1,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "hr-benefits@omniumhealth.com",
+    "subject": "Tax Form: Benefits Enrollment Confirmation",
+    "body": "Dear Employees, this is a confirmation that your benefits enrollment and tax form have been received. Please review the details and ensure that everything is accurate. If you have any questions or concerns, please don't hesitate to reach out to our HR department.",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   }
+  ]
+ },
+ "naive": {
+  "label": "naive phish",
+  "examples": [
+   {
+    "source": "plain_llm",
+    "sender": "shipping@parcelsender.co",
+    "subject": "Package Shipping Notice: Update Your Address",
+    "body": "Dear Customer, we need to update your shipping address. Click here to confirm: http://bit.ly/3cN1xGj. If not, your package will be delayed. Regards, Parcelsender Team.",
+    "cues": [
+     "generic_greeting",
+     "suspicious_link"
+    ],
+    "n_cues": 2,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 84.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 93.3,
+      "clicked": 28,
+      "reported": 2,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 10.0
+   },
+   {
+    "source": "plain_llm",
+    "sender": "payroll@ezpayroll.tld",
+    "subject": "Reimbursement Notification: Action Required",
+    "body": "Dear Customer, you have a pending reimbursement. To recieve your payment, please visit: http://bit.ly/ezpayroll-reimburse. Your account will be closed if not verified within 2 days. Please act now.",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "spelling_grammar",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 14.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 10.0,
+      "clicked": 3,
+      "reported": 27,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   },
+   {
+    "source": "plain_llm",
+    "sender": "finance@invoicemanagement.xyz",
+    "subject": "Invoice Payment: Overdue",
+    "body": "Dear Customer, Your invoice is overdue and payment is required now to avoid late fees. Please pay via this link: https://www.invoicemanagement.xyz/payment/abc123. If we dont recieve payment, we will take further action.",
+    "cues": [
+     "generic_greeting",
+     "suspicious_sender",
+     "threats",
+     "urgency",
+     "spelling_grammar"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 16.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   },
+   {
+    "source": "plain_llm",
+    "sender": "filehub@filehub.tld",
+    "subject": "Shared Document from FileHub Storage",
+    "body": "Dear Customer, a shared document has been uploaded to your FileHub account. Please click this link to view: https://filehub.tld/share/abc123. Note: this link will expire soon, so act now. Best, FileHub Team.",
+    "cues": [
+     "urgency",
+     "generic_greeting"
+    ],
+    "n_cues": 2,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 81.3,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 93.3,
+      "clicked": 28,
+      "reported": 2,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 16.7
+   },
+   {
+    "source": "plain_llm",
+    "sender": "admin@microsoft365-admin-portal.net",
+    "subject": "Office 365 Admin Notice: User License Allocation Failed",
+    "body": "Dear Administrator,\r\n\r\nOur licensing system was unable to automatically renew user seat allocations for your Microsoft 365 tenant subscription during the last billing cycle. As a result, 7 user accounts in your organization have been placed in restricted mode and cannot access Exchange, Teams, or SharePoint.\r\n\r\nTo restore access for these users, the tenant administrator must log in and confirm the license renewal. If no action is taken within 48 hours, the affected accounts will be fully deprovisioned and their mailbox data will be queued for deletion.\r\n\r\nRestore licenses now: https://microsoft365-tenant-admin.online/licenses\r\n\r\nYou will be required to authenticate as a global administrator to proceed.\r\n\r\nMicrosoft 365 Licensing Operations",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 16.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   }
+  ]
+ },
+ "benign": {
+  "label": "benign",
+  "examples": [
+   {
+    "source": "spamassassin_ham",
+    "sender": "\"John P. Looney\" <valen@tuatha.org>",
+    "subject": "[ILUG] cups question",
+    "body": "I seem to be having a little trouble with it. My printers.conf is: <DefaultPrinter lp> Info Hp4050 Location locals DeviceURI ipp://192.168.2.90:9100/ State Idle Accepting Yes JobSheets none none QuotaPeriod 0 PageLimit 0 KLimit 0 </Printer> and cupds uses that to make a printcap of: lp: Sounds dodgy to me. If someone has an example printers.conf/printcap for a JetDirect printer, I'd appreciate it if they sent it on. John -- Irish Linux Users' Group: ilug@linux.ie http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information. List maintainer: listmaster@linux.ie",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "trec07_ham",
+    "sender": "\"Suraj N. Kurapati\" <skurapat@ucsc.edu>",
+    "subject": "Re: BSD & MIT licenses compatible?",
+    "body": "Andrew Donnellan wrote: > On 4/14/07, Suraj N. Kurapati wrote: >> So when I appended bsd.c to mit.c, did the entire mit.c become >> licensed under both licenses? That is, did the originally-MIT >> portions of mit.c inherit the extra condition from the BSD license? > > The combination of the MIT and BSD licensed code (ie. the whole file) > is under the most restrictive one, the BSD license. Is it possible to extract the originally-MIT portions from the file and act upon them only according to the MIT license? -- To UNSUBSCRIBE, email to debian-legal-REQUEST@lists.debian.org with a subject of \"unsubscribe\". Trouble? Contact listmaster@lists.debian.org",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "enron_clean",
+    "sender": "ginger.dernehl@enron.com",
+    "subject": "RCR Meeting",
+    "body": "The next RCR meeting is scheduled for Monday, March 19 at 12:00 PM CST. The dial in number is 1-800-283-1805. gngr 713-853-7751",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "spamassassin_ham",
+    "sender": "Roi Dayan <dejavo@punkass.com>",
+    "subject": "xine src packge still gives errors",
+    "body": "Hi I try to rebuild xine from src package and I get these errors: . . . . . Finding Provides: /usr/lib/rpm/find-provides Finding Requires: /usr/lib/rpm/find-requires PreReq: rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1 Requires(rpmlib): rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1 Requires: xine-libs = 0.9.13 /bin/sh Obsoletes: xine-devel RPM build errors: user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root File not found: /var/tmp/xine-root/usr/bin/aaxine thx, Roi _______________________________________________ RPM-List mailing list <RPM-List@freshrpms.net> http://lists.freshrpms.net/mailman/listinfo/rpm-list",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "trec07_ham",
+    "sender": "Celejar <celejar@gmail.com>",
+    "subject": "Re: hwclock",
+    "body": "On Tue, 24 Apr 2007 01:29:57 +0530 Ritesh Raj Sarraf wrote: > carex@skynet.be wrote: > > > HWCLOCKPARS=\"--directisa\" as you specified above and the problem > > vanished ! > > BTW, this issue came up sometime back (I guess with 2.6.18). > > Will the fix be to include the \"--directisa\" option with hwclock ? > If yes, any ideas if this is going to be committed into the package ? > > Thanks, > Ritesh See debian bug #410328. Celejar -- mailmin.sourceforge.net - remote access via secure (OpenPGP) email ssuds.sourceforge.net - A Simple Sudoku Solver and Generator",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   }
+  ]
+ }
+}
