@@ -14,24 +14,22 @@ Cues extracted locally by `gemma4:12b` (Ollama) — one model across the whole c
 
 | Source | avg detectable cues | click rate | |
 |---|---:|---:|---|
-| **hybrid_vtriad** (AI, V-Triad-guided) | **0.93** | **92.0%** | ← fewest cues, **most clicks** |
-| phishbowl (real phishing) | 1.85 | 81.7% | |
 | ceas08 (real phishing) | 1.90 | 82.7% | |
+| phishbowl (real phishing) | 1.85 | 81.7% | |
+| **hybrid_vtriad** (AI, V-Triad-guided) | **2.10** | **76.2%** | ← AI, persuasion-guided: **parity with top real phishing** |
 | nazario (real phishing) | 2.79 | 62.1% | |
 | nigerian_fraud (real 419) | 2.90 | 62.0% | |
-| multi_llm (modern AI, 3 models) | 3.49 | 47.4% | |
+| multi_llm (modern AI, 3 models) | 3.49 | 47.5% | |
 | plain_llm (naive AI) | 4.64 | 27.8% | most cues, fewest clicks |
 
 - **Spearman(cues, click rate) = −0.96** — near-monotonic: every step up in detectability is a step down in clicks.
-- **Replicated across two independent extractors.** `llama-4-scout-17b` (hosted, 17B) and
-  `gemma4:12b` (local, 12B) rank V-Triad **lowest in cues and highest in clicks** in both
-  runs. The finding is not an artifact of one extraction model.
+- **hybrid_vtriad ranks 3rd by both measures**, in a tight cluster with ceas08 and phishbowl — the two best-performing real, human-authored phishing sources. A September 2026 review found a labelling-validity defect in an earlier version of this corpus (documented in `notebooks/07_vtriad_validity_fix.ipynb`); the numbers above are post-fix. Cross-extractor replication (`llama-4-scout-17b`, hosted) was run pre-fix and is pending re-verification — treat it as stale until re-run.
 - **Benign false-positive rate: 0.12%** (benign cue sparsity 0.03–0.12 across all 3 benign sources)
-- **Workday fatigue effect: +13.6%** (same agent, 4pm vs 8am)
+- **Workday fatigue effect: +14.5%** (same agent, 4pm vs 8am)
 
-![Fewer detectable cues means more clicks. V-Triad sits alone in the top-left: fewest cues, highest click rate.](results/v2_demo_cues_vs_click.png)
+![Fewer detectable cues means more clicks. V-Triad (AI, persuasion-guided) sits in a tight cluster with the best real phishing, not alone.](results/v2_demo_cues_vs_click.png)
 
-**Interpretation:** persuasion-guided AI phishing carries barely more detectable red flags than *legitimate* email (0.93 vs ~0.03–0.12 for benign) — and it beats real, human-authored phishing at getting clicked. Sophistication is inversely related to detectability.
+**Interpretation:** persuasion-guided AI phishing carries relatively few detectable red flags for its length — enough to reach parity with the best human-authored spear-phishing (ceas08, Cornell Phishbowl) — without requiring an attacker's own expertise. Sophistication is inversely related to detectability; V-Triad's win is closing that gap with skilled human attackers, not surpassing all real phishing outright.
 
 ![Dataset composition: 1,595 emails across 10 sources, kept segregated.](results/v2_dataset_composition.png)
 
@@ -91,7 +89,7 @@ Both live in the repo side by side — **v1 is untouched and still runs.**
 | FPL | fatigue × (1−JP) | + **Perceived Vulnerability** |
 | Threshold | fixed 2–6 | **partly dynamic** (base + F_dynamic drift) |
 | Agents | independent traits | **copula-correlated** |
-| Workday curve | **flat / slightly falling** | **rises (+13.6%)** |
+| Workday curve | **flat / slightly falling** | **rises (+14.5%)** |
 | Decisions | 37,500 | **239,250** |
 
 **Why v2 exists:** in v1, click rate correlated **+0.98 with the fixed suspicion threshold** but only **−0.06 with fatigue** (and −0.05 with FPL — the wrong sign). The Åkerstedt circadian term peaks at 4:48pm, making agents *more* alert late in the day, cancelling fatigue accumulation and flattening the workday curve. v2 rebuilds the model on a single `[0,1]` scale so fatigue is monotone and actually moves outcomes.
@@ -176,7 +174,7 @@ SYSTEM.md             technical codebase reference
 ## Honest limits
 
 - **Coefficients are modeling choices.** ED weights, JP exponents, `λ_PV`, threshold drift and the P_click centring were tuned for `[0,1]` bounds and monotonicity — **not** taken from any paper. The literature motivates *structure and signs* only.
-- **The extraction model matters.** Cue counts differ measurably by model (llama-3.1-8b over-flags benign at ~1.7 cues/email vs ~0.0 for the models we use), so a corpus must be extracted by **one** model — the cue cache is scoped per model for exactly this reason. Results here use **local `gemma4:12b`**, recorded in the datasheet. The V-Triad ranking **replicates** on `llama-4-scout-17b` (Groq), so the headline is not an artifact of one extractor, but cue *magnitudes* are not comparable across extractors.
+- **The extraction model matters.** Cue counts differ measurably by model (llama-3.1-8b over-flags benign at ~1.7 cues/email vs ~0.0 for the models we use), so a corpus must be extracted by **one** model — the cue cache is scoped per model for exactly this reason. Results here use **local `gemma4:12b`**, recorded in the datasheet. An earlier cross-check on `llama-4-scout-17b` (Groq) reproduced the same ranking, but that check ran on the **pre-fix** corpus and has not been re-verified since the hybrid_vtriad validity fix — treat cross-extractor replication as pending, not confirmed, and cue *magnitudes* as never comparable across extractors regardless.
 - **The Shin-Carley `−5.584` PV coefficient** comes from the Phase-1 report and must be verified against the primary paper. The organizational damage index is an *index*, not validation — it's built from its own inputs, and tracks actual clicks at only r ≈ +0.08.
 - **The suspicion threshold still dominates between agents** (r ≈ 0.98). It's a large individual difference; fatigue is a *within-person* effect. Both are reported honestly in `06 §12`.
 - **Synthetic phishing is self-generated** (fictional entities only) — no public V-Triad corpus exists.

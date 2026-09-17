@@ -8,9 +8,11 @@ how to prove that in under a minute — before touching any other file.
 An agent-based simulation of phishing susceptibility (PES University capstone
 PW26_SVM_01). Synthetic employees with cognitive traits (fatigue, motivation,
 vigilance) "read" a 1,595-email corpus and click or report each one. Headline finding:
-persuasion-guided AI phishing carries the fewest detectable red flags yet gets clicked
-the most. Full narrative: [`README.md`](README.md). Deep technical reference:
-[`SYSTEM.md`](SYSTEM.md).
+persuasion-guided AI phishing reaches parity with the best human-authored spear-phishing
+in evading detection, without requiring an attacker's own expertise — not superiority
+over all real phishing (an earlier version of this claim overstated that; see
+`notebooks/07_vtriad_validity_fix.ipynb`). Full narrative: [`README.md`](README.md). Deep
+technical reference: [`SYSTEM.md`](SYSTEM.md).
 
 ## Step 1 — always run this first
 

@@ -151,12 +151,31 @@ def load_plain_llm(path: Path = None) -> pd.DataFrame:
 
 
 def load_hybrid_vtriad(path: Path = None) -> pd.DataFrame:
-    """Base V-Triad phishing plus any Groq-generated additions (segregated file)."""
+    """V-Triad phishing, validity-filtered.
+
+    A panel review found 87/120 (72.5%) of the published rows read as ordinary
+    corporate announcements with no requested action and no destination -- a
+    corporate tone alone is not phishing. The original files are kept as-is
+    (nothing deleted); every row is now passed through phishing_validator before
+    being included, and hybrid_vtriad_v2_groq.csv (generated under the corrected
+    _VTRIAD_PROMPT, which requires a concrete attack path) supplies replacements
+    for whatever the old files fail. This is a label-quality fix, not a re-architecture
+    -- the 9-cue extraction and decision loop are untouched.
+    """
+    from .phishing_validator import has_attack_path
     dfs = [_load_simple(path or (RAW / "hybrid_vtriad_phishing.csv"), "hybrid_vtriad", 1)]
     g = RAW / "hybrid_vtriad_groq.csv"
     if g.exists():
         dfs.append(_load_simple(g, "hybrid_vtriad", 1))
-    return pd.concat(dfs, ignore_index=True)
+    old = pd.concat(dfs, ignore_index=True)
+    old_valid = old[old["body"].apply(has_attack_path)].reset_index(drop=True)
+
+    v2 = RAW / "hybrid_vtriad_v2_groq.csv"
+    if v2.exists():
+        new = _load_simple(v2, "hybrid_vtriad", 1)
+        new_valid = new[new["body"].apply(has_attack_path)].reset_index(drop=True)
+        return pd.concat([old_valid, new_valid], ignore_index=True)
+    return old_valid
 
 
 def assemble(ham=None, phishbowl=None, plain_llm=None, hybrid_vtriad=None,

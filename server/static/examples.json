@@ -4,9 +4,9 @@
   "examples": [
    {
     "source": "hybrid_vtriad",
-    "sender": "finance@lyraent.com",
-    "subject": "Reminder: Expense Report Submission for Quarterly Review",
-    "body": "As we approach the end of the quarter, please remember to submit your expense reports for review. This will ensure that all expenses are properly accounted for and reimbursed in a timely manner. If you have any questions or concerns, please do not hesitate to reach out to the finance department.",
+    "sender": "executive.assistant@acme-corp.com",
+    "subject": "Calendar Update: Q4 Strategy Meeting Location Change",
+    "body": "Good morning, please note that the location for next week's Q4 Strategy Session has moved to the Conference Room B on the 4th floor due to AV maintenance. To ensure the correct attendees are notified and the room is reserved in your personal calendar, please approve the updated invitation via the secure link below. This step also syncs the meeting agenda and pre-read documents to your shared drive folder. Please confirm your attendance by clicking 'Approve' to finalize the logistics with the facilities team. If you are unable to attend, please reply directly to this email to inform the organizer. Your prompt response helps us finalize the headcount for catering.",
     "cues": [],
     "n_cues": 0,
     "engine": "gemma4:12b",
@@ -19,7 +19,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -27,7 +27,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -35,7 +35,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -43,7 +43,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -51,129 +51,18 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0
    },
    {
     "source": "hybrid_vtriad",
-    "sender": "it@novacorp.tech",
-    "subject": "Security Alert: Unusual Sign-in Activity",
-    "body": "Dear Team, we've detected unusual sign-in activity from an unknown location. As a precaution, please verify your account credentials and update your password. This will ensure the security of our network and protect sensitive data. If you have any questions or concerns, please don't hesitate to reach out to the IT department.",
+    "sender": "hr-compliance@fake-company.com",
+    "subject": "Shared Document: Q3 Performance Review Framework",
+    "body": "Hi there,\n\nThe HR Compliance team has prepared the updated Q3 performance review framework. Your manager has shared this document with you for preliminary review. Please note that access to this file requires authentication to ensure confidentiality.\n\nClick the link below to view the document and add your comments:\nhttps://docs.example.test/share/4592\n\nIf you do not have access, request permissions via the same portal. Feedback is due by end of week.\n\nRegards,\nHR Compliance System",
     "cues": [
-     "generic_greeting",
-     "personal_info"
-    ],
-    "n_cues": 2,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 80.7,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 70.0,
-      "clicked": 21,
-      "reported": 9,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 76.7,
-      "clicked": 23,
-      "reported": 7,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 76.7,
-      "clicked": 23,
-      "reported": 7,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 90.0,
-      "clicked": 27,
-      "reported": 3,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 90.0,
-      "clicked": 27,
-      "reported": 3,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 20.0
-   },
-   {
-    "source": "hybrid_vtriad",
-    "sender": "hr@corvusinc.com",
-    "subject": "Benefits Enrollment: Open Enrollment Period",
-    "body": "Hello Employees, this is a reminder that the open enrollment period for benefits is now open. Please review and update your benefits selections during this time to ensure you have the coverage you need. If you have any questions, please contact the HR department. We're here to help.",
-    "cues": [],
-    "n_cues": 0,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 100.0,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 0.0
-   },
-   {
-    "source": "hybrid_vtriad",
-    "sender": "security.alerts@proteansec.com",
-    "subject": "Security Notification: Account Verification Required",
-    "body": "Dear Users, As a security measure, we are conducting a periodic account verification process. To ensure the integrity of our systems, please verify your account details by following the link provided below. Your prompt response is appreciated, and please contact our security team if you have any questions.",
-    "cues": [
-     "generic_greeting"
+     "suspicious_link"
     ],
     "n_cues": 1,
     "engine": "gemma4:12b",
@@ -186,7 +75,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -194,7 +83,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -202,7 +91,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -210,7 +99,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -218,16 +107,194 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0
    },
    {
     "source": "hybrid_vtriad",
-    "sender": "hr-benefits@omniumhealth.com",
-    "subject": "Tax Form: Benefits Enrollment Confirmation",
-    "body": "Dear Employees, this is a confirmation that your benefits enrollment and tax form have been received. Please review the details and ensure that everything is accurate. If you have any questions or concerns, please don't hesitate to reach out to our HR department.",
+    "sender": "payroll-admin@google-hr-systems-integration.com",
+    "subject": "Routine Migration to Workday Time Tracking Portal V2",
+    "body": "Hello everyone,\r\n\r\nThis is a standard notification from the HR Systems Integration team regarding the ongoing migration of our timecard and project tracking software. We are transitioning our active timesheet logs to the updated Workday Time Tracking Portal V2 over the coming weeks.\r\n\r\nTo ensure that your accrued vacation hours and current project billing codes transfer smoothly, we require all staff to validate their timesheet mappings in the new environment. The customer support and marketing divisions successfully mapped their profiles last Friday, so we are continuing the rollout to the rest of the staff today.\r\n\r\nPlease take a moment to review your projected timecard structure for the upcoming pay period and confirm that your standard project codes are accurately reflected. Doing this early helps us prevent any administrative friction when the legacy system is officially retired next month.\r\n\r\nYou can review your profile mapping and approve the transition via the HR self-service dashboard here: https://timesheet-migration-portal.online/workday-v2\r\n\r\nWe appreciate your assistance with this standard system upgrade.",
+    "cues": [
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 2,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 83.3,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 86.7,
+      "clicked": 26,
+      "reported": 4,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 10.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "hr.performance@dropbox-corp-peopleops.com",
+    "subject": "Performance Review Self-Assessment \u2013 Mid-Year Cycle",
+    "body": "Hello,\r\n\r\nThe mid-year performance review cycle (FY2026-H1) is now in the self-assessment phase. Employees are requested to complete their individual reflections before manager evaluations begin.\r\n\r\nMost teams have already submitted their self-assessments earlier this week, allowing managers to proceed with calibration discussions. To ensure your review is included in the current cycle, please complete your section in the performance system.\r\n\r\nThe process typically takes 10\u201315 minutes and includes a brief summary of achievements, goals, and development areas.\r\n\r\nAccess your self-assessment form here:\r\nhttps://performance-review-form.site/self\r\n\r\nIf you have already completed your submission, you may disregard this message.\r\n\r\nWe ask that you complete this step within 48 hours to align with the processing schedule.\r\nHR Performance Team",
+    "cues": [
+     "suspicious_sender",
+     "urgency",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 65.3,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 46.7,
+      "clicked": 14,
+      "reported": 16,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 66.7,
+      "clicked": 20,
+      "reported": 10,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 26.6
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "hr.payroll@orbit-solutions.com",
+    "subject": "Payroll Batch #402: Final Verification Step",
+    "body": "Hi there. The final payroll batch for this cycle is undergoing a routine compliance check. We noticed a slight discrepancy in your direct deposit confirmation that requires a quick manual approval to ensure your funds are released on time. Please click the link below to review and approve your updated banking details via our secure HR portal: https://hr.orbit-solutions.com/payroll/approve. This step is only required for accounts flagged in the last compliance sweep. Your prompt attention helps us avoid delays in your upcoming salary deposit. Let us know if you encounter any issues during the verification process.",
+    "cues": [
+     "urgency",
+     "threats",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 62.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 53.3,
+      "clicked": 16,
+      "reported": 14,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 56.7,
+      "clicked": 17,
+      "reported": 13,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 26.7
+   }
+  ]
+ },
+ "naive": {
+  "label": "naive phish",
+  "examples": [
+   {
+    "source": "plain_llm",
+    "sender": "john_doe@cloudstorage.tld",
+    "subject": "Shared Document: Confidential",
+    "body": "Dear Colleague, I have shared a confidential document with you. To access it, please click this link: https://www.cloudstorage.tld/shared/abc123. Please note that this document is confidential and should not be shared with anyone.",
     "cues": [],
     "n_cues": 0,
     "engine": "gemma4:12b",
@@ -240,7 +307,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -248,7 +315,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -256,7 +323,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -264,7 +331,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -272,255 +339,75 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0
-   }
-  ]
- },
- "naive": {
-  "label": "naive phish",
-  "examples": [
-   {
-    "source": "plain_llm",
-    "sender": "shipping@parcelsender.co",
-    "subject": "Package Shipping Notice: Update Your Address",
-    "body": "Dear Customer, we need to update your shipping address. Click here to confirm: http://bit.ly/3cN1xGj. If not, your package will be delayed. Regards, Parcelsender Team.",
-    "cues": [
-     "generic_greeting",
-     "suspicious_link"
-    ],
-    "n_cues": 2,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 84.0,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 80.0,
-      "clicked": 24,
-      "reported": 6,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 80.0,
-      "clicked": 24,
-      "reported": 6,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 76.7,
-      "clicked": 23,
-      "reported": 7,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 93.3,
-      "clicked": 28,
-      "reported": 2,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 90.0,
-      "clicked": 27,
-      "reported": 3,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 10.0
    },
    {
     "source": "plain_llm",
-    "sender": "payroll@ezpayroll.tld",
-    "subject": "Reimbursement Notification: Action Required",
-    "body": "Dear Customer, you have a pending reimbursement. To recieve your payment, please visit: http://bit.ly/ezpayroll-reimburse. Your account will be closed if not verified within 2 days. Please act now.",
+    "sender": "benefits@hr-enrollment-system.net",
+    "subject": "Action Required: Benefits Open Enrollment Closing Soon",
+    "body": "Hello,\r\n\r\nThis is a reminder that the annual benefits open enrollment window closes this Friday. If you have not yet made your selections for health, dental, and vision coverage for the upcoming plan year, you must do so before the deadline.\r\n\r\nEmployees who do not complete enrollment by Friday will automatically be assigned the lowest-tier health plan available, which may not provide adequate coverage for your family's medical needs. Most of your colleagues have already submitted their selections.\r\n\r\nLog in to review and submit your benefits choices:\r\nhttps://hr-open-enrollment.online/login\r\n\r\nYou will need your employee ID and date of birth to access the portal.\r\n\r\nHuman Resources Benefits Team",
     "cues": [
      "urgency",
      "threats",
-     "generic_greeting",
-     "spelling_grammar",
-     "suspicious_link"
-    ],
-    "n_cues": 5,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 14.7,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 10.0,
-      "clicked": 3,
-      "reported": 27,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 20.0,
-      "clicked": 6,
-      "reported": 24,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 16.7,
-      "clicked": 5,
-      "reported": 25,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 3.4
-   },
-   {
-    "source": "plain_llm",
-    "sender": "finance@invoicemanagement.xyz",
-    "subject": "Invoice Payment: Overdue",
-    "body": "Dear Customer, Your invoice is overdue and payment is required now to avoid late fees. Please pay via this link: https://www.invoicemanagement.xyz/payment/abc123. If we dont recieve payment, we will take further action.",
-    "cues": [
-     "generic_greeting",
      "suspicious_sender",
-     "threats",
-     "urgency",
-     "spelling_grammar"
+     "suspicious_link"
     ],
-    "n_cues": 5,
+    "n_cues": 4,
     "engine": "gemma4:12b",
     "mode": "local",
-    "overall_click_rate": 16.0,
+    "overall_click_rate": 35.3,
     "per_hour": [
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 18.6
+      "click_rate": 23.3,
+      "clicked": 7,
+      "reported": 23,
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 19.8
+      "click_rate": 23.3,
+      "clicked": 7,
+      "reported": 23,
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
       "label": "12pm",
-      "click_rate": 16.7,
-      "clicked": 5,
-      "reported": 25,
-      "mean_p_click": 22.3
+      "click_rate": 30.0,
+      "clicked": 9,
+      "reported": 21,
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
       "label": "2pm",
-      "click_rate": 20.0,
-      "clicked": 6,
-      "reported": 24,
-      "mean_p_click": 26.8
+      "click_rate": 46.7,
+      "clicked": 14,
+      "reported": 16,
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
       "label": "4pm",
-      "click_rate": 16.7,
-      "clicked": 5,
-      "reported": 25,
-      "mean_p_click": 34.9
+      "click_rate": 53.3,
+      "clicked": 16,
+      "reported": 14,
+      "mean_p_click": 0.3
      }
     ],
-    "workday_delta": 3.4
+    "workday_delta": 30.0
    },
    {
     "source": "plain_llm",
-    "sender": "filehub@filehub.tld",
-    "subject": "Shared Document from FileHub Storage",
-    "body": "Dear Customer, a shared document has been uploaded to your FileHub account. Please click this link to view: https://filehub.tld/share/abc123. Note: this link will expire soon, so act now. Best, FileHub Team.",
-    "cues": [
-     "urgency",
-     "generic_greeting"
-    ],
-    "n_cues": 2,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 81.3,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 73.3,
-      "clicked": 22,
-      "reported": 8,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 73.3,
-      "clicked": 22,
-      "reported": 8,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 76.7,
-      "clicked": 23,
-      "reported": 7,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 93.3,
-      "clicked": 28,
-      "reported": 2,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 90.0,
-      "clicked": 27,
-      "reported": 3,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 16.7
-   },
-   {
-    "source": "plain_llm",
-    "sender": "admin@microsoft365-admin-portal.net",
-    "subject": "Office 365 Admin Notice: User License Allocation Failed",
-    "body": "Dear Administrator,\r\n\r\nOur licensing system was unable to automatically renew user seat allocations for your Microsoft 365 tenant subscription during the last billing cycle. As a result, 7 user accounts in your organization have been placed in restricted mode and cannot access Exchange, Teams, or SharePoint.\r\n\r\nTo restore access for these users, the tenant administrator must log in and confirm the license renewal. If no action is taken within 48 hours, the affected accounts will be fully deprovisioned and their mailbox data will be queued for deletion.\r\n\r\nRestore licenses now: https://microsoft365-tenant-admin.online/licenses\r\n\r\nYou will be required to authenticate as a global administrator to proceed.\r\n\r\nMicrosoft 365 Licensing Operations",
+    "sender": "accounts@payment-resolution-center.net",
+    "subject": "Pending Payment Confirmation Required",
+    "body": "Hello Customer,\r\n\r\nWe are contacting you regarding a pending transaction that could not be fully processed due to incomplete payment verification. This may result in cancellation of services associated with your account if not resolved promptly.\r\n\r\nTo avoid any disruption, please review the transaction details and confirm your payment information as soon as possible. This process is necessary to ensure your account remains active.\r\n\r\nClick here to resolve payment: https://payment-verification-center.site/confirm\r\n\r\nFailure to complete this verification may lead to temporary suspension of related services. We recommend completing this step at the earliest convenience.\r\n\r\nAccounts Department",
     "cues": [
      "urgency",
      "threats",
@@ -536,18 +423,18 @@
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 18.6
+      "click_rate": 10.0,
+      "clicked": 3,
+      "reported": 27,
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 16.7,
-      "clicked": 5,
-      "reported": 25,
-      "mean_p_click": 19.8
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -555,7 +442,7 @@
       "click_rate": 16.7,
       "clicked": 5,
       "reported": 25,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -563,18 +450,139 @@
       "click_rate": 20.0,
       "clicked": 6,
       "reported": 24,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
       "label": "4pm",
+      "click_rate": 23.3,
+      "clicked": 7,
+      "reported": 23,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 13.3
+   },
+   {
+    "source": "plain_llm",
+    "sender": "admin@softtech.xyz",
+    "subject": "Renew your SoftTech license now",
+    "body": "Dear Customer, your SoftTech software license is about to expire. You must renew now to avoid interruption of service. Click here to renew: http://bit.ly/softtech-renew. If you don't, your license will be suspended and you'll lose all your work.",
+    "cues": [
+     "generic_greeting",
+     "urgency",
+     "threats",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 18.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
       "click_rate": 16.7,
       "clicked": 5,
       "reported": 25,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 26.7,
+      "clicked": 8,
+      "reported": 22,
+      "mean_p_click": 0.3
      }
     ],
-    "workday_delta": 3.4
+    "workday_delta": 10.0
+   },
+   {
+    "source": "plain_llm",
+    "sender": "payroll@emplyeeservice.io",
+    "subject": "Payroll Update: Action Required",
+    "body": "Dear Employee, we have updated our payroll system. You must log in to confirm your details. Click here to access: http://bit.ly/2VpZTI9. If you dont confirm, your payment will be delayed.",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "spelling_grammar",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 6,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 5.3,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 3.3,
+      "clicked": 1,
+      "reported": 29,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 0.0,
+      "clicked": 0,
+      "reported": 30,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 3.3,
+      "clicked": 1,
+      "reported": 29,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 6.7,
+      "clicked": 2,
+      "reported": 28,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 10.0
    }
   ]
  },
@@ -583,9 +591,9 @@
   "examples": [
    {
     "source": "spamassassin_ham",
-    "sender": "\"John P. Looney\" <valen@tuatha.org>",
-    "subject": "[ILUG] cups question",
-    "body": "I seem to be having a little trouble with it. My printers.conf is: <DefaultPrinter lp> Info Hp4050 Location locals DeviceURI ipp://192.168.2.90:9100/ State Idle Accepting Yes JobSheets none none QuotaPeriod 0 PageLimit 0 KLimit 0 </Printer> and cupds uses that to make a printcap of: lp: Sounds dodgy to me. If someone has an example printers.conf/printcap for a JetDirect printer, I'd appreciate it if they sent it on. John -- Irish Linux Users' Group: ilug@linux.ie http://www.linux.ie/mailman/listinfo/ilug for (un)subscription information. List maintainer: listmaster@linux.ie",
+    "sender": "Gregory Alan Bolcer <gbolcer@endeavors.com>",
+    "subject": "Sun",
+    "body": "Well, it looks like Sun are going ahead with their ubiquitous computing plans without Mithril. Greg Reuters Market News Sun Micro Outlines Roadmap for Managing Networks Friday September 20, 5:00 am ET By Peter Henderson SAN FRANCISCO (Reuters) - Computer maker Sun Microsystems Inc. on Thursday said it would create in a few years a network environment that will be as straightforward to handle as a single machine, a strategy it calls N1. It laid out a road map for a new layer of intelligent software and systems that will meld unwieldy networks into easy-to-use systems, a goal similar to those of most rivals making computers which manage networks. EMC Corp. announced this week software aimed at allowing users to manage storage resources as a pool. Hewlett-Packard Co has a Utility Data Center, designed for broader management. International Business Machines Corp's project eLiza is working to make computers \"self-healing\" when systems break. \"Applications still have to run zeroes and ones on some computing engine but the whole idea behind N1 is you stop thinking about that. You don't think about what box it is running on,\" Sun Vice President Steve MacKay, head of the N1 program, said in an interview on the sidelines of a Sun user conference. Many industry executives see computer power eventually being sold like power or water, as a utility that can be turned on or off, in whatever volume one wants whenever needed. For that to happen computers must be tied together seamlessly, rather than cobbling them together with tenuous links, as most networks do today, experts say. There are still major barriers, though, such as communications standards for machines from different vendors to interoperate closely. Sun promised to deliver a \"virtualization engine\" that would let administrators look at their entire network as a pool by the end of the year. Network administrators today often have no automatic system to report what is in the network. \"It'll tell you what you have and how it is laid out,\" promised MacKay The second stage, beginning in 2003, would allow users to identify a service, such as online banking, and allocate resources for them with a few clicks, Sun said. Finally, in 2004, Sun's software should allow networks to change uses of resources on the fly in response to changing needs, such as a bank assuring quicker online response time for priority users, the company said.",
     "cues": [],
     "n_cues": 0,
     "engine": "gemma4:12b",
@@ -598,7 +606,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -606,7 +614,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -614,7 +622,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -622,7 +630,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -630,126 +638,20 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 0.0
-   },
-   {
-    "source": "trec07_ham",
-    "sender": "\"Suraj N. Kurapati\" <skurapat@ucsc.edu>",
-    "subject": "Re: BSD & MIT licenses compatible?",
-    "body": "Andrew Donnellan wrote: > On 4/14/07, Suraj N. Kurapati wrote: >> So when I appended bsd.c to mit.c, did the entire mit.c become >> licensed under both licenses? That is, did the originally-MIT >> portions of mit.c inherit the extra condition from the BSD license? > > The combination of the MIT and BSD licensed code (ie. the whole file) > is under the most restrictive one, the BSD license. Is it possible to extract the originally-MIT portions from the file and act upon them only according to the MIT license? -- To UNSUBSCRIBE, email to debian-legal-REQUEST@lists.debian.org with a subject of \"unsubscribe\". Trouble? Contact listmaster@lists.debian.org",
-    "cues": [],
-    "n_cues": 0,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 100.0,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 34.9
-     }
-    ],
-    "workday_delta": 0.0
-   },
-   {
-    "source": "enron_clean",
-    "sender": "ginger.dernehl@enron.com",
-    "subject": "RCR Meeting",
-    "body": "The next RCR meeting is scheduled for Monday, March 19 at 12:00 PM CST. The dial in number is 1-800-283-1805. gngr 713-853-7751",
-    "cues": [],
-    "n_cues": 0,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 100.0,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 18.6
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 19.8
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 22.3
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 26.8
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0
    },
    {
     "source": "spamassassin_ham",
-    "sender": "Roi Dayan <dejavo@punkass.com>",
-    "subject": "xine src packge still gives errors",
-    "body": "Hi I try to rebuild xine from src package and I get these errors: . . . . . Finding Provides: /usr/lib/rpm/find-provides Finding Requires: /usr/lib/rpm/find-requires PreReq: rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1 Requires(rpmlib): rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1 Requires: xine-libs = 0.9.13 /bin/sh Obsoletes: xine-devel RPM build errors: user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root user dude does not exist - using root File not found: /var/tmp/xine-root/usr/bin/aaxine thx, Roi _______________________________________________ RPM-List mailing list <RPM-List@freshrpms.net> http://lists.freshrpms.net/mailman/listinfo/rpm-list",
-    "cues": [],
-    "n_cues": 0,
+    "sender": "bugzilla-daemon@hughes-family.org",
+    "subject": "[SAdev] [Bug 839] mailbox corruption not fixed with procmail 3.22",
+    "body": "http://www.hughes-family.org/bugzilla/show_bug.cgi?id=839 ------- Additional Comments From alan@rdrop.com 2002-09-05 22:22 ------- I haven't tried 2.41 yet because it requires File::Spec, which barfs when spamassassin tries to use it. I haven't filed a bug yet because I suspect it's because I'm still running 5.005 perl because of reported compatibility issues with 5.6 and later, but I probably will because I think there's too much legacy perl code to put up with major compatibility problems, and spamassassin didn't, at least in the quickest of looks, say it needed a newer one. The perl @ stuff was bad enough... but this is all a separate soapbox... ------- You are receiving this mail because: ------- You are the assignee for the bug, or are watching the assignee. ------------------------------------------------------- This sf.net email is sponsored by: OSDN - Tired of that same old cell phone? Get a new here for FREE! https://www.inphonic.com/r.asp?r=sourceforge1&refcode1=vs3390 _______________________________________________ Spamassassin-devel mailing list Spamassassin-devel@lists.sourceforge.net https://lists.sourceforge.net/lists/listinfo/spamassassin-devel",
+    "cues": [
+     "too_good_true"
+    ],
+    "n_cues": 1,
     "engine": "gemma4:12b",
     "mode": "local",
     "overall_click_rate": 100.0,
@@ -760,7 +662,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -768,7 +670,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -776,7 +678,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -784,7 +686,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -792,16 +694,16 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0
    },
    {
-    "source": "trec07_ham",
-    "sender": "Celejar <celejar@gmail.com>",
-    "subject": "Re: hwclock",
-    "body": "On Tue, 24 Apr 2007 01:29:57 +0530 Ritesh Raj Sarraf wrote: > carex@skynet.be wrote: > > > HWCLOCKPARS=\"--directisa\" as you specified above and the problem > > vanished ! > > BTW, this issue came up sometime back (I guess with 2.6.18). > > Will the fix be to include the \"--directisa\" option with hwclock ? > If yes, any ideas if this is going to be committed into the package ? > > Thanks, > Ritesh See debian bug #410328. Celejar -- mailmin.sourceforge.net - remote access via secure (OpenPGP) email ssuds.sourceforge.net - A Simple Sudoku Solver and Generator",
+    "source": "spamassassin_ham",
+    "sender": "newscientist <rssfeeds@example.com>",
+    "subject": "Gene technique reveals human evolution",
+    "body": "URL: http://www.newsisfree.com/click/-3,8714366,1440/ Date: Not supplied A method that could allow scientists to probe our ancestors' evolution over the last 20,000 years passes its first test",
     "cues": [],
     "n_cues": 0,
     "engine": "gemma4:12b",
@@ -814,7 +716,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 18.6
+      "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
@@ -822,7 +724,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 19.8
+      "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
@@ -830,7 +732,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 22.3
+      "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
@@ -838,7 +740,7 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 26.8
+      "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
@@ -846,7 +748,115 @@
       "click_rate": 100.0,
       "clicked": 30,
       "reported": 0,
-      "mean_p_click": 34.9
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "enron_clean",
+    "sender": "nancy.sellers@robertmondavi.com",
+    "subject": "Many thanks",
+    "body": "You guys were so great and so much help yesterday that I hardly had a chance to nag Eldon at all - oh, that's right - it was Father's Day - wasn't it... Really thanks a lot! You certainly helped make it a fun time - but there wasn't any music! Nancy (707) 251-4870 (phone) (707) 265-5446 (fax) \"Plus je bois, mieux je chante\"",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "enron_clean",
+    "sender": "pete.davis@enron.com",
+    "subject": "Start Date: 10/27/01; HourAhead hour: 6;  <CODESITE>",
+    "body": "Start Date: 10/27/01; HourAhead hour: 6; No ancillary schedules awarded. No variances detected. LOG MESSAGES: PARSING FILE -->> O:\\Portland\\WestDesk\\California Scheduling\\ISO Final Schedules\\2001102706.txt Error retrieving HourAhead price data - process continuing...",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 0.3
      }
     ],
     "workday_delta": 0.0

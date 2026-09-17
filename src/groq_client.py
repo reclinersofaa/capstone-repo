@@ -38,7 +38,13 @@ VALID_CUES = [
 # budget. llama-3.3-70b-versatile gives similar quality but its free daily token cap is
 # small — it 429s partway through a full corpus, so do NOT use it as the bulk default.
 DEFAULT_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
-GEN_MODEL = "llama-3.3-70b-versatile"   # generation only (few calls) — best writing quality
+# llama-3.3-70b-versatile was RETIRED from Groq's API (confirmed via a live 404 — same
+# failure mode as DEFAULT_MODEL's predecessor). qwen/qwen3.8-27b is the replacement:
+# verified live to comply with the phishing-generation prompt and return clean JSON.
+# compound-mini and gpt-oss-120b were tried first and both REFUSE this prompt outright
+# ("I'm sorry, but I can't help with that"), even though it's framed as academic
+# defensive-security research — a real constraint on which models are usable here.
+GEN_MODEL = "qwen/qwen3.8-27b"   # generation only (few calls) — best writing quality
 
 
 def _key() -> str:
@@ -262,14 +268,39 @@ framework (Visceral emotion, Tribal in-group trust, Danger/authority) with MINIM
 plausible internal context, no spelling errors, no blatant urgency or lottery language. They should read like a real
 IT/HR/Finance notification. Use FICTIONAL company names and generic internal senders — NO real brands, people, or domains.
 
+CRITICAL — every email MUST be a genuine phishing attempt, not just a corporate-sounding announcement. A plausible
+tone alone does not make an email phishing. Each email MUST include ALL of the following, woven in subtly:
+  1. A believable pretext (a password renewal, payroll update, invoice, shared document, or security review)
+  2. A concrete action the recipient is asked to take (sign in, confirm, approve, submit, or open something)
+  3. A destination or response path for that action: a fictional inert URL on a safe reserved domain
+     (e.g. https://portal.example.test/verify or https://login.example.test/account), OR an explicit reply-to
+     request, OR a referenced attachment — pick whichever fits the pretext naturally
+  4. A concrete benefit to the attacker if the action is taken (credentials, payment redirect, sensitive data,
+     account access, or a malicious download) — this must be inferable from the action and destination, not stated
+Do NOT generate a message that only announces a policy, meeting, training session, or delivery with no requested
+action and no destination — that is not phishing, it is a memo, and must be rejected.
+Do NOT use real brands, real people, real domains, or working credential-harvesting links — fictional and inert only.
+
 Generate {n} DISTINCT such emails, varied across these themes: {themes}.
-Return ONLY a JSON array; each element: {{"subject": "...", "sender": "name@fake-company.com", "body": "...", "expected_cues": [...], "vtriad_tactic": "visceral|tribal|danger"}}.
+Return ONLY a JSON array; each element: {{"subject": "...", "sender": "name@fake-company.com", "body": "...", "expected_cues": [...], "vtriad_tactic": "visceral|tribal|danger", "attack_goal": "credential_harvesting|payment_diversion|data_exfiltration|account_takeover|malware_delivery", "requested_action": "sign_in|approve|reply|open_attachment|submit_info"}}.
 Bodies 70-160 words, professional and subtle. Output ONLY the JSON array."""
 
 
 def generate_phishing(style: str, n: int, model: str = GEN_MODEL,
-                      batch_size: int = 10, temperature: float = 0.9, seed: int = 0) -> list:
-    """Generate `n` synthetic phishing emails. style in {'plain_llm','hybrid_vtriad'}."""
+                      batch_size: int = 4, temperature: float = 0.9, seed: int = 0,
+                      max_retries: int = 5) -> list:
+    """Generate `n` synthetic phishing emails. style in {'plain_llm','hybrid_vtriad'}.
+
+    batch_size defaults to 4, not 10: qwen/qwen3.8-27b has a hard 1000
+    output-tokens-per-minute cap on this key, verified live via a 429 body
+    ("Request too large... on output tokens per minute (OTPM): Limit 1000"). Each
+    generated email needs ~150-270 output tokens (70-160 word body + JSON fields
+    including attack_goal/requested_action), so a batch of 10 (~2000-2700 tokens)
+    ALWAYS exceeds the cap in one call — a batch of 4 (~600-1100 tokens) fits.
+    On a 429, RETRY THE SAME BATCH after backing off, rather than silently moving
+    to the next batch_i — the original code discarded every rate-limited attempt
+    and could stall indefinitely a few emails short of the target.
+    """
     assert style in ("plain_llm", "hybrid_vtriad")
     prompt_tpl = _PLAIN_PROMPT if style == "plain_llm" else _VTRIAD_PROMPT
     cli = _client()
@@ -278,23 +309,33 @@ def generate_phishing(style: str, n: int, model: str = GEN_MODEL,
         k = min(batch_size, n - len(out))
         themes = ", ".join(_SCENARIOS[(batch_i * 3) % len(_SCENARIOS):][:5]) or ", ".join(_SCENARIOS[:5])
         prompt = prompt_tpl.format(n=k, themes=themes)
-        try:
-            resp = cli.chat.completions.create(
-                model=model, temperature=temperature, max_tokens=3000,
-                messages=[{"role": "system", "content": f"Deterministic-ish batch #{batch_i} (seed {seed})."},
-                          {"role": "user", "content": prompt}],
-            )
-            text = resp.choices[0].message.content
-            s, e = text.find("["), text.rfind("]") + 1
-            arr = json.loads(text[s:e])
-            for item in arr:
-                if isinstance(item, dict) and item.get("body"):
-                    out.append(item)
-            print(f"  [groq gen {style}] {len(out)}/{n}")
-        except Exception as ex:
-            print(f"  [groq gen err] {type(ex).__name__}: {str(ex)[:120]}")
+        for attempt in range(max_retries + 1):
+            try:
+                resp = cli.chat.completions.create(
+                    model=model, temperature=temperature, max_tokens=280 * k + 150,
+                    messages=[{"role": "system", "content": f"Deterministic-ish batch #{batch_i} (seed {seed})."},
+                              {"role": "user", "content": prompt}],
+                )
+                text = resp.choices[0].message.content
+                s, e = text.find("["), text.rfind("]") + 1
+                arr = json.loads(text[s:e])
+                for item in arr:
+                    if isinstance(item, dict) and item.get("body"):
+                        out.append(item)
+                print(f"  [groq gen {style}] {len(out)}/{n}")
+                break
+            except Exception as ex:
+                is_rate_limit = type(ex).__name__ == "RateLimitError" or "429" in str(ex)
+                if is_rate_limit and attempt < max_retries:
+                    wait = 18 + attempt * 4
+                    print(f"  [groq gen 429 -- waiting {wait}s and retrying batch "
+                          f"({attempt + 1}/{max_retries})]")
+                    time.sleep(wait)
+                    continue
+                print(f"  [groq gen err] {type(ex).__name__}: {str(ex)[:120]}")
+                break
         batch_i += 1
-        if batch_i > n:   # safety
+        if batch_i > n * 3:   # safety: allow real retries, still bounded
             break
     return out[:n]
 

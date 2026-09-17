@@ -99,7 +99,7 @@ def main():
     print("\n=== PER-SOURCE: avg cues -> phishing click rate ===")
     for s in rate.index:
         print(f"  {s:<18} cues={cues.get(s, float('nan')):.2f}   click={rate[s]:.1%}"
-              + ("   <-- fewest cues, most clicks" if s == HL else ""))
+              + ("   <-- AI, persuasion-guided (parity with top real phishing)" if s == HL else ""))
     print(f"\nbenign FPR: {1 - bn['clicked'].mean():.1%}")
     wd = ph.pivot_table("clicked", "agent_id", "workday_hour")
     if 16.0 in wd.columns and 8.0 in wd.columns:
@@ -123,7 +123,7 @@ def _charts(ph, bn, cues, rate):
                     fontsize=10, fontweight=("bold" if s == HL else "normal"))
     ax.set_xlabel("Avg detectable cues per email  (lower = harder to detect)")
     ax.set_ylabel("Phishing click rate")
-    ax.set_title("Fewer detectable cues -> more clicks. V-Triad = fewest cues, most clicks.")
+    ax.set_title("Fewer detectable cues -> more clicks. V-Triad (red): parity with the best real phishing, not an outlier.")
     ax.grid(alpha=0.3)
     plt.tight_layout(); plt.savefig("results/v2_demo_cues_vs_click.png", dpi=150); plt.close()
 

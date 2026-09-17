@@ -181,14 +181,17 @@ PIPELINE_MODELS = {
         "model": "gemma4:12b (Ollama, local — RTX 4060 Ti 16GB)",
         "why": "reproducible (open weights, runs offline), no rate limits, ~0.55s/email; "
                "the whole 1,595-email corpus is extracted by ONE model in ~13 min",
-        "note": "REPLICATION: llama-4-scout-17b (Groq) independently produces the same "
-                "source ranking — V-Triad lowest cues / highest clicks — so the headline "
-                "result is not an artifact of one extractor. Scout's cues are retained in "
+        "note": "REPLICATION (pending re-verification): llama-4-scout-17b (Groq) independently "
+                "produced the same source ranking on the PRE-FIX corpus. That check has not "
+                "been re-run since the Sept 2026 hybrid_vtriad validity fix (see "
+                "notebooks/07_vtriad_validity_fix.ipynb) — treat cross-extractor replication "
+                "as stale, not confirmed, until it is. Scout's cues are retained in "
                 "data/cue_cache_v2/groq-scout/ for comparison. Cache is scoped per model: "
                 "cue counts from different extractors are NOT comparable and must never be "
-                "mixed within one corpus. Rejected: llama-3.1-8b (over-flags benign, ~1.7 "
-                "cues vs ~0.0); llama-3.3-70b (free daily cap 429s mid-corpus); "
-                "gpt-oss-120b / zai-glm-4.7 (reasoning-only, return no content field).",
+                "mixed within one corpus. Rejected for extraction: llama-3.1-8b (over-flags "
+                "benign, ~1.7 cues vs ~0.0); llama-3.3-70b (free daily cap 429s mid-corpus, "
+                "since retired by Groq entirely); gpt-oss-120b / zai-glm-4.7 / qwen3 base "
+                "(reasoning-only, return no content field).",
         "batching": "8 emails/call, per-email fallback on malformed batch response "
                     "(fell back on 13 batches of ~200 — model returned 7 arrays for 8 emails)",
         "gotcha": "Reasoning models REQUIRE 'think': False. Without it Ollama spends the whole "
@@ -196,9 +199,14 @@ PIPELINE_MODELS = {
                   "returns an empty string — indistinguishable from 'no cues found'.",
     },
     "synthetic_generation": {
-        "model": "llama-3.3-70b-versatile (Groq)",
-        "why": "best writing quality; only ~24 calls needed, so the small daily cap is not binding",
-        "note": "used ONLY for plain_llm / hybrid_vtriad generation. Fictional entities only.",
+        "model": "qwen/qwen3.8-27b (Groq)",
+        "why": "best writing quality; only ~24 calls needed at batch_size=4, well under the "
+               "model's 1000 output-tokens-per-minute cap",
+        "note": "used ONLY for plain_llm / hybrid_vtriad generation. Fictional entities only. "
+                "Prior model llama-3.3-70b-versatile was retired by Groq (Sept 2026, confirmed "
+                "via a live 404) and replaced; groq/compound-mini and gpt-oss-120b were tried "
+                "first and refuse the phishing-generation prompt outright, even under an "
+                "academic-research framing.",
     },
 }
 

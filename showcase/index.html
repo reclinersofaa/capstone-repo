@@ -146,7 +146,7 @@
       <span>Hybrid Agent-Based Modeling</span>
     </div>
     <h1>Fewer flags, <em>more clicks.</em></h1>
-    <p class="dek">A simulation of how detectable a phishing email <b>looks</b> versus how often a synthetic employee <b>falls for it</b> — across 1,595 emails from ten segregated sources. The persuasion-guided AI email carries the fewest red flags and is clicked the most.</p>
+    <p class="dek">A simulation of how detectable a phishing email <b>looks</b> versus how often a synthetic employee <b>falls for it</b> — across 1,595 emails from ten segregated sources. The persuasion-guided AI email reaches <b>parity with the best human-crafted spear-phishing</b> in evading detection, without requiring an attacker's expertise.</p>
     <div class="tiles">
       <div class="tile"><span class="stripe"></span><div class="k">Emails · Sources</div><div class="v">1,595</div><div class="sub">10 segregated origins</div></div>
       <div class="tile"><span class="stripe"></span><div class="k">Decisions simulated</div><div class="v">239,250</div><div class="sub">agents × hours × emails</div></div>
@@ -156,7 +156,7 @@
   </header>
 
   <section>
-    <div class="sec-head"><span class="sec-num">01</span><div><h2>The core finding</h2><p class="sec-note">Each point is one email source. As average detectable cues rise (right), simulated click rate falls (down). The V-Triad AI email sits alone in the top-left: almost no red flags, almost everyone clicks.</p></div></div>
+    <div class="sec-head"><span class="sec-num">01</span><div><h2>The core finding</h2><p class="sec-note">Each point is one email source. As average detectable cues rise (right), simulated click rate falls (down). The V-Triad AI email ranks 3rd overall, in a tight cluster with the two best-performing real, human-authored phishing sources (ceas08, phishbowl) — not an outlier alone in the corner.</p></div></div>
     <div class="grid-2">
       <figure class="card">
         <svg id="scatter" viewBox="0 0 640 430" role="img" aria-label="Scatter plot of average detectable cues versus click rate across seven phishing sources, showing a strong downward trend."></svg>
@@ -181,10 +181,10 @@
     <div class="sec-head"><span class="sec-num">03</span><div><h2>The workday effect</h2><p class="sec-note">The same agent, reading the same email, at 8am versus 4pm. As modelled fatigue accumulates across the day, susceptibility rises — a within-person effect held here as an honest, bracketed prediction (see §05).</p></div></div>
     <div class="card day-wrap">
       <figure style="flex:1 1 340px; margin:0">
-        <svg id="workday" viewBox="0 0 560 240" role="img" aria-label="Slope chart: simulated click rate rises from 58.6 percent at 8am to 72.2 percent at 4pm, a 13.6 point increase."></svg>
+        <svg id="workday" viewBox="0 0 560 240" role="img" aria-label="Slope chart: simulated click rate rises from 55.8 percent at 8am to 70.3 percent at 4pm, a 14.5 point increase."></svg>
       </figure>
       <div style="flex:1 1 220px">
-        <div class="tile" style="box-shadow:none"><span class="stripe"></span><div class="k">8am → 4pm, same agent</div><div class="v">+13.6<span style="font-size:1.1rem"> pts</span></div><div class="sub">58.6% → 72.2% · positive for 29 / 30 agents</div></div>
+        <div class="tile" style="box-shadow:none"><span class="stripe"></span><div class="k">8am → 4pm, same agent</div><div class="v">+14.5<span style="font-size:1.1rem"> pts</span></div><div class="sub">55.8% → 70.3% · positive for 29 / 30 agents</div></div>
       </div>
     </div>
   </section>
@@ -207,9 +207,9 @@
   <section>
     <div class="sec-head"><span class="sec-num">05</span><div><h2>How to read these numbers</h2><p class="sec-note">The honest framing — the version that survives an examiner. Included on the showcase deliberately.</p></div></div>
     <div class="frame-grid">
-      <div class="note good"><h3>What the result is</h3><p>A <b>relative ranking</b> of email sources by detectability→susceptibility, under identical controlled conditions. The ordering — persuasion-guided AI &gt; real phishing &gt; naive AI — is the finding, and it replicates across two independent extraction models.</p></div>
-      <div class="note"><h3>What it is not</h3><p>The absolute click rates (28–92%) are <b>not</b> population predictions. Verizon's DBIR reports a ~1.4% real-world median; these levels are an artifact of the model's parameterization. Read the rank order, not the percentages.</p></div>
-      <div class="note"><h3>Replication</h3><p>Cue extraction ran on <b>gemma4:12b (local)</b> and <b>llama-4-scout-17b (hosted)</b>. Both rank V-Triad lowest in cues and highest in clicks, so the headline is not an artifact of one extractor.</p></div>
+      <div class="note good"><h3>What the result is</h3><p>A <b>relative ranking</b> of email sources by detectability→susceptibility, under identical controlled conditions. Persuasion-guided AI phishing reaches <b>parity with the best human-authored spear-phishing</b> (ceas08, phishbowl) and clearly outperforms naive AI phishing — that ordering is the finding.</p></div>
+      <div class="note"><h3>What it is not</h3><p>The absolute click rates (28–83%) are <b>not</b> population predictions. Verizon's DBIR reports a ~1.4% real-world median; these levels are an artifact of the model's parameterization. Read the rank order, not the percentages.</p></div>
+      <div class="note"><h3>Replication</h3><p>Cue extraction ran on <b>gemma4:12b (local)</b>. An earlier cross-check on <b>llama-4-scout-17b (hosted)</b> was run before a labelling-validity fix to the V-Triad corpus and is being re-verified — see notebook <code>07_vtriad_validity_fix.ipynb</code>.</p></div>
       <div class="note"><h3>Reproducible &amp; offline</h3><p>Nothing on this page runs a model. Cue extractions are cached and the simulation is deterministic Python — the entire result set rebuilds from committed data with <b>no GPU and no API key</b>.</p></div>
     </div>
   </section>
@@ -232,12 +232,12 @@
     return e;
   }
   var sources=[
-    {name:'hybrid_vtriad', tag:'AI · V-Triad', cues:0.93, click:92.0, sv:7, flag:true},
+    {name:'ceas08',        tag:'real',         cues:1.90, click:82.7, sv:7},
     {name:'phishbowl',     tag:'real',         cues:1.85, click:81.7, sv:6},
-    {name:'ceas08',        tag:'real',         cues:1.90, click:82.7, sv:5},
+    {name:'hybrid_vtriad', tag:'AI · V-Triad', cues:2.10, click:76.2, sv:5, flag:true},
     {name:'nazario',       tag:'real',         cues:2.79, click:62.1, sv:4},
     {name:'nigerian_fraud',tag:'real · 419',   cues:2.90, click:62.0, sv:3},
-    {name:'multi_llm',     tag:'AI · 3 models',cues:3.49, click:47.4, sv:2},
+    {name:'multi_llm',     tag:'AI · 3 models',cues:3.49, click:47.5, sv:2},
     {name:'plain_llm',     tag:'AI · naive',   cues:4.64, click:27.8, sv:1}
   ];
 
@@ -317,14 +317,14 @@
       svg.appendChild(el('line',{x1:m.l,y1:py(v),x2:W-m.r,y2:py(v),'class':'gridline'}));
       svg.appendChild(el('text',{x:m.l-8,y:py(v)+3.5,'text-anchor':'end','class':'tick'},v+'%'));
     });
-    var A={x:xA,y:py(58.6)},B={x:xB,y:py(72.2)};
+    var A={x:xA,y:py(55.8)},B={x:xB,y:py(70.3)};
     svg.appendChild(el('line',{x1:A.x,y1:A.y,x2:B.x,y2:B.y,'class':'s-accent','stroke-width':2.5}));
-    [['8:00',A,58.6],['16:00',B,72.2]].forEach(function(p){
+    [['8:00',A,55.8],['16:00',B,70.3]].forEach(function(p){
       svg.appendChild(el('circle',{cx:p[1].x,cy:p[1].y,r:6,'class':'f-accent pt-day'}));
       svg.appendChild(el('text',{x:p[1].x,y:p[1].y-14,'text-anchor':'middle','class':'pt-label','font-weight':'700'},p[2].toFixed(1)+'%'));
       svg.appendChild(el('text',{x:p[1].x,y:H-m.b+18,'text-anchor':'middle','class':'tick'},p[0]));
     });
-    svg.appendChild(el('text',{x:(A.x+B.x)/2,y:py(65.4)-6,'text-anchor':'middle','class':'axis-label f-accent-ink'},'+13.6 pts'));
+    svg.appendChild(el('text',{x:(A.x+B.x)/2,y:py(63.05)-6,'text-anchor':'middle','class':'axis-label f-accent-ink'},'+14.5 pts'));
     svg.appendChild(el('text',{x:14,y:(m.t+H-m.b)/2,'text-anchor':'middle','class':'axis-label',transform:'rotate(-90 14 '+((m.t+H-m.b)/2)+')'},'CLICK RATE'));
   })();
 })();

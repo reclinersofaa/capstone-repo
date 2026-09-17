@@ -335,7 +335,7 @@ OK - fatigue is monotone increasing (v1 fell).</pre>
 <section id="4-cuestrength-why-some-cues-get-missed">
 <div class="sec-head"><span class="sec-num">4</span><h2>CueStrength - why some cues get missed</h2></div>
 <div class="sec-md"><p>Not all red flags are equal. A blatant <code>suspicious_link</code> is hard to miss; a <code>generic_greeting</code> is easy to skim past. Per-cue miss probability is <code>FPL_base x (1 - CueStrength[cue])</code>, plus trait modifiers (age/education on URL cues, exposure bonus on account-threat cues).</p>
-<p><strong>This is the mechanism behind the headline:</strong> V-Triad emails carry few cues <em>and</em> the ones they carry are subtle.</p></div>
+<p><strong>This is part of the mechanism behind the headline:</strong> V-Triad emails carry relatively few cues for their length <em>and</em> the ones they carry lean subtle — enough to put it in the same bracket as the best real phishing, not to make it an outlier.</p></div>
 <div class="table-wrap"><table border="1" class="dnb-table">
   <thead>
     <tr style="text-align: right;">
@@ -424,22 +424,22 @@ Strong cues collapse the miss probability; weak cues leave most of it intact.</p
 trec07_ham          0.03
 enron_clean         0.08
 spamassassin_ham    0.12
-hybrid_vtriad       0.93
 phishbowl           1.85
 ceas08              1.90
+hybrid_vtriad       2.10
 nazario             2.79
 nigerian_fraud      2.90
 multi_llm           3.49
 plain_llm           4.64
 Name: avg_cues, dtype: float64
 
-V-Triad carries barely more cues than legitimate email -&gt; that is why it slips through.</pre>
+V-Triad sits with the two lowest-cue REAL phishing sources (ceas08, phishbowl), well above benign but well below naive AI phishing.</pre>
 <figure><img src="report_assets/chart_05.png" alt="Cue extraction - the detection signal chart" loading="lazy"></figure>
 </section>
 <section id="6-headline-fewer-cues-more-clicks">
 <div class="sec-head"><span class="sec-num">6</span><h2>HEADLINE - fewer cues → more clicks</h2></div>
 <div class="sec-md"><p>The core finding. Each point is a phishing source: <strong>x = how detectable it is, y = how often agents fell for it.</strong></p>
-<p><strong>hybrid_vtriad sits alone top-left: the fewest detectable cues of <em>any</em> source - real or synthetic - and the highest click rate.</strong></p></div>
+<p><strong>hybrid_vtriad ranks 3rd by both measures, in a tight cluster with ceas08 and phishbowl — the two best-performing REAL, human-authored phishing sources.</strong> It is no longer the single lowest-cue, highest-click source (an earlier, pre-fix version of this corpus was — see <code>07_vtriad_validity_fix.ipynb</code>). The corrected, honest claim: AI-generated, persuasion-guided phishing reaches <strong>parity with the best human-crafted spear-phishing</strong>, not superiority over all of it.</p></div>
 <div class="table-wrap"><table border="1" class="dnb-table">
   <thead>
     <tr style="text-align: right;">
@@ -455,11 +455,6 @@ V-Triad carries barely more cues than legitimate email -&gt; that is why it slip
   </thead>
   <tbody>
     <tr>
-      <th>hybrid_vtriad</th>
-      <td>0.933</td>
-      <td>0.920</td>
-    </tr>
-    <tr>
       <th>ceas08</th>
       <td>1.900</td>
       <td>0.827</td>
@@ -468,6 +463,11 @@ V-Triad carries barely more cues than legitimate email -&gt; that is why it slip
       <th>phishbowl</th>
       <td>1.852</td>
       <td>0.817</td>
+    </tr>
+    <tr>
+      <th>hybrid_vtriad</th>
+      <td>2.100</td>
+      <td>0.762</td>
     </tr>
     <tr>
       <th>nazario</th>
@@ -482,7 +482,7 @@ V-Triad carries barely more cues than legitimate email -&gt; that is why it slip
     <tr>
       <th>multi_llm</th>
       <td>3.487</td>
-      <td>0.474</td>
+      <td>0.475</td>
     </tr>
     <tr>
       <th>plain_llm</th>
@@ -496,7 +496,7 @@ V-Triad carries barely more cues than legitimate email -&gt; that is why it slip
 </section>
 <section id="7-click-rate-by-source">
 <div class="sec-head"><span class="sec-num">7</span><h2>Click rate by source</h2></div>
-<div class="sec-md"><p>Guided AI phishing beats <strong>real, human-authored</strong> phishing (CEAS, Phishbowl, Nazario, 419) - not just naive AI.</p></div>
+<div class="sec-md"><p>Guided AI phishing matches the two best real, human-authored phishing sources (CEAS-08, Cornell Phishbowl) and clearly beats naive AI phishing and the weaker real sources (Nazario, 419) - parity with the hardest real phishing to catch, not superiority over all of it (see §6).</p></div>
 <pre class="out">benign pass rate: 99.9%   -&gt;  false-positive rate: 0.1%</pre>
 <figure><img src="report_assets/v2_demo_click_by_source.png" alt="Click rate by source chart" loading="lazy"></figure>
 </section>
@@ -509,13 +509,13 @@ V-Triad carries barely more cues than legitimate email -&gt; that is why it slip
 <section id="9-controlled-fatigue-experiment">
 <div class="sec-head"><span class="sec-num">9</span><h2>Controlled fatigue experiment</h2></div>
 <div class="sec-md"><p>Two ways to isolate fatigue from the (large) individual differences between agents.</p></div>
-<pre class="out">Within-agent workday effect (4pm - 8am): mean +0.1357 | positive for 29/30 agents
+<pre class="out">Within-agent workday effect (4pm - 8am): mean +0.1451 | positive for 29/30 agents
 
 Click rate by fatigue tertile:
 fatigue_level
-Low       0.6234
-Medium    0.6396
-High      0.6767</pre>
+Low       0.5982
+Medium    0.6158
+High      0.6552</pre>
 <figure><img src="report_assets/v2_fatigue_effect.png" alt="Controlled fatigue experiment chart" loading="lazy"></figure>
 </section>
 <section id="10-perceived-vulnerability">
@@ -557,7 +557,7 @@ Takeaway: individual caution sets the between-person baseline; fatigue moves eac
 </section>
 <section id="15-robustness-sensitivity">
 <div class="sec-head"><span class="sec-num">15</span><h2>Robustness &amp; sensitivity</h2></div>
-<div class="sec-md"><p><strong>The answer to "did you just tune it until it looked good?"</strong> We vary the random seed and the key coefficients and check the headline claim survives: V-Triad stays the top click rate, the workday effect stays positive, FPR stays low.</p>
+<div class="sec-md"><p><strong>The answer to "did you just tune it until it looked good?"</strong> We vary the random seed and the key coefficients and check the corrected headline survives: V-Triad stays competitive with the top real-phishing sources (not necessarily #1 — see §6), the workday effect stays positive, FPR stays low.</p>
 <p><em>Run on a stratified subsample (40/source) so it re-executes in ~2 min - cues are already cached, so no API calls.</em></p></div>
 <div class="table-wrap"><table border="1" class="dnb-table">
   <thead>
@@ -565,7 +565,8 @@ Takeaway: individual caution sets the between-person baseline; fatigue moves eac
       <th></th>
       <th>test</th>
       <th>vtriad_click</th>
-      <th>vtriad_is_top</th>
+      <th>vtriad_rank</th>
+      <th>vtriad_top3</th>
       <th>within_delta</th>
       <th>FPR</th>
     </tr>
@@ -574,65 +575,73 @@ Takeaway: individual caution sets the between-person baseline; fatigue moves eac
     <tr>
       <th>0</th>
       <td>seed=42</td>
-      <td>0.939</td>
+      <td>0.756</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.125</td>
+      <td>0.137</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>seed=1</td>
-      <td>0.956</td>
+      <td>0.823</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.080</td>
+      <td>0.086</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>seed=7</td>
-      <td>0.943</td>
+      <td>0.797</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.101</td>
+      <td>0.109</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>drift K=1.0</td>
-      <td>0.931</td>
+      <td>0.733</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.087</td>
+      <td>0.098</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>drift K=3.0</td>
-      <td>0.948</td>
+      <td>0.781</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.188</td>
+      <td>0.206</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>lambda_PV=0.5</td>
-      <td>0.939</td>
+      <td>0.756</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.126</td>
+      <td>0.140</td>
       <td>0.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>lambda_PV=0.9</td>
-      <td>0.938</td>
+      <td>0.755</td>
+      <td>3</td>
       <td>True</td>
-      <td>0.124</td>
+      <td>0.135</td>
       <td>0.0</td>
     </tr>
   </tbody>
 </table></div>
-<pre class="out">C:\Users\krish\AppData\Local\Temp\ipykernel_20356\3514174871.py:1: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+<pre class="out">C:\Users\krish\AppData\Local\Temp\ipykernel_25816\2682594466.py:1: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
   sub = emails.groupby('source', group_keys=False).apply(lambda g: g.head(40)).reset_index(drop=True)
 
-V-Triad is the TOP click rate in every case:  True
+V-Triad stays in the top 3 by click rate in every case:  True
+V-Triad rank across configs (1 = highest click rate): [3, 3, 3, 3, 3, 3, 3]
 workday fatigue effect positive in every case: True
 benign FPR &lt; 3% in every case:               True</pre>
 </section>
@@ -665,7 +674,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.506</td>
       <td>0.429</td>
       <td>0.100</td>
-      <td>1516</td>
+      <td>1344</td>
       <td>11.749</td>
     </tr>
     <tr>
@@ -673,7 +682,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.243</td>
       <td>0.427</td>
       <td>0.164</td>
-      <td>3480</td>
+      <td>3471</td>
       <td>8.890</td>
     </tr>
     <tr>
@@ -681,7 +690,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.344</td>
       <td>0.438</td>
       <td>0.213</td>
-      <td>2555</td>
+      <td>2450</td>
       <td>8.292</td>
     </tr>
   </tbody>
@@ -711,7 +720,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.259</td>
       <td>0.773</td>
       <td>0.950</td>
-      <td>3106</td>
+      <td>3066</td>
       <td>-13.329</td>
     </tr>
     <tr>
@@ -719,7 +728,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.242</td>
       <td>0.611</td>
       <td>0.971</td>
-      <td>1053</td>
+      <td>859</td>
       <td>-11.004</td>
     </tr>
     <tr>
@@ -727,7 +736,7 @@ benign FPR &lt; 3% in every case:               True</pre>
       <td>0.170</td>
       <td>0.694</td>
       <td>0.819</td>
-      <td>3855</td>
+      <td>3853</td>
       <td>-9.756</td>
     </tr>
   </tbody>
@@ -748,22 +757,22 @@ Damage Index vs ACTUAL phishing-click count: r = +0.092
   scale      239,250 decisions (30 agents x 5 hours x 1,595 emails)
 
   PER-SOURCE:  cues -&gt; click rate
-    hybrid_vtriad      cues=0.93   click=92.0%   &lt;-- fewest cues, most clicks
     ceas08             cues=1.90   click=82.7%
     phishbowl          cues=1.85   click=81.7%
+    hybrid_vtriad      cues=2.10   click=76.2%   &lt;-- AI, persuasion-guided (parity with top real phishing)
     nazario            cues=2.79   click=62.1%
     nigerian_fraud     cues=2.90   click=62.0%
-    multi_llm          cues=3.49   click=47.4%
+    multi_llm          cues=3.49   click=47.5%
     plain_llm          cues=4.64   click=27.8%
 
   benign FPR        0.1%
-  workday effect    +13.6%  (within-agent, 4pm-8am)
+  workday effect    +14.5%  (within-agent, 4pm-8am)
   cues&lt;-&gt;click      spearman -0.96
-  robustness        V-Triad top in 7/7 configs</pre>
+  robustness        V-Triad top-3 in 7/7 configs, rank range 3-3</pre>
 </section>
 <section id="caveats-honest-limits">
 <div class="sec-head"><span class="sec-num">!</span><h2>Caveats &amp; honest limits</h2></div>
-<div class="sec-md"><ul><li><strong>Coefficients are modeling choices.</strong> ED weights, JP exponents, <code>lambda_PV</code>, threshold drift and P_click centring were tuned for <code>[0,1]</code> bounds and monotonicity - <strong>not</strong> taken from any paper. Literature motivates the <strong>structure and signs</strong> only.</li><li><strong>The Shin-Carley <code>-5.584</code> PV coefficient</strong> is from the Phase-1 report and must be verified against the primary paper. The damage index (§16) is an index, not validation.</li><li><strong>Synthetic phishing is self-generated</strong> (Groq llama-3.3-70b, fictional entities only). No public V-Triad corpus exists, so this class cannot be sourced externally.</li><li><strong>The threshold still dominates between agents</strong> (r~0.98). Making it partly dynamic surfaced the within-agent fatigue effect; correlating it with traits is a further option.</li><li><strong>The v1-vs-v2 workday chart (§8) changes model <em>and</em> dataset</strong> - treat §9's within-agent measure as the clean evidence.</li><li><strong>Extraction model matters</strong>: cue counts differ measurably between models, so a corpus must be extracted by ONE model (the cache is scoped per model for this reason). These results use <strong>local gemma4:12b</strong>, and the V-Triad ranking <strong>replicates</strong> on Groq llama-4-scout - so the headline is not an artifact of one extractor. llama-3.1-8b is rejected: it over-flags benign email (~1.7 cues vs ~0.0). Recorded in <code>DATA_PROVENANCE.md</code>.</li><li><strong>Licences</strong>: sources marked ⚠️ in <code>DATA_PROVENANCE.md</code> have inherited/unclear licences - verify before publishing, cite the <em>original</em> corpora (not Kaggle mirrors), and ship loader code + DOIs rather than re-hosted data.</li><li><code>P_click</code> is a reporting index only - the click/report <strong>decisions</strong> come from the per-cue Bernoulli loop.</li></ul></div>
+<div class="sec-md"><ul><li><strong>Validity fix (Sept 2026):</strong> a panel review found ~72% of the published hybrid_vtriad rows were ordinary corporate announcements (a calendar update, a benefits notice) with no requested action and no destination — labelled phishing but with no actual attack path. Fixed at the generation-prompt and corpus level (see <code>07_vtriad_validity_fix.ipynb</code>); every number on this page reflects the corrected corpus. The headline changed as a direct, mechanistically-explainable result: V-Triad moved from the single lowest-cue/highest-click source to a 3-way cluster with the best real phishing.</li><li><strong>The llama-4-scout cross-extractor replication (below) was run on the PRE-FIX corpus and has not been re-verified against the corrected hybrid_vtriad content</strong> — treat that replication claim as stale until it is re-run.</li><li><strong>Coefficients are modeling choices.</strong> ED weights, JP exponents, <code>lambda_PV</code>, threshold drift and P_click centring were tuned for <code>[0,1]</code> bounds and monotonicity - <strong>not</strong> taken from any paper. Literature motivates the <strong>structure and signs</strong> only.</li><li><strong>The Shin-Carley <code>-5.584</code> PV coefficient</strong> is from the Phase-1 report and must be verified against the primary paper. The damage index (§16) is an index, not validation.</li><li><strong>Synthetic phishing is self-generated</strong> (Groq qwen/qwen3.8-27b as of the Sept 2026 validity fix — the prior model, llama-3.3-70b, was retired by Groq; fictional entities only). No public V-Triad corpus exists, so this class cannot be sourced externally.</li><li><strong>The threshold still dominates between agents</strong> (r~0.98). Making it partly dynamic surfaced the within-agent fatigue effect; correlating it with traits is a further option.</li><li><strong>The v1-vs-v2 workday chart (§8) changes model <em>and</em> dataset</strong> - treat §9's within-agent measure as the clean evidence.</li><li><strong>Extraction model matters</strong>: cue counts differ measurably between models, so a corpus must be extracted by ONE model (the cache is scoped per model for this reason). These results use <strong>local gemma4:12b</strong>. An earlier cross-check on Groq llama-4-scout replicated the ranking, but that check ran on the PRE-FIX corpus and has not been re-run since — treat cross-extractor replication as pending, not confirmed. llama-3.1-8b is rejected: it over-flags benign email (~1.7 cues vs ~0.0). Recorded in <code>DATA_PROVENANCE.md</code>.</li><li><strong>Licences</strong>: sources marked ⚠️ in <code>DATA_PROVENANCE.md</code> have inherited/unclear licences - verify before publishing, cite the <em>original</em> corpora (not Kaggle mirrors), and ship loader code + DOIs rather than re-hosted data.</li><li><code>P_click</code> is a reporting index only - the click/report <strong>decisions</strong> come from the per-cue Bernoulli loop.</li></ul></div>
 </section>
 
     <div class="end-note">

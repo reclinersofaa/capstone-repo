@@ -146,19 +146,22 @@ Corpus assembly. Non-destructive — never touches `master_emails.csv`.
 | Item | Notes |
 |---|---|
 | `DEFAULT_MODEL` | `meta-llama/llama-4-scout-17b-16e-instruct` — extraction (replication path; default is now local `gemma4:12b`) |
-| `GEN_MODEL` | `llama-3.3-70b-versatile` — generation only |
+| `GEN_MODEL` | `qwen/qwen3.8-27b` — generation only (as of the Sept 2026 validity fix; the prior model, `llama-3.3-70b-versatile`, was retired by Groq) |
 | `GroqExtractor.extract_batch(df, batch_size=10)` | cache-first + **batched** (10 emails/call) |
 | `GroqExtractor._call_batch()` | per-email fallback if the batch response is malformed |
-| `generate_phishing(style, n)` | `plain_llm` (obvious) / `hybrid_vtriad` (subtle) — fictional entities only |
+| `generate_phishing(style, n, batch_size=4)` | `plain_llm` (obvious) / `hybrid_vtriad` (subtle, requires a full attack path — pretext, action, destination, benefit) — fictional entities only; retries the same batch on a 429 instead of skipping it |
 
 **Model choice matters and is recorded in `DATA_PROVENANCE.md`:**
 - `gemma4:12b` (Ollama, local) — **the default and the published path.** Reproducible, no
   rate limit, no key, ~0.55s/email, whole corpus in ~13 min. Requires `"think": False`.
-- `llama-4-scout-17b` (Groq) — clean JSON, used for the **replication** run. Reproduces the
-  same source ranking, which is why the headline is not an extractor artifact.
-- `llama-3.3-70b-versatile` — equivalent quality, but its small free daily token cap 429s partway through a full corpus.
+- `llama-4-scout-17b` (Groq) — clean JSON, used for the **replication** run. Reproduced the
+  same source ranking pre-fix; that check has not been re-run since the V-Triad validity fix
+  and should be treated as stale, not confirmed, until it is.
+- `llama-3.3-70b-versatile` — **retired by Groq (confirmed via a live 404)**; was the
+  generation model until the Sept 2026 fix, replaced by `qwen/qwen3.8-27b`.
 - `llama-3.1-8b-instant` — fast but **over-flags benign** (~1.7 cues/email vs ~0.0) and muddies the V-Triad signal.
-- `openai/gpt-oss-*`, `qwen3`, `zai-glm-4.7` — reasoning-only: return no `content` field at all.
+- `openai/gpt-oss-*`, `qwen3` (base), `zai-glm-4.7` — reasoning-only for **extraction**: return no `content` field at all.
+- `groq/compound-mini`, `openai/gpt-oss-120b` — refuse the phishing-**generation** prompt outright ("I'm sorry, but I can't help with that"), even framed as academic defensive-security research; ruled out as `GEN_MODEL` candidates during the Sept 2026 fix regardless of extraction quality.
 
 > **Two traps that cost this project real time — both fail *silently*, yielding zero cues
 > that look exactly like "no cues found":**
