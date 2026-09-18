@@ -292,63 +292,66 @@
   "examples": [
    {
     "source": "plain_llm",
-    "sender": "john_doe@cloudstorage.tld",
-    "subject": "Shared Document: Confidential",
-    "body": "Dear Colleague, I have shared a confidential document with you. To access it, please click this link: https://www.cloudstorage.tld/shared/abc123. Please note that this document is confidential and should not be shared with anyone.",
-    "cues": [],
-    "n_cues": 0,
+    "sender": "calendar@apexcorp.info",
+    "subject": "Meeting Invite: Update Your Calendar",
+    "body": "Dear Attendee, please update your calendar to confirm your meeting invite. Click this link to update: http://apexcorp.info/meeting. Failure to do so will result in removal from the attendee list. Contact calendar@apexcorp.info for any queries.",
+    "cues": [
+     "generic_greeting",
+     "threats"
+    ],
+    "n_cues": 2,
     "engine": "gemma4:12b",
     "mode": "local",
-    "overall_click_rate": 100.0,
+    "overall_click_rate": 78.0,
     "per_hour": [
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
+      "click_rate": 70.0,
+      "clicked": 21,
+      "reported": 9,
       "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
       "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
       "label": "12pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
       "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
       "label": "2pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
       "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
       "label": "4pm",
-      "click_rate": 100.0,
-      "clicked": 30,
-      "reported": 0,
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
       "mean_p_click": 0.3
      }
     ],
-    "workday_delta": 0.0
+    "workday_delta": 20.0
    },
    {
     "source": "plain_llm",
-    "sender": "benefits@hr-enrollment-system.net",
-    "subject": "Action Required: Benefits Open Enrollment Closing Soon",
-    "body": "Hello,\r\n\r\nThis is a reminder that the annual benefits open enrollment window closes this Friday. If you have not yet made your selections for health, dental, and vision coverage for the upcoming plan year, you must do so before the deadline.\r\n\r\nEmployees who do not complete enrollment by Friday will automatically be assigned the lowest-tier health plan available, which may not provide adequate coverage for your family's medical needs. Most of your colleagues have already submitted their selections.\r\n\r\nLog in to review and submit your benefits choices:\r\nhttps://hr-open-enrollment.online/login\r\n\r\nYou will need your employee ID and date of birth to access the portal.\r\n\r\nHuman Resources Benefits Team",
+    "sender": "notify@onedrive-secure-share.net",
+    "subject": "OneDrive Alert: New Document Received",
+    "body": "OneDrive\r\n\r\nNEW DOCUMENT HAS BEEN SHARED WITH YOU\r\nReference ID: 88421-AXD\r\nStatus: Pending Review\r\n\r\nHello,\r\n\r\nA new document has been sent to your account and is awaiting your review. Due to security restrictions, the file will only remain available for a limited time before it expires automatically.\r\n\r\nTo access the document, please confirm your account credentials and proceed to the secure viewer page.\r\n\r\nClick here to view document:\r\nhttps://onedrive-document-access.online/view\r\n\r\nFailure to review this document within the time limit may result in permanent deletion.\r\n\r\nMicrosoft OneDrive Team\r\nDo not share this link with others.",
     "cues": [
      "urgency",
      "threats",
@@ -363,25 +366,25 @@
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 23.3,
-      "clicked": 7,
-      "reported": 23,
+      "click_rate": 26.7,
+      "clicked": 8,
+      "reported": 22,
       "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 23.3,
-      "clicked": 7,
-      "reported": 23,
+      "click_rate": 30.0,
+      "clicked": 9,
+      "reported": 21,
       "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
       "label": "12pm",
-      "click_rate": 30.0,
-      "clicked": 9,
-      "reported": 21,
+      "click_rate": 33.3,
+      "clicked": 10,
+      "reported": 20,
       "mean_p_click": 0.2
      },
      {
@@ -390,6 +393,65 @@
       "click_rate": 46.7,
       "clicked": 14,
       "reported": 16,
+      "mean_p_click": 0.3
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 40.0,
+      "clicked": 12,
+      "reported": 18,
+      "mean_p_click": 0.3
+     }
+    ],
+    "workday_delta": 13.3
+   },
+   {
+    "source": "plain_llm",
+    "sender": "security@syssecure.net",
+    "subject": "Account Verification Required",
+    "body": "Dear User, we need to verify your account information. Please click this link to confirm: https://cutt.ly/5fR9A. This is a one-time requirment. Regards, Security Team",
+    "cues": [
+     "urgency",
+     "generic_greeting",
+     "spelling_grammar",
+     "suspicious_link"
+    ],
+    "n_cues": 4,
+    "engine": "gemma4:12b",
+    "mode": "local",
+    "overall_click_rate": 33.3,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 23.3,
+      "clicked": 7,
+      "reported": 23,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 30.0,
+      "clicked": 9,
+      "reported": 21,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 0.2
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 40.0,
+      "clicked": 12,
+      "reported": 18,
       "mean_p_click": 0.3
      },
      {
@@ -405,9 +467,9 @@
    },
    {
     "source": "plain_llm",
-    "sender": "accounts@payment-resolution-center.net",
-    "subject": "Pending Payment Confirmation Required",
-    "body": "Hello Customer,\r\n\r\nWe are contacting you regarding a pending transaction that could not be fully processed due to incomplete payment verification. This may result in cancellation of services associated with your account if not resolved promptly.\r\n\r\nTo avoid any disruption, please review the transaction details and confirm your payment information as soon as possible. This process is necessary to ensure your account remains active.\r\n\r\nClick here to resolve payment: https://payment-verification-center.site/confirm\r\n\r\nFailure to complete this verification may lead to temporary suspension of related services. We recommend completing this step at the earliest convenience.\r\n\r\nAccounts Department",
+    "sender": "payroll@corp-salaryupdate.net",
+    "subject": "Payroll Processing Delay \u2013 Action Needed",
+    "body": "Hello Employee,\r\n\r\nWe encountered an issue while processing this month\u2019s payroll due to incomplete verification of employee banking details. Your account has been temporarily placed on hold until confirmation is received.\r\n\r\nTo prevent delays in your salary payment, please review and update your banking information through the secure payroll portal.\r\n\r\nClick here to update details: https://salary-verification-center.site/update\r\n\r\nMake sure all information entered is accurate, as incorrect details may cause further delays. This verification must be completed before the payroll deadline.\r\n\r\nPayroll Department",
     "cues": [
      "urgency",
      "threats",
@@ -418,22 +480,22 @@
     "n_cues": 5,
     "engine": "gemma4:12b",
     "mode": "local",
-    "overall_click_rate": 16.7,
+    "overall_click_rate": 19.3,
     "per_hour": [
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 10.0,
-      "clicked": 3,
-      "reported": 27,
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
       "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
       "mean_p_click": 0.2
      },
      {
@@ -447,69 +509,9 @@
      {
       "hour": 14.0,
       "label": "2pm",
-      "click_rate": 20.0,
-      "clicked": 6,
-      "reported": 24,
-      "mean_p_click": 0.3
-     },
-     {
-      "hour": 16.0,
-      "label": "4pm",
       "click_rate": 23.3,
       "clicked": 7,
       "reported": 23,
-      "mean_p_click": 0.3
-     }
-    ],
-    "workday_delta": 13.3
-   },
-   {
-    "source": "plain_llm",
-    "sender": "admin@softtech.xyz",
-    "subject": "Renew your SoftTech license now",
-    "body": "Dear Customer, your SoftTech software license is about to expire. You must renew now to avoid interruption of service. Click here to renew: http://bit.ly/softtech-renew. If you don't, your license will be suspended and you'll lose all your work.",
-    "cues": [
-     "generic_greeting",
-     "urgency",
-     "threats",
-     "suspicious_sender",
-     "suspicious_link"
-    ],
-    "n_cues": 5,
-    "engine": "gemma4:12b",
-    "mode": "local",
-    "overall_click_rate": 18.0,
-    "per_hour": [
-     {
-      "hour": 8.0,
-      "label": "8am",
-      "click_rate": 16.7,
-      "clicked": 5,
-      "reported": 25,
-      "mean_p_click": 0.2
-     },
-     {
-      "hour": 10.0,
-      "label": "10am",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 0.2
-     },
-     {
-      "hour": 12.0,
-      "label": "12pm",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
-      "mean_p_click": 0.2
-     },
-     {
-      "hour": 14.0,
-      "label": "2pm",
-      "click_rate": 20.0,
-      "clicked": 6,
-      "reported": 24,
       "mean_p_click": 0.3
      },
      {
@@ -521,13 +523,13 @@
       "mean_p_click": 0.3
      }
     ],
-    "workday_delta": 10.0
+    "workday_delta": 13.4
    },
    {
     "source": "plain_llm",
-    "sender": "payroll@emplyeeservice.io",
-    "subject": "Payroll Update: Action Required",
-    "body": "Dear Employee, we have updated our payroll system. You must log in to confirm your details. Click here to access: http://bit.ly/2VpZTI9. If you dont confirm, your payment will be delayed.",
+    "sender": "hr@emplify.biz",
+    "subject": "Benefits Enrollment: Action Required",
+    "body": "Dear Employee, you must enroll in our benefits program by the end of the week or you will loose your coverage. Please click on this link to access the enrollment form: https://tinyurl.com/y4ejwb. Don't miss this oppertunity to secure your benifits.",
     "cues": [
      "urgency",
      "threats",
@@ -539,50 +541,50 @@
     "n_cues": 6,
     "engine": "gemma4:12b",
     "mode": "local",
-    "overall_click_rate": 5.3,
+    "overall_click_rate": 9.3,
     "per_hour": [
      {
       "hour": 8.0,
       "label": "8am",
-      "click_rate": 3.3,
-      "clicked": 1,
-      "reported": 29,
+      "click_rate": 6.7,
+      "clicked": 2,
+      "reported": 28,
       "mean_p_click": 0.2
      },
      {
       "hour": 10.0,
       "label": "10am",
-      "click_rate": 0.0,
-      "clicked": 0,
-      "reported": 30,
+      "click_rate": 10.0,
+      "clicked": 3,
+      "reported": 27,
       "mean_p_click": 0.2
      },
      {
       "hour": 12.0,
       "label": "12pm",
-      "click_rate": 3.3,
-      "clicked": 1,
-      "reported": 29,
+      "click_rate": 6.7,
+      "clicked": 2,
+      "reported": 28,
       "mean_p_click": 0.2
      },
      {
       "hour": 14.0,
       "label": "2pm",
-      "click_rate": 6.7,
-      "clicked": 2,
-      "reported": 28,
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
       "mean_p_click": 0.3
      },
      {
       "hour": 16.0,
       "label": "4pm",
-      "click_rate": 13.3,
-      "clicked": 4,
-      "reported": 26,
+      "click_rate": 10.0,
+      "clicked": 3,
+      "reported": 27,
       "mean_p_click": 0.3
      }
     ],
-    "workday_delta": 10.0
+    "workday_delta": 3.3
    }
   ]
  },

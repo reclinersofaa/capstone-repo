@@ -40,8 +40,19 @@ def score(inp: EmailIn):
         return JSONResponse(status_code=400, content={"error": "Provide at least a subject or a body."})
     try:
         ext = extract_cues(inp.subject, inp.sender, inp.body)   # <- the swapper
-    except Exception as e:
+    except RuntimeError as e:
+        # extract_cues() only raises this for the one expected, already-friendly case:
+        # neither extractor is configured. Safe to show verbatim.
         return JSONResponse(status_code=503, content={"error": str(e)})
+    except Exception as e:
+        # Anything else (network error, malformed provider response, ...) is an
+        # unexpected failure -- log the real cause server-side, never leak a raw
+        # exception string onto the live results panel.
+        print(f"[api/score] unexpected extractor failure: {e!r}")
+        return JSONResponse(status_code=503, content={
+            "error": "The extractor hit an unexpected error. Try again, or switch to a "
+                     "preloaded example while it's investigated."
+        })
     result = score_email(ext["cues"], n_agents=max(5, min(int(inp.n_agents), 100)))
     result["engine"] = ext["engine"]
     result["mode"] = ext["mode"]
@@ -56,17 +67,15 @@ def index():
     return FileResponse(str(HERE / "static" / "index.html"))
 
 
-@app.get("/showcase")
-def showcase():
-    """Serve the static results showcase from the same server, for convenience."""
-    return FileResponse(str(HERE.parent / "showcase" / "index.html"))
-
-
 @app.get("/report")
-def report():
-    """Full-notebook report: every section of notebook 06, rendered from its saved outputs."""
+def report_alias():
+    """Old bookmark-friendly alias -> the report now lives under /showcase/."""
     return FileResponse(str(HERE.parent / "showcase" / "report.html"))
 
 
-app.mount("/report_assets", StaticFiles(directory=str(HERE.parent / "showcase" / "report_assets")),
-          name="report_assets")
+# Mounted (not FileResponse'd) so the showcase pages' own relative links
+# (index.html / report.html / mock_landing_page.html / report_assets/...) resolve
+# correctly under the server exactly as they do when the file is opened directly or
+# hosted elsewhere with no server at all -- see CLAUDE.md's "host it anywhere" note.
+# html=True serves index.html for a bare /showcase/ request.
+app.mount("/showcase", StaticFiles(directory=str(HERE.parent / "showcase"), html=True), name="showcase")

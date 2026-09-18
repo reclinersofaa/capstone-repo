@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fewer Flags, More Clicks — Phishing Susceptibility Simulation (PW26_SVM_01)</title>
+<title>Fewer Flags, More Clicks: Phishing Susceptibility Simulation (PW26_SVM_01)</title>
 <style>
   :root{
     --ground:#EEF0F4; --surface:#FBFCFD; --surface-2:#F3F5F9; --ink:#14181F;
@@ -46,6 +46,13 @@
   body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.55; -webkit-font-smoothing:antialiased; font-size:16px}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
   a{color:var(--accent-ink); text-decoration-thickness:1px; text-underline-offset:2px}
+
+  .demo-nav{position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+            background:var(--surface); border-bottom:1px solid var(--hairline); padding:10px 24px;
+            font-family:var(--font-mono); font-size:12px}
+  .demo-nav a{color:var(--muted); text-decoration:none; padding:6px 12px; border-radius:20px}
+  .demo-nav a:hover{background:var(--surface-2)}
+  .demo-nav a.active{background:var(--accent-wash); color:var(--accent-ink); font-weight:600}
 
   .f-sev-1{fill:var(--sev-1)}.f-sev-2{fill:var(--sev-2)}.f-sev-3{fill:var(--sev-3)}.f-sev-4{fill:var(--sev-4)}.f-sev-5{fill:var(--sev-5)}.f-sev-6{fill:var(--sev-6)}.f-sev-7{fill:var(--sev-7)}
   .bg-sev-1{background:var(--sev-1)}.bg-sev-2{background:var(--sev-2)}.bg-sev-3{background:var(--sev-3)}.bg-sev-4{background:var(--sev-4)}.bg-sev-5{background:var(--sev-5)}.bg-sev-6{background:var(--sev-6)}.bg-sev-7{background:var(--sev-7)}
@@ -138,6 +145,11 @@
 </style>
 </head>
 <body>
+<nav class="demo-nav">
+  <a href="index.html" class="active">Results Summary</a>
+  <a href="report.html">Full Report</a>
+  <a href="mock_landing_page.html">Phishing Demo &middot; NovaCorp</a>
+</nav>
 <div class="wrap">
   <header class="masthead">
     <div class="eyebrow">
@@ -146,7 +158,7 @@
       <span>Hybrid Agent-Based Modeling</span>
     </div>
     <h1>Fewer flags, <em>more clicks.</em></h1>
-    <p class="dek">A simulation of how detectable a phishing email <b>looks</b> versus how often a synthetic employee <b>falls for it</b> — across 1,595 emails from ten segregated sources. The persuasion-guided AI email reaches <b>parity with the best human-crafted spear-phishing</b> in evading detection, without requiring an attacker's expertise.</p>
+    <p class="dek">A simulation of how detectable a phishing email <b>looks</b> versus how often a synthetic employee <b>falls for it</b>, across 1,595 emails from ten segregated sources. The persuasion-guided AI email reaches <b>parity with the best human-crafted spear-phishing</b> in evading detection, without requiring an attacker's expertise.</p>
     <div class="tiles">
       <div class="tile"><span class="stripe"></span><div class="k">Emails · Sources</div><div class="v">1,595</div><div class="sub">10 segregated origins</div></div>
       <div class="tile"><span class="stripe"></span><div class="k">Decisions simulated</div><div class="v">239,250</div><div class="sub">agents × hours × emails</div></div>
@@ -156,7 +168,7 @@
   </header>
 
   <section>
-    <div class="sec-head"><span class="sec-num">01</span><div><h2>The core finding</h2><p class="sec-note">Each point is one email source. As average detectable cues rise (right), simulated click rate falls (down). The V-Triad AI email ranks 3rd overall, in a tight cluster with the two best-performing real, human-authored phishing sources (ceas08, phishbowl) — not an outlier alone in the corner.</p></div></div>
+    <div class="sec-head"><span class="sec-num">01</span><div><h2>The core finding</h2><p class="sec-note">Each point is one email source. As average detectable cues rise (right), simulated click rate falls (down). The V-Triad AI email ranks 3rd overall, in a tight cluster with the two best-performing real, human-authored phishing sources (ceas08, phishbowl), not an outlier alone in the corner.</p></div></div>
     <div class="grid-2">
       <figure class="card">
         <svg id="scatter" viewBox="0 0 640 430" role="img" aria-label="Scatter plot of average detectable cues versus click rate across seven phishing sources, showing a strong downward trend."></svg>
@@ -173,12 +185,12 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">02</span><div><h2>The corpus</h2><p class="sec-note">Ten sources kept strictly segregated — never blended — so cue behaviour and click rate can always be sliced by origin. Loaders and DOIs ship in the repo; the corpora themselves are not re-hosted.</p></div></div>
+    <div class="sec-head"><span class="sec-num">02</span><div><h2>The corpus</h2><p class="sec-note">Ten sources kept strictly segregated, never blended, so cue behaviour and click rate can always be sliced by origin. Loaders and DOIs ship in the repo; the corpora themselves are not re-hosted.</p></div></div>
     <div class="card comp-row" id="composition"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">03</span><div><h2>The workday effect</h2><p class="sec-note">The same agent, reading the same email, at 8am versus 4pm. As modelled fatigue accumulates across the day, susceptibility rises — a within-person effect held here as an honest, bracketed prediction (see §05).</p></div></div>
+    <div class="sec-head"><span class="sec-num">03</span><div><h2>The workday effect</h2><p class="sec-note">The same agent, reading the same email, at 8am versus 4pm. As modelled fatigue accumulates across the day, susceptibility rises, a within-person effect held here as an honest, bracketed prediction (see §05).</p></div></div>
     <div class="card day-wrap">
       <figure style="flex:1 1 340px; margin:0">
         <svg id="workday" viewBox="0 0 560 240" role="img" aria-label="Slope chart: simulated click rate rises from 55.8 percent at 8am to 70.3 percent at 4pm, a 14.5 point increase."></svg>
@@ -205,12 +217,12 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">05</span><div><h2>How to read these numbers</h2><p class="sec-note">The honest framing — the version that survives an examiner. Included on the showcase deliberately.</p></div></div>
+    <div class="sec-head"><span class="sec-num">05</span><div><h2>How to read these numbers</h2><p class="sec-note">The honest framing: the version that survives an examiner. Included on the showcase deliberately.</p></div></div>
     <div class="frame-grid">
-      <div class="note good"><h3>What the result is</h3><p>A <b>relative ranking</b> of email sources by detectability→susceptibility, under identical controlled conditions. Persuasion-guided AI phishing reaches <b>parity with the best human-authored spear-phishing</b> (ceas08, phishbowl) and clearly outperforms naive AI phishing — that ordering is the finding.</p></div>
+      <div class="note good"><h3>What the result is</h3><p>A <b>relative ranking</b> of email sources by detectability→susceptibility, under identical controlled conditions. Persuasion-guided AI phishing reaches <b>parity with the best human-authored spear-phishing</b> (ceas08, phishbowl) and clearly outperforms naive AI phishing, that ordering is the finding.</p></div>
       <div class="note"><h3>What it is not</h3><p>The absolute click rates (28–83%) are <b>not</b> population predictions. Verizon's DBIR reports a ~1.4% real-world median; these levels are an artifact of the model's parameterization. Read the rank order, not the percentages.</p></div>
-      <div class="note"><h3>Replication</h3><p>Cue extraction ran on <b>gemma4:12b (local)</b>. An earlier cross-check on <b>llama-4-scout-17b (hosted)</b> was run before a labelling-validity fix to the V-Triad corpus and is being re-verified — see notebook <code>07_vtriad_validity_fix.ipynb</code>.</p></div>
-      <div class="note"><h3>Reproducible &amp; offline</h3><p>Nothing on this page runs a model. Cue extractions are cached and the simulation is deterministic Python — the entire result set rebuilds from committed data with <b>no GPU and no API key</b>.</p></div>
+      <div class="note"><h3>Replication</h3><p>Cue extraction ran on <b>gemma4:12b (local)</b>. An earlier cross-check on <b>llama-4-scout-17b (hosted)</b> was run before a labelling-validity fix to the V-Triad corpus and is being re-verified, see notebook <code>07_vtriad_validity_fix.ipynb</code>.</p></div>
+      <div class="note"><h3>Reproducible &amp; offline</h3><p>Nothing on this page runs a model. Cue extractions are cached and the simulation is deterministic Python, the entire result set rebuilds from committed data with <b>no GPU and no API key</b>.</p></div>
     </div>
   </section>
 
@@ -218,7 +230,7 @@
     <div class="meta">
       <span>corpus 1,595 · 10 sources</span><span>239,250 decisions</span><span>extractor gemma4:12b (Ollama, local)</span><span>Spearman −0.96</span><span>benign FPR 0.12%</span>
     </div>
-    <p class="team">Adithya Kallaje · B. Thanav Reddy · Dattatreya K A · Krishna Venkatesh — guide Dr. Sapna V M · notebook 06_agent_simulation_v2</p>
+    <p class="team">Adithya Kallaje · B. Thanav Reddy · Dattatreya K A · Krishna Venkatesh &middot; guide Dr. Sapna V M &middot; notebook 06_agent_simulation_v2</p>
   </footer>
 </div>
 
@@ -260,7 +272,7 @@
     sources.forEach(function(d){
       var cx=px(d.cues),cy=py(d.click);
       var c=el('circle',{cx:cx,cy:cy,r:d.flag?9:7,'class':'pt f-sev-'+d.sv});
-      c.appendChild(el('title',{},d.name+' — '+d.cues+' cues, '+d.click+'% click'));
+      c.appendChild(el('title',{},d.name+' - '+d.cues+' cues, '+d.click+'% click'));
       svg.appendChild(c);
       var right=d.cues>3.5;
       var lbl=el('text',{x:cx+(right?-14:14),y:cy+(d.flag?-14:4),'text-anchor':right?'end':'start','class':'pt-label'+(d.flag?' f-accent-ink':'')},d.name);
@@ -300,7 +312,7 @@
       cl.parts.forEach(function(p,i){
         var s=document.createElement('span');
         s.className='bg-sev-'+cl.sv; s.style.flex=p[1]+' 0 0'; s.style.opacity=(1-i*0.16).toFixed(2);
-        s.title=p[0]+' — '+p[1];
+        s.title=p[0]+' - '+p[1];
         s.textContent = p[1]>=90 ? p[0].split(' ')[0]+' · '+p[1] : p[1];
         seg.appendChild(s);
       });

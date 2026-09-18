@@ -95,7 +95,9 @@
       <h1>Live phishing scorer</h1>
     </div>
     <div class="navbar">
-      <a class="nav-link" href="/report" target="_blank" rel="noopener">Full report &rarr;</a>
+      <a class="nav-link" href="/showcase/" target="_blank" rel="noopener">Results summary</a>
+      <a class="nav-link" href="/showcase/report.html" target="_blank" rel="noopener">Full report &rarr;</a>
+      <a class="nav-link" href="/showcase/mock_landing_page.html" target="_blank" rel="noopener">Phishing demo</a>
       <div id="badge" class="badge"><span class="led"></span><span id="badge-text">checking engine...</span></div>
     </div>
   </header>
@@ -201,10 +203,13 @@ function render(res){
    email for that category. No network call, no live model needed to show these. ---- */
 var CATEGORIES = {};      // filled from /static/examples.json
 var catIndex = {vtriad: 0, naive: 0, benign: 0};
+var renderToken = 0;      // bumped on every render so a stale in-flight /api/score
+                          // response can never overwrite a newer chip click or vice versa
 
 function showCategoryExample(cat){
   var group = CATEGORIES[cat];
   if(!group || !group.examples.length) return;
+  renderToken++;
   document.querySelectorAll('.chip-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.cat===cat); });
   var i = catIndex[cat] % group.examples.length;
   var ex = group.examples[i];
@@ -232,12 +237,16 @@ document.getElementById('go').addEventListener('click', function(){
   var btn=this, box=document.getElementById('result');
   var payload={sender:val('sender'),subject:val('subject'),body:val('body')};
   if(!payload.subject && !payload.body){ box.innerHTML='<div class="err">Add a subject or a body first.</div>'; return; }
+  var myToken = ++renderToken;
   btn.disabled=true; btn.textContent='Extracting cues and simulating...';
   box.innerHTML='<div class="placeholder">Extracting cues, then running 150 decisions...</div>';
   fetch('/api/score',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
-    .then(function(o){ if(!o.ok){ box.innerHTML='<div class="err">'+(o.j.error||'Scoring failed.')+'</div>'; } else { render(o.j); } })
-    .catch(function(e){ box.innerHTML='<div class="err">Could not reach the scorer: '+e+'</div>'; })
+    .then(function(o){
+      if(myToken !== renderToken) return;   // a chip click or another score landed first, drop this one
+      if(!o.ok){ box.innerHTML='<div class="err">'+(o.j.error||'Scoring failed.')+'</div>'; } else { render(o.j); }
+    })
+    .catch(function(e){ if(myToken === renderToken) box.innerHTML='<div class="err">Could not reach the scorer: '+e+'</div>'; })
     .finally(function(){ btn.disabled=false; btn.textContent='Score this email'; });
 });
 function val(id){ return document.getElementById(id).value.trim(); }
