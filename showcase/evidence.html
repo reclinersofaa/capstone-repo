@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why this is phishing: cue evidence</title>
+<style>
+  :root{ --ground:#f1f3f4; --card:#fff; --ink:#202124; --muted:#5f6368; --line:#dadce0; --blue:#1a73e8; --hl:#fde293; }
+  @media (prefers-color-scheme:dark){ :root{ --ground:#202124; --card:#2d2e31; --ink:#e8eaed; --muted:#9aa0a6; --line:#5f6368; --blue:#8ab4f8; --hl:#7a5c00; } }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  main{max-width:760px; margin:0 auto; padding:24px 16px 60px}
+  .nav{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px}
+  .nav a{font-size:.85rem; color:var(--muted); text-decoration:none; padding:5px 12px; border-radius:16px; border:1px solid var(--line)}
+  .nav a.active{background:var(--blue); color:#fff; border-color:var(--blue)}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-bottom:16px}
+  .hdr{font-size:.88rem; color:var(--muted); line-height:1.7; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:12px; word-break:break-all}
+  .hdr b{color:var(--ink)}
+  .subj{font-size:1.1rem; font-weight:600; margin-bottom:10px}
+  .body{white-space:pre-wrap; line-height:1.6; font-size:.95rem}
+  .cue{background:var(--hl); border-bottom:2px solid #e8a100; border-radius:3px; padding:0 2px}
+  .url{font-family:ui-monospace,Consolas,monospace; background:var(--ground); padding:0 4px; border-radius:3px}
+  .legend{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
+  .tag{font-size:.8rem; padding:3px 9px; border-radius:12px; background:var(--hl)}
+  .verdict{font-size:.92rem; margin-top:12px; color:var(--muted)}
+  .ctl{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:.9rem}
+  button{background:var(--blue); color:#fff; border:none; border-radius:16px; padding:8px 16px; cursor:pointer; font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+  <nav class="nav">
+    <a href="index.html">Results Summary</a>
+    <a href="report.html">Full Report</a>
+    <a href="evidence.html" class="active">Why it is phishing</a>
+    <a href="mock_landing_page.html">Phishing Demo</a>
+    <a href="quiz.html">Phishing Quiz</a>
+  </nav>
+  <div class="ctl"><span id="counter"></span><button id="next">Next email</button></div>
+  <div class="card" id="mail"></div>
+  <div class="card">
+    <div class="legend" id="legend"></div>
+    <p class="verdict" id="verdict"></p>
+  </div>
+</main>
+<script>
+(function(){
+  var CUE_TEXT = {
+    urgency:'Pressure to act now', threats:'Threatens a consequence', generic_greeting:'Impersonal greeting',
+    spelling_grammar:'Spelling or grammar problem', emotional_appeal:'Emotional pull', too_good_true:'Too-good-to-be-true offer',
+    personal_info:'Asks for sensitive details', suspicious_sender:'Sender looks mismatched', suspicious_link:'Link looks suspicious'
+  };
+  var items = [], i = 0;
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // Highlight each detected cue by the phrase in the body that signals it. Phrases come from
+  // the extractor's own cue names, so the highlight shows where the signal sits in the text.
+  var HINTS = {
+    urgency: /\b(now|immediately|today|urgent|within \d+ (hours?|days?)|act)\b/i,
+    threats: /\b(suspend|suspended|closed|blocked|terminat\w*|legal|penalt\w*|lose access|will be removed)\b/i,
+    generic_greeting: /^(dear [^,\n]+|hello [^,\n]+|hi there|to whom)[,.]?/im,
+    too_good_true: /\b(free|prize|reward|bonus|guaranteed|winner|congratulations)\b/i,
+    personal_info: /\b(password|credentials|verify your|bank|social security|account details|confirm your)\b/i,
+    emotional_appeal: /\b(urgent plea|please help|desperate|don't miss|selected)\b/i,
+    spelling_grammar: /\b(recieve|verfy|acount|pls|dont|recieved)\b/i,
+    suspicious_link: /https?:\/\/[^\s<>"']+/i,
+    suspicious_sender: null
+  };
+
+  function render(it){
+    var body = esc(it.body);
+    var marks = [];
+    (it.cues || []).forEach(function(c){
+      var re = HINTS[c]; if(!re) return;
+      var m = re.exec(body);
+      if(m) marks.push({start:m.index, end:m.index + m[0].length, cue:c});
+    });
+    marks.sort(function(a,b){ return a.start - b.start; });
+    var out = '', pos = 0;
+    marks.forEach(function(m){
+      if(m.start < pos) return;
+      out += body.slice(pos, m.start) + '<span class="cue" title="' + esc(CUE_TEXT[m.cue]) + '">' + body.slice(m.start, m.end) + '</span>';
+      pos = m.end;
+    });
+    out += body.slice(pos);
+    var linkOnly = marks.length === 0;
+    out = out.replace(/https?:\/\/[^\s<>&"']+/g, function(u){
+      return '<span class="' + (linkOnly ? 'cue' : 'url') + '" title="' + (linkOnly ? 'Link is the only signal here' : 'Link') + '">' + u + '</span>';
+    });
+
+    $('mail').innerHTML =
+      '<div class="hdr"><b>From:</b> ' + esc(it.sender) + '<br><b>Subject:</b> ' + esc(it.subject) + '</div>' +
+      '<div class="subj">' + esc(it.subject) + '</div><div class="body">' + out + '</div>';
+    $('counter').textContent = 'Email ' + (i + 1) + ' of ' + items.length + ' (' + it.source + ')';
+    var legend = '';
+    (it.cues || []).forEach(function(c){ legend += '<span class="tag">' + esc(CUE_TEXT[c] || c) + '</span>'; });
+    $('legend').innerHTML = legend || '<span class="tag">No red-flag cues detected</span>';
+    var n = (it.cues || []).length;
+    $('verdict').textContent = it.is_phishing
+      ? 'Phishing. ' + (n ? 'Highlighted: ' + n + ' cue(s) the model detected.' : 'No text cues were detected, so the highlighted link is the only signal.')
+      : 'Legitimate email, shown for comparison.';
+  }
+  function $(id){ return document.getElementById(id); }
+  $('next').addEventListener('click', function(){ i = (i + 1) % items.length; render(items[i]); });
+  fetch('evidence_items.json').then(function(r){ return r.json(); }).then(function(d){
+    items = d;
+    if(items.length) render(items[0]);
+  }).catch(function(){ $('counter').textContent = 'Could not load the emails.'; });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+[
+ {
+  "email_id": 1529,
+  "sender": "hr-payroll@aster-bio.com",
+  "subject": "Verification Notice: Direct Deposit Routing Update",
+  "body": "Hello,\n\nAs part of our recent security hardening measures, we are validating the banking details associated with active employee accounts. Our records indicate a pending update request for your direct deposit routing information that requires final employee confirmation to proceed.\n\nPlease visit the secure verification page linked below to review the proposed bank details. If these details are incorrect, you may update them directly within the portal. This step is mandatory to ensure your next payroll run processes without interruption.\n\nYou will be required to sign in using your standard employee ID and password to access the verification dashboard.\n\n[Link: https://shared-workspace.example.com/doc/aa486f25\n\nThank you for your cooperation in maintaining secure payroll operations.\n\nSincerely,\nAster Bio Payroll Administration",
+  "is_phishing": 1,
+  "source": "hybrid_vtriad",
+  "model_cues": [
+   "threats",
+   "suspicious_link"
+  ]
+ },
+ {
+  "email_id": 892,
+  "sender": "Aurelia Rudd <KatelyndefrayIrving@marchofdimes.com>",
+  "subject": "Penis Enlargment Reviews",
+  "body": "Now, thanks to an incredible breakthrough, there is a herbal supplement available on the market that is absolutely GUARANTEED to add inches to your manhood, as well as increase thickness, pleasure, and allow you to maintain a rock hard, solid erect1on through intercourse. Now, thanks to an incredible breakthrough, there is a herbal supplement available on the market that is absolutely GUARANTEED to add inches to your manhood, as well as increase thickness, pleasure, and allow you to maintain a rock hard, solid erect1on through intercourse. https://intranet-portal.example.com/doc/c2aee861",
+  "is_phishing": 1,
+  "source": "ceas08",
+  "model_cues": [
+   "too_good_true",
+   "suspicious_sender",
+   "suspicious_link"
+  ]
+ },
+ {
+  "email_id": 952,
+  "sender": "\"Microsoft Admin\" <MAILSERVERMESSAGE@OUTLOOK.COM>",
+  "subject": "Your Email account has been Iimited",
+  "body": "Dear Account Owner(jose@monkey.org) Mailbox Server update. 3840MB 4096MB Current size Maximum size Your Account will expire shortly, if you would like to continue using your email Address, Click here To Re-activate. This service is free. Thanks, Cpanel Team! This email has been checked for viruses by Avast antivirus software. www.avast.com Dear Account Owner(jose@monkey.org) Mailbox Server update. 3840MB 4096MB Current size Maximum size Your Account will expire shortly, if you would like to continue using your email Address, Click here To Re-activate.This service is free. Thanks,Cpanel Team! This email has been checked for viruses by Avast antivirus software. www.avast.com You can review the details here: https://hr-services.example.com/doc/e6cb2a3c",
+  "is_phishing": 1,
+  "source": "nazario",
+  "model_cues": [
+   "urgency",
+   "threats",
+   "generic_greeting",
+   "spelling_grammar",
+   "suspicious_sender",
+   "suspicious_link"
+  ]
+ },
+ {
+  "email_id": 1265,
+  "sender": "notify@onedrive-secure-share.net",
+  "subject": "OneDrive Alert: New Document Received",
+  "body": "OneDrive\r\n\r\nNEW DOCUMENT HAS BEEN SHARED WITH YOU\r\nReference ID: 88421-AXD\r\nStatus: Pending Review\r\n\r\nHello,\r\n\r\nA new document has been sent to your account and is awaiting your review. Due to security restrictions, the file will only remain available for a limited time before it expires automatically.\r\n\r\nTo access the document, please confirm your account credentials and proceed to the secure viewer page.\r\n\r\nClick here to view document:\r\nhttps://intranet-portal.example.com/doc/0ce2ffd2\r\n\r\nFailure to review this document within the time limit may result in permanent deletion.\r\n\r\nMicrosoft OneDrive Team\r\nDo not share this link with others.",
+  "is_phishing": 1,
+  "source": "plain_llm",
+  "model_cues": [
+   "urgency",
+   "threats",
+   "generic_greeting",
+   "personal_info",
+   "suspicious_sender",
+   "suspicious_link"
+  ]
+ },
+ {
+  "email_id": 1463,
+  "sender": "nan",
+  "subject": "Urgent: Expiring Security Certificate on Your Account",
+  "body": "Dear valued client, I am writing to bring to your attention a matter of utmost importance regarding the security of your account with YourBank. Our system has alerted us that the security certificate associated with your account is set to expire within the next 48 hours. This certificate is crucial for ensuring the encryption and protection of your sensitive financial information. If this certificate expires, your account will be temporarily suspended, and you will not be able to access your funds or conduct any transactions until the issue is resolved. To avoid any inconvenience, we strongly advise you to take immediate action. We recommend that you contact our dedicated Fraud Hotline at +1-800-555-1234 to speak with one of our security specialists. They will guide you through the process of renewing your security certificate and ensure that your account remains secure. Please have your account information ready when you call, as this will expedite the verification process. Our team is available 24/7 to assist you, and we urge you to call as soon as possible to prevent any disruption to your account services. Your prompt attention to this matter is greatly appreciated, and we look forward to resolving this issue swiftly. Sincerely, A Wealth Management Advisor support@your-bank-portal.com You can review the details here: https://it-helpdesk.example.com/doc/fe70c368",
+  "is_phishing": 1,
+  "source": "multi_llm",
+  "model_cues": [
+   "urgency",
+   "threats",
+   "generic_greeting",
+   "suspicious_sender",
+   "suspicious_link"
+  ]
+ },
+ {
+  "email_id": 153,
+  "sender": "Chris Garrigues <cwg-exmh@DeepEddy.Com>",
+  "subject": "Re: New Sequences Window",
+  "body": "> From: Chris Garrigues <cwg-exmh@DeepEddy.Com> > Date: Wed, 21 Aug 2002 10:40:39 -0500 > > > From: Chris Garrigues <cwg-exmh@DeepEddy.Com> > > Date: Wed, 21 Aug 2002 10:17:45 -0500 > > > > Ouch...I'll get right on it. > > > > > From: Robert Elz <kre@munnari.OZ.AU> > > > Date: Wed, 21 Aug 2002 19:30:01 +0700 > > > > > > Any chance of having that lengthen instead? I like all my exmh stuff > > > in nice columns (fits the display better). That is, I use the detache > d > > > folder list, one column. The main exmh window takes up full screen, > > > top to bottom, but less than half the width, etc... > > I thought about that. The first order approximation would be to just add > using pack .... -side top instead of pack ... -side left, however, since their > each a different width, it would look funny. I've done this. It's not as pretty as I think it should be, but it works. I'm going to leave the cosmetic issues to others. When I update the documentation, I'll add this to the exmh.TODO file. I'm leaving for a 2 1/2 week vacation in a week, so this is the last new functionality I'm going to add for a while. Also, I now have pretty much everything in there that I want for my own use, so I'm probably pretty much done. I'll work on bug fixes and documentation before my vacation, and hopefully do nothing more afterwards. Chris -- Chris Garrigues http://www.DeepEddy.Com/~cwg/ virCIO http://www.virCIO.Com 716 Congress, Suite 200 Austin, TX 78701 +1 512 374 0500 World War III: The Wrong-Doers Vs. the Evil-Doers.",
+  "is_phishing": 0,
+  "source": "spamassassin_ham",
+  "model_cues": []
+ },
+ {
+  "email_id": 210,
+  "sender": "Angles  Puglisi <angles@aminvestments.com>",
+  "subject": "Re: ALSA (almost) made easy (gamix rocks)",
+  "body": "This mixer is specific to ALSA's special stuff, I use it in addition to the other mixers if I need something special. I built it a while ago, may need a --rebuild. http://www.dudex.net/rpms/gamix-1.99.p13-aap1.i686.rpm http://www.dudex.net/rpms/gamix-1.99.p13-aap1.src.rpm http://www.dudex.net/rpms/gamix.spec Matthias Saou (matthias@egwn.net) wrote*: > >Once upon a time, Ville wrote : > >> Ah! The mixer stuff was what made me look for an init script in the >> first place, I didn't bother to check whether the existing stuff would >> have worked with that. Will try that out, you can assume silence == >> success :) > >Well, from what I've tried, both the main and the PCM (at least) volume >levels can be controlled either by \"alsamixer\" or the good old \"aumix\". > >> > >From what I can tell after only 2 days using it : ALSA rocks, >> > >especially >> > since having a full OSS compatibility results that it breaks nothing at >> > all! :-) >> >> Agreed. Though with only 2 hours experience... > >I guess/hope some other people from the list will try it out ;-) > >Both problems you reported (libasound.so and wrong xine dependency) are now >fixed in the current packages. > >Oh, it's maybe also worth pointing out : I've implemented at last sorting >by both last change date and alphabetically for my \"build list\" in the php >code : http://freshrpms.net/builds/ > >And yes, I accept patches/comments/suggestions about all those spec files! > >Matthias > > >_______________________________________________ >RPM-List mailing list <RPM-List@freshrpms.net> > -- That's \"angle\" as in geometry. _______________________________________________ RPM-List mailing list <RPM-List@freshrpms.net> http://lists.freshrpms.net/mailman/listinfo/rpm-list",
+  "is_phishing": 0,
+  "source": "spamassassin_ham",
+  "model_cues": []
+ },
+ {
+  "email_id": 766,
+  "sender": "Ellen Shaffer <ershaffer@cpath.org>",
+  "subject": "[Ip-health] Arrest of Korean FTA Opponents; protest letter",
+  "body": "-- [ Picked text/plain from multipart/alternative ] This group is leading the opposition to the IP provisions of the Korea-US free trade agreement. Please sign on to the protest below of the arrest of these leaders. - Ellen Shaffer >>The Korean Alliance against the Korea-U.S. FTA >> >>150-982 Daeyoung Building 3F, 139 >>Youngdeungpo-dong 2-ga, Youngdeungpo-gu, Seoul, Republic of Korea >> >>Tel: 82-2-775-2501 www.nofta.or.kr >> >> >> >>Official Release, July 3, 2007 >> >> >> >>To: The International Community Concerned about >>Democratic Principles and Economic and Social Justice >> >> >> >>Re: International Protest Letter against the >>Arrests of Co-Chairs of the Korean Alliance against the Korea-U.S. FTA >> >> >> >>Included: International Protest Letter >> >> >> >>The Situation >> >> >> >>On Tuesday, July 03, 2007, two Co-Chairs of the >>Korean Alliance against the Korea-U.S. FTA, Oh >>Jong-ryul and Jung Gwang-hoon, were arrested on >>charges of carrying out âillegalâ and >>ânon-permittedâ protests against the free >>trade agreement between U.S. and Korea. Mr. Oh >>and Mr. Jung are currently detained at a police >>station in Seoul; in a few days, they will be >>relocated to another jail where they will await >>sentencing. Koreaâs consitution does not >>recognize a permit system for rallies; only a >>notice needs to be given, which we have done so >>without fail. We, the Korean Alliance, thus >>feel that their arrests are a direct violation >>of democratic and constitutional right to >>assemble and express our opinion. Since its >>formation in March 2006, the Korean Alliance >>has organized peaceful and legal demonstrations >>against what we think is a seriously unjust >>agreement for the people of Korea, the U.S., >>and the world. However, since November 2006, >>the Roh Moo-hyun Administration has declared >>all Korean Allianceâs public rallies illegal. >>Police suppression has been severe on all >>activities of the Korean Alliance. We believe >>that the Roh Moo-hyun Administration has >>gravely violated fundamental rights of the >>people to assemble and oppose any unjust government practices. >> >> >> >>Mr. Oh was born in 1938 in the city of Kwangju. >>He helped establish the Korean Teachers and >>Education Workersâ Union, for which he was >>imprisoned. He has worked tirelessly for >>democracy, unification, and the abolition of >>Koreaâs National Security Law, the latter for >>which he was again imprisoned. Mr. Jung was >>born in 1939 in the city of Haenam. He has been >>active in the democratic movement to demand >>government responsibility, for which he was >>imprisoned for 4 years. He has served as >>President of the Korean Peasantsâ League, the >>national federation of small farmersâ >>organizations. He has for years led the >>farmersâ movement against the WTO and free trade. >> >> >> >>Call for International Protest Letter >> >> >> >>We ask the international community to carefully >>consider the situation of Korea. What is >>happening in Korea happens daily around the >>world. We call upon individuals and >>organziations to endorse this protest letter. >> >> >> >>Please send endoresements via email to >>interstruggle@gmail.com >> >> >> >>Indicate that you endorse this letter, then >>give us your name, organization, city, and country. >> >> >> >>Timing is crucial, so please send us your endorsements by July 13, 2007 >> >> >> >>International Protest Letter >> >>In Protest against the Arrests of Oh Jong-ryul and Jung Gwang-hoon >> >> >> >>We Demand their Immediate Release! >> >>We Demand an Immediate End to Police Suppression of the Korean Alliance! >> >> >> >>July 3, 2007 >> >> >> >>From: International Community Concerned about >>Democratic Principles and Economic and Social Justice >> >> >> >>To: South Koreaâs President Roh Moo-hyun >> >> >> >>We are serisouly disappointed and troubled by >>the police suppression of the Korean Alliance >>against the Korea-U.S. FTA and the arrests of >>its two officers. We write this urgent letter >>to demand 1) the immediate release of Mr. Oh >>Jong-ryul and Mr. Jung Gwang-hoon, two >>Co-Chairs of the Korean Alliance and 2) an >>immediate end to police suppression of the Korean Alliance. >> >> >> >>First, the arrests of Mr. Oh and Mr. Jung are a >>direct violation of basic democratic principles >>and constitutional rights. We believe that >>South Korea is a democratic nation that >>guarantees, under the constitution, the right >>to associate and oppose unjust practices of >>ruling authority. These rights are fundamental >>to any democratic nation, and we strongly feel >>that today's arrests may represent a >>retrogression of Korea's status as a democratic >>nation. In addition, the policeâs disregard >>for their old age and health conditions shows a sign of inhumane treatment. >> >> >> >>Second, their arrests are an infringement of >>international principles of political and civil >>rights. As a member of the United Nations, >>South Korea has signed on to connventions that >>protect and promote the advancement of social >>freedom and human rights. South Korea has made >>important democratic strides since the 1970s. >>We have witnessed this transformation. We urge >>the Roh Moo-hyun Administration, elected by >>democratic means, to not forget Koreaâs >>history and to foster international and >>democratic principles. The rights of the people >>to assemble and express their voices must be protected. >> >> >> >>And third, we demand an immediate end of police >>suppression against the Korean Alliance. We are >>aware that South Koreaâs constitution >>(Article 21) does not recognize a permit system >>for rallies; only notices need to be given, >>which the Korean Alliance has done without >>fail. Therefore, we believe that the activities >>of the Korean Alliance is by no means illegal. >>The police suppression of FTA protests, which >>we have seen in the media, is shocking. The >>fact that the Korean Allianceâs activities >>a",
+  "is_phishing": 0,
+  "source": "trec07_ham",
+  "model_cues": [
+   "suspicious_sender"
+  ]
+ },
+ {
+  "email_id": 775,
+  "sender": "Andy Weller <weller@erdw.ethz.ch>",
+  "subject": "[R] (Heuristic?) salient feature selection",
+  "body": "Dear all, I am new to R and statistics really in general. I am hoping that someone will be able to point me in the right direction and/or suggest a technique/package/reference that will help me with the following. I have: Some input variables (integers, real) Some output variables (integers, real) and I want to find out which between the two correlate best - i.e. the salient features. I also need to know the confidence between them. I hope this makes sense? I look forward to your replies, Andy ______________________________________________ R-help@stat.math.ethz.ch mailing list https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the posting guide http://www.R-project.org/posting-guide.html and provide commented, minimal, self-contained, reproducible code.",
+  "is_phishing": 0,
+  "source": "trec07_ham",
+  "model_cues": []
+ },
+ {
+  "email_id": 593,
+  "sender": "networkcommerce-tdtl20011226@ombramarketing.com",
+  "subject": "Put on holiday pounds? Pay Nothing to Lose Weight!",
+  "body": "[IMAGE] NCI Marketing Web Alert [IMAGE]Phillip Lose up to 10 pounds or more for free[IMAGE] [IMAGE] Start today [IMAGE] You are receiving this special offer because you have provided permission to receive third party email communications regarding special online promotions or offers. If you do not wish to receive any further messages from Network Commerce, please click here to unsubscribe. Any third-party offers contained in this email are the sole responsibility of the offer originator. Copyright ? 2001 Network Commerce Inc.",
+  "is_phishing": 0,
+  "source": "enron_clean",
+  "model_cues": [
+   "too_good_true",
+   "suspicious_sender"
+  ]
+ }
+]

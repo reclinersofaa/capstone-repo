@@ -290,6 +290,18 @@ def write_datasheet(manifest: dict, out: Path = OUT_MD):
             L.append(f"- Batching: {mm['batching']}")
         L.append(f"- Note: {mm['note']}\n")
 
+    L.append("\n## Corpus transforms applied after ingestion\n")
+    L.append("- **Inert links on every phishing item (Oct 2026).** Each phishing body's URLs were replaced "
+             "with a subdomain of the reserved `example.com` domain (RFC 2606) as a portal-style address, and phishing bodies without a URL "
+             "received one. The original source links were usually obviously suspicious or shortened, so "
+             "link quality varied by source. Normalizing it removes that as a confound between sources; "
+             "the cue counts reflect wording, not link quality. Benign rows are unchanged. The pre-transform "
+             "corpus is kept as `master_emails_v2.csv.bak_pre_links`.")
+    L.append("- **Simulated workforce.** The 30 simulated employees are six departments of five each, with fixed "
+             "scenario baselines (`src/scenarios.py`). These are modelling assumptions, not measured data. "
+             "Randomness is confined to the per-cue decision loop and is varied across seeds in the robustness "
+             "analysis.\n")
+
     L.append("\n## Publication policy\n")
     L.append("- **Ship loader code + DOIs/URLs, not re-hosted corpora.** This repo's `src/dataset_v2.py` "
              "reconstructs the corpus from the original sources; we do not redistribute third-party email data.")

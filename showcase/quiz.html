@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phishing Quiz: PES Capstone PW26_SVM_01</title>
+<style>
+  :root{
+    --ground:#f1f3f4; --card:#ffffff; --ink:#202124; --muted:#5f6368; --line:#dadce0;
+    --blue:#1a73e8; --blue-ink:#174ea6; --red:#c5221f; --red-wash:#fce8e6; --green:#137333; --green-wash:#e6f4ea;
+    --shadow:0 1px 2px rgba(60,64,67,.25), 0 1px 3px 1px rgba(60,64,67,.15);
+    --font:"Google Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --ground:#202124; --card:#2d2e31; --ink:#e8eaed; --muted:#9aa0a6; --line:#5f6368;
+      --blue:#8ab4f8; --blue-ink:#aecbfa; --red:#f28b82; --red-wash:#3c1f1d; --green:#81c995; --green-wash:#1b3324;
+      --shadow:0 1px 2px rgba(0,0,0,.5); }
+  }
+  :root[data-theme="light"]{ --ground:#f1f3f4; --card:#ffffff; --ink:#202124; --muted:#5f6368; --line:#dadce0; --blue:#1a73e8; --blue-ink:#174ea6; --red:#c5221f; --red-wash:#fce8e6; --green:#137333; --green-wash:#e6f4ea; }
+  :root[data-theme="dark"]{ --ground:#202124; --card:#2d2e31; --ink:#e8eaed; --muted:#9aa0a6; --line:#5f6368; --blue:#8ab4f8; --blue-ink:#aecbfa; --red:#f28b82; --red-wash:#3c1f1d; --green:#81c995; --green-wash:#1b3324; }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--font); min-height:100vh}
+  header.top{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; background:var(--card); border-bottom:1px solid var(--line)}
+  header.top .brand{font-size:1.05rem; color:var(--muted)}
+  header.top .brand b{color:var(--ink); font-weight:600}
+  header.top .count{color:var(--blue); font-weight:600; font-size:.95rem}
+  main{max-width:760px; margin:0 auto; padding:28px 16px 60px}
+  .panel{background:var(--card); border-radius:12px; box-shadow:var(--shadow); padding:26px 28px; margin-bottom:18px}
+  h1{font-size:1.9rem; font-weight:400; margin:6px 0 12px; text-align:center}
+  h2{font-size:1.15rem; font-weight:500; margin:0 0 10px}
+  p{line-height:1.6; margin:0 0 12px; font-size:.97rem}
+  .muted{color:var(--muted); font-size:.9rem}
+  .essay p{font-size:.96rem}
+  .essay h3{font-size:.95rem; margin:18px 0 6px; font-weight:600}
+  label{display:block; font-size:.92rem; margin:12px 0 6px}
+  select, input[type=text]{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); font-size:.95rem; font-family:inherit}
+  .check{display:flex; gap:10px; align-items:flex-start; font-size:.92rem; margin:16px 0; line-height:1.5}
+  .btn{display:inline-block; background:var(--blue); color:#fff; border:none; border-radius:20px; padding:10px 22px; font-size:.95rem; font-weight:500; cursor:pointer; font-family:inherit}
+  .btn:disabled{opacity:.45; cursor:not-allowed}
+  .btn.ghost{background:transparent; color:var(--blue); border:1px solid var(--line)}
+  .btn.wide{display:block; width:100%; padding:14px; border-radius:24px; font-size:1rem}
+  .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:18px 0 6px}
+  .prompt{text-align:center; margin:14px 0 18px; font-size:1.05rem}
+  .email{border:1px solid var(--line); border-radius:10px; padding:18px 20px; background:var(--card)}
+  .email .meta{font-size:.85rem; color:var(--muted); margin-bottom:4px; word-break:break-all}
+  .email .subj{font-size:1.1rem; margin:8px 0 14px; font-weight:500}
+  .email .body{font-size:.94rem; line-height:1.6; white-space:pre-wrap; word-break:break-word}
+  .linkish{font-family:ui-monospace,Consolas,monospace; font-size:.85rem; background:var(--ground); padding:1px 6px; border-radius:4px; color:var(--blue-ink); cursor:default; user-select:all}
+  .verdict{border-radius:10px; padding:16px 18px; margin-bottom:14px}
+  .verdict.right{background:var(--green-wash); color:var(--green)}
+  .verdict.wrong{background:var(--red-wash); color:var(--red)}
+  .verdict b{font-size:1.05rem}
+  .cue{padding:10px 0; border-bottom:1px solid var(--line); font-size:.9rem}
+  .cue:last-child{border-bottom:none}
+  .tag{display:inline-block; font-size:.78rem; font-family:ui-monospace,Consolas,monospace; padding:2px 8px; border-radius:10px; background:var(--red-wash); color:var(--red); margin-right:6px}
+  .none{color:var(--muted); font-size:.9rem}
+  .hidden{display:none !important}
+  .score{font-size:2.6rem; text-align:center; margin:8px 0; font-weight:400}
+  .stat{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0}
+  .stat div{background:var(--ground); border-radius:10px; padding:12px; text-align:center}
+  .stat .k{font-size:.78rem; color:var(--muted)}
+  .stat .v{font-size:1.2rem; margin-top:4px}
+  .err{color:var(--red); font-size:.9rem; margin-top:10px}
+  .navtabs{display:flex; gap:6px; flex-wrap:wrap; margin:0 0 14px}
+  .navtabs a{font-size:.85rem; color:var(--muted); text-decoration:none; padding:5px 12px; border-radius:16px; border:1px solid var(--line)}
+  .navtabs a.active{background:var(--blue); color:#fff; border-color:var(--blue)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>Phishing Quiz</b> &middot; PES Capstone PW26_SVM_01</div>
+  <div class="count" id="counter"></div>
+</header>
+<main>
+  <nav class="navtabs">
+    <a href="index.html">Results Summary</a>
+    <a href="report.html">Full Report</a>
+    <a href="evidence.html">Why it is phishing</a>
+    <a href="mock_landing_page.html">Phishing Demo</a>
+    <a href="quiz.html" class="active">Phishing Quiz</a>
+  </nav>
+
+  <!-- 1. Intro essay + consent -->
+  <section id="intro" class="panel essay">
+    <h1>Can you spot a phishing email?</h1>
+    <p>Thank you for helping our capstone research. This short quiz shows you ten emails, five phishing and five legitimate. For each one, decide whether it is phishing or legitimate, then read what the model found in the message.</p>
+    <h3>Why we are doing this</h3>
+    <p>Our project simulates how employees in different departments respond to phishing. The simulation needs realistic inputs, and it is only as good as the evidence behind it. Your answers, and how long you take to answer, let us check how the simulated employees' assumptions compare with how people actually judge these emails.</p>
+    <h3>What we record</h3>
+    <p>For each question we record: your answer, whether it was right, and how many milliseconds you took. If you choose, you also tell us your department. We assign a random anonymous ID that is stored in this browser. We do not record your name, your email address, or anything you type in other fields.</p>
+    <h3>Things to know</h3>
+    <p>Every link in these emails is inert. The domains are the reserved <span class="linkish">example.com</span> domain, which is never registered to anyone and cannot be reached, and the links are not clickable here. Please do not type real passwords or personal details anywhere in this quiz. Taking part is voluntary, and you can stop at any time by closing the tab. Responses already submitted can be withdrawn by sending the anonymous ID shown on the final screen to the team.</p>
+    <label for="dept">Your department (optional)</label>
+    <select id="dept">
+      <option value="">Prefer not to say</option>
+      <option>Finance &amp; Accounts Payable</option>
+      <option>IT Service Desk</option>
+      <option>Human Resources</option>
+      <option>Regional Sales</option>
+      <option>Operations &amp; Logistics (shift)</option>
+      <option>Customer Support (contact centre)</option>
+      <option>Other / not listed</option>
+    </select>
+    <p class="muted">Your anonymous ID for withdrawal: <span id="pidIntro"></span></p>
+    <label class="check"><input type="checkbox" id="consent"> <span>I have read this, I am 18 or older, and I agree to take part and for my anonymous answers and timings to be used for this capstone research.</span></label>
+    <div class="err" id="loadErr"></div>
+    <div class="row"><button class="btn" id="startBtn" disabled>Start the quiz</button></div>
+  </section>
+
+  <!-- 2. Question -->
+  <section id="question" class="panel hidden">
+    <h2 id="qTitle">Question 1 of 10</h2>
+    <div class="email">
+      <div class="meta" id="qFrom"></div>
+      <div class="subj" id="qSubj"></div>
+      <div class="body" id="qBody"></div>
+    </div>
+    <p class="prompt">Is this email phishing or legitimate?</p>
+    <div class="row">
+      <button class="btn" id="ansPhish">Phishing</button>
+      <button class="btn" id="ansLegit">Legitimate</button>
+    </div>
+  </section>
+
+  <!-- 3. Reveal -->
+  <section id="reveal" class="panel hidden">
+    <div id="verdict" class="verdict"></div>
+    <h2>What the model found</h2>
+    <div id="cueList"></div>
+    <div class="row"><button class="btn" id="nextBtn">Next email</button></div>
+  </section>
+
+  <!-- 4. Final -->
+  <section id="final" class="panel hidden">
+    <h1>Quiz complete</h1>
+    <div class="score" id="finalScore"></div>
+    <div class="stat">
+      <div><div class="k">Average time</div><div class="v" id="avgTime"></div></div>
+      <div><div class="k">Phishing correct</div><div class="v" id="phishAcc"></div></div>
+      <div><div class="k">Legit correct</div><div class="v" id="legitAcc"></div></div>
+    </div>
+    <p class="muted">Your anonymous ID: <span id="pid"></span>. Keep it if you want to withdraw your answers later.</p>
+    <p class="muted" id="saveState"></p>
+    <div class="row"><a class="btn ghost" href="index.html">See the simulation results</a></div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var items = [], idx = 0, answers = [], activeMs = 0, resumedAt = 0, showing = false;
+  var PID_KEY = 'pes_quiz_pid';
+  var pid = null;
+  try { pid = localStorage.getItem(PID_KEY); } catch(e) {}
+  if(!pid){
+    pid = 'q-' + Math.random().toString(36).slice(2, 8) + '-' + Date.now().toString(36).slice(-4);
+    try { localStorage.setItem(PID_KEY, pid); } catch(e) {}
+  }
+  $ids();
+  function $ids(){ var el = document.getElementById('pidIntro'); if(el) el.textContent = pid; }
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  // Active time only: the clock stops while the tab is hidden, so a switched tab does not count.
+  function resumeClock(){ resumedAt = performance.now(); }
+  function pauseClock(){ if(resumedAt){ activeMs += performance.now() - resumedAt; resumedAt = 0; } }
+  document.addEventListener('visibilitychange', function(){
+    if(!showing) return;
+    if(document.hidden) pauseClock(); else resumeClock();
+  });
+  var $ = function(id){ return document.getElementById(id); };
+  function show(id){ ['intro','question','reveal','final'].forEach(function(s){ $(s).classList.toggle('hidden', s !== id); }); }
+
+  fetch('quiz_items.json').then(function(r){
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function(d){
+    if(!Array.isArray(d) || d.length === 0) throw new Error('empty item list');
+    items = d;
+  }).catch(function(){
+    $('loadErr').textContent = 'The quiz questions could not be loaded. Please tell the research team.';
+    $('startBtn').disabled = true;
+  });
+
+  $('consent').addEventListener('change', function(){ $('startBtn').disabled = !this.checked; });
+
+  $('startBtn').addEventListener('click', function(){
+    idx = 0; answers = []; consentAt = new Date().toISOString();
+    items = shuffle(items.slice());   // each participant sees a different order
+    showQuestion();
+  });
+  var consentAt = null;
+
+  function showQuestion(){
+    var it = items[idx];
+    $('counter').textContent = (idx + 1) + ' / ' + items.length;
+    $('qTitle').textContent = 'Question ' + (idx + 1) + ' of ' + items.length;
+    $('qFrom').textContent = 'From: ' + it.sender;
+    $('qSubj').textContent = it.subject;
+    $('qBody').innerHTML = renderBody(it.body);
+    show('question');
+    activeMs = 0; showing = true; resumeClock();
+  }
+
+  // Links are shown as inert text (not anchors) so nobody navigates away from the quiz.
+  function renderBody(text){
+    var esc = function(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+    return esc(text).replace(/https?:\/\/[^\s<]+/g, function(u){ return '<span class="linkish">' + u + '</span>'; });
+  }
+
+  function answer(choice){
+    var it = items[idx];
+    pauseClock(); showing = false;
+    var ms = Math.round(activeMs);
+    var correct = (choice === it.is_phishing);
+    var rec = {participant_id: pid, consent_at: consentAt, question: idx + 1, email_id: it.email_id,
+               is_phishing: it.is_phishing, answer: choice ? 'phishing' : 'legitimate',
+               correct: correct ? 1 : 0, response_ms: ms, long_pause: ms > 120000 ? 1 : 0,
+               department: $('dept').value || 'not_given', ts: new Date().toISOString()};
+    answers.push(rec);
+    sendRecord(rec);
+    showReveal(it, correct);
+  }
+
+  function showReveal(it, correct){
+    var v = $('verdict');
+    v.className = 'verdict ' + (correct ? 'right' : 'wrong');
+    v.innerHTML = '<b>' + (correct ? 'Correct.' : 'Not quite.') + '</b> This email was ' +
+      (it.is_phishing ? 'phishing.' : 'legitimate.');
+    var html = '';
+    var cues = it.model_cues || [];
+    if(cues.length){
+      cues.forEach(function(c){
+        html += '<div class="cue"><span class="tag">' + c.replace(/_/g,' ') + '</span>' + cueHelp(c) + '</div>';
+      });
+    } else {
+      html += '<div class="none">The model found no red-flag cues in this email.' +
+        (it.is_phishing ? ' Many phishing emails look like this, which is part of why they work.' : '') + '</div>';
+    }
+    $('cueList').innerHTML = html;
+    var last = idx === items.length - 1;
+    $('nextBtn').textContent = last ? 'See my results' : 'Next email';
+    show('reveal');
+  }
+
+  function cueHelp(c){
+    var help = {
+      urgency: 'pressure to act immediately',
+      threats: 'warning of negative consequences',
+      generic_greeting: 'impersonal opener, no name',
+      spelling_grammar: 'spelling or grammar errors',
+      emotional_appeal: 'strong emotional pull',
+      too_good_true: 'unrealistic reward',
+      personal_info: 'asks for sensitive details',
+      suspicious_sender: 'sender looks spoofed or mismatched',
+      suspicious_link: 'link looks odd, shortened, or off-brand'
+    };
+    return help[c] || '';
+  }
+
+  $('ansPhish').addEventListener('click', function(){ answer(1); });
+  $('ansLegit').addEventListener('click', function(){ answer(0); });
+  $('nextBtn').addEventListener('click', function(){
+    if(idx < items.length - 1){ idx++; showQuestion(); } else { showFinal(); }
+  });
+
+  function showFinal(){
+    var n = answers.length, right = answers.filter(function(a){ return a.correct; }).length;
+    $('finalScore').textContent = right + ' / ' + n;
+    var avg = Math.round(answers.reduce(function(s,a){ return s + a.response_ms; }, 0) / n);
+    $('avgTime').textContent = (avg / 1000).toFixed(1) + ' s';
+    var ph = answers.filter(function(a){ return a.is_phishing; }), lg = answers.filter(function(a){ return !a.is_phishing; });
+    $('phishAcc').textContent = ph.filter(function(a){ return a.correct; }).length + ' / ' + ph.length;
+    $('legitAcc').textContent = lg.filter(function(a){ return a.correct; }).length + ' / ' + lg.length;
+    $('pid').textContent = pid;
+    $('counter').textContent = '';
+    show('final');
+  }
+
+  // Each answer is posted when given. A failed post is shown to the participant, not hidden.
+  function sendRecord(rec){
+    fetch('/api/quiz/response', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(rec)})
+      .then(function(r){
+        if($('saveState')) $('saveState').textContent = r.ok ? 'Your answers are saved.'
+          : 'Your last answer could not be saved. Please tell the research team.';
+      })
+      .catch(function(){ if($('saveState')) $('saveState').textContent = 'Your last answer could not be saved (the server is unreachable).'; });
+  }
+})();
+</script>
+</body>
+</html>

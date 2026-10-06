@@ -207,7 +207,7 @@ Benign pass rate 98.7% (false-positive rate ≈ 1.3%).
 
 **Headline finding (v1, this 50-email hybrid_vtriad batch):** hybrid V-Triad phishing fools the most agents *because it contains the fewest detectable cues* — guided-LLM emails read like legitimate corporate mail, while naive LLM output is full of obvious "act now / suspended" language that agents catch. Sophistication is inversely related to detectability.
 
-*(Note: `README.md` quotes higher click numbers from an older run; the numbers above are what the committed results CSV actually contains. More importantly: v2's much larger hybrid_vtriad batch (120 emails) was later found to contain a labelling defect — many rows had no actual attack path — and was fixed. The v2 corrected finding is **parity with the best real phishing, not the single most dangerous source**; see `README.md` and `notebooks/07_vtriad_validity_fix.ipynb`. This v1 batch was not re-audited against that validator, so read this section's "fools the most" framing as v1-specific history, not the project's current claim.)*
+*(Note: `README.md` quotes higher click numbers from an older run; the numbers above are what the committed results CSV actually contains. More importantly: v2's much larger hybrid_vtriad batch (120 emails) was later found to contain a labelling defect — many rows had no actual attack path — and was fixed. The v2 corrected finding is **second of seven, behind the strongest real phishing, not the single most dangerous source**; see `README.md` and `notebooks/07_vtriad_validity_fix.ipynb`. This v1 batch was not re-audited against that validator, so read this section's "fools the most" framing as v1-specific history, not the project's current claim.)*
 
 ---
 

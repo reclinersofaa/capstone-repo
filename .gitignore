@@ -113,3 +113,6 @@ PC_CLAUDE.md
 
 # Scratch probe, superseded by src/ollama_extractor.py (which sends think=False)
 test_gemma.py
+
+# Human-subject quiz responses: personal research data, never committed.
+data/human_quiz/

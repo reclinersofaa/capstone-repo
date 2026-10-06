@@ -139,11 +139,11 @@ def check_showcase():
 
 
 def check_server_files():
-    needed = ["server/app.py", "server/scorer.py", "server/static/index.html"]
+    needed = ["server/app.py", "server/scorer.py", "showcase/quiz.html", "showcase/quiz_items.json"]
     missing = [f for f in needed if not (ROOT / f).exists()]
     if missing:
         return FAIL, f"missing: {', '.join(missing)}"
-    return OK, "app.py, scorer.py, static/index.html present"
+    return OK, "app.py, scorer.py, quiz.html, quiz_items.json present"
 
 
 def check_git_state():

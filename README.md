@@ -1,9 +1,9 @@
-# AI Phishing Simulation via Hybrid Agent-Based Modeling
+# AI Phishing Simulation via Hybrid Simulated employee-Based Modeling
 
 PES University Capstone · Project ID `PW26_SVM_01`
 Adithya Kallaje · B. Thanav Reddy · Dattatreya K A · Krishna Venkatesh — guide: Dr. Sapna V M
 
-An agent-based simulation of **how an employee's cognitive state — fatigue, motivation, vigilance — changes whether they fall for a phishing email**, and whether AI-crafted phishing evades human detection better than real, human-authored phishing. Live phishing tests on staff are unethical and illegal, so we simulate synthetic employees reading a labelled corpus.
+A simulated employee-based simulation of **how an employee's cognitive state — fatigue, motivation, vigilance — changes whether they fall for a phishing email**, and whether AI-crafted phishing evades human detection better than real, human-authored phishing. Live phishing tests on staff are unethical and illegal, so we simulate synthetic employees reading a labelled corpus.
 
 ---
 
@@ -16,20 +16,20 @@ Cues extracted locally by `gemma4:12b` (Ollama) — one model across the whole c
 |---|---:|---:|---|
 | ceas08 (real phishing) | 1.90 | 82.7% | |
 | phishbowl (real phishing) | 1.85 | 81.7% | |
-| **hybrid_vtriad** (AI, V-Triad-guided) | **2.10** | **76.2%** | ← AI, persuasion-guided: **parity with top real phishing** |
+| **hybrid_vtriad** (AI, V-Triad-guided) | **2.45** | **86.1%** | ← second of seven, behind ceas08 |
 | nazario (real phishing) | 2.79 | 62.1% | |
 | nigerian_fraud (real 419) | 2.90 | 62.0% | |
 | multi_llm (modern AI, 3 models) | 3.49 | 47.5% | |
 | plain_llm (naive AI) | 4.64 | 27.8% | most cues, fewest clicks |
 
 - **Spearman(cues, click rate) = −0.96** — near-monotonic: every step up in detectability is a step down in clicks.
-- **hybrid_vtriad ranks 3rd by both measures**, in a tight cluster with ceas08 and phishbowl — the two best-performing real, human-authored phishing sources. A September 2026 review found a labelling-validity defect in an earlier version of this corpus (documented in `notebooks/07_vtriad_validity_fix.ipynb`); the numbers above are post-fix. Cross-extractor replication (`llama-4-scout-17b`, hosted) was run pre-fix and is pending re-verification — treat it as stale until re-run.
+- **hybrid_vtriad ranks 2nd of seven by click rate**, behind ceas08 and ahead of phishbowl — the two best-performing real, human-authored phishing sources. A September 2026 review found a labelling-validity defect in an earlier version of this corpus (documented in `notebooks/07_vtriad_validity_fix.ipynb`); the numbers above are post-fix. Cross-extractor replication (`llama-4-scout-17b`, hosted) was run pre-fix and is pending re-verification — treat it as stale until re-run.
 - **Benign false-positive rate: 0.12%** (benign cue sparsity 0.03–0.12 across all 3 benign sources)
-- **Workday fatigue effect: +14.5%** (same agent, 4pm vs 8am)
+- **Workday fatigue effect: +14.5%** (same simulated employee, 4pm vs 8am)
 
-![Fewer detectable cues means more clicks. V-Triad (AI, persuasion-guided) sits in a tight cluster with the best real phishing, not alone.](results/v2_demo_cues_vs_click.png)
+![Fewer detectable cues means more clicks. V-Triad (AI, persuasion-guided) ranks second of seven, behind the strongest real phishing.](results/v2_demo_cues_vs_click.png)
 
-**Interpretation:** persuasion-guided AI phishing carries relatively few detectable red flags for its length — enough to reach parity with the best human-authored spear-phishing (ceas08, Cornell Phishbowl) — without requiring an attacker's own expertise. Sophistication is inversely related to detectability; V-Triad's win is closing that gap with skilled human attackers, not surpassing all real phishing outright.
+**Interpretation:** persuasion-guided AI phishing carries relatively few detectable red flags for its length — and it lands second of seven by click rate, behind the strongest real phishing (ceas08). It does not reach parity with the best real spear-phishing on this corpus. Sophistication is inversely related to detectability; V-Triad's win is closing that gap with skilled human attackers, not surpassing all real phishing outright.
 
 ![Dataset composition: 1,595 emails across 10 sources, kept segregated.](results/v2_dataset_composition.png)
 
@@ -88,11 +88,13 @@ Both live in the repo side by side — **v1 is untouched and still runs.**
 | Job performance | 2 stacked regressions | **weighted geometric mean** |
 | FPL | fatigue × (1−JP) | + **Perceived Vulnerability** |
 | Threshold | fixed 2–6 | **partly dynamic** (base + F_dynamic drift) |
-| Agents | independent traits | **copula-correlated** |
+| Simulated employees | independent traits | **copula-correlated** |
 | Workday curve | **flat / slightly falling** | **rises (+14.5%)** |
 | Decisions | 37,500 | **239,250** |
 
-**Why v2 exists:** in v1, click rate correlated **+0.98 with the fixed suspicion threshold** but only **−0.06 with fatigue** (and −0.05 with FPL — the wrong sign). The Åkerstedt circadian term peaks at 4:48pm, making agents *more* alert late in the day, cancelling fatigue accumulation and flattening the workday curve. v2 rebuilds the model on a single `[0,1]` scale so fatigue is monotone and actually moves outcomes.
+**The simulated workforce (six department scenarios).** The 30 simulated employees are fixed, not sampled: five each in Finance & Accounts Payable, IT Service Desk, Human Resources, Regional Sales, Operations & Logistics (shift), and Customer Support (contact centre). Each department has a baseline profile in `src/scenarios.py`, and the five employees sit at fixed offsets around it. These baselines are modelling assumptions, not measured data. Randomness only enters the per-cue decision loop, and the robustness analysis varies seeds and coefficients. The quiz asks participants which department they work in, so their answers can be compared with the matching scenario.
+
+**Why v2 exists:** in v1, click rate correlated **+0.98 with the fixed suspicion threshold** but only **−0.06 with fatigue** (and −0.05 with FPL — the wrong sign). The Åkerstedt circadian term peaks at 4:48pm, making simulated employees *more* alert late in the day, cancelling fatigue accumulation and flattening the workday curve. v2 rebuilds the model on a single `[0,1]` scale so fatigue is monotone and actually moves outcomes.
 
 ---
 
@@ -101,7 +103,7 @@ Both live in the repo side by side — **v1 is untouched and still runs.**
 ```
 raw sources → normalise + clean + dedupe → master_emails_v2.csv (segregated by `source`)
            → cue extraction (9 cues, cache-first) → data/cue_cache_v2/
-           → agents (copula-correlated traits) × 5 workday hours × emails
+           → simulated employees (copula-correlated traits) × 5 workday hours × emails
            → per-cue stochastic decision loop → clicked | reported
            → data/simulation_results_v2.csv → notebook 06
 ```
@@ -156,7 +158,7 @@ notebooks/
   06_agent_simulation_v2.ipynb    v2 — THE analysis: dataset, model, results, robustness
 src/
   agent.py            v1 cognitive model
-  agent_v2.py         v2 model + copula agent generation + simulation runner
+  agent_v2.py         v2 model + copula simulated employee generation + simulation runner
   decision_loop.py    per-cue stochastic click/report loop (shared by v1 & v2)
   simulation.py       v1 pipeline orchestration
   dataset_v2.py       corpus assembly: clean, parse, dedupe, segregate
@@ -176,6 +178,8 @@ SYSTEM.md             technical codebase reference
 - **Coefficients are modeling choices.** ED weights, JP exponents, `λ_PV`, threshold drift and the P_click centring were tuned for `[0,1]` bounds and monotonicity — **not** taken from any paper. The literature motivates *structure and signs* only.
 - **The extraction model matters.** Cue counts differ measurably by model (llama-3.1-8b over-flags benign at ~1.7 cues/email vs ~0.0 for the models we use), so a corpus must be extracted by **one** model — the cue cache is scoped per model for exactly this reason. Results here use **local `gemma4:12b`**, recorded in the datasheet. An earlier cross-check on `llama-4-scout-17b` (Groq) reproduced the same ranking, but that check ran on the **pre-fix** corpus and has not been re-verified since the hybrid_vtriad validity fix — treat cross-extractor replication as pending, not confirmed, and cue *magnitudes* as never comparable across extractors regardless.
 - **The Shin-Carley `−5.584` PV coefficient** comes from the Phase-1 report and must be verified against the primary paper. The organizational damage index is an *index*, not validation — it's built from its own inputs, and tracks actual clicks at only r ≈ +0.08.
-- **The suspicion threshold still dominates between agents** (r ≈ 0.98). It's a large individual difference; fatigue is a *within-person* effect. Both are reported honestly in `06 §12`.
+- **The suspicion threshold still dominates between simulated employees** (r ≈ 0.98). It's a large individual difference; fatigue is a *within-person* effect. Both are reported honestly in `06 §12`.
 - **Synthetic phishing is self-generated** (fictional entities only) — no public V-Triad corpus exists.
-- The v1-vs-v2 workday chart changes **model *and* dataset**; the within-agent measure is the clean evidence.
+- The v1-vs-v2 workday chart changes **model *and* dataset**; the within-employee measure is the clean evidence.
+
+> Demo-only material (team scenario, email preview, quiz) is described in [`DEMO_NOTES.md`](DEMO_NOTES.md).

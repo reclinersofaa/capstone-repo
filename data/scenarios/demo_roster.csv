@@ -1,0 +1,31 @@
+team,designation,level,threshold,perceived_vulnerability,total_sleep_time,stress_avg,burnout,job_complexity,intrinsic_motivation,age,tenure,source
+Finance,Accounts Payable Clerk,L1,4.2,0.4,7.5,3,2,2,3,24,1,SoSafe 2021 (Age/Youth baseline)
+Finance,Payroll Specialist,L2,3.8,0.5,6.5,4,3,3,3,29,3,Team assumption
+Finance,Financial Analyst,L3,3.5,0.6,6.0,4,4,4,4,35,6,ID Agent (Stress/Distraction)
+Finance,Finance Controller,L4,2.5,0.8,5.5,5,4,4,4,45,10,UW Study (High stress impacts accuracy)
+Finance,Head of Finance,L5,2.0,0.9,6.0,4,3,5,5,52,15,4C Group (Exec targeting)
+HR,HR Assistant,L1,4.0,0.3,8.0,2,2,2,3,23,1,SoSafe 2021 (Age/Youth baseline)
+HR,Recruiter,L2,4.1,0.4,7.0,4,4,3,4,27,3,Team assumption
+HR,HR Generalist,L3,3.2,0.5,7.0,3,3,3,4,32,5,Team assumption
+HR,HR Business Partner,L4,2.8,0.6,6.5,4,3,4,4,41,8,Team assumption
+HR,Head of HR,L5,2.2,0.8,6.5,4,3,5,5,50,12,4C Group (Exec targeting)
+IT,Helpdesk Technician,L1,2.5,0.3,7.0,4,4,3,3,25,2,Team assumption
+IT,Systems Administrator,L2,2.2,0.4,6.0,4,4,4,4,30,5,Team assumption
+IT,Security Analyst,L3,1.2,0.4,6.5,3,2,4,5,34,7,PhishSkill (Role-based awareness)
+IT,IT Infrastructure Manager,L4,1.8,0.6,5.5,5,4,4,4,42,10,UW Study (High stress impacts accuracy)
+IT,CIO,L5,1.5,0.9,6.0,4,3,5,5,49,14,4C Group (Exec targeting)
+Marketing,Social Media Coordinator,L1,4.8,0.5,7.5,3,2,2,4,23,1,SoSafe 2021 (Age/Youth baseline)
+Marketing,Content Writer,L2,4.5,0.4,7.0,3,3,3,4,26,3,Team assumption
+Marketing,SEO Specialist,L3,3.9,0.5,6.5,4,3,3,4,31,5,Team assumption
+Marketing,Marketing Director,L4,3.0,0.7,6.0,5,4,4,5,39,9,Team assumption
+Marketing,CMO,L5,2.5,0.9,5.5,4,3,5,5,47,11,4C Group (Exec targeting)
+Sales,SDR,L1,4.5,0.4,7.0,4,3,2,3,24,1,Team assumption
+Sales,Account Executive,L2,4.2,0.5,6.5,5,4,3,4,28,4,UW Study (High stress impacts accuracy)
+Sales,Senior AE,L3,3.8,0.6,6.0,4,4,3,4,34,7,Team assumption
+Sales,Regional Sales Manager,L4,3.2,0.7,5.5,5,4,4,5,43,10,ID Agent (Stress/Distraction)
+Sales,VP of Sales,L5,2.6,0.9,5.5,5,4,5,5,51,15,4C Group (Exec targeting)
+Operations,Warehouse Coordinator,L1,3.5,0.3,7.5,3,2,2,3,26,2,Team assumption
+Operations,Logistics Analyst,L2,3.3,0.4,7.0,3,3,3,3,31,4,Team assumption
+Operations,Supply Chain Specialist,L3,2.9,0.5,6.5,4,3,4,4,36,7,Team assumption
+Operations,Operations Manager,L4,2.5,0.6,6.0,5,4,4,4,44,11,UW Study (High stress impacts accuracy)
+Operations,COO,L5,2.1,0.8,5.5,4,3,5,5,53,16,4C Group (Exec targeting)

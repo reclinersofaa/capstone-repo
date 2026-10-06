@@ -571,6 +571,8 @@ def run_simulation_v2(
     seed: int = 42,
     cache_dir: str = "data/cue_cache",
     correlated: bool = True,
+    population: str = "scenario",
+    agents: list = None,
     extractor: str = "ollama",
     ollama_model: str = "llama3.1:8b",
     groq_model: str = "meta-llama/llama-4-scout-17b-16e-instruct",
@@ -597,8 +599,14 @@ def run_simulation_v2(
     print(f"Step 1 — cue extraction ({extractor}, cache-first) for {len(emails)} emails...")
     email_cues = _ext.extract_batch(emails)
 
-    print(f"Step 2 — building {n_agents} {'correlated' if correlated else 'independent'} agents...")
-    if correlated:
+    print(f"Step 2 — building simulated workforce ({population})...")
+    if agents is not None:
+        n_agents = len(agents)
+    elif population == "scenario":
+        from .scenarios import build_scenario_agents
+        agents = build_scenario_agents()
+        n_agents = len(agents)
+    elif correlated:
         agents = build_correlated_agents(n_agents, seed=seed)
     else:
         base = random.Random(seed)
