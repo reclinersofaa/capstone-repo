@@ -217,7 +217,7 @@
   .mw-from{font-size:.92rem; font-weight:600; word-break:break-word}
   .mw-from .addr{color:var(--muted); font-weight:400}
   .mw-to{font-size:.8rem; color:var(--muted); margin-top:2px}
-  .mw-body{white-space:pre-wrap; line-height:1.7; font-size:.95rem}
+  .mw-body{white-space:normal; line-height:1.7; font-size:.95rem}
   .mw-body p{margin:0 0 .9em}
   .mw-body p:last-child{margin-bottom:0}
 </style>
@@ -313,7 +313,7 @@
   var PAT = {
     urgency: /(act now|immediately|urgent(ly)?|today|within \d+ (hours?|days?)|as soon as possible|right away|expires?)/i,
     threats: /(suspend\w*|closed|blocked|terminat\w*|legal action|penalt\w*|lose access|will be removed|disabled|consequences?)/i,
-    generic_greeting: /^(dear [^,\n]{1,40}|hello [^,\n]{1,40}|hi there|to whom it may concern)/im,
+    generic_greeting: /^(dear [^,.!?\n]{1,40}|hello [^,.!?\n]{1,40}|hi there|to whom it may concern)/im,
     spelling_grammar: /\b(recieve\w*|verfy|acount|pls|dont|seperate|occured|untill|wich)\b/i,
     emotional_appeal: /(congratulations|you('ve| have) been selected|urgent plea|please help|we are sorry|don'?t miss)/i,
     too_good_true: /(free|prize|reward|bonus|guaranteed|winner|lottery|gift card)/i,
