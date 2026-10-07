@@ -181,6 +181,9 @@
   .ev-root .body{white-space:pre-wrap; line-height:1.65; font-size:.95rem}
   .ev-root .legend{display:flex; gap:8px; flex-wrap:wrap}
 </style>
+<style>
+  #fatigue-day img{max-width:100%; height:auto; display:block}
+</style>
 </head>
 <body>
 <nav class="demo-nav">
@@ -229,7 +232,7 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">03</span><div><h2>The workday effect</h2><p class="sec-note">The same simulated employee, reading the same email, at 8am versus 4pm. As modelled fatigue accumulates across the day, susceptibility rises, a within-person effect. With every simulated employee on the same caution threshold, the effect is small (+3.6 points); a larger effect appeared only when thresholds varied between people, so this is a sensitivity result, not a settled finding (see §06).</p></div></div>
+    <div class="sec-head"><span class="sec-num">03</span><div><h2>The workday effect</h2><p class="sec-note">The same simulated employee, reading the same email, at 8am versus 4pm. As modelled fatigue accumulates across the day, susceptibility rises, a within-person effect. With every simulated employee on the same caution threshold, the effect is small (+3.6 points); a larger effect appeared only when thresholds varied between people, so this is a sensitivity result, not a settled finding (see §08).</p></div></div>
     <div class="card day-wrap">
       <figure style="flex:1 1 340px; margin:0">
         <svg id="workday" viewBox="0 0 560 240" role="img" aria-label="Slope chart: simulated click rate rises from 53.8 percent at 8am to 57.4 percent at 4pm, a 3.6 point increase."></svg>
@@ -245,28 +248,17 @@
     <div class="card"><div class="table-wrap"><table aria-label="Department scenario baselines"><thead><tr><th>Department (scenario)</th><th class="num">Simulated employees</th><th class="num">stress</th><th class="num">burnout</th><th class="num">job complexity</th><th class="num">perceived vulnerability</th><th class="num">sleep (h)</th><th class="num">cues processed</th></tr></thead><tbody><tr><td>Finance & Accounts Payable</td><td class="num">5</td><td class="num">3.30</td><td class="num">2.60</td><td class="num">3.80</td><td class="num">0.45</td><td class="num">6.90</td><td class="num">9</td></tr><tr><td>IT Service Desk</td><td class="num">5</td><td class="num">3.80</td><td class="num">3.00</td><td class="num">3.90</td><td class="num">0.70</td><td class="num">6.40</td><td class="num">11</td></tr><tr><td>Human Resources</td><td class="num">5</td><td class="num">2.80</td><td class="num">2.30</td><td class="num">2.90</td><td class="num">0.40</td><td class="num">7.20</td><td class="num">9</td></tr><tr><td>Regional Sales</td><td class="num">5</td><td class="num">3.10</td><td class="num">2.40</td><td class="num">2.60</td><td class="num">0.30</td><td class="num">6.60</td><td class="num">8</td></tr><tr><td>Operations & Logistics (shift)</td><td class="num">5</td><td class="num">3.50</td><td class="num">3.00</td><td class="num">2.40</td><td class="num">0.35</td><td class="num">6.00</td><td class="num">8</td></tr><tr><td>Customer Support (contact centre)</td><td class="num">5</td><td class="num">3.90</td><td class="num">3.30</td><td class="num">2.80</td><td class="num">0.42</td><td class="num">6.30</td><td class="num">7</td></tr></tbody></table></div></div>
   </section>
 
-  <section id="why-phishing" class="ev-root">
-    <div class="sec-head"><span class="sec-num">07</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
-    <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
-    <div class="card">
-      <div class="verdict" id="ev-verdict"></div>
-      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
-      <div class="subj" id="ev-subj"></div>
-      <div class="body" id="ev-body"></div>
-    </div>
-    <div class="card"><div class="legend" id="ev-legend"></div></div>
-  </section>
   <section id="fatigue-day">
-    <div class="sec-head"><span class="sec-num">03b</span><div><h2>Fatigue across the day, against click rate</h2><p class="sec-note">Left: over the workday, simulated fatigue rises from 0.25 to 0.50, job performance falls from 0.71 to 0.58, and the click rate rises from 53.8% to 57.4%. Right: correlation of each metric with click rate across the 150 employee-hour cells. Fatigue is about +0.49, job performance about -0.44. The suspicion threshold moves with fatigue by design, so its correlation is partly built in. Perceived vulnerability is identical for everyone in this run, so it has no correlation to report.</p></div></div>
+    <div class="sec-head"><span class="sec-num">05</span><div><h2>Fatigue across the day, against click rate</h2><p class="sec-note">Left: over the workday, simulated fatigue rises from 0.25 to 0.50, job performance falls from 0.71 to 0.58, and the click rate rises from 53.8% to 57.4%. Right: correlation of each metric with click rate across the 150 employee-hour cells. Fatigue is about +0.49, job performance about -0.44. The suspicion threshold moves with fatigue by design, so its correlation is partly built in. Perceived vulnerability is identical for everyone in this run, so it has no correlation to report.</p></div></div>
     <div class="card"><figure><img src="report_assets/fatigue_vs_click.png" alt="Fatigue, job performance and click rate across the workday, and each metric's correlation with click rate" loading="lazy"></figure></div>
   </section>
   <section id="demo-scenario">
-    <div class="sec-head"><span class="sec-num">04b</span><div><h2>Team scenario: 30 people in six teams</h2><p class="sec-note">Each team has five people across levels L1 (entry) to L5 (head of team). The same emails are run through the same decision loop. Click rate below is for the phishing emails only, by team.</p></div></div>
+    <div class="sec-head"><span class="sec-num">06</span><div><h2>Team scenario: 30 people in six teams</h2><p class="sec-note">Each team has five people across levels L1 (entry) to L5 (head of team). The same emails are run through the same decision loop. Click rate below is for the phishing emails only, by team.</p></div></div>
     <div class="card"><div class="table-wrap"><table aria-label="Team scenario click rates"><thead><tr><th>Team</th><th class="num">Employees and levels</th><th class="num">Phishing click rate</th></tr></thead><tbody><tr><td>Sales</td><td class="num">5 (L1 to L5)</td><td class="num">62.7%</td></tr><tr><td>Marketing</td><td class="num">5 (L1 to L5)</td><td class="num">62.1%</td></tr><tr><td>HR</td><td class="num">5 (L1 to L5)</td><td class="num">55.2%</td></tr><tr><td>Finance</td><td class="num">5 (L1 to L5)</td><td class="num">53.2%</td></tr><tr><td>Operations</td><td class="num">5 (L1 to L5)</td><td class="num">46.4%</td></tr><tr><td>IT</td><td class="num">5 (L1 to L5)</td><td class="num">24.6%</td></tr></tbody></table></div>
     <figcaption>Results from a separate run that uses this roster. The headline numbers elsewhere on this page are unchanged.</figcaption></div>
   </section>
   <section>
-    <div class="sec-head"><span class="sec-num">05</span><div><h2>How a simulated employee decides</h2><p class="sec-note">Every quantity lives on a single [0,1] scale so fatigue is monotone and actually moves outcomes. The decision itself is a per-cue stochastic loop: the simulated employee perceives red flags one by one until suspicion crosses its threshold.</p></div></div>
+    <div class="sec-head"><span class="sec-num">07</span><div><h2>How a simulated employee decides</h2><p class="sec-note">Every quantity lives on a single [0,1] scale so fatigue is monotone and actually moves outcomes. The decision itself is a per-cue stochastic loop: the simulated employee perceives red flags one by one until suspicion crosses its threshold.</p></div></div>
     <div class="chain">
       <div class="stage"><div class="st-k">ED(t)</div><div class="st-d">Energy depletion from workload, time-pressure, task-switching</div></div>
       <div class="chain-arrow">→</div>
@@ -281,7 +273,7 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">06</span><div><h2>How to read these numbers</h2><p class="sec-note">The honest framing: the version that survives an examiner. Included on the showcase deliberately.</p></div></div>
+    <div class="sec-head"><span class="sec-num">08</span><div><h2>How to read these numbers</h2><p class="sec-note">The honest framing: the version that survives an examiner. Included on the showcase deliberately.</p></div></div>
     <div class="frame-grid">
       <div class="note good"><h3>What the result is</h3><p>A <b>relative ranking</b> of email sources by detectability→susceptibility, under identical controlled conditions. Persuasion-guided AI phishing ranks <b>second of seven</b>, behind the strongest real phishing (ceas08), and clearly outperforms naive AI phishing. That ordering is the finding.</p></div>
       <div class="note"><h3>What it is not</h3><p>The absolute click rates (28–83%) are <b>not</b> population predictions. Verizon's DBIR reports a ~1.4% real-world median; these levels are an artifact of the model's parameterization. Read the rank order, not the percentages.</p></div>
@@ -290,6 +282,17 @@
     </div>
   </section>
 
+  <section id="why-phishing" class="ev-root">
+    <div class="sec-head"><span class="sec-num">09</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
+    <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
+    <div class="card">
+      <div class="verdict" id="ev-verdict"></div>
+      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
+      <div class="subj" id="ev-subj"></div>
+      <div class="body" id="ev-body"></div>
+    </div>
+    <div class="card"><div class="legend" id="ev-legend"></div></div>
+  </section>
   <footer>
     <div class="meta">
       <span>corpus 1,595 · 10 sources</span><span>239,250 decisions</span><span>extractor gemma4:12b (Ollama, local)</span><span>Spearman −0.96</span><span>benign FPR 0.0%</span>
@@ -332,7 +335,6 @@
     var n=sources.length,sx=0,sy=0,sxy=0,sxx=0;
     sources.forEach(function(d){sx+=d.cues;sy+=d.click;sxy+=d.cues*d.click;sxx+=d.cues*d.cues;});
     var slope=(n*sxy-sx*sy)/(n*sxx-sx*sx),inter=(sy-slope*sx)/n;
-    svg.appendChild(el('line',{x1:px(0.6),y1:py(inter+slope*0.6),x2:px(4.9),y2:py(inter+slope*4.9),'class':'trend'}));
     sources.forEach(function(d){
       var cx=px(d.cues),cy=py(d.click);
       var c=el('circle',{cx:cx,cy:cy,r:d.flag?9:7,'class':'pt f-sev-'+d.sv});
@@ -432,8 +434,8 @@
     var text = String(it.body), spans = [];
     (it.cues || []).forEach(function(c){
       if(c === 'suspicious_link'){
-        var u = /https?:\/\/[^\s<>"']+/i.exec(text);
-        if(u) spans.push({s:u.index, e:u.index + u[0].length, c:c});
+        var re = /https?:\/\/[^\s<>"']+/gi, u;
+        while((u = re.exec(text))) spans.push({s:u.index, e:u.index + u[0].length, c:c});
         return;
       }
       var m = PAT[c] && PAT[c].exec(text);
