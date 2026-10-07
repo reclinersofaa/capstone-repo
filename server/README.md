@@ -12,7 +12,6 @@ Then open http://localhost:8000 (redirects to the results summary).
 |---|---|
 | `/showcase/` | results summary |
 | `/showcase/report.html` | full report (notebook 06 output) |
-| `/showcase/mock_landing_page.html` | phishing-simulation demo page (fully client-side, sends nothing) |
 | `/showcase/quiz.html` | human phishing quiz (intro essay, consent, per-item timing) |
 | `POST /api/quiz/response` | appends one quiz answer to `data/human_quiz/responses.jsonl` |
 

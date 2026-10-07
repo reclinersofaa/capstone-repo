@@ -7,7 +7,7 @@
   are the author's pointers and must be checked against the original sources before anyone
   cites them.
 - The scenario run is separate from the headline results; it does not change them.
-- The email preview (`showcase/evidence.html`) and the quiz (`showcase/quiz.html`) are
+- The email preview (section "Why it is phishing" on `showcase/index.html`) and the quiz (`showcase/quiz.html`) are
   demonstrations, not finished products.
 - Before a real study: ethics approval, consent wording, and removal of real personal data
   from the legitimate emails are still open.

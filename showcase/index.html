@@ -143,14 +143,51 @@
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 </style>
+<style>
+  .ev-root .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-bottom:14px}
+  .ev-root .verdict{font-size:.98rem; font-weight:600; color:#c62828; margin-bottom:12px}
+  .ev-root .mailhdr{display:flex; gap:12px; align-items:center; border-bottom:1px solid var(--line); padding-bottom:12px; margin-bottom:14px}
+  .ev-root .avatar{width:38px; height:38px; border-radius:50%; background:#8e8e93; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; flex:none}
+  .ev-root .from{font-size:.92rem; word-break:break-all}
+  .ev-root .from .addr{color:var(--muted)}
+  .ev-root .subj{font-size:1.15rem; font-weight:600; margin:0 0 12px}
+  .ev-root .body{white-space:pre-wrap; line-height:1.65; font-size:.95rem}
+  .ev-root .hl{border-radius:4px; padding:1px 3px; border-bottom:2px solid; cursor:help}
+  .ev-root .c-urgency{background:#ffe0b2; border-color:#e65100}
+  .ev-root .c-threats{background:#ffcdd2; border-color:#c62828}
+  .ev-root .c-generic_greeting{background:#e1bee7; border-color:#6a1b9a}
+  .ev-root .c-spelling_grammar{background:#fff59d; border-color:#f9a825}
+  .ev-root .c-emotional_appeal{background:#f8bbd0; border-color:#ad1457}
+  .ev-root .c-too_good_true{background:#c8e6c9; border-color:#2e7d32}
+  .ev-root .c-personal_info{background:#b3e5fc; border-color:#0277bd}
+  .ev-root .c-suspicious_sender{background:#d7ccc8; border-color:#4e342e}
+  .ev-root .c-suspicious_link{background:#ffccbc; border-color:#bf360c}
+  .ev-root .legend{display:flex; gap:8px; flex-wrap:wrap}
+  .ev-root .chip{font-size:.82rem; padding:4px 10px; border-radius:14px; border:1px solid transparent}
+  .ev-root .hl, .ev-root .chip{color:#111}
+  .ev-root .chip.nf{border:1px dashed var(--muted); background:none; color:var(--muted)}
+  .ev-root .small{font-size:.85rem; color:var(--muted); margin:10px 0 0}
+  .ev-root .avatar{background:#8e8e93}
+  .ev-root .card,.ev-root .body{color:var(--ink)}
+
+  .ev-root .ev-ctl{display:flex; justify-content:space-between; align-items:center; margin:10px 0; font-size:.9rem}
+  .ev-root .ev-btn{background:var(--accent); color:#fff; border:none; border-radius:16px; padding:8px 16px; cursor:pointer; font-size:.9rem}
+  .ev-root .card{background:var(--surface); border:1px solid var(--hairline); border-radius:12px; padding:18px 20px; margin-bottom:12px}
+  .ev-root .verdict{font-size:.98rem; font-weight:600; color:var(--accent-ink); margin-bottom:10px}
+  .ev-root .mailhdr{display:flex; gap:12px; align-items:center; border-bottom:1px solid var(--hairline); padding-bottom:10px; margin-bottom:12px}
+  .ev-root .avatar{width:38px; height:38px; border-radius:50%; background:#8e8e93; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; flex:none}
+  .ev-root .from{font-size:.92rem; word-break:break-all}
+  .ev-root .subj{font-size:1.1rem; font-weight:600; margin:0 0 10px}
+  .ev-root .body{white-space:pre-wrap; line-height:1.65; font-size:.95rem}
+  .ev-root .legend{display:flex; gap:8px; flex-wrap:wrap}
+</style>
 </head>
 <body>
 <nav class="demo-nav">
   <a href="index.html" class="active">Results Summary</a>
   <a href="report.html">Full Report</a>
   <a href="quiz.html">Phishing Quiz</a>
-  <a href="evidence.html">Why it is phishing</a>
-  <a href="mock_landing_page.html">Phishing Demo &middot; NovaCorp</a>
+  <a href="#why-phishing">Why it is phishing</a>
 </nav>
 <div class="wrap">
   <header class="masthead">
@@ -206,6 +243,18 @@
   <section>
     <div class="sec-head"><span class="sec-num">04</span><div><h2>The six department scenarios</h2><p class="sec-note">The workforce is fixed, not sampled. Thirty simulated employees are five per department, and each department has a baseline profile. Randomness only enters the per-cue decision loop, and seed replication is what the robustness analysis varies. These baselines are modelling assumptions, not measured data.</p></div></div>
     <div class="card"><div class="table-wrap"><table aria-label="Department scenario baselines"><thead><tr><th>Department (scenario)</th><th class="num">Simulated employees</th><th class="num">stress</th><th class="num">burnout</th><th class="num">job complexity</th><th class="num">perceived vulnerability</th><th class="num">sleep (h)</th><th class="num">cues processed</th></tr></thead><tbody><tr><td>Finance & Accounts Payable</td><td class="num">5</td><td class="num">3.30</td><td class="num">2.60</td><td class="num">3.80</td><td class="num">0.45</td><td class="num">6.90</td><td class="num">9</td></tr><tr><td>IT Service Desk</td><td class="num">5</td><td class="num">3.80</td><td class="num">3.00</td><td class="num">3.90</td><td class="num">0.70</td><td class="num">6.40</td><td class="num">11</td></tr><tr><td>Human Resources</td><td class="num">5</td><td class="num">2.80</td><td class="num">2.30</td><td class="num">2.90</td><td class="num">0.40</td><td class="num">7.20</td><td class="num">9</td></tr><tr><td>Regional Sales</td><td class="num">5</td><td class="num">3.10</td><td class="num">2.40</td><td class="num">2.60</td><td class="num">0.30</td><td class="num">6.60</td><td class="num">8</td></tr><tr><td>Operations & Logistics (shift)</td><td class="num">5</td><td class="num">3.50</td><td class="num">3.00</td><td class="num">2.40</td><td class="num">0.35</td><td class="num">6.00</td><td class="num">8</td></tr><tr><td>Customer Support (contact centre)</td><td class="num">5</td><td class="num">3.90</td><td class="num">3.30</td><td class="num">2.80</td><td class="num">0.42</td><td class="num">6.30</td><td class="num">7</td></tr></tbody></table></div></div>
+  </section>
+
+  <section id="why-phishing" class="ev-root">
+    <div class="sec-head"><span class="sec-num">07</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
+    <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
+    <div class="card">
+      <div class="verdict" id="ev-verdict"></div>
+      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
+      <div class="subj" id="ev-subj"></div>
+      <div class="body" id="ev-body"></div>
+    </div>
+    <div class="card"><div class="legend" id="ev-legend"></div></div>
   </section>
   <section id="fatigue-day">
     <div class="sec-head"><span class="sec-num">03b</span><div><h2>Fatigue across the day, against click rate</h2><p class="sec-note">Left: over the workday, simulated fatigue rises from 0.25 to 0.50, job performance falls from 0.71 to 0.58, and the click rate rises from 53.8% to 57.4%. Right: correlation of each metric with click rate across the 150 employee-hour cells. Fatigue is about +0.49, job performance about -0.44. The suspicion threshold moves with fatigue by design, so its correlation is partly built in. Perceived vulnerability is identical for everyone in this run, so it has no correlation to report.</p></div></div>
@@ -354,6 +403,87 @@
     svg.appendChild(el('text',{x:(A.x+B.x)/2,y:py(57.4)-6,'text-anchor':'middle','class':'axis-label f-accent-ink'},'+3.6 pts'));
     svg.appendChild(el('text',{x:14,y:(m.t+H-m.b)/2,'text-anchor':'middle','class':'axis-label',transform:'rotate(-90 14 '+((m.t+H-m.b)/2)+')'},'CLICK RATE'));
   })();
+})();
+</script>
+<script>
+(function(){
+
+(function(){
+  var CUES = {
+    urgency:'Pressure to act now', threats:'Threatens a consequence', generic_greeting:'Impersonal greeting',
+    spelling_grammar:'Spelling or grammar problem', emotional_appeal:'Emotional pull', too_good_true:'Too-good-to-be-true offer',
+    personal_info:'Asks for sensitive details', suspicious_sender:'Sender looks mismatched', suspicious_link:'Link looks suspicious'
+  };
+  // Patterns that locate each cue in the text. A cue with no match is listed, not hidden.
+  var PAT = {
+    urgency: /(act now|immediately|urgent(ly)?|today|within \d+ (hours?|days?)|as soon as possible|right away|expires?)/i,
+    threats: /(suspend\w*|closed|blocked|terminat\w*|legal action|penalt\w*|lose access|will be removed|disabled|consequences?)/i,
+    generic_greeting: /^(dear [^,\n]{1,40}|hello [^,\n]{1,40}|hi there|to whom it may concern)/im,
+    spelling_grammar: /\b(recieve\w*|verfy|acount|pls|dont|seperate|occured|untill|wich)\b/i,
+    emotional_appeal: /(congratulations|you('ve| have) been selected|urgent plea|please help|we are sorry|don'?t miss)/i,
+    too_good_true: /(free|prize|reward|bonus|guaranteed|winner|lottery|gift card)/i,
+    personal_info: /(password|credentials|verify your|bank (account|details)|social security|account details|confirm your (identity|details|login))/i
+  };
+  var items = [], i = 0;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function bodyHtml(it){
+    var text = String(it.body), spans = [];
+    (it.cues || []).forEach(function(c){
+      if(c === 'suspicious_link'){
+        var u = /https?:\/\/[^\s<>"']+/i.exec(text);
+        if(u) spans.push({s:u.index, e:u.index + u[0].length, c:c});
+        return;
+      }
+      var m = PAT[c] && PAT[c].exec(text);
+      if(m) spans.push({s:m.index, e:m.index + m[0].length, c:c});
+    });
+    spans.sort(function(a,b){ return a.s - b.s; });
+    var out = '', pos = 0, used = [];
+    spans.forEach(function(sp){
+      if(sp.s < pos) return;
+      out += esc(text.slice(pos, sp.s)) + '<span class="hl c-' + sp.c + '" title="' + esc(CUES[sp.c]) + '">' +
+             esc(text.slice(sp.s, sp.e)) + '</span>';
+      pos = sp.e; used.push(sp.c);
+    });
+    out += esc(text.slice(pos));
+    return {html: out, used: used};
+  }
+
+  function render(it){
+    var b = bodyHtml(it), cues = it.cues || [];
+    var addr = String(it.sender);
+    var m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(addr);
+    var name = m ? m[1].trim() : addr.split('@')[0];
+    var mail = m ? m[2] : addr;
+    var senderHl = cues.indexOf('suspicious_sender') >= 0;
+    $('ev-avatar').textContent = (name.charAt(0) || '?').toUpperCase();
+    $('ev-from').innerHTML = (senderHl
+        ? '<span class="hl c-suspicious_sender" title="' + esc(CUES.suspicious_sender) + '">' + esc(name) + '</span>'
+        : esc(name)) + ' <span class="addr">&lt;' + esc(mail) + '&gt;</span>';
+    $('ev-subj').textContent = it.subject;
+    $('ev-body').innerHTML = b.html;
+    $('ev-counter').textContent = 'Phishing email ' + (i + 1) + ' of ' + items.length + ' (source: ' + it.source + ')';
+    var chips = '';
+    cues.forEach(function(c){
+      var located = b.used.indexOf(c) >= 0 || (c === 'suspicious_sender' && senderHl);
+      chips += located
+        ? '<span class="chip c-' + c + '">' + esc(CUES[c] || c) + '</span>'
+        : '<span class="chip nf">' + esc(CUES[c] || c) + ' (no phrase located)</span>';
+    });
+    $('ev-legend').innerHTML = chips || '<span class="chip nf">No text cues detected: the link is the only signal</span>';
+    $('ev-verdict').textContent = 'Phishing: ' + (cues.length
+      ? cues.length + ' red-flag cue' + (cues.length === 1 ? '' : 's') + ' detected by the model'
+      : 'no text cues, the link is the only signal');
+  }
+
+  $('ev-next').addEventListener('click', function(){ i = (i + 1) % items.length; render(items[i]); });
+  fetch('evidence_items.json').then(function(r){ return r.json(); }).then(function(d){
+    items = d; if(items.length) render(items[0]);
+  }).catch(function(){ $('ev-counter').textContent = 'Could not load the emails.'; });
+})();
+
 })();
 </script>
 </body>
