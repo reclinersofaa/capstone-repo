@@ -49,12 +49,17 @@
   .chip-btn{font-family:var(--font-mono); font-size:12px; padding:7px 14px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; cursor:pointer}
   .chip-btn.on{background:var(--accent); border-color:var(--accent); color:#fff}
   .counter{font-family:var(--font-mono); font-size:12px; color:var(--faint); margin:0 0 14px}
-  .mailhdr{display:flex; align-items:center; gap:10px; margin-bottom:10px}
-  .avatar{width:34px; height:34px; border-radius:50%; background:var(--accent-wash); color:var(--accent-ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:var(--font-mono); flex:none}
-  .from{font-weight:600}
+  .mail-window{background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:14px}
+  .mw-subject{font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:0 0 12px; line-height:1.3}
+  .mw-headrow{display:flex; align-items:center; gap:10px; padding-bottom:10px; margin-bottom:12px; border-bottom:1px solid var(--line)}
+  .mw-avatar{width:34px; height:34px; border-radius:50%; background:var(--accent-wash); color:var(--accent-ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:var(--font-mono); flex:none}
+  .mw-fromto{min-width:0; flex:1 1 auto}
+  .mw-from{font-weight:600; word-break:break-word}
   .addr{color:var(--faint); font-weight:400; font-family:var(--font-mono); font-size:.85rem}
-  .subj{font-family:var(--font-display); font-size:1.2rem; font-weight:700; margin:0 0 10px}
-  .body{white-space:pre-wrap; font-size:.95rem; border-top:1px solid var(--line); padding-top:12px}
+  .mw-to{font-size:.78rem; color:var(--faint); margin-top:2px}
+  .mw-body{white-space:pre-wrap; font-size:.95rem; line-height:1.65}
+  .mw-body p{margin:0 0 .9em}
+  .mw-body p:last-child{margin-bottom:0}
   .hl{border-radius:4px; padding:0 3px; cursor:help}
   .c-urgency{background:#f6d7ae; color:#5a3c05}
   .c-threats{background:#f3bcb6; color:#6e170a}
@@ -115,10 +120,18 @@
     <div class="chips" id="cat-chips"></div>
     <p class="counter" id="ex-counter">Loading...</p>
     <div class="card">
-      <div class="verdict" id="ex-verdict"></div>
-      <div class="mailhdr"><div class="avatar" id="ex-avatar"></div><div class="from" id="ex-from"></div></div>
-      <div class="subj" id="ex-subj"></div>
-      <div class="body" id="ex-body"></div>
+      <div class="mail-window">
+        <div class="verdict" id="ex-verdict"></div>
+        <div class="mw-subject" id="ex-subj"></div>
+        <div class="mw-headrow">
+          <div class="mw-avatar" id="ex-avatar"></div>
+          <div class="mw-fromto">
+            <div class="mw-from" id="ex-from"></div>
+            <div class="mw-to">to you</div>
+          </div>
+        </div>
+        <div class="mw-body" id="ex-body"></div>
+      </div>
       <div class="legend" id="ex-legend"></div>
       <div class="two-col">
         <div>
@@ -167,6 +180,16 @@
   };
   function $(id){ return document.getElementById(id); }
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  // Purely visual: breaks a wall-of-text body into paragraphs at sentence boundaries
+  // (every 2nd sentence). Safe on already-escaped/highlighted HTML -- no cue label
+  // or highlight markup contains ". " followed by a capital letter.
+  function paragraphize(html){
+    var n = 0;
+    return '<p>' + html.replace(/([.!?])\s+(?=[A-Z])/g, function(m, p){
+      n++;
+      return (n % 2 === 0) ? p + '</p><p>' : p + ' ';
+    }) + '</p>';
+  }
 
   function bodyHtml(text, cues){
     text = String(text || ''); var spans = [];
@@ -188,7 +211,7 @@
       pos = sp.e; used.push(sp.c);
     });
     out += esc(text.slice(pos));
-    return {html: out, used: used};
+    return {html: paragraphize(out), used: used};
   }
 
   function renderMail(prefix, sender, subject, body, cues){
@@ -313,10 +336,15 @@
         $('score-btn').disabled = false;
         if (!res.ok) { box.innerHTML = '<p class="err">' + esc(res.d.error || 'Scoring failed.') + '</p>'; return; }
         box.innerHTML =
-          '<div class="verdict" id="own-verdict"></div>' +
-          '<div class="mailhdr"><div class="avatar" id="own-avatar"></div><div class="from" id="own-from"></div></div>' +
-          '<div class="subj" id="own-subj"></div>' +
-          '<div class="body" id="own-body"></div>' +
+          '<div class="mail-window">' +
+            '<div class="verdict" id="own-verdict"></div>' +
+            '<div class="mw-subject" id="own-subj"></div>' +
+            '<div class="mw-headrow">' +
+              '<div class="mw-avatar" id="own-avatar"></div>' +
+              '<div class="mw-fromto"><div class="mw-from" id="own-from"></div><div class="mw-to">to you</div></div>' +
+            '</div>' +
+            '<div class="mw-body" id="own-body"></div>' +
+          '</div>' +
           '<div class="legend" id="own-legend"></div>' +
           '<div class="two-col">' +
             '<div><div class="scorebox"><span class="big" id="own-rate"></span></div>' +

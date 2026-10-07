@@ -205,6 +205,22 @@
   .tl-cues{font-size:.84rem; color:var(--muted)}
   @media (prefers-color-scheme: dark){ .tl-dec.clicked{background:#4a1f1b; color:#f7c7c1} .tl-dec.reported{background:#1d3b28; color:#bfe6cd} }
 </style>
+<style>
+  /* Shared "mail window" component: used by both the cue-highlight view and the
+     click-through-day view, so every email on this page reads like an opened
+     message (subject, from/to header, divider, body) rather than loose text. */
+  .mail-window{background:var(--surface); border:1px solid var(--hairline,var(--line)); border-radius:12px; padding:18px 20px; margin-bottom:14px}
+  .mw-subject{font-family:var(--font-display,inherit); font-size:1.2rem; font-weight:700; margin:0 0 12px; line-height:1.3}
+  .mw-headrow{display:flex; align-items:center; gap:12px; padding-bottom:12px; margin-bottom:14px; border-bottom:1px solid var(--hairline,var(--line))}
+  .mw-avatar{width:38px; height:38px; border-radius:50%; background:#8e8e93; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex:none; font-size:.95rem}
+  .mw-fromto{min-width:0; flex:1 1 auto}
+  .mw-from{font-size:.92rem; font-weight:600; word-break:break-word}
+  .mw-from .addr{color:var(--muted); font-weight:400}
+  .mw-to{font-size:.8rem; color:var(--muted); margin-top:2px}
+  .mw-body{white-space:pre-wrap; line-height:1.7; font-size:.95rem}
+  .mw-body p{margin:0 0 .9em}
+  .mw-body p:last-child{margin-bottom:0}
+</style>
 </head>
 <body>
 <nav class="demo-nav">
@@ -227,11 +243,17 @@
   <section id="why-phishing" class="ev-root">
     <div class="sec-head"><span class="sec-num">01</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
     <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
-    <div class="card">
+    <div class="mail-window">
       <div class="verdict" id="ev-verdict"></div>
-      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
-      <div class="subj" id="ev-subj"></div>
-      <div class="body" id="ev-body"></div>
+      <div class="mw-subject" id="ev-subj"></div>
+      <div class="mw-headrow">
+        <div class="mw-avatar" id="ev-avatar"></div>
+        <div class="mw-fromto">
+          <div class="mw-from" id="ev-from"></div>
+          <div class="mw-to">to you</div>
+        </div>
+      </div>
+      <div class="mw-body" id="ev-body"></div>
     </div>
     <div class="card"><div class="legend" id="ev-legend"></div></div>
   </section>
@@ -245,8 +267,17 @@
       <div class="tl-top">
         <div class="tl-mail">
           <div class="tl-meta" id="tl-meta"></div>
-          <div class="subj" id="tl-subj"></div>
-          <div class="body" id="tl-body"></div>
+          <div class="mail-window">
+            <div class="mw-subject" id="tl-subj"></div>
+            <div class="mw-headrow">
+              <div class="mw-avatar" id="tl-avatar"></div>
+              <div class="mw-fromto">
+                <div class="mw-from" id="tl-from"></div>
+                <div class="mw-to">to you</div>
+              </div>
+            </div>
+            <div class="mw-body" id="tl-body"></div>
+          </div>
         </div>
         <figure class="tl-chart"><svg id="tl-svg" viewBox="0 0 420 240" role="img" aria-label="Line chart of percent of simulated employees who clicked, by hour of the workday"></svg></figure>
       </div>
@@ -291,6 +322,16 @@
   var items = [], i = 0;
   function $(id){ return document.getElementById(id); }
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  // Purely visual: breaks a wall-of-text body into paragraphs at sentence boundaries
+  // (every 2nd sentence). Operates on the already-escaped/highlighted HTML; safe
+  // because no cue label or highlight markup contains ". " followed by a capital.
+  function paragraphize(html){
+    var n = 0;
+    return '<p>' + html.replace(/([.!?])\s+(?=[A-Z])/g, function(m, p){
+      n++;
+      return (n % 2 === 0) ? p + '</p><p>' : p + ' ';
+    }) + '</p>';
+  }
 
   function bodyHtml(it){
     var text = String(it.body), spans = [];
@@ -312,7 +353,7 @@
       pos = sp.e; used.push(sp.c);
     });
     out += esc(text.slice(pos));
-    return {html: out, used: used};
+    return {html: paragraphize(out), used: used};
   }
 
   function render(it){
@@ -362,6 +403,17 @@
   function $(id){ return document.getElementById(id); }
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function cueList(cs){ return cs.map(function(c){ return CUE[c] || c; }); }
+  // Purely visual: breaks a wall-of-text body into paragraphs at sentence boundaries
+  // (every 2nd sentence), so it reads like an opened email instead of one block.
+  // Operates on already-escaped/highlighted HTML; safe because none of the cue
+  // labels or highlight markup contain ". " followed by a capital letter.
+  function paragraphize(html){
+    var n = 0;
+    return '<p>' + html.replace(/([.!?])\s+(?=[A-Z])/g, function(m, p){
+      n++;
+      return (n % 2 === 0) ? p + '</p><p>' : p + ' ';
+    }) + '</p>';
+  }
 
   function renderChips(){
     var host = $('tl-chips'); host.innerHTML = '';
@@ -376,8 +428,14 @@
 
   function renderMail(e){
     $('tl-meta').textContent = 'Source ' + e.source + ' · email ' + e.email_id + ' · overall click rate ' + e.overall_click_pct.toFixed(1) + '% (median of this source)';
+    var addr = String(e.sender || '');
+    var m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(addr);
+    var name = m ? m[1].trim() : (addr.split('@')[0] || 'Sender');
+    var mail = m ? m[2] : addr;
+    $('tl-avatar').textContent = (name.charAt(0) || '?').toUpperCase();
+    $('tl-from').innerHTML = esc(name) + (mail ? ' <span class="addr">&lt;' + esc(mail) + '&gt;</span>' : '');
     $('tl-subj').textContent = e.subject;
-    $('tl-body').textContent = e.body;
+    $('tl-body').innerHTML = paragraphize(esc(e.body));
   }
 
   function renderChart(e){
