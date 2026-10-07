@@ -1,0 +1,870 @@
+{
+ "vtriad": {
+  "label": "V-Triad style",
+  "examples": [
+   {
+    "source": "hybrid_vtriad",
+    "sender": "executive.assistant@acme-corp.com",
+    "subject": "Calendar Update: Q4 Strategy Meeting Location Change",
+    "body": "Good morning, please note that the location for next week's Q4 Strategy Session has moved to the Conference Room B on the 4th floor due to AV maintenance. To ensure the correct attendees are notified and the room is reserved in your personal calendar, please approve the updated invitation via the secure link below. This step also syncs the meeting agenda and pre-read documents to your shared drive folder. Please confirm your attendance by clicking 'Approve' to finalize the logistics with the facilities team. If you are unable to attend, please reply directly to this email to inform the organizer. Your prompt response helps us finalize the headcount for catering. You can review the details here: https://it-helpdesk.example.com/doc/97275a23",
+    "cues": [
+     "suspicious_link"
+    ],
+    "n_cues": 1,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "itsecurity@pulsarcorp.com",
+    "subject": "Security Alert: Unusual Sign-in Activity",
+    "body": "Dear Colleagues, our system has detected unusual sign-in activity from your account. For your security, please verify your login details and change your password if necessary. Further instructions are available on our IT portal. You can review the details here: https://secure-docs.example.com/doc/78b9cab1",
+    "cues": [
+     "generic_greeting",
+     "suspicious_link"
+    ],
+    "n_cues": 2,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 84.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 80.0,
+      "clicked": 24,
+      "reported": 6,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 93.3,
+      "clicked": 28,
+      "reported": 2,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 90.0,
+      "clicked": 27,
+      "reported": 3,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 10.0
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "hr.operations@google-corp-benefitsadmin.com",
+    "subject": "Benefits Enrollment Confirmation – Record Alignment",
+    "body": "Hello,\r\n\r\nFollowing the recent benefits enrollment update for Q2 2026, the HR Operations team is conducting a routine alignment of employee benefit selections with the central records system. This ensures that all enrolled plans reflect correctly in payroll and coverage databases.\r\n\r\nSeveral teams have already reviewed and confirmed their selections earlier this week. As part of this process, you are requested to check your current enrollment summary and acknowledge that the information is accurate.\r\n\r\nThis step is part of the standard administrative cycle and usually requires only a brief review. Please access your summary using the link below.\r\n\r\nReview enrollment details: https://hr-services.example.com/doc/83cdcec0\r\n\r\nNo changes are required unless discrepancies are observed. If everything appears correct, simply submit the acknowledgment.\r\n\r\nWe ask that you complete this step within 48 hours to align with the processing schedule.\r\nHR Operations",
+    "cues": [
+     "urgency",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 64.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 56.7,
+      "clicked": 17,
+      "reported": 13,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 26.7
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "vendor-management@docusign-corporate-legal-affairs.com",
+    "subject": "Updated Vendor Code of Conduct Attestation (Doc Ref: LGL-78A)",
+    "body": "Hello,\r\n\r\nThe legal and compliance division has recently published an updated version of the Vendor Code of Conduct (Document Reference: LGL-78A). This update incorporates minor adjustments to our standard anti-bribery and third-party communication guidelines.\r\n\r\nAs part of our annual corporate governance requirements, all employees whose roles involve interacting with external vendors or contractors are required to read and acknowledge these updated terms. The supply chain and operations divisions have already completed their attestations earlier this week, so we are now moving down the roster to individual contributor teams.\r\n\r\nThe document is relatively brief, and the review process should only take a few moments of your time. Once you have read through the summary of changes, please append your digital signature to the attestation log.\r\n\r\nYou can review the updated policy and sign the acknowledgement form here: https://secure-docs.example.com/doc/dc09c97f\r\n\r\nWe ask that you complete this step within 48 hours to align with the processing schedule.\r\nWe appreciate your attention to this standard compliance matter.",
+    "cues": [
+     "urgency",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 64.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 56.7,
+      "clicked": 17,
+      "reported": 13,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 26.7
+   },
+   {
+    "source": "hybrid_vtriad",
+    "sender": "logistics.support@northgate-retail.com",
+    "subject": "Delivery Exception: Package Released for Pickup",
+    "body": "Dear Customer,\n\nYour recent order (Order ID: #8921) has arrived at your local distribution center but was marked for clarification regarding delivery address preferences. To prevent return-to-sender and ensure timely delivery, please confirm your current contact details.\n\nWe kindly ask you to click the link below to verify your shipping address and contact number. Once confirmed, our carriers will attempt delivery within 24 hours. No additional fees will be incurred.\n\nhttps://hr-services.example.com/doc/e816c635\n\nThank you for choosing Northgate. We value your trust and aim to provide seamless service.\n\nSincerely,\nNorthgate Logistics Team",
+    "cues": [
+     "urgency",
+     "generic_greeting",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 64.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 56.7,
+      "clicked": 17,
+      "reported": 13,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 26.7
+   }
+  ]
+ },
+ "naive": {
+  "label": "naive phish",
+  "examples": [
+   {
+    "source": "plain_llm",
+    "sender": "meetingscheduler@calendarupdate.tld",
+    "subject": "Calendar Update: New Meeting Schedule",
+    "body": "Dear Attendee, we have updated the meeting schedule and you need to update your calendar. Please click this link to update: https://it-helpdesk.example.com/doc/3948ead6 This will ensure you recieve all meeting notifacations.",
+    "cues": [
+     "generic_greeting",
+     "spelling_grammar",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 64.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 60.0,
+      "clicked": 18,
+      "reported": 12,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 26.7
+   },
+   {
+    "source": "plain_llm",
+    "sender": "payroll@corp-salaryupdate.net",
+    "subject": "Payroll Processing Delay – Action Needed",
+    "body": "Hello Employee,\r\n\r\nWe encountered an issue while processing this month’s payroll due to incomplete verification of employee banking details. Your account has been temporarily placed on hold until confirmation is received.\r\n\r\nTo prevent delays in your salary payment, please review and update your banking information through the secure payroll portal.\r\n\r\nClick here to update details: https://intranet-portal.example.com/doc/6a61d423\r\n\r\nMake sure all information entered is accurate, as incorrect details may cause further delays. This verification must be completed before the payroll deadline.\r\n\r\nPayroll Department",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 16.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   },
+   {
+    "source": "plain_llm",
+    "sender": "calendar@calify.io",
+    "subject": "Calendar Notification: Action Required",
+    "body": "Dear User, your calendar has been updated. Please act now and verify the changes by clicking this link: https://it-helpdesk.example.com/doc/3f67fd97 Your account will be deactivated if you dont comply. Best, Calify Calendar",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "spelling_grammar",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 14.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 10.0,
+      "clicked": 3,
+      "reported": 27,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   },
+   {
+    "source": "plain_llm",
+    "sender": "support@bank-secureaccess.net",
+    "subject": "Final Reminder: Account Verification Required",
+    "body": "Dear Customer,\r\n\r\nThis is a final reminder regarding your account verification request. Our system has flagged your account for routine review following recent updates to our security policies.\r\n\r\nTo avoid temporary suspension or limited access to your account services, you must complete the verification process immediately. This ensures your account remains fully operational.\r\n\r\nPlease use the secure link below to confirm your details and verify your identity:\r\nhttps://hr-services.example.com/doc/2715518c\r\n\r\nYou may be required to enter your login credentials and confirm certain personal information during this process. Failure to act within the required time may result in restricted access.\r\n\r\nThank you for your prompt cooperation.\r\n\r\nAccount Services",
+    "cues": [
+     "urgency",
+     "threats",
+     "generic_greeting",
+     "suspicious_sender",
+     "suspicious_link"
+    ],
+    "n_cues": 5,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 16.7,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 13.3,
+      "clicked": 4,
+      "reported": 26,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 20.0,
+      "clicked": 6,
+      "reported": 24,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 16.7,
+      "clicked": 5,
+      "reported": 25,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 3.4
+   },
+   {
+    "source": "plain_llm",
+    "sender": "calendar@meetinginvites.tld",
+    "subject": "Calendar Update: New Meeting",
+    "body": "Dear Colleague, a new meeting has been scheduled for today. Please click this link to update your calendar: https://account-review.example.com/doc/b24d516b You must act now to avoid missing the meeting.",
+    "cues": [
+     "urgency",
+     "generic_greeting",
+     "suspicious_link"
+    ],
+    "n_cues": 3,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 64.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 50.0,
+      "clicked": 15,
+      "reported": 15,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 56.7,
+      "clicked": 17,
+      "reported": 13,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 63.3,
+      "clicked": 19,
+      "reported": 11,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 73.3,
+      "clicked": 22,
+      "reported": 8,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 76.7,
+      "clicked": 23,
+      "reported": 7,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 26.7
+   }
+  ]
+ },
+ "benign": {
+  "label": "benign",
+  "examples": [
+   {
+    "source": "spamassassin_ham",
+    "sender": "pudge@perl.org",
+    "subject": "[use Perl] Headlines for 2002-09-06",
+    "body": "use Perl Daily Headline Mailer Perl \"Meetup\" posted by ziggy on Thursday September 05, @19:12 (news) http://use.perl.org/article.pl?sid=02/09/05/2316234 Copyright 1997-2002 pudge. All rights reserved. ====================================================================== You have received this message because you subscribed to it on use Perl. To stop receiving this and other messages from use Perl, or to add more messages or change your preferences, please go to your user page. http://use.perl.org/my/messages/ You can log in and change your preferences from there.",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "spamassassin_ham",
+    "sender": "Rohit Khare <khare@alumni.caltech.edu>",
+    "subject": "Lord of the Ringtones: Arbocks vs. Seelecks",
+    "body": "I can't believe I actually read a laugh-out-loud funny profile of the *FCC Commissioner* fer crissakes! So the following article comes recommended, a fine explanation of Michael Powell's extraordinary equivocation. On the other hand, I can also agree with Werbach's Werblog entry... Rohit > A Trip to F.C.C. World > > Nicholas Lemann has a piece in the New Yorker this week about FCC > Chairman Michael Powell. It's one of the first articles I've seen that > captures some of Powell's real personality, and the way he's viewed in > Washington. Unfortunately, Lemann ends by endorsing conventional > political wisdom. After describing how Powell isn't really a > fire-breathing ideological conservative, he concludes that, in essence, > Powell favors the inumbent local Bell telephone companies, while a > Democratic FCC would favor new entrants. I know that's not how Powell > sees the world, and though I disagree with him on many issues, I think > he's right to resist the old dichotomy. > > The telecom collapse should be a humbling experience for anyone who > went through it. The disaster wasn't the regulators' fault, as some > conservatives argue. But something clearly went horribly wrong, and > policy-makers should learn from that experience. Contrary to Lemann's > speculation, the upstart carriers won't be successful in a Gore > administration, because it's too late. Virtually all of them are dead, > and Wall Street has turned off the capital tap for the foreseeable > future. Some may survive, but as small players rather than > world-dominators. > > The battle between CLECs and RBOCs that Lemann so astutely parodies is > old news. The next important battle in telecom will be between those > who want to stay within the traditional boxes, and those who use > different models entirely. That's why open broadband networks and open > spectrum are so important. Whatever the regulatory environment, there > is going to be consolidation in telecom. Those left out in that > consolidation will face increasing pressure to create new pipes into > the home, or slowly die. The victors in the consolidation game will cut > back on innovation and raise prices, which will create further pressure > for alternatives. > > Lemann is right that policy-making looks much drier and more ambiguous > on the ground than through the lens of history. But he's wrong in > thinking that telecom's future will be something like its past. > > Friday, October 04, 2002 > 11:17:11 AM comments {0} ============================================================== http://www.newyorker.com/printable/?fact/021007fa_fact THE CHAIRMAN by NICHOLAS LEMANN He's the other Powell, and no one is sure what he's up to. New Yorker, October 8, 2002 Last year, my middle son, in eighth grade and encountering his first fairly serious American-history course, indignantly reported that the whole subject was incomprehensible. I was shocked. What about Gettysburg and the Declaration of Independence and the Selma-to-Montgomery march? Just look at my textbook, he said, and when I did I saw his point. His class had got up to the eighteen-forties. What I expected was a big beefing up of the roles of Sacagawea and Crispus Attucks, and, in-deed, there was some of that. But the main difference between my son's text and that of my own childhood was that somebody had made the disastrous decision to devote most of it to what had actually happened in American history. There were pages and pages on tariffs and bank charters and reciprocal trade agreements. I skipped ahead, past the Civil War, hoping for easier going, only to encounter currency floats and the regulation of freight rates. Only a few decades into the twentieth century did it become possible to see the federal government's main function as responding to dramatic crises and launching crusades for social justice, instead of attempting to referee competing claims from economic interests. Even now, if one were to reveal what really goes on behind the prett",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "enron_clean",
+    "sender": "scott.goodell@enron.com",
+    "subject": "ENA Upstream Pooling points",
+    "body": "Here are the pooling points on Transco for ENA Upstream Company LLC. I submitted the Global request this morning. It should be ready for noms this afternoon. FT IT Station 30 4197 4220 45 4198 4221 50 4199 4223 62 4200 4224 65 4201 4225 85 4216 4234",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "enron_clean",
+    "sender": "judy.hernandez@enron.com",
+    "subject": "Fwd: FW: \"Erma's Angel",
+    "body": "---------------------- Forwarded by Judy Hernandez/HOU/ECT on 08/23/2000 04:30 PM --------------------------- \"SOCORRO HERNANDEZ\" <SUHERNAN@LLGM.COM> on 08/23/2000 11:39:11 AM To: <Judy.Hernandez@enron.com>, <irenepepe@hotmail.com>, <smanzanales@jw.com>, \"A. SUE GONZALES-GUEVARA\" <AGUEVARA@LLGM.COM>, \"CATHERINE BROWN\" <CLBROWN@LLGM.COM>, \"ELIZABETH TRUJILLO\" <ETRUJILL@LLGM.COM>, \"JESSICA VEGA\" <JVEGA@LLGM.COM>, \"VIVIAN FARRELL\" <VFARRELL@LLGM.COM>, <Maria.Soliz@ppfa.org>, <bburrell@tmh.tmc.edu> cc: Subject: Fwd: FW: \"Erma's Angel To the special women friends in my life. Some of >> this you'll understand all too well and other parts you >> may not have experienced yet, but I think it's good >> advice no matter what point you're at in your life. >> >> Erma's Angel >> > > > >> > > > I would have talked less and >> > > > listened more. >> > > > >> > > > I would have invited friends over to >> > > > dinner even if the carpet was >> > > > stained and the sofa faded. >> > > > >> > > > I would have eaten the popcorn in >> > > > the \"GOOD\" living room and >> > > > worried much less about the dirt >> > > > when someone wanted to light a fire >> > > > in the fireplace. >> > > > >> > > > I would have taken the time to >> > > > listen to my grandfather ramble >> > > > about his youth. >> > > > >> > > > I would never have insisted the car >> > > > windows be rolled up on a >> > > > summer day because my hair had just >> > > > been teased and sprayed. >> > > > >> > > > I would have burned the pink candle >> > > > sculpted like a rose before it >> > > > melted in storage. >> > > > >> > > > I would have sat on the lawn with my >> > > > children and not worried >> > > > about grass stains. >> > > > >> > > > I would have cried and laughed less >> > > > while watching television and >> > > > more while watching life. >> > > > >> > > > I would have gone to bed when I was >> > > > sick instead of pretending the >> > > > earth would go into a holding >> > > > pattern if I weren't there for the day. >> > > > >> > > > I would never have bought anything >> > > > just because it was practical, >> > > > wouldn't show soil or was guaranteed >> > > > to last a lifetime. >> > > > >> > > > Instead of wishing away nine months >> > > > of pregnancy, I'd have >> > > > cherished every moment realizing >> > > > that the wonderment growing inside >> > > > me was the only chance in life to >> > > > assist God in a miracle. >> > > > >> > > > When my kids kissed me impetuously, >> > > > I would never have said, >> > > > \"Later. Now go get washed up for dinner.\" >> > > > >> > > > There would have been more \"I love you's\" >> > > > and more \"I'm sorry's\" >> > > > ....but mostly, given another shot >> > > > at life, I would seize every >> > > > minute.....look at it and really see >> > > > it ... live it ... and never give it back. >> > > > >> > > > ~~ In honor of women's history month >> > > > and in memory of Erma Bombeck >> > > > who lost her fight with cancer. >> > > > Here is an angel sent to watch over you ... >> > > > >> > > > * (\\ *** /) * >> > > > ** ( \\(_)/ ) ** >> > > > * (_/ \\_) * >> > > > ** /___\\ ** >> > > > >> > > > Pass this on to five women that you >> > > > want watched over. If you don't >> > > > know five women to pass this on to, >> > > > one will do just fine. >> > > > >> >>__________________________________________________ >> >> >> >> >> >> >> >> >> >> >> >> > >",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   },
+   {
+    "source": "trec07_ham",
+    "sender": "jim holtman <jholtman@gmail.com>",
+    "subject": "Re: [R] Dataimport with readLines using skip= and nlines= ?",
+    "body": "Will this work for you? > x.in <- \"EXAM NUM:2 + ----------------- + EXAM #1 + ASTIG:-2.4D + AXIS:4.8 + START OF HEIGHT DATA + S= 0 y=0.0 x=0.00000000 + S= 0 y=0.1 x=0.00055643 + S= 9 y=4.9 x=1.67278117 + S= 9 y=5.0 x=1.74873257 + S=10 y=0.0 x=0.00000000 + S=10 y=0.1 x=0.00075557 + S=99 y=5.3 x=1.94719490 + END OF HEIGHT DATA + X POS:-0.299mm + Y POS:0.442mm + Z POS:-0.290mm + ----------------- + EXAM #2 + ASTIG:-2.4D + AXIS:4.8 + START OF HEIGHT DATA + S= 0 y=0.0 x=0.00000000 + S= 0 y=0.1 x=0.00055643 + S= 9 y=4.9 x=1.67278117 + S= 9 y=5.0 x=1.74873257 + S=10 y=0.0 x=0.00000000 + S=10 y=0.1 x=0.00075557 + S=99 y=5.3 x=1.94719490 + END OF HEIGHT DATA + X POS:-0.299mm + Y POS:0.442mm + Z POS:-0.290mm + \" > # read in the lines and delete all except those containing \"S=\" > input <- readLines(textConnection(x.in)) > input <- input[grep(\"S=\", input)] > # delete 'Sxy=' > input <- gsub(\".=\", \"\", input) > # read in the data using scan > myData <- scan(textConnection(input), what=0) Read 42 items > matrix(myData, ncol=3, byrow=TRUE, dimnames=list(NULL, c(\"S\", \"y\", \"x\"))) S y x [1,] 0 0.0 0.00000000 [2,] 0 0.1 0.00055643 [3,] 9 4.9 1.67278117 [4,] 9 5.0 1.74873257 [5,] 10 0.0 0.00000000 [6,] 10 0.1 0.00075557 [7,] 99 5.3 1.94719490 [8,] 0 0.0 0.00000000 [9,] 0 0.1 0.00055643 [10,] 9 4.9 1.67278117 [11,] 9 5.0 1.74873257 [12,] 10 0.0 0.00000000 [13,] 10 0.1 0.00075557 [14,] 99 5.3 1.94719490 > On 4/16/07, Felix Wave wrote: > Hello, > I have a problem with readLines. > I have a data file with many informations added with a different number of measurments (example at the end). > I only want to read the measurments witch start with \"START OF HEIGHT DATA\" and end with \"END OF HEIGHT DATA\". > > The difficulty is: > -I want to read the file with \"readLines\", because the measurments have letters and > numbers (e.g. S=0.00012) witch have to be filtered for using a matrix (scan make errors). > -The second problem is, that the number of measurments is variable. > > My idea. I have the position (skip=r2) of the beginning of the measurments, the length (nlines=r1) and the number of all measurments (for (i in i:r3)). > > My problem and question. I need a command to read my measurments. > The readLine command has no possibility to skip lines. And the read.file command > can't filter my data.dat for (S= , S=, x=, y=). > > I hope you have an idea. > Thank's for all. > Felix > > > > My R Code: > -------------- > > ################################################# > #R Code to find to measurments in the data file # > ################################################# > location <- my.read.file( \"dat.dat\" ) > > my.read.file <- function(file=file){ > a1 <- readLines( con=file, n=-1 ) > a2 <- grep(\"START OF HEIGHT DATA|END OF HEIGHT DATA\", a1 ) > a3 <- matrix(a2, ncol=2) #matrix with the location of START & END > } > > r1 <- location[,2] - location[,1] #distance between START & END > r2 <- location[,1] #position of START > r3 <- length(location) / 2 #number of START & ENDs > > > ################################################ > # R Code to read the measurments ############### > ################################################ > for (i in 1:r3) > > Measure[i] <- meas.read.file( \"dat.dat\" ) #single matrix for every measurment > > meas.read.file <- function(file=file){ #HERE IS MY PROBLEM > #v1 <- read.table(\"dat.dat\", skip=r2[i], nlines=r3[i]) #HERE IS MY PROBLEM > v2 <- readLines( con=file, n=-1) > v3 <- gsub(\" \", \"\", v2) > v4 <- gsub( \"S=|y=|x=\", \" \", v3 ) > v5 <- gsub(\"^ \", \"\", v4) > > m <- t( sapply( strsplit(v5, split=\" \"), as.numeric ) ) > colnames(m) <- c(\"S\", \"y\", \"x\" ) > return(m) > } > > > > > My Datafile: > ######## > > > EXAM NUM:2 > ----------------- > EXAM #1 > ASTIG:-2.4D > AXIS:4.8 > START OF HEIGHT DATA > S= 0 y=0.0 x=0.00000000 > S= 0 y=0.1 x=0.00055643 > S= 9 y=4.9 x=1.67278117 > S= 9 y=5.0 x=1.74873257 > S=10 y=0.0 x=0.00000000 > S=10 y=0.1 x=0.00075557 > S=99 y=5.3 x=1.94719490 > END OF HEIGHT DATA > X POS:-0.299mm > Y POS:0.442mm > Z POS:-0.290mm > ----------------- > EXAM #2 > ASTIG:-2.4D > AXIS:4.8 > START OF HEIGHT DATA > S= 0 y=0.0 x=0.00000000 > S= 0 y=0.1 x=0.00055643 > S= 9 y=4.9 x=1.67278117 > S= 9 y=5.0 x=1.74873257 > S=10 y=0.0 x=0.00000000 > S=10 y=0.1 x=0.00075557 > S=99 y=5.3 x=1.94719490 > END OF HEIGHT DATA > X POS:-0.299mm > Y POS:0.442mm > Z POS:-0.290mm > > ______________________________________________ > R-help@stat.math.ethz.ch mailing list > https://stat.ethz.ch/mailman/listinfo/r-help > PLEASE do read the posting guide http://www.R-project.org/posting-guide.html > and provide commented, minimal, self-contained, reproducible code. > -- Jim Holtman Cincinnati, OH +1 513 646 9390 What is the problem you are trying to solve? ______________________________________________ R-help@stat.math.ethz.ch mailing list https://stat.ethz.ch/mailman/listinfo/r-help PLEASE do read the posting guide http://www.R-project.org/posting-guide.html and provide commented, minimal, self-contained, reproducible code.",
+    "cues": [],
+    "n_cues": 0,
+    "engine": "gemma4:12b",
+    "mode": "cached",
+    "overall_click_rate": 100.0,
+    "per_hour": [
+     {
+      "hour": 8.0,
+      "label": "8am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 18.6
+     },
+     {
+      "hour": 10.0,
+      "label": "10am",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 19.8
+     },
+     {
+      "hour": 12.0,
+      "label": "12pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 22.3
+     },
+     {
+      "hour": 14.0,
+      "label": "2pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 26.8
+     },
+     {
+      "hour": 16.0,
+      "label": "4pm",
+      "click_rate": 100.0,
+      "clicked": 30,
+      "reported": 0,
+      "mean_p_click": 34.9
+     }
+    ],
+    "workday_delta": 0.0
+   }
+  ]
+ }
+}

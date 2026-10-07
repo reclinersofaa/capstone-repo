@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live Phishing Scorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,500;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --surface:#f6f5f2; --ink:#161513; --muted:#5b5750; --faint:#8a857c;
+    --line:#e4e1da; --accent:#c8553d; --accent-ink:#8c3a28; --accent-wash:#fbeae6;
+    --good:#2f6f4e; --good-wash:#e8f3ec;
+    --font-display:'Newsreader', Georgia, serif; --font-body:'Inter', system-ui, sans-serif; --font-mono:'JetBrains Mono', monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15140f; --surface:#1d1c17; --ink:#efece4; --muted:#a39d92; --faint:#79736a;
+      --line:#34322a; --accent:#e8806a; --accent-ink:#f3a894; --accent-wash:#2e201b;
+      --good:#6cc99a; --good-wash:#16261e;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15140f; --surface:#1d1c17; --ink:#efece4; --muted:#a39d92; --faint:#79736a;
+    --line:#34322a; --accent:#e8806a; --accent-ink:#f3a894; --accent-wash:#2e201b;
+    --good:#6cc99a; --good-wash:#16261e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); line-height:1.5}
+  .wrap{max-width:1040px; margin:0 auto; padding:28px 20px 64px}
+  .demo-nav{display:flex; gap:4px; flex-wrap:wrap; padding:14px 20px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:5}
+  .demo-nav a{font-family:var(--font-mono); font-size:12px; text-decoration:none; color:var(--muted); padding:7px 12px; border-radius:999px}
+  .demo-nav a.active, .demo-nav a:hover{background:var(--accent-wash); color:var(--accent-ink)}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
+  .dot{width:4px; height:4px; border-radius:50%; background:var(--faint)}
+  h1{font-family:var(--font-display); font-weight:700; font-size:2.3rem; margin:0 0 10px; letter-spacing:-0.01em}
+  .dek{color:var(--muted); font-size:1.02rem; max-width:62ch; margin:0 0 22px}
+  .badge{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:11.5px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:5px 11px; margin-bottom:22px}
+  .led{width:7px; height:7px; border-radius:50%; background:var(--faint)}
+  .led.ok{background:var(--good)}
+  .led.bad{background:var(--accent)}
+  hr{border:none; border-top:1px solid var(--line); margin:30px 0}
+  .sec-head{display:flex; gap:14px; align-items:baseline; margin-bottom:16px}
+  .sec-num{font-family:var(--font-mono); font-size:12px; color:var(--faint); padding-top:4px}
+  h2{font-family:var(--font-display); font-size:1.5rem; margin:0 0 4px}
+  .sec-note{color:var(--muted); font-size:.92rem; max-width:70ch; margin:0}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px}
+  .chip-btn{font-family:var(--font-mono); font-size:12px; padding:7px 14px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; cursor:pointer}
+  .chip-btn.on{background:var(--accent); border-color:var(--accent); color:#fff}
+  .counter{font-family:var(--font-mono); font-size:12px; color:var(--faint); margin:0 0 14px}
+  .mailhdr{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+  .avatar{width:34px; height:34px; border-radius:50%; background:var(--accent-wash); color:var(--accent-ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:var(--font-mono); flex:none}
+  .from{font-weight:600}
+  .addr{color:var(--faint); font-weight:400; font-family:var(--font-mono); font-size:.85rem}
+  .subj{font-family:var(--font-display); font-size:1.2rem; font-weight:700; margin:0 0 10px}
+  .body{white-space:pre-wrap; font-size:.95rem; border-top:1px solid var(--line); padding-top:12px}
+  .hl{border-radius:4px; padding:0 3px; cursor:help}
+  .c-urgency{background:#f6d7ae; color:#5a3c05}
+  .c-threats{background:#f3bcb6; color:#6e170a}
+  .c-generic_greeting{background:#d8d2c4; color:#39321c}
+  .c-spelling_grammar{background:#cfe0d6; color:#163926}
+  .c-emotional_appeal{background:#e6c9ea; color:#431a4b}
+  .c-too_good_true{background:#fbe39a; color:#5c4100}
+  .c-personal_info{background:#f6c0d4; color:#5e0f2e}
+  .c-suspicious_sender{background:#c3d9f0; color:#0d2c52}
+  .c-suspicious_link{background:#f2b8a8; color:#5c1a08}
+  .legend{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+  .chip{font-family:var(--font-mono); font-size:11.5px; padding:4px 10px; border-radius:999px}
+  .chip.nf{background:var(--line); color:var(--muted); border:1px dashed var(--faint)}
+  .verdict{font-weight:600; color:var(--accent-ink); margin-bottom:10px}
+  .two-col{display:flex; gap:18px; flex-wrap:wrap; margin-top:16px}
+  .two-col > *{flex:1 1 320px; min-width:0}
+  .scorebox{display:flex; align-items:baseline; gap:10px; margin-bottom:10px}
+  .big{font-family:var(--font-display); font-size:2.4rem; font-weight:700}
+  .kv{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--line); font-size:.9rem}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--muted)}
+  .note{font-size:.84rem; color:var(--muted); margin-top:12px}
+  svg{width:100%; height:auto; display:block}
+  .gridline{stroke:var(--line); stroke-width:1}
+  .tick{font-family:var(--font-mono); font-size:10px; fill:var(--faint)}
+  .pt-label{font-family:var(--font-mono); font-size:11px; fill:var(--ink)}
+  .axis-label{font-family:var(--font-mono); font-size:10px; fill:var(--faint); letter-spacing:.04em}
+  .f-accent{fill:var(--accent)}
+  textarea, input[type=text]{width:100%; font-family:var(--font-body); font-size:.92rem; background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:10px}
+  textarea{min-height:140px; resize:vertical}
+  label{font-family:var(--font-mono); font-size:11px; color:var(--muted); display:block; margin-bottom:4px}
+  .field{margin-bottom:12px}
+  .go-btn{font-family:var(--font-mono); font-size:12.5px; padding:9px 18px; border-radius:8px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer}
+  .go-btn:disabled{opacity:.5; cursor:default}
+  .err{color:var(--accent-ink); font-size:.88rem}
+  footer{margin-top:40px; color:var(--faint); font-size:.82rem}
+</style>
+</head>
+<body>
+<nav class="demo-nav">
+  <a href="index.html">Results Summary</a>
+  <a href="report.html">Full Report</a>
+  <a href="quiz.html">Phishing Quiz</a>
+  <a href="emails.html">Phishing Emails</a>
+  <a href="live.html" class="active">Live Scorer</a>
+</nav>
+<div class="wrap">
+  <div class="eyebrow">
+    <span>PES UNIVERSITY</span><span class="dot"></span>
+    <span>CAPSTONE PW26_SVM_01</span>
+  </div>
+  <h1>Live phishing scorer.</h1>
+  <p class="dek">Cue extraction and the simulated workforce, running for real. Cycle a preloaded example for an instant result, or paste your own text to trigger a fresh extraction.</p>
+  <div class="badge"><span class="led" id="engine-led"></span><span id="engine-text">checking extractor...</span></div>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><div><h2>Try an example</h2><p class="sec-note">Each button cycles through real corpus emails, already extracted and simulated, so results show instantly with no model call. Cues are highlighted the same way as the full corpus view.</p></div></div>
+    <div class="chips" id="cat-chips"></div>
+    <p class="counter" id="ex-counter">Loading...</p>
+    <div class="card">
+      <div class="verdict" id="ex-verdict"></div>
+      <div class="mailhdr"><div class="avatar" id="ex-avatar"></div><div class="from" id="ex-from"></div></div>
+      <div class="subj" id="ex-subj"></div>
+      <div class="body" id="ex-body"></div>
+      <div class="legend" id="ex-legend"></div>
+      <div class="two-col">
+        <div>
+          <div class="scorebox"><span class="big" id="ex-rate">-</span></div>
+          <div class="kv"><span class="k">Click rate at 8am</span><span class="v" id="ex-8am">-</span></div>
+          <div class="kv"><span class="k">Click rate at 4pm</span><span class="v" id="ex-4pm">-</span></div>
+          <div class="kv"><span class="k">Workday fatigue effect</span><span class="v" id="ex-delta">-</span></div>
+          <p class="note">A relative, within-model susceptibility score (30 generic simulated agents), not a real-world click rate or the department-scenario numbers used elsewhere on this site. Fewer detectable cues means a higher score by construction.</p>
+        </div>
+        <figure style="margin:0"><svg id="ex-chart" viewBox="0 0 320 200" role="img" aria-label="Click rate by hour for the selected example"></svg></figure>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><div><h2>Paste your own</h2><p class="sec-note">Runs a fresh extraction through the local or hosted model (see the badge above) and the same scoring path as the examples.</p></div></div>
+    <div class="card">
+      <div class="field"><label for="in-sender">Sender</label><input type="text" id="in-sender" placeholder="billing@example.com"></div>
+      <div class="field"><label for="in-subject">Subject</label><input type="text" id="in-subject" placeholder="Action required: verify your account"></div>
+      <div class="field"><label for="in-body">Body</label><textarea id="in-body" placeholder="Paste or write an email body..."></textarea></div>
+      <button class="go-btn" id="score-btn">Score this email</button>
+      <div id="own-result" style="margin-top:18px"></div>
+    </div>
+  </section>
+
+  <footer>corpus 1,595 &middot; 10 sources &middot; extractor gemma4:12b (Ollama, local) or hosted fallback</footer>
+</div>
+
+<script>
+(function(){
+  var CUE = {
+    urgency:'pressure to act now', threats:'threatens a consequence', generic_greeting:'impersonal greeting',
+    spelling_grammar:'spelling or grammar problem', emotional_appeal:'emotional pull', too_good_true:'too-good-to-be-true offer',
+    personal_info:'asks for sensitive details', suspicious_sender:'sender looks mismatched', suspicious_link:'link looks suspicious'
+  };
+  var PAT = {
+    urgency: /(act now|immediately|urgent(ly)?|today|within \d+ (hours?|days?)|as soon as possible|right away|expires?)/i,
+    threats: /(suspend\w*|closed|blocked|terminat\w*|legal action|penalt\w*|lose access|will be removed|disabled|consequences?)/i,
+    generic_greeting: /^(dear [^,\n]{1,40}|hello [^,\n]{1,40}|hi there|to whom it may concern)/im,
+    spelling_grammar: /\b(recieve\w*|verfy|acount|pls|dont|seperate|occured|untill|wich)\b/i,
+    emotional_appeal: /(congratulations|you('ve| have) been selected|urgent plea|please help|we are sorry|don'?t miss)/i,
+    too_good_true: /(free|prize|reward|bonus|guaranteed|winner|lottery|gift card)/i,
+    personal_info: /(password|credentials|verify your|bank (account|details)|social security|account details|confirm your (identity|details|login))/i
+  };
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function bodyHtml(text, cues){
+    text = String(text || ''); var spans = [];
+    (cues || []).forEach(function(c){
+      if (c === 'suspicious_link'){
+        var re = /https?:\/\/[^\s<>"']+/gi, u;
+        while ((u = re.exec(text))) spans.push({s:u.index, e:u.index + u[0].length, c:c});
+        return;
+      }
+      var m = PAT[c] && PAT[c].exec(text);
+      if (m) spans.push({s:m.index, e:m.index + m[0].length, c:c});
+    });
+    spans.sort(function(a,b){ return a.s - b.s; });
+    var out = '', pos = 0, used = [];
+    spans.forEach(function(sp){
+      if (sp.s < pos) return;
+      out += esc(text.slice(pos, sp.s)) + '<span class="hl c-' + sp.c + '" title="' + esc(CUE[sp.c]) + '">' +
+             esc(text.slice(sp.s, sp.e)) + '</span>';
+      pos = sp.e; used.push(sp.c);
+    });
+    out += esc(text.slice(pos));
+    return {html: out, used: used};
+  }
+
+  function renderMail(prefix, sender, subject, body, cues){
+    var b = bodyHtml(body, cues);
+    var addr = String(sender || '');
+    var m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(addr);
+    var name = m ? m[1].trim() : (addr.split('@')[0] || 'Sender');
+    var mail = m ? m[2] : addr;
+    var senderHl = (cues || []).indexOf('suspicious_sender') >= 0;
+    $(prefix + '-avatar').textContent = (name.charAt(0) || '?').toUpperCase();
+    $(prefix + '-from').innerHTML = (senderHl
+        ? '<span class="hl c-suspicious_sender" title="' + esc(CUE.suspicious_sender) + '">' + esc(name) + '</span>'
+        : esc(name)) + (mail ? ' <span class="addr">&lt;' + esc(mail) + '&gt;</span>' : '');
+    $(prefix + '-subj').textContent = subject || '(no subject)';
+    $(prefix + '-body').innerHTML = b.html;
+    var chips = '';
+    (cues || []).forEach(function(c){
+      var located = b.used.indexOf(c) >= 0 || (c === 'suspicious_sender' && senderHl);
+      chips += located
+        ? '<span class="chip c-' + c + '">' + esc(CUE[c] || c) + '</span>'
+        : '<span class="chip nf">' + esc(CUE[c] || c) + ' (no phrase located)</span>';
+    });
+    $(prefix + '-legend').innerHTML = chips || '<span class="chip nf">No text cues detected</span>';
+    if ($(prefix + '-verdict')) {
+      $(prefix + '-verdict').textContent = (cues && cues.length)
+        ? cues.length + ' red-flag cue' + (cues.length === 1 ? '' : 's') + ' detected'
+        : 'No text cues detected';
+    }
+  }
+
+  function chart(svgId, rows){
+    var svg = $(svgId); if (!svg) return; svg.innerHTML = '';
+    var NS = 'http://www.w3.org/2000/svg', W = 320, H = 200, m = {t:18, r:12, b:28, l:34};
+    function el(tag, attrs, text){
+      var n = document.createElementNS(NS, tag);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      if (text != null) n.appendChild(document.createTextNode(text));
+      return n;
+    }
+    var vals = rows.map(function(d){ return d.click_rate; });
+    var lo = 0, hi = Math.max(100, Math.max.apply(null, vals));
+    var px = function(i){ return m.l + i * (W - m.l - m.r) / (rows.length - 1); };
+    var py = function(v){ return H - m.b - (v - lo) / (hi - lo || 1) * (H - m.t - m.b); };
+    [0, 50, 100].forEach(function(v){
+      if (v > hi) return;
+      svg.appendChild(el('line', {x1:m.l, y1:py(v), x2:W-m.r, y2:py(v), 'class':'gridline'}));
+      svg.appendChild(el('text', {x:m.l-6, y:py(v)+3, 'text-anchor':'end', 'class':'tick'}, v + '%'));
+    });
+    var pts = rows.map(function(r, i){ return px(i) + ',' + py(r.click_rate); }).join(' ');
+    svg.appendChild(el('polyline', {points:pts, fill:'none', stroke:'var(--accent)', 'stroke-width':2.5}));
+    rows.forEach(function(r, i){
+      svg.appendChild(el('circle', {cx:px(i), cy:py(r.click_rate), r:4, 'class':'f-accent'}));
+      svg.appendChild(el('text', {x:px(i), y:py(r.click_rate)-9, 'text-anchor':'middle', 'class':'pt-label'}, r.click_rate + '%'));
+      svg.appendChild(el('text', {x:px(i), y:H-m.b+16, 'text-anchor':'middle', 'class':'tick'}, r.label));
+    });
+  }
+
+  function renderScore(prefix, res){
+    $(prefix + '-rate').textContent = res.overall_click_rate + '%';
+    $(prefix + '-8am').textContent = res.per_hour[0].click_rate + '%';
+    $(prefix + '-4pm').textContent = res.per_hour[res.per_hour.length-1].click_rate + '%';
+    $(prefix + '-delta').textContent = (res.workday_delta >= 0 ? '+' : '') + res.workday_delta + ' pts';
+    chart(prefix + '-chart', res.per_hour);
+  }
+
+  // ---- example cycling ----
+  var DATA = null, catIndex = {};
+  var CATS = [['vtriad','V-Triad style'], ['naive','naive phish'], ['benign','benign']];
+  var curCat = 'vtriad';
+
+  function renderExample(){
+    var group = DATA && DATA[curCat];
+    if (!group || !group.examples.length) return;
+    var i = catIndex[curCat] = (catIndex[curCat] || 0) % group.examples.length;
+    var ex = group.examples[i];
+    renderMail('ex', ex.sender, ex.subject, ex.body, ex.cues);
+    renderScore('ex', ex);
+    $('ex-counter').textContent = 'Showing ' + group.label + ' example ' + (i+1) + ' of ' + group.examples.length + ' (source: ' + ex.source + ')';
+  }
+
+  function renderChips(){
+    var host = $('cat-chips'); host.innerHTML = '';
+    CATS.forEach(function(c){
+      var b = document.createElement('button');
+      b.className = 'chip-btn' + (c[0] === curCat ? ' on' : '');
+      b.textContent = c[1];
+      b.addEventListener('click', function(){
+        if (c[0] === curCat) { catIndex[curCat] = (catIndex[curCat] || 0) + 1; }
+        curCat = c[0];
+        renderChips();
+        renderExample();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  fetch('live_examples.json').then(function(r){ return r.json(); }).then(function(d){
+    DATA = d; renderChips(); renderExample();
+  }).catch(function(){ $('ex-counter').textContent = 'Could not load the preloaded examples.'; });
+
+  // ---- health badge ----
+  fetch('/api/health').then(function(r){ return r.json(); }).then(function(d){
+    var led = $('engine-led'), txt = $('engine-text');
+    if (d.mode === 'none') { led.className = 'led bad'; txt.textContent = d.detail; }
+    else { led.className = 'led ok'; txt.textContent = d.detail; }
+  }).catch(function(){ $('engine-text').textContent = 'Could not reach the server (static file preview, no live scoring).'; });
+
+  // ---- paste your own ----
+  var renderToken = 0;
+  $('score-btn').addEventListener('click', function(){
+    var sender = $('in-sender').value, subject = $('in-subject').value, body = $('in-body').value;
+    if (!subject.trim() && !body.trim()) return;
+    var box = $('own-result'); box.innerHTML = '<p class="note">Scoring...</p>';
+    var myToken = ++renderToken;
+    $('score-btn').disabled = true;
+    fetch('/api/score', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({subject:subject, sender:sender, body:body, n_agents:30})
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, d:d}; }); })
+      .then(function(res){
+        if (myToken !== renderToken) return;
+        $('score-btn').disabled = false;
+        if (!res.ok) { box.innerHTML = '<p class="err">' + esc(res.d.error || 'Scoring failed.') + '</p>'; return; }
+        box.innerHTML =
+          '<div class="verdict" id="own-verdict"></div>' +
+          '<div class="mailhdr"><div class="avatar" id="own-avatar"></div><div class="from" id="own-from"></div></div>' +
+          '<div class="subj" id="own-subj"></div>' +
+          '<div class="body" id="own-body"></div>' +
+          '<div class="legend" id="own-legend"></div>' +
+          '<div class="two-col">' +
+            '<div><div class="scorebox"><span class="big" id="own-rate"></span></div>' +
+            '<div class="kv"><span class="k">Click rate at 8am</span><span class="v" id="own-8am"></span></div>' +
+            '<div class="kv"><span class="k">Click rate at 4pm</span><span class="v" id="own-4pm"></span></div>' +
+            '<div class="kv"><span class="k">Workday fatigue effect</span><span class="v" id="own-delta"></span></div>' +
+            '<p class="note">Extracted by ' + esc(res.d.engine || 'the extractor') + ' (' + esc(res.d.mode || '') + ').</p></div>' +
+            '<figure style="margin:0"><svg id="own-chart" viewBox="0 0 320 200" role="img" aria-label="Click rate by hour"></svg></figure>' +
+          '</div>';
+        renderMail('own', sender, subject, body, res.d.cues);
+        renderScore('own', res.d);
+      })
+      .catch(function(e){
+        if (myToken !== renderToken) return;
+        $('score-btn').disabled = false;
+        box.innerHTML = '<p class="err">Could not reach the scorer: ' + esc(String(e)) + '</p>';
+      });
+  });
+})();
+</script>
+</body>
+</html>

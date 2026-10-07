@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phishing Emails · Cue Highlights</title>
+<style>
+  :root{
+    --ground:#EEF0F4; --surface:#FBFCFD; --surface-2:#F3F5F9; --ink:#14181F;
+    --muted:#586173; --faint:#8A93A3; --hairline:#DCE0E8; --hairline-strong:#C7CDD8;
+    --accent:#B5314A; --accent-ink:#8E2138; --accent-wash:#F7E9EC;
+    --sev-1:#2E7D9A; --sev-2:#3E8E93; --sev-3:#6F9A63; --sev-4:#C79A2E;
+    --sev-5:#D07C33; --sev-6:#C3563F; --sev-7:#B5314A;
+    --good:#2E7D5B; --shadow:0 1px 2px rgba(20,24,31,.05), 0 8px 28px -14px rgba(20,24,31,.18);
+    --font-display:Georgia,"Iowan Old Style","Charter","Times New Roman",serif;
+    --font-sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --maxw:1120px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0E1116; --surface:#161B22; --surface-2:#1B222C; --ink:#E7EAF0;
+      --muted:#9AA4B4; --faint:#6B7482; --hairline:#262D38; --hairline-strong:#333C49;
+      --accent:#E4637A; --accent-ink:#F08A9C; --accent-wash:#2A1A20;
+      --sev-1:#4FB6D6; --sev-2:#54C0B4; --sev-3:#8CC072; --sev-4:#E3BE4E;
+      --sev-5:#EC9A54; --sev-6:#E8735A; --sev-7:#E4637A;
+      --good:#5FBE8E; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#EEF0F4; --surface:#FBFCFD; --surface-2:#F3F5F9; --ink:#14181F;
+    --muted:#586173; --faint:#8A93A3; --hairline:#DCE0E8; --hairline-strong:#C7CDD8;
+    --accent:#B5314A; --accent-ink:#8E2138; --accent-wash:#F7E9EC;
+    --sev-1:#2E7D9A; --sev-2:#3E8E93; --sev-3:#6F9A63; --sev-4:#C79A2E;
+    --sev-5:#D07C33; --sev-6:#C3563F; --sev-7:#B5314A; --good:#2E7D5B;
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E1116; --surface:#161B22; --surface-2:#1B222C; --ink:#E7EAF0;
+    --muted:#9AA4B4; --faint:#6B7482; --hairline:#262D38; --hairline-strong:#333C49;
+    --accent:#E4637A; --accent-ink:#F08A9C; --accent-wash:#2A1A20;
+    --sev-1:#4FB6D6; --sev-2:#54C0B4; --sev-3:#8CC072; --sev-4:#E3BE4E;
+    --sev-5:#EC9A54; --sev-6:#E8735A; --sev-7:#E4637A; --good:#5FBE8E;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--font-sans); line-height:1.55; -webkit-font-smoothing:antialiased; font-size:16px}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+  a{color:var(--accent-ink); text-decoration-thickness:1px; text-underline-offset:2px}
+
+  .demo-nav{position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+            background:var(--surface); border-bottom:1px solid var(--hairline); padding:10px 24px;
+            font-family:var(--font-mono); font-size:12px}
+  .demo-nav a{color:var(--muted); text-decoration:none; padding:6px 12px; border-radius:20px}
+  .demo-nav a:hover{background:var(--surface-2)}
+  .demo-nav a.active{background:var(--accent-wash); color:var(--accent-ink); font-weight:600}
+
+  .f-sev-1{fill:var(--sev-1)}.f-sev-2{fill:var(--sev-2)}.f-sev-3{fill:var(--sev-3)}.f-sev-4{fill:var(--sev-4)}.f-sev-5{fill:var(--sev-5)}.f-sev-6{fill:var(--sev-6)}.f-sev-7{fill:var(--sev-7)}
+  .bg-sev-1{background:var(--sev-1)}.bg-sev-2{background:var(--sev-2)}.bg-sev-3{background:var(--sev-3)}.bg-sev-4{background:var(--sev-4)}.bg-sev-5{background:var(--sev-5)}.bg-sev-6{background:var(--sev-6)}.bg-sev-7{background:var(--sev-7)}
+  .s-accent{stroke:var(--accent)}.f-accent{fill:var(--accent)}.f-accent-ink{fill:var(--accent-ink)}
+  .pt-day{stroke:var(--surface); stroke-width:2}
+
+  .masthead{padding:56px 0 32px; border-bottom:1px solid var(--hairline)}
+  .eyebrow{font-family:var(--font-mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+  .eyebrow .dot{width:5px; height:5px; border-radius:50%; background:var(--accent)}
+  h1{font-family:var(--font-display); font-weight:600; letter-spacing:-.015em; font-size:clamp(2.1rem,5.2vw,3.4rem); line-height:1.04; margin:.35em 0 .3em; text-wrap:balance; max-width:16ch}
+  h1 em{font-style:italic; color:var(--accent)}
+  .dek{font-size:1.12rem; color:var(--muted); max-width:60ch; margin:0}
+  .dek b{color:var(--ink); font-weight:600}
+
+  section{padding:44px 0; border-bottom:1px solid var(--hairline)}
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin:0 0 22px}
+  .sec-num{font-family:var(--font-mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
+  h2{font-family:var(--font-display); font-weight:600; font-size:1.5rem; letter-spacing:-.01em; margin:0}
+  .sec-note{color:var(--muted); font-size:.95rem; margin:.2em 0 0; max-width:64ch}
+
+  .tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:26px}
+  .tile{background:var(--surface); border:1px solid var(--hairline); border-radius:12px; padding:18px 18px 16px; box-shadow:var(--shadow); position:relative; overflow:hidden}
+  .tile .stripe{position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent)}
+  .tile .k{font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted)}
+  .tile .v{font-family:var(--font-mono); font-weight:600; font-size:2rem; letter-spacing:-.02em; margin-top:6px; font-variant-numeric:tabular-nums}
+  .tile .sub{font-size:.82rem; color:var(--faint); margin-top:2px}
+
+  .card{background:var(--surface); border:1px solid var(--hairline); border-radius:14px; box-shadow:var(--shadow); padding:22px}
+  .grid-2{display:grid; grid-template-columns:1.35fr 1fr; gap:20px; align-items:start}
+  figure{margin:0}
+  figcaption{font-size:.85rem; color:var(--muted); margin-top:12px; max-width:62ch}
+  svg{display:block; width:100%; height:auto; overflow:visible}
+  .axis-label{font-family:var(--font-mono); font-size:11px; fill:var(--faint)}
+  .tick{font-family:var(--font-mono); font-size:10.5px; fill:var(--faint); font-variant-numeric:tabular-nums}
+  .gridline{stroke:var(--hairline); stroke-width:1}
+  .trend{stroke:var(--faint); stroke-width:1.5; stroke-dasharray:5 4; opacity:.7}
+  .pt{stroke:var(--surface); stroke-width:2; transition:r .15s ease}
+  .pt:hover{r:11}
+  .pt-label{font-family:var(--font-mono); font-size:10.5px; fill:var(--ink)}
+
+  table{width:100%; border-collapse:collapse; font-size:.94rem}
+  th{text-align:left; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:500; padding:0 12px 10px; border-bottom:1px solid var(--hairline-strong)}
+  th.num{text-align:right}
+  td{padding:11px 12px; border-bottom:1px solid var(--hairline); vertical-align:middle}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; font-family:var(--font-mono)}
+  tbody tr{transition:background .12s ease}
+  tbody tr:hover{background:var(--surface-2)}
+  .src{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .sev-chip{width:9px; height:9px; border-radius:2px; flex:none}
+  .src-name{font-family:var(--font-mono); font-size:.9rem}
+  .src-tag{font-size:.72rem; color:var(--faint); border:1px solid var(--hairline-strong); border-radius:20px; padding:1px 8px}
+  .bar-cell{min-width:150px}
+  .bar-row{display:flex; align-items:center; gap:9px}
+  .bar-track{height:8px; background:var(--surface-2); border-radius:5px; overflow:hidden; border:1px solid var(--hairline); flex:1}
+  .bar-fill{height:100%; border-radius:5px}
+  .bar-val{font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:.85rem; min-width:46px; text-align:right}
+  tr.flag td{background:var(--accent-wash)}
+
+  .comp-row{display:flex; flex-direction:column; gap:16px}
+  .cl-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px}
+  .cl-name{font-weight:600; font-size:.95rem}
+  .cl-count{font-family:var(--font-mono); color:var(--muted); font-size:.85rem; font-variant-numeric:tabular-nums}
+  .seg{display:flex; height:30px; border-radius:8px; overflow:hidden; border:1px solid var(--hairline)}
+  .seg span{display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px; color:#fff; min-width:0; overflow:hidden; white-space:nowrap; text-shadow:0 1px 1px rgba(0,0,0,.32)}
+
+  .day-wrap{display:flex; gap:26px; align-items:center; flex-wrap:wrap}
+
+  .chain{display:flex; flex-wrap:wrap; gap:10px; align-items:stretch}
+  .stage{flex:1 1 130px; background:var(--surface-2); border:1px solid var(--hairline); border-radius:10px; padding:12px 13px; min-width:0}
+  .stage .st-k{font-family:var(--font-mono); font-size:11px; color:var(--accent-ink); font-weight:600}
+  .stage .st-d{font-size:.82rem; color:var(--muted); margin-top:4px; line-height:1.4}
+  .chain-arrow{align-self:center; color:var(--faint); font-family:var(--font-mono)}
+
+  .frame-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .note{background:var(--surface); border:1px solid var(--hairline); border-left:3px solid var(--accent); border-radius:10px; padding:16px 18px}
+  .note h3{font-family:var(--font-sans); font-size:.9rem; letter-spacing:.02em; margin:0 0 6px; text-transform:uppercase; color:var(--muted)}
+  .note p{margin:0; font-size:.92rem; color:var(--ink)}
+  .note.good{border-left-color:var(--good)}
+
+  footer{padding:34px 0 60px; color:var(--muted); font-size:.86rem}
+  footer .meta{display:flex; flex-wrap:wrap; gap:8px 22px; font-family:var(--font-mono); font-size:12px}
+  footer .team{margin-top:12px; color:var(--faint)}
+
+  @media (max-width:820px){
+    .tiles{grid-template-columns:repeat(2,1fr)}
+    .grid-2{grid-template-columns:1fr}
+    .frame-grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+<style>
+  .ev-root .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 22px; margin-bottom:14px}
+  .ev-root .verdict{font-size:.98rem; font-weight:600; color:#c62828; margin-bottom:12px}
+  .ev-root .mailhdr{display:flex; gap:12px; align-items:center; border-bottom:1px solid var(--line); padding-bottom:12px; margin-bottom:14px}
+  .ev-root .avatar{width:38px; height:38px; border-radius:50%; background:#8e8e93; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; flex:none}
+  .ev-root .from{font-size:.92rem; word-break:break-all}
+  .ev-root .from .addr{color:var(--muted)}
+  .ev-root .subj{font-size:1.15rem; font-weight:600; margin:0 0 12px}
+  .ev-root .body{white-space:pre-wrap; line-height:1.65; font-size:.95rem}
+  .ev-root .hl{border-radius:4px; padding:1px 3px; border-bottom:2px solid; cursor:help}
+  .ev-root .c-urgency{background:#ffe0b2; border-color:#e65100}
+  .ev-root .c-threats{background:#ffcdd2; border-color:#c62828}
+  .ev-root .c-generic_greeting{background:#e1bee7; border-color:#6a1b9a}
+  .ev-root .c-spelling_grammar{background:#fff59d; border-color:#f9a825}
+  .ev-root .c-emotional_appeal{background:#f8bbd0; border-color:#ad1457}
+  .ev-root .c-too_good_true{background:#c8e6c9; border-color:#2e7d32}
+  .ev-root .c-personal_info{background:#b3e5fc; border-color:#0277bd}
+  .ev-root .c-suspicious_sender{background:#d7ccc8; border-color:#4e342e}
+  .ev-root .c-suspicious_link{background:#ffccbc; border-color:#bf360c}
+  .ev-root .legend{display:flex; gap:8px; flex-wrap:wrap}
+  .ev-root .chip{font-size:.82rem; padding:4px 10px; border-radius:14px; border:1px solid transparent}
+  .ev-root .hl, .ev-root .chip{color:#111}
+  .ev-root .chip.nf{border:1px dashed var(--muted); background:none; color:var(--muted)}
+  .ev-root .small{font-size:.85rem; color:var(--muted); margin:10px 0 0}
+  .ev-root .avatar{background:#8e8e93}
+  .ev-root .card,.ev-root .body{color:var(--ink)}
+
+  .ev-root .ev-ctl{display:flex; justify-content:space-between; align-items:center; margin:10px 0; font-size:.9rem}
+  .ev-root .ev-btn{background:var(--accent); color:#fff; border:none; border-radius:16px; padding:8px 16px; cursor:pointer; font-size:.9rem}
+  .ev-root .card{background:var(--surface); border:1px solid var(--hairline); border-radius:12px; padding:18px 20px; margin-bottom:12px}
+  .ev-root .verdict{font-size:.98rem; font-weight:600; color:var(--accent-ink); margin-bottom:10px}
+  .ev-root .mailhdr{display:flex; gap:12px; align-items:center; border-bottom:1px solid var(--hairline); padding-bottom:10px; margin-bottom:12px}
+  .ev-root .avatar{width:38px; height:38px; border-radius:50%; background:#8e8e93; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; flex:none}
+  .ev-root .from{font-size:.92rem; word-break:break-all}
+  .ev-root .subj{font-size:1.1rem; font-weight:600; margin:0 0 10px}
+  .ev-root .body{white-space:pre-wrap; line-height:1.65; font-size:.95rem}
+  .ev-root .legend{display:flex; gap:8px; flex-wrap:wrap}
+</style>
+<style>
+  #fatigue-day img{max-width:100%; height:auto; display:block}
+</style>
+<style>
+  .tl-chips{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px}
+  .tl-chip{font-family:var(--font-mono); font-size:12px; padding:6px 12px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; cursor:pointer}
+  .tl-chip.on{background:var(--accent); border-color:var(--accent); color:#fff}
+  .tl-top{display:flex; flex-wrap:wrap; gap:18px}
+  .tl-mail{flex:1 1 340px; min-width:0}
+  .tl-meta{font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-bottom:6px}
+  .tl-chart{flex:1 1 320px; margin:0}
+  .tl-chart svg{width:100%; height:auto; display:block}
+  .tl-hourbar{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px}
+  .tl-deptbar{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; padding:12px; background:var(--bg); border:1px solid var(--line); border-radius:10px}
+  .tl-dept-cell{flex:1 1 140px; min-width:120px}
+  .tl-dept-name{font-family:var(--font-mono); font-size:10.5px; color:var(--muted); display:block; margin-bottom:3px}
+  .tl-dept-pct{font-family:var(--font-display); font-weight:700; font-size:1.3rem}
+  .tl-dec{font-family:var(--font-mono); font-size:12px; padding:3px 8px; border-radius:6px; display:inline-block}
+  .tl-dec.clicked{background:#f6d7d4; color:#7a1d14}
+  .tl-dec.reported{background:#d8ecdf; color:#14502a}
+  .tl-summary{margin-top:12px; color:var(--muted); font-size:.9rem}
+  .tl-cues{font-size:.84rem; color:var(--muted)}
+  @media (prefers-color-scheme: dark){ .tl-dec.clicked{background:#4a1f1b; color:#f7c7c1} .tl-dec.reported{background:#1d3b28; color:#bfe6cd} }
+</style>
+</head>
+<body>
+<nav class="demo-nav">
+  <a href="index.html">Results Summary</a>
+  <a href="report.html">Full Report</a>
+  <a href="quiz.html">Phishing Quiz</a>
+  <a href="emails.html" class="active">Phishing Emails</a>
+  <a href="live.html">Live Scorer</a>
+</nav>
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>PES University</span><span class="dot"></span>
+      <span>Capstone PW26_SVM_01</span>
+    </div>
+    <h1>Phishing emails, <em>cue by cue.</em></h1>
+    <p class="dek">Real phishing emails from the corpus with each red flag the model detected highlighted in the text. Browse with Next email; the legend lists the cues for each message.</p>
+  </header>
+
+  <section id="why-phishing" class="ev-root">
+    <div class="sec-head"><span class="sec-num">01</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
+    <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
+    <div class="card">
+      <div class="verdict" id="ev-verdict"></div>
+      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
+      <div class="subj" id="ev-subj"></div>
+      <div class="body" id="ev-body"></div>
+    </div>
+    <div class="card"><div class="legend" id="ev-legend"></div></div>
+  </section>
+
+  <section id="timeline" class="tl-root">
+    <div class="sec-head"><span class="sec-num">02</span><div><h2>Click rate through the day, email by email</h2><p class="sec-note">One phishing email per source, chosen at the median click rate of its source so the examples are typical, not the most dramatic. The chart shows the share of the 30 simulated employees who clicked at each hour. The table shows each employee's decision and the reason: a report happens when the cues they noticed pushed suspicion past their threshold; a click happens when they stayed under it.</p></div></div>
+    <div class="tl-ctl">
+      <div class="tl-chips" id="tl-chips"></div>
+    </div>
+    <div class="card">
+      <div class="tl-top">
+        <div class="tl-mail">
+          <div class="tl-meta" id="tl-meta"></div>
+          <div class="subj" id="tl-subj"></div>
+          <div class="body" id="tl-body"></div>
+        </div>
+        <figure class="tl-chart"><svg id="tl-svg" viewBox="0 0 420 240" role="img" aria-label="Line chart of percent of simulated employees who clicked, by hour of the workday"></svg></figure>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tl-hourbar" id="tl-hourbar"></div>
+      <div class="tl-deptbar" id="tl-deptbar"></div>
+      <div class="table-wrap"><table aria-label="Simulated employee decisions for the selected email">
+        <thead><tr><th>Simulated employee</th><th>Department</th><th class="num">Threshold</th><th>Decision at selected hour</th><th>Why</th></tr></thead>
+        <tbody id="tl-rows"></tbody>
+      </table></div>
+      <figcaption id="tl-summary" class="tl-summary"></figcaption>
+    </div>
+  </section>
+
+  <footer>
+    <div class="meta">
+      <span>corpus 1,595 · 10 sources</span><span>extractor gemma4:12b (Ollama, local)</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+
+(function(){
+  var CUES = {
+    urgency:'Pressure to act now', threats:'Threatens a consequence', generic_greeting:'Impersonal greeting',
+    spelling_grammar:'Spelling or grammar problem', emotional_appeal:'Emotional pull', too_good_true:'Too-good-to-be-true offer',
+    personal_info:'Asks for sensitive details', suspicious_sender:'Sender looks mismatched', suspicious_link:'Link looks suspicious'
+  };
+  // Patterns that locate each cue in the text. A cue with no match is listed, not hidden.
+  var PAT = {
+    urgency: /(act now|immediately|urgent(ly)?|today|within \d+ (hours?|days?)|as soon as possible|right away|expires?)/i,
+    threats: /(suspend\w*|closed|blocked|terminat\w*|legal action|penalt\w*|lose access|will be removed|disabled|consequences?)/i,
+    generic_greeting: /^(dear [^,\n]{1,40}|hello [^,\n]{1,40}|hi there|to whom it may concern)/im,
+    spelling_grammar: /\b(recieve\w*|verfy|acount|pls|dont|seperate|occured|untill|wich)\b/i,
+    emotional_appeal: /(congratulations|you('ve| have) been selected|urgent plea|please help|we are sorry|don'?t miss)/i,
+    too_good_true: /(free|prize|reward|bonus|guaranteed|winner|lottery|gift card)/i,
+    personal_info: /(password|credentials|verify your|bank (account|details)|social security|account details|confirm your (identity|details|login))/i
+  };
+  var items = [], i = 0;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function bodyHtml(it){
+    var text = String(it.body), spans = [];
+    (it.cues || []).forEach(function(c){
+      if(c === 'suspicious_link'){
+        var re = /https?:\/\/[^\s<>"']+/gi, u;
+        while((u = re.exec(text))) spans.push({s:u.index, e:u.index + u[0].length, c:c});
+        return;
+      }
+      var m = PAT[c] && PAT[c].exec(text);
+      if(m) spans.push({s:m.index, e:m.index + m[0].length, c:c});
+    });
+    spans.sort(function(a,b){ return a.s - b.s; });
+    var out = '', pos = 0, used = [];
+    spans.forEach(function(sp){
+      if(sp.s < pos) return;
+      out += esc(text.slice(pos, sp.s)) + '<span class="hl c-' + sp.c + '" title="' + esc(CUES[sp.c]) + '">' +
+             esc(text.slice(sp.s, sp.e)) + '</span>';
+      pos = sp.e; used.push(sp.c);
+    });
+    out += esc(text.slice(pos));
+    return {html: out, used: used};
+  }
+
+  function render(it){
+    var b = bodyHtml(it), cues = it.cues || [];
+    var addr = String(it.sender);
+    var m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(addr);
+    var name = m ? m[1].trim() : addr.split('@')[0];
+    var mail = m ? m[2] : addr;
+    var senderHl = cues.indexOf('suspicious_sender') >= 0;
+    $('ev-avatar').textContent = (name.charAt(0) || '?').toUpperCase();
+    $('ev-from').innerHTML = (senderHl
+        ? '<span class="hl c-suspicious_sender" title="' + esc(CUES.suspicious_sender) + '">' + esc(name) + '</span>'
+        : esc(name)) + ' <span class="addr">&lt;' + esc(mail) + '&gt;</span>';
+    $('ev-subj').textContent = it.subject;
+    $('ev-body').innerHTML = b.html;
+    $('ev-counter').textContent = 'Phishing email ' + (i + 1) + ' of ' + items.length + ' (source: ' + it.source + ')';
+    var chips = '';
+    cues.forEach(function(c){
+      var located = b.used.indexOf(c) >= 0 || (c === 'suspicious_sender' && senderHl);
+      chips += located
+        ? '<span class="chip c-' + c + '">' + esc(CUES[c] || c) + '</span>'
+        : '<span class="chip nf">' + esc(CUES[c] || c) + ' (no phrase located)</span>';
+    });
+    $('ev-legend').innerHTML = chips || '<span class="chip nf">No text cues detected: the link is the only signal</span>';
+    $('ev-verdict').textContent = 'Phishing: ' + (cues.length
+      ? cues.length + ' red-flag cue' + (cues.length === 1 ? '' : 's') + ' detected by the model'
+      : 'no text cues, the link is the only signal');
+  }
+
+  $('ev-next').addEventListener('click', function(){ i = (i + 1) % items.length; render(items[i]); });
+  fetch('evidence_items.json').then(function(r){ return r.json(); }).then(function(d){
+    items = d; if(items.length) render(items[0]);
+  }).catch(function(){ $('ev-counter').textContent = 'Could not load the emails.'; });
+})();
+
+})();
+</script>
+<script>
+(function(){
+  var CUE = {
+    urgency:'pressure to act now', threats:'threatens a consequence', generic_greeting:'impersonal greeting',
+    spelling_grammar:'spelling or grammar problem', emotional_appeal:'emotional pull', too_good_true:'too-good-to-be-true offer',
+    personal_info:'asks for sensitive details', suspicious_sender:'sender looks mismatched', suspicious_link:'link looks suspicious'
+  };
+  var HOUR_LABEL = {8:'8am',10:'10am',12:'12pm',14:'2pm',16:'4pm'};
+  var data = null, si = 0, hi = 0;
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function cueList(cs){ return cs.map(function(c){ return CUE[c] || c; }); }
+
+  function renderChips(){
+    var host = $('tl-chips'); host.innerHTML = '';
+    data.emails.forEach(function(e, k){
+      var b = document.createElement('button');
+      b.className = 'tl-chip' + (k === si ? ' on' : '');
+      b.textContent = e.source + ' · ' + e.overall_click_pct.toFixed(0) + '%';
+      b.addEventListener('click', function(){ si = k; hi = 0; render(); });
+      host.appendChild(b);
+    });
+  }
+
+  function renderMail(e){
+    $('tl-meta').textContent = 'Source ' + e.source + ' · email ' + e.email_id + ' · overall click rate ' + e.overall_click_pct.toFixed(1) + '% (median of this source)';
+    $('tl-subj').textContent = e.subject;
+    $('tl-body').textContent = e.body;
+  }
+
+  function renderChart(e){
+    var svg = $('tl-svg'); svg.innerHTML = '';
+    var NS = 'http://www.w3.org/2000/svg', W = 420, H = 240, m = {t:24, r:16, b:34, l:44};
+    function el(tag, attrs, text){
+      var n = document.createElementNS(NS, tag);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      if (text != null) n.appendChild(document.createTextNode(text));
+      return n;
+    }
+    var px = function(i){ return m.l + i * (W - m.l - m.r) / (e.hours.length - 1); };
+    var py = function(v){ return H - m.b - v / 100 * (H - m.t - m.b); };
+    [0, 25, 50, 75, 100].forEach(function(v){
+      svg.appendChild(el('line', {x1:m.l, y1:py(v), x2:W-m.r, y2:py(v), 'class':'gridline'}));
+      svg.appendChild(el('text', {x:m.l-6, y:py(v)+3.5, 'text-anchor':'end', 'class':'tick'}, v + '%'));
+    });
+    var pts = e.hourly_click_pct.map(function(v, i){ return px(i) + ',' + py(v); }).join(' ');
+    svg.appendChild(el('polyline', {points:pts, fill:'none', stroke:'var(--accent)', 'stroke-width':2.5}));
+    e.hours.forEach(function(h, i){
+      var v = e.hourly_click_pct[i];
+      svg.appendChild(el('circle', {cx:px(i), cy:py(v), r: i === hi ? 7 : 5, 'class':'f-accent', style:'cursor:pointer'}))
+        .addEventListener('click', function(){ hi = i; render(); });
+      svg.appendChild(el('text', {x:px(i), y:py(v)-10, 'text-anchor':'middle', 'class':'pt-label', 'font-weight':'700'}, v.toFixed(0) + '%'));
+      svg.appendChild(el('text', {x:px(i), y:H-m.b+16, 'text-anchor':'middle', 'class':'tick'}, HOUR_LABEL[h] || h));
+    });
+    svg.appendChild(el('text', {x:(m.l+W-m.r)/2, y:H-4, 'text-anchor':'middle', 'class':'axis-label'}, 'WORKDAY (click a point to select hour)'));
+  }
+
+  function renderHours(e){
+    var bar = $('tl-hourbar'); bar.innerHTML = '';
+    e.hours.forEach(function(h, i){
+      var b = document.createElement('button');
+      b.className = 'tl-chip' + (i === hi ? ' on' : '');
+      b.textContent = (HOUR_LABEL[h] || h) + ' · ' + e.hourly_click_pct[i].toFixed(0) + '% clicked';
+      b.addEventListener('click', function(){ hi = i; render(); });
+      bar.appendChild(b);
+    });
+  }
+
+  function renderRows(e){
+    var body = $('tl-rows'); body.innerHTML = '';
+    var h = e.hours[hi], clicked = 0, clickedNoCue = 0;
+    e.agents.forEach(function(a){
+      var s = a.steps.filter(function(st){ return st.h === h; })[0];
+      if (!s) return;
+      var cues = cueList(s.cues);
+      var reason;
+      if (s.d === 'clicked') {
+        clicked++;
+        if (!s.cues.length) { clickedNoCue++; reason = 'Noticed no red flags, so suspicion never rose.'; }
+        else reason = 'Noticed ' + cues.join(', ') + ', but suspicion stayed under the threshold.';
+      } else {
+        reason = 'Noticed ' + cues.join(', ') + ', and that pushed suspicion to the threshold.';
+      }
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + esc(a.id) + '</td>' +
+        '<td>' + esc(a.dept || 'unknown') + '</td>' +
+        '<td class="num">' + s.t.toFixed(2) + '</td>' +
+        '<td><span class="tl-dec ' + s.d + '">' + (s.d === 'clicked' ? 'clicked' : 'reported') + '</span></td>' +
+        '<td class="tl-cues">' + esc(reason) + '</td>';
+      body.appendChild(tr);
+    });
+    var n = e.agents.length;
+    $('tl-summary').textContent = HOUR_LABEL[h] + ': ' + clicked + ' of ' + n + ' simulated employees clicked. ' +
+      clickedNoCue + ' of those noticed no red flag at all. Reports came from cue-driven suspicion crossing each employee\'s threshold.';
+  }
+
+  function renderDeptBar(e){
+    var host = $('tl-deptbar'); if (!host) return; host.innerHTML = '';
+    if (!e.dept_hourly) return;
+    Object.keys(e.dept_hourly).forEach(function(dept){
+      var v = e.dept_hourly[dept][hi];
+      var cell = document.createElement('div'); cell.className = 'tl-dept-cell';
+      cell.innerHTML = '<span class="tl-dept-name">' + esc(dept) + '</span>' +
+        '<span class="tl-dept-pct">' + (v == null ? '-' : v.toFixed(0) + '%') + '</span>';
+      host.appendChild(cell);
+    });
+  }
+
+  function render(){
+    var e = data.emails[si];
+    renderChips(); renderMail(e); renderChart(e); renderHours(e); renderDeptBar(e); renderRows(e);
+  }
+
+  fetch('email_timeline.json').then(function(r){ return r.json(); }).then(function(d){
+    data = d; render();
+  }).catch(function(){ $('tl-summary').textContent = 'Could not load the timeline.'; });
+})();
+</script>
+</body>
+</html>

@@ -190,7 +190,8 @@
   <a href="index.html" class="active">Results Summary</a>
   <a href="report.html">Full Report</a>
   <a href="quiz.html">Phishing Quiz</a>
-  <a href="#why-phishing">Why it is phishing</a>
+  <a href="emails.html">Phishing Emails</a>
+  <a href="live.html">Live Scorer</a>
 </nav>
 <div class="wrap">
   <header class="masthead">
@@ -282,17 +283,6 @@
     </div>
   </section>
 
-  <section id="why-phishing" class="ev-root">
-    <div class="sec-head"><span class="sec-num">09</span><div><h2>Why it is phishing</h2><p class="sec-note">Real phishing emails from the corpus, with each cue the model detected highlighted in the text. Colours match the legend. Dashed chips are cues with no single phrase in the text.</p></div></div>
-    <div class="ev-ctl"><span id="ev-counter">Loading</span><button id="ev-next" class="ev-btn">Next email</button></div>
-    <div class="card">
-      <div class="verdict" id="ev-verdict"></div>
-      <div class="mailhdr"><div class="avatar" id="ev-avatar"></div><div class="from" id="ev-from"></div></div>
-      <div class="subj" id="ev-subj"></div>
-      <div class="body" id="ev-body"></div>
-    </div>
-    <div class="card"><div class="legend" id="ev-legend"></div></div>
-  </section>
   <footer>
     <div class="meta">
       <span>corpus 1,595 · 10 sources</span><span>239,250 decisions</span><span>extractor gemma4:12b (Ollama, local)</span><span>Spearman −0.96</span><span>benign FPR 0.0%</span>
@@ -405,87 +395,6 @@
     svg.appendChild(el('text',{x:(A.x+B.x)/2,y:py(57.4)-6,'text-anchor':'middle','class':'axis-label f-accent-ink'},'+3.6 pts'));
     svg.appendChild(el('text',{x:14,y:(m.t+H-m.b)/2,'text-anchor':'middle','class':'axis-label',transform:'rotate(-90 14 '+((m.t+H-m.b)/2)+')'},'CLICK RATE'));
   })();
-})();
-</script>
-<script>
-(function(){
-
-(function(){
-  var CUES = {
-    urgency:'Pressure to act now', threats:'Threatens a consequence', generic_greeting:'Impersonal greeting',
-    spelling_grammar:'Spelling or grammar problem', emotional_appeal:'Emotional pull', too_good_true:'Too-good-to-be-true offer',
-    personal_info:'Asks for sensitive details', suspicious_sender:'Sender looks mismatched', suspicious_link:'Link looks suspicious'
-  };
-  // Patterns that locate each cue in the text. A cue with no match is listed, not hidden.
-  var PAT = {
-    urgency: /(act now|immediately|urgent(ly)?|today|within \d+ (hours?|days?)|as soon as possible|right away|expires?)/i,
-    threats: /(suspend\w*|closed|blocked|terminat\w*|legal action|penalt\w*|lose access|will be removed|disabled|consequences?)/i,
-    generic_greeting: /^(dear [^,\n]{1,40}|hello [^,\n]{1,40}|hi there|to whom it may concern)/im,
-    spelling_grammar: /\b(recieve\w*|verfy|acount|pls|dont|seperate|occured|untill|wich)\b/i,
-    emotional_appeal: /(congratulations|you('ve| have) been selected|urgent plea|please help|we are sorry|don'?t miss)/i,
-    too_good_true: /(free|prize|reward|bonus|guaranteed|winner|lottery|gift card)/i,
-    personal_info: /(password|credentials|verify your|bank (account|details)|social security|account details|confirm your (identity|details|login))/i
-  };
-  var items = [], i = 0;
-  function $(id){ return document.getElementById(id); }
-  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-  function bodyHtml(it){
-    var text = String(it.body), spans = [];
-    (it.cues || []).forEach(function(c){
-      if(c === 'suspicious_link'){
-        var re = /https?:\/\/[^\s<>"']+/gi, u;
-        while((u = re.exec(text))) spans.push({s:u.index, e:u.index + u[0].length, c:c});
-        return;
-      }
-      var m = PAT[c] && PAT[c].exec(text);
-      if(m) spans.push({s:m.index, e:m.index + m[0].length, c:c});
-    });
-    spans.sort(function(a,b){ return a.s - b.s; });
-    var out = '', pos = 0, used = [];
-    spans.forEach(function(sp){
-      if(sp.s < pos) return;
-      out += esc(text.slice(pos, sp.s)) + '<span class="hl c-' + sp.c + '" title="' + esc(CUES[sp.c]) + '">' +
-             esc(text.slice(sp.s, sp.e)) + '</span>';
-      pos = sp.e; used.push(sp.c);
-    });
-    out += esc(text.slice(pos));
-    return {html: out, used: used};
-  }
-
-  function render(it){
-    var b = bodyHtml(it), cues = it.cues || [];
-    var addr = String(it.sender);
-    var m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(addr);
-    var name = m ? m[1].trim() : addr.split('@')[0];
-    var mail = m ? m[2] : addr;
-    var senderHl = cues.indexOf('suspicious_sender') >= 0;
-    $('ev-avatar').textContent = (name.charAt(0) || '?').toUpperCase();
-    $('ev-from').innerHTML = (senderHl
-        ? '<span class="hl c-suspicious_sender" title="' + esc(CUES.suspicious_sender) + '">' + esc(name) + '</span>'
-        : esc(name)) + ' <span class="addr">&lt;' + esc(mail) + '&gt;</span>';
-    $('ev-subj').textContent = it.subject;
-    $('ev-body').innerHTML = b.html;
-    $('ev-counter').textContent = 'Phishing email ' + (i + 1) + ' of ' + items.length + ' (source: ' + it.source + ')';
-    var chips = '';
-    cues.forEach(function(c){
-      var located = b.used.indexOf(c) >= 0 || (c === 'suspicious_sender' && senderHl);
-      chips += located
-        ? '<span class="chip c-' + c + '">' + esc(CUES[c] || c) + '</span>'
-        : '<span class="chip nf">' + esc(CUES[c] || c) + ' (no phrase located)</span>';
-    });
-    $('ev-legend').innerHTML = chips || '<span class="chip nf">No text cues detected: the link is the only signal</span>';
-    $('ev-verdict').textContent = 'Phishing: ' + (cues.length
-      ? cues.length + ' red-flag cue' + (cues.length === 1 ? '' : 's') + ' detected by the model'
-      : 'no text cues, the link is the only signal');
-  }
-
-  $('ev-next').addEventListener('click', function(){ i = (i + 1) % items.length; render(items[i]); });
-  fetch('evidence_items.json').then(function(r){ return r.json(); }).then(function(d){
-    items = d; if(items.length) render(items[0]);
-  }).catch(function(){ $('ev-counter').textContent = 'Could not load the emails.'; });
-})();
-
 })();
 </script>
 </body>
