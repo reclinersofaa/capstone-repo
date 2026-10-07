@@ -1,8 +1,8 @@
 # Dataset Provenance & Transparency
 
-> Auto-generated from `data\processed\master_emails_v2.csv` on 2026-09-17 16:54. Do not edit by hand — regenerate with `python -m src.provenance`.
+> Auto-generated from `data\processed\master_emails_v2.csv` on 2026-09-22 10:56. Do not edit by hand — regenerate with `python -m src.provenance`.
 
-**Corpus:** 1595 emails — 797 benign / 798 phishing. 10 segregated sources.
+**Corpus:** 618 emails — 300 benign / 318 phishing. 5 segregated sources.
 
 Every email is tagged with its `source` in `master_emails_v2.csv`; sources are never blended, so cue behaviour and click rates can always be sliced per origin.
 
@@ -11,26 +11,13 @@ Every email is tagged with its `source` in `master_emails_v2.csv`; sources are n
 
 | source | class | kind | n | origin | license | retrieved |
 |---|---|---|---:|---|---|---|
-| `spamassassin_ham` | benign | benign | 447 | Apache SpamAssassin public corpus | Apache SpamAssassin public corpus (free for research) ✅ | 2026-07-16 |
 | `enron_clean` | benign | benign | 200 | CMU/FERC Enron corpus, parsed | Enron corpus is public (CMU/FERC); HF card omits explicit license — cite, do not re-host ⚠️ | 2026-07-16 |
-| `multi_llm` | phishing | synthetic_llm | 150 | Gutierrez, Villegas-Ch & Govea (2026), Universidad de las Américas, Quito — accompanies Frontiers in Big Data 10.3389/fdata.2026.1883452 | CC BY 4.0 (data) / MIT (code) — record states: intended exclusively for defensive security research and academic study ✅ | 2026-07-16 |
-| `trec07_ham` | benign | benign | 150 | TREC 2007 Spam Track (Cormack & Lynam, Univ. of Waterloo), via the curated Zenodo release | CC BY 4.0 asserted on the Zenodo record by Champa et al. (NOT by Cormack/Waterloo) — cite the original TREC track ⚠️ | 2026-07-16 |
-| `ceas08` | phishing | real_phishing | 130 | CEAS 2008 conference corpus | Merged Kaggle listing unclear — cite original CEAS-08 source ⚠️ | 2026-07-16 |
 | `hybrid_vtriad` | phishing | synthetic_llm | 120 | Self-generated with V-Triad persuasion framework + Groq additions | Own work — CC-BY or project license ✅ | 2026-07-16 |
 | `plain_llm` | phishing | synthetic_llm | 110 | Self-generated (GPT / Claude / Gemini, unguided) + Groq additions | Own work — CC-BY or project license ✅ | 2026-07-16 |
-| `nazario` | phishing | real_phishing | 110 | J. Nazario in-the-wild phishing collection | Academic-use collection — cite original, verify redistribution ⚠️ | 2026-07-16 |
-| `nigerian_fraud` | phishing | real_phishing | 90 | Advance-fee (419) fraud email collection | Public-domain-style academic corpus — verify ⚠️ | 2026-07-16 |
+| `spamassassin_ham` | benign | benign | 100 | Apache SpamAssassin public corpus | Apache SpamAssassin public corpus (free for research) ✅ | 2026-07-16 |
 | `phishbowl` | phishing | real_phishing | 88 | Cornell University IT Security Phish Bowl archive | Cornell IT public phish archive — verify redistribution terms ⚠️ | 2026-07-16 |
 
 ### Per-source detail
-
-**`spamassassin_ham` — SpamAssassin Public Corpus (easy_ham + hard_ham)** (447 emails)
-- Origin: Apache SpamAssassin public corpus
-- URL / access: https://spamassassin.apache.org/old/publiccorpus/  (mirror: `kaggle:beatoa/spamassassin-public-corpus`)
-- License: Apache SpamAssassin public corpus (free for research)  *(verified)*
-- Retrieved: 2026-07-16
-- Cleaning applied: RFC822 parsed; From/Subject/plain-text body extracted; spam_2 excluded; __MACOSX filtered; body capped 4000 chars
-- Cite as: The Apache SpamAssassin Project, Public Corpus.
 
 **`enron_clean` — Enron emails (pre-cleaned)** (200 emails)
 - Origin: CMU/FERC Enron corpus, parsed
@@ -39,31 +26,6 @@ Every email is tagged with its `source` in `master_emails_v2.csv`; sources are n
 - Retrieved: 2026-07-16
 - Cleaning applied: HF corbt/enron-emails parquet (from/subject/body); body>=40 chars; whitespace-normalized; capped 6000; seeded sample; deduped on body hash
 - Cite as: Klimt & Yang (2004), The Enron Corpus.
-
-**`multi_llm` — Cross-model Multi-LLM Phishing Corpus (GPT-4.1 / DeepSeek-3.2 / Llama-3.3-70b)** (150 emails)
-- Origin: Gutierrez, Villegas-Ch & Govea (2026), Universidad de las Américas, Quito — accompanies Frontiers in Big Data 10.3389/fdata.2026.1883452
-- URL / access: https://doi.org/10.5281/zenodo.20250116
-- License: CC BY 4.0 (data) / MIT (code) — record states: intended exclusively for defensive security research and academic study  *(verified)*
-- Retrieved: 2026-07-16
-- Cleaning applied: VERIFIED raw bodies: llm_corpus_sampled.csv (4,986 rows) ships real subject+body, separate from corpus_features.csv. LLM half ONLY — the 5,000 human rows duplicate CEAS-08/Nazario/419/Enron already present. Sampled evenly across the 3 generating models; whitespace-normalized; body capped 6000; deduped on body hash.
-- ⚠️ Caveat: Ships NO sender field, so the `suspicious_sender` cue can never fire for these emails — their cue count is not perfectly comparable with sources that carry senders.
-- Cite as: Gutierrez, Villegas-Ch & Govea (2026), Cross-model evaluation of phishing detectors against LLM-generated emails, Zenodo, doi:10.5281/zenodo.20250116 (CC BY 4.0).
-
-**`trec07_ham` — TREC 2007 Public Corpus — benign half (named benchmark)** (150 emails)
-- Origin: TREC 2007 Spam Track (Cormack & Lynam, Univ. of Waterloo), via the curated Zenodo release
-- URL / access: https://doi.org/10.5281/zenodo.8339691  (mirror: `zenodo:8339691 (TREC_07.csv — 53,757 rows: 24,358 ham / 29,399 spam)`)
-- License: CC BY 4.0 asserted on the Zenodo record by Champa et al. (NOT by Cormack/Waterloo) — cite the original TREC track  *(verify)*
-- Retrieved: 2026-07-16
-- Cleaning applied: label==0 (ham) only; whitespace-normalized; body capped 6000; seeded sample; deduped on body hash. The TREC SPAM half is deliberately EXCLUDED — spam is not targeted phishing, and labelling it class 1 would corrupt the construct.
-- Cite as: Cormack & Lynam (2007), TREC 2007 Spam Track Overview. Curated release: Champa, Rabbi & Zibran, Zenodo doi:10.5281/zenodo.8339691.
-
-**`ceas08` — CEAS 2008 Live Spam Challenge (phishing subset)** (130 emails)
-- Origin: CEAS 2008 conference corpus
-- URL / access: https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset  (mirror: `kaggle:naserabdullahalam/phishing-email-dataset (CEAS_08.csv)`)
-- License: Merged Kaggle listing unclear — cite original CEAS-08 source  *(verify)*
-- Retrieved: 2026-07-16
-- Cleaning applied: CEAS_08.csv filtered to label==1; whitespace-normalized; body capped 6000; seeded sample; deduped on body hash
-- Cite as: CEAS 2008 Live Spam Challenge Corpus.
 
 **`hybrid_vtriad` — Hybrid V-Triad phishing (guided, self-generated)** (120 emails)
 - Origin: Self-generated with V-Triad persuasion framework + Groq additions
@@ -81,21 +43,13 @@ Every email is tagged with its `source` in `master_emails_v2.csv`; sources are n
 - Cleaning applied: Prompted for obvious phishing cues; fictional entities only; no real brands/people/domains
 - Cite as: This project — synthetic naive-LLM phishing.
 
-**`nazario` — Nazario Phishing Corpus** (110 emails)
-- Origin: J. Nazario in-the-wild phishing collection
-- URL / access: https://monkey.org/~jose/phishing/  (mirror: `kaggle:naserabdullahalam/phishing-email-dataset (Nazario.csv)`)
-- License: Academic-use collection — cite original, verify redistribution  *(verify)*
+**`spamassassin_ham` — SpamAssassin Public Corpus (easy_ham + hard_ham)** (100 emails)
+- Origin: Apache SpamAssassin public corpus
+- URL / access: https://spamassassin.apache.org/old/publiccorpus/  (mirror: `kaggle:beatoa/spamassassin-public-corpus`)
+- License: Apache SpamAssassin public corpus (free for research)  *(verified)*
 - Retrieved: 2026-07-16
-- Cleaning applied: Nazario.csv (label==1); dropped MAILER-DAEMON/folder-internal-data junk rows; whitespace-normalized; body capped 6000; seeded sample; deduped on body hash
-- Cite as: J. Nazario, Phishing Corpus.
-
-**`nigerian_fraud` — Nigerian / 419 Fraudulent Email Corpus** (90 emails)
-- Origin: Advance-fee (419) fraud email collection
-- URL / access: https://www.kaggle.com/datasets/rtatman/fraudulent-email-corpus  (mirror: `kaggle:naserabdullahalam/phishing-email-dataset (Nigerian_Fraud.csv)`)
-- License: Public-domain-style academic corpus — verify  *(verify)*
-- Retrieved: 2026-07-16
-- Cleaning applied: Nigerian_Fraud.csv (label==1); whitespace-normalized; body capped 6000; seeded sample; deduped on body hash
-- Cite as: Fraudulent E-mail Corpus (Nigerian/419).
+- Cleaning applied: RFC822 parsed; From/Subject/plain-text body extracted; spam_2 excluded; __MACOSX filtered; body capped 4000 chars
+- Cite as: The Apache SpamAssassin Project, Public Corpus.
 
 **`phishbowl` — Cornell University Phish Bowl (real phishing)** (88 emails)
 - Origin: Cornell University IT Security Phish Bowl archive
@@ -105,6 +59,16 @@ Every email is tagged with its `source` in `master_emails_v2.csv`; sources are n
 - Cleaning applied: Stripped Cornell IT warning-notice <div> boilerplate; recovered spoofed sender from notice; HTML/entities stripped; dropped records <40 chars
 - Cite as: Cornell University, IT@Cornell Phish Bowl.
 
+
+## Planned additions (target composition — not yet ingested)
+
+| source | class | kind | origin | access | url / DOI | license |
+|---|---|---|---|---|---|---|
+| `nazario` | phishing | real_phishing | J. Nazario in-the-wild phishing collection | kaggle_csv | https://monkey.org/~jose/phishing/ | Academic-use collection — cite original, verify redistribution ⚠️ |
+| `ceas08` | phishing | real_phishing | CEAS 2008 conference corpus | kaggle_csv | https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset | Merged Kaggle listing unclear — cite original CEAS-08 source ⚠️ |
+| `nigerian_fraud` | phishing | real_phishing | Advance-fee (419) fraud email collection | kaggle_csv | https://www.kaggle.com/datasets/rtatman/fraudulent-email-corpus | Public-domain-style academic corpus — verify ⚠️ |
+| `multi_llm` | phishing | synthetic_llm | Gutierrez, Villegas-Ch & Govea (2026), Universidad de las Américas, Quito — accompanies Frontiers in Big Data 10.3389/fdata.2026.1883452 | zenodo | https://doi.org/10.5281/zenodo.20250116 | CC BY 4.0 (data) / MIT (code) — record states: intended exclusively for defensive security research and academic study ✅ |
+| `trec07_ham` | benign | benign | TREC 2007 Spam Track (Cormack & Lynam, Univ. of Waterloo), via the curated Zenodo release | zenodo | https://doi.org/10.5281/zenodo.8339691 | CC BY 4.0 asserted on the Zenodo record by Champa et al. (NOT by Cormack/Waterloo) — cite the original TREC track ⚠️ |
 
 ## Evaluated and NOT ingested
 
